@@ -1,0 +1,775 @@
+\chapter{Orientasi: Enterprise Architecture, Platform, dan Penulisan Akademik}
+\label{ch:orientasi}
+
+\section*{Tujuan Pembelajaran}
+\begin{itemize}
+  \item Menjelaskan posisi \emph{Enterprise Architecture} (EA) sebagai jembatan
+        antara strategi organisasi dan kapabilitas teknologi, dengan bahasa
+        manajerial yang dapat dipahami audiens non-IT.
+  \item Membedakan empat domain arsitektur enterprise---Business, Data,
+        Application, Technology (BDAT)---serta peran API dan platform sebagai
+        pengungkit nilai pada model bisnis digital modern.
+  \item Mengenali anatomi makalah ilmiah yang relevan untuk bidang Enterprise
+        Architecture dan platform/API, serta kriteria memilih target publikasi
+        seperti jurnal SINTA, jurnal internasional, atau konferensi akademik.
+  \item Menyusun pernyataan topik awal, memilih organisasi studi kasus dalam
+        konteks Indonesia, dan merumuskan dua sampai tiga kandidat target
+        publikasi sebagai dasar kerja satu semester.
+\end{itemize}
+
+\section{Pendahuluan}
+
+Bab ini menjadi pintu masuk untuk seluruh perjalanan mata kuliah. Sebelum
+memasuki konsep-konsep seperti TOGAF-lite, arsitektur BDAT, strategi API, dan
+tata kelola platform, pembaca diperkenalkan terlebih dahulu pada
+\emph{gambaran besar} yang mengikat semua konsep tersebut: bagaimana sebuah
+organisasi menerjemahkan strategi menjadi keputusan arsitektur, dan bagaimana
+mahasiswa magister non-IT dapat mengolah proses analisis itu menjadi makalah
+ilmiah yang layak dipublikasikan.
+
+Tiga gagasan utama bab ini saling berkaitan. Pertama, Enterprise Architecture
+diperkenalkan bukan sebagai produk diagram yang rumit, melainkan sebagai cara
+berpikir untuk membaca organisasi sebagai sebuah sistem. Kedua, ekonomi
+platform dan strategi API diperkenalkan sebagai konteks bisnis modern yang
+membuat keputusan arsitektur semakin strategis dan tidak lagi semata-mata
+menjadi urusan tim TI. Ketiga, makalah publikasi diperkenalkan sebagai sarana
+untuk mengubah proses analisis selama satu semester menjadi kontribusi
+akademik yang dapat ditelaah oleh komunitas.
+
+Bagi mahasiswa berlatar belakang non-IT, bab ini menegaskan bahwa keputusan
+arsitektur enterprise pada dasarnya adalah keputusan manajerial yang dapat
+dipahami melalui contoh bisnis sehari-hari. Bagi mahasiswa yang sudah pernah
+bersentuhan dengan teknologi, bab ini menggeser perhatian dari kode dan
+implementasi menuju pertanyaan yang lebih strategis: mengapa, untuk siapa,
+dengan kompromi apa, dan berdasarkan bukti apa.
+
+\section{Skenario Pembuka: Bank Daerah dan Rencana Transformasi Digital}
+
+Bayangkan sebuah bank daerah di Indonesia, sebut saja \emph{Bank Wanua}, yang
+selama tiga puluh tahun melayani nasabah lokal dengan jaringan cabang
+tradisional. Direksi baru ingin membawa Bank Wanua masuk lebih serius ke
+layanan digital: aplikasi mobile, integrasi pembayaran QRIS, kemitraan dengan
+fintech,
+serta layanan API publik untuk pelaku UMKM yang menjadi tulang punggung
+ekonomi daerah. Dewan direksi sepakat tentang \emph{tujuan}, tetapi mereka
+tidak yakin tentang \emph{urutan} dan \emph{prioritas}.
+
+Direktur Operasional bertanya: ``Sistem mana yang harus diperbarui terlebih
+dahulu, dan layanan mana yang sebaiknya dibuka sebagai API?'' Direktur
+Kepatuhan bertanya: ``Bagaimana Bank Wanua memenuhi UU Perlindungan Data
+Pribadi (UU PDP), Standar Nasional Open API Pembayaran (SNAP BI) Bank
+Indonesia, dan ketentuan Otoritas Jasa Keuangan (OJK)?'' Direktur Pemasaran
+bertanya: ``Apakah Bank Wanua sebaiknya menjadi platform mandiri atau
+bergabung sebagai mitra ke ekosistem yang lebih besar?''
+
+Tidak satu pun pertanyaan itu dapat dijawab hanya dengan keputusan teknis.
+Setiap jawaban membutuhkan pemahaman tentang strategi bisnis, kapabilitas yang
+sudah dimiliki, kondisi data dan aplikasi saat ini, aturan main regulasi
+Indonesia, serta dinamika ekosistem mitra. Pertanyaan seperti inilah yang
+menjadi wilayah kerja \emph{Enterprise Architecture}.
+
+\subsection*{Pertanyaan Pemandu Bab Ini}
+
+Sepanjang bab, lima pertanyaan berikut menjadi kompas pembaca:
+
+\begin{enumerate}
+  \item Apa sesungguhnya yang dimaksud dengan Enterprise Architecture, dan
+        mengapa pembaca non-IT perlu memahaminya?
+  \item Bagaimana platform dan API mengubah cara organisasi mengambil keputusan
+        arsitektur dalam dekade terakhir?
+  \item Apa yang membedakan sebuah \emph{makalah ilmiah} dari laporan proyek
+        atau dokumen konsultasi?
+  \item Bagaimana cara memilih target publikasi yang realistis dan relevan,
+        khususnya dalam konteks Indonesia?
+  \item Bagaimana pembaca dapat memulai perjalanan satu semester ini dengan
+        memilih organisasi studi kasus dan topik makalah yang tepat?
+\end{enumerate}
+
+\section{Mengapa Topik Ini Penting bagi Pembaca Non-IT}
+
+Mata kuliah ini sengaja dirancang untuk mahasiswa magister berlatar belakang
+non-IT karena keputusan arsitektur enterprise pada akhirnya adalah keputusan
+manajerial. Di dalamnya ada pertimbangan bisnis, anggaran, regulasi, sumber
+daya manusia, budaya organisasi, dan risiko. Pengembang dan arsitek teknis
+dapat membantu pelaksanaan, tetapi arah, prioritas, tata kelola, dan kompromi
+yang diambil tetap perlu dipahami oleh pengambil keputusan.
+
+Salah satu kesalahan yang sering terjadi adalah memperlakukan Enterprise
+Architecture sebagai ``urusan tim TI''. Cara pandang ini membuat strategi
+digital mudah gagal. Penyebabnya bukan selalu teknologi yang buruk, melainkan
+keputusan teknis yang tidak tersambung dengan keputusan bisnis. Akibatnya,
+organisasi dapat membayar mahal untuk sistem canggih yang jarang digunakan,
+atau membangun kapabilitas TI yang tidak relevan dengan pelanggan dan model
+bisnisnya.
+
+Dengan memahami EA sebagai bahasa lintas fungsi, pembaca non-IT dapat menjadi
+jembatan antara dewan direksi, tim bisnis, tim TI, dan mitra eksternal.
+Kemampuan ini penting bagi peran strategis seperti Chief Information Officer,
+Chief Digital Officer, Strategy Manager, Product Manager, Business Analyst,
+atau pemimpin transformasi digital di sektor publik dan swasta.
+
+\section{Kerangka Konseptual: Empat Pilar Bab Ini}
+
+Empat konsep inti diperkenalkan pada bab pengantar ini:
+
+\begin{enumerate}
+  \item \textbf{Enterprise Architecture (EA)} sebagai jembatan strategi dan
+        teknologi.
+  \item \textbf{BDAT---Business, Data, Application, Technology} sebagai empat
+        domain arsitektur yang akan dipetakan secara bertahap.
+  \item \textbf{API dan Platform} sebagai pengungkit nilai pada model bisnis
+        digital modern.
+  \item \textbf{Anatomi Makalah Ilmiah} sebagai bentuk komunikasi akademik yang
+        akan dibangun selama 14 sesi.
+\end{enumerate}
+
+\subsection{Enterprise Architecture: Jembatan Strategi dan Teknologi}
+
+Enterprise Architecture adalah disiplin yang membantu organisasi menyelaraskan
+strategi bisnis dengan kapabilitas teknologi melalui pemetaan, prinsip, dan
+keputusan yang terdokumentasi. Hasil EA bukan sekadar kumpulan diagram,
+melainkan keputusan terstruktur tentang apa yang perlu dipertahankan,
+diperbaiki, diganti, atau dibangun dari awal.
+
+Gambar~\ref{fig:ea-jembatan} menggambarkan posisi EA secara konseptual. EA
+menjembatani \emph{lapisan strategi} (visi, model bisnis, dan tujuan
+organisasi) dengan \emph{lapisan teknologi} (sistem, data, aplikasi, dan
+infrastruktur). Tanpa jembatan ini, kedua sisi sering berbicara dengan bahasa
+yang berbeda.
+
+\begin{figure}[htbp]
+\centering
+\scalebox{0.95}{
+\begin{tikzpicture}[
+  font=\small\bfseries,
+  node distance=12mm,
+  layer/.style={
+    draw, rounded corners=2mm, align=center,
+    minimum width=88mm, minimum height=14mm
+  },
+  strategi/.style={layer, fill=praditagreen!20},
+  ea/.style={layer, fill=orange!25, minimum height=18mm},
+  tek/.style={layer, fill=blue!12},
+  arrow/.style={Latex-Latex, very thick}
+]
+\node[strategi] (s) {STRATEGI ORGANISASI\\
+\footnotesize\mdseries Visi, model bisnis, tujuan, pelanggan, mitra, regulasi};
+\node[ea, below=of s] (e) {ENTERPRISE ARCHITECTURE\\
+\footnotesize\mdseries Prinsip, peta kapabilitas, kondisi saat ini$\to$target, gap, peta jalan};
+\node[tek, below=of e] (t) {KAPABILITAS TEKNOLOGI\\
+\footnotesize\mdseries Aplikasi, data, infrastruktur, integrasi, API, platform};
+
+\draw[arrow] (s.south) -- (e.north);
+\draw[arrow] (e.south) -- (t.north);
+
+\node[right=0.3cm of e, align=left, font=\footnotesize\mdseries\itshape, text width=30mm]
+ {menerjemahkan\\strategi$\leftrightarrow$\\ kapabilitas};
+\end{tikzpicture}
+}
+\caption{Enterprise Architecture sebagai jembatan dua arah antara strategi
+organisasi dan kapabilitas teknologi.}
+\label{fig:ea-jembatan}
+\end{figure}
+
+Analogi yang dekat adalah cetak biru bangunan. Cetak biru bukanlah bangunan
+itu sendiri; ia adalah gambar kerja yang membantu pemilik, kontraktor, pekerja
+lapangan, dan pemeriksa berbicara tentang rancangan yang sama. Di dalamnya ada
+pilihan tentang jumlah lantai, posisi tangga darurat, material pondasi, sistem
+pendingin, urutan pembangunan, dan biaya. Cetak biru juga memuat asumsi dan
+prinsip: apakah bangunan tahan gempa, hemat energi, dan ramah disabilitas.
+Dengan cara serupa, Enterprise Architecture memuat keputusan dan prinsip
+tentang ``bangunan organisasi'' yang sedang dirancang, dirawat, atau
+ditransformasikan.
+
+\subsection{BDAT: Empat Domain Arsitektur Enterprise}
+
+Empat domain klasik dalam Enterprise Architecture, yang sering disingkat BDAT,
+membantu kita memecah kerumitan organisasi menjadi beberapa lapisan yang lebih
+mudah dibaca. Setiap lapisan dapat dianalisis secara terpisah, tetapi
+keputusannya tetap saling memengaruhi. Gambar~\ref{fig:bdat-stack}
+menunjukkan empat lapisan tersebut.
+
+\begin{figure}[htbp]
+\centering
+\scalebox{0.95}{
+\begin{tikzpicture}[
+  font=\small\bfseries,
+  node distance=2mm,
+  layer/.style={
+    draw, rounded corners=1.5mm, align=left,
+    minimum width=110mm, minimum height=12mm,
+    inner xsep=4mm
+  },
+  business/.style={layer, fill=praditagreen!25},
+  data/.style={layer, fill=orange!20},
+  app/.style={layer, fill=blue!15},
+  tech/.style={layer, fill=gray!18}
+]
+\node[business] (b) {\textbf{B} -- BUSINESS\\
+\footnotesize\mdseries Kapabilitas, value stream, proses, pemangku kepentingan, model operasional};
+\node[data, below=of b] (d) {\textbf{D} -- DATA\\
+\footnotesize\mdseries Entitas data inti, kepemilikan, kualitas, privasi, tata kelola};
+\node[app, below=of d] (a) {\textbf{A} -- APPLICATION\\
+\footnotesize\mdseries Portofolio aplikasi, integrasi, pola layanan, bangun sendiri vs.\ beli};
+\node[tech, below=of a] (t) {\textbf{T} -- TECHNOLOGY\\
+\footnotesize\mdseries Cloud, infrastruktur, keamanan, prinsip teknologi};
+\end{tikzpicture}
+}
+\caption{Empat domain arsitektur enterprise (BDAT) tersusun dari lapisan
+strategi-bisnis di puncak hingga teknologi pendukung di dasar.}
+\label{fig:bdat-stack}
+\end{figure}
+
+Domain \textbf{Business} menjawab pertanyaan: apa yang dilakukan organisasi
+untuk pelanggannya, dan kapabilitas apa yang dibutuhkan untuk melakukannya.
+Domain \textbf{Data} menjawab: informasi apa yang dibutuhkan, siapa
+pemiliknya, dan bagaimana informasi itu dilindungi. Domain
+\textbf{Application} menjawab: aplikasi dan layanan apa yang mendukung
+kapabilitas tersebut, serta bagaimana aplikasi saling terhubung. Domain
+\textbf{Technology} menjawab: infrastruktur, keamanan, dan platform teknis apa
+yang menopang semuanya.
+
+Empat domain ini akan dipetakan secara bertahap pada Bab~4 sampai Bab~7. Pada
+bab pengantar ini, pembaca cukup memahami satu hal: hampir setiap keputusan
+organisasi akan menyentuh keempat domain tersebut, baik disadari maupun tidak.
+Tugas arsitektur enterprise adalah membuat hubungan itu terlihat, sehingga
+keputusan dapat dijelaskan dan dipertanggungjawabkan.
+
+\subsection{API dan Platform: Pengungkit Nilai Digital}
+
+Dalam dua dekade terakhir, banyak model bisnis digital tumbuh bukan melalui
+alur linear sederhana (produsen $\to$ konsumen), melainkan melalui platform
+yang menghubungkan banyak pihak. Gojek menghubungkan pengemudi, penumpang,
+mitra warung, mitra layanan makanan, dan pengiklan. Tokopedia menghubungkan
+pedagang dan pembeli. BCA Open API dan BRI BRIAPI menghubungkan bank dengan
+pengembang fintech yang membangun layanan pembayaran. Platform semacam ini
+menghasilkan \emph{network effect}: semakin banyak peserta di satu sisi,
+semakin besar pula nilai bagi sisi lainnya.
+
+Application Programming Interface, atau API, dapat dipahami sebagai kontrak
+digital yang membuat satu sistem dapat berinteraksi dengan sistem lain secara
+terstandar. Bagi pembaca non-IT, API dapat dianalogikan sebagai stop kontak:
+bentuk dan tegangannya disepakati, sehingga berbagai perangkat dapat terhubung
+tanpa harus dinegosiasikan ulang satu per satu. API yang dirancang dengan baik
+membuat integrasi dengan mitra menjadi lebih cepat, lebih konsisten, dan lebih
+mudah dikelola.
+
+Dalam konteks Bank Wanua, API dan platform menentukan apakah bank tersebut
+akan tetap menjadi penyedia layanan yang tertutup, atau berkembang menjadi
+simpul ekosistem yang terhubung dengan UMKM, fintech, dan pemerintah daerah.
+Keputusan ini bukan sekadar urusan teknis. Ia menyangkut model bisnis, tata
+kelola, manajemen risiko, dan posisi strategis bank dalam ekosistem.
+
+\subsection{Anatomi Makalah Ilmiah}
+
+Bab ini juga memperkenalkan luaran utama mata kuliah: makalah publikasi
+individu. Makalah ilmiah berbeda dari laporan proyek karena ia memiliki
+struktur yang memungkinkan pembaca akademik memahami masalah, menilai metode,
+memeriksa argumen, dan menggunakan kontribusinya. Gambar~\ref{fig:anatomi-makalah}
+menampilkan struktur minimum yang akan dibangun sesi demi sesi.
+
+\begin{figure}[htbp]
+\centering
+\scalebox{0.85}{
+\begin{tikzpicture}[
+  font=\footnotesize\bfseries,
+  node distance=2mm,
+  sec/.style={
+    draw, rounded corners=1.5mm, align=left,
+    minimum width=98mm, minimum height=8mm,
+    fill=praditagreen!10,
+    inner xsep=3mm
+  },
+  highlight/.style={sec, fill=orange!20}
+]
+\node[sec] (a) {Judul, Abstrak (150--250 kata), Kata Kunci (4--6)};
+\node[sec, below=of a] (b) {Pendahuluan: latar belakang, masalah, RQ, kontribusi};
+\node[sec, below=of b] (c) {Tinjauan Pustaka \& Kerangka Konseptual};
+\node[sec, below=of c] (d) {Metode/Pendekatan Analisis (TOGAF-lite atau lainnya)};
+\node[sec, below=of d] (e) {Konteks Organisasi/Studi Kasus};
+\node[highlight, below=of e] (f) {Analisis Kondisi Saat Ini};
+\node[highlight, below=of f] (g) {Rancangan Arsitektur Target (BDAT)};
+\node[highlight, below=of g] (h) {Strategi API \& Strategi Platform};
+\node[highlight, below=of h] (i) {Tata Kelola Platform, Risiko, Metrik};
+\node[highlight, below=of i] (j) {Analisis Kesenjangan, Peta Jalan, Implikasi Manajerial};
+\node[sec, below=of j] (k) {Diskusi, Keterbatasan, Arah Lanjutan};
+\node[sec, below=of k] (l) {Kesimpulan \& Rekomendasi};
+\node[sec, below=of l] (m) {Daftar Pustaka, Lampiran Artefak};
+\end{tikzpicture}
+}
+\caption{Anatomi makalah publikasi yang akan dibangun sesi demi sesi. Bagian
+berlatar oranye merupakan bagian teknis-substantif yang menjadi inti
+kontribusi dan paling banyak dibangun pada Sesi~6 sampai Sesi~12.}
+\label{fig:anatomi-makalah}
+\end{figure}
+
+Setiap bagian makalah memiliki tujuan komunikasi tersendiri.
+\emph{Pendahuluan} meyakinkan pembaca bahwa masalah penting dan layak
+dipelajari. \emph{Tinjauan pustaka} menempatkan makalah dalam percakapan
+akademik yang sudah ada. \emph{Metode} menjelaskan bagaimana analisis
+dilakukan agar dapat dievaluasi atau direplikasi. \emph{Analisis dan
+rancangan} menyajikan kontribusi inti. \emph{Diskusi} mengubah temuan menjadi
+makna dan implikasi. \emph{Kesimpulan} menutup argumen dengan jelas dan
+menunjukkan arah lanjutan.
+
+\section{Konteks Indonesia: Mengapa Lokal Itu Penting}
+
+Banyak buku Enterprise Architecture ditulis dengan asumsi pasar, regulasi, dan
+budaya organisasi Amerika Utara atau Eropa. Kondisi tersebut tidak selalu
+sejalan dengan Indonesia. Karena itu, mata kuliah ini menempatkan konteks
+Indonesia sebagai bagian inti analisis, bukan sekadar catatan tambahan.
+
+Beberapa regulasi dan standar yang akan sering muncul dalam buku ini antara
+lain:
+
+\begin{itemize}
+  \item \textbf{UU No.~27/2022 tentang Pelindungan Data Pribadi (UU PDP)}
+        membentuk batas etis dan hukum tentang bagaimana data pelanggan boleh
+        dikumpulkan, diproses, dan dipertukarkan.
+  \item \textbf{UU No.~11/2008 jo.~UU No.~19/2016 tentang Informasi dan
+        Transaksi Elektronik (UU ITE)} mengatur tanggung jawab penyelenggara
+        sistem elektronik.
+  \item \textbf{PP No.~71/2019 tentang Penyelenggaraan Sistem dan Transaksi
+        Elektronik} mengatur penyelenggaraan sistem elektronik, termasuk
+        aspek kedaulatan data dan klasifikasi
+        sistem strategis.
+  \item \textbf{Permenkominfo PSE} mewajibkan pendaftaran penyelenggara sistem
+        elektronik baik publik maupun privat.
+  \item \textbf{Standar Nasional Open API Pembayaran (SNAP BI)} dari Bank
+        Indonesia membakukan integrasi API pada layanan pembayaran.
+  \item \textbf{Ketentuan Otoritas Jasa Keuangan (OJK)} dan \textbf{Badan Siber
+        dan Sandi Negara (BSSN)} memberi rambu untuk sektor keuangan dan
+        keamanan siber nasional.
+\end{itemize}
+
+Selain regulasi, mahasiswa juga akan belajar dari ekosistem digital Indonesia:
+Gojek, Tokopedia, Dana, Halodoc, Ruangguru, BCA Open API, BRI BRIAPI, Telkom
+Indonesia, Kementerian PANRB melalui program Satu Data Indonesia, serta
+koperasi/BPR dan BUMN di sektor energi, transportasi, dan telekomunikasi.
+Studi kasus lokal diperkenalkan secara bertahap agar pembahasan tidak berhenti
+pada abstraksi.
+
+Tantangan implementasi yang khas Indonesia juga akan dibahas secara terbuka:
+keterbatasan anggaran TI di banyak organisasi publik, kapasitas SDM yang
+beragam, kematangan vendor lokal yang tidak merata, infrastruktur digital
+yang berbeda antarwilayah, regulasi sektoral yang berlapis, serta budaya
+organisasi yang sering kali masih hierarkis.
+
+\section{Studi Kasus Mini: Memilih Posisi Bank Wanua}
+
+Mari kita lanjutkan skenario Bank Wanua. Setelah dewan direksi sepakat untuk
+melakukan transformasi digital, sebuah lokakarya satu hari diadakan untuk
+menjawab tiga pertanyaan strategis berikut:
+
+\begin{enumerate}
+  \item Apakah Bank Wanua akan menjadi platform mandiri yang mengundang mitra
+        UMKM dan fintech untuk masuk, atau akan bergabung sebagai mitra ke
+        platform yang lebih besar (misalnya melalui SNAP BI dan kemitraan
+        dengan dompet digital nasional)?
+  \item Layanan apa yang sebaiknya dibuka sebagai \emph{public API} terlebih
+        dahulu agar memberi nilai segera bagi UMKM, tanpa membahayakan keamanan
+        dan kepatuhan?
+  \item Kapabilitas internal apa yang harus diperkuat sebelum API publik
+        tersebut layak diluncurkan?
+\end{enumerate}
+
+Lokakarya seperti ini, bila hanya diisi diskusi bebas, sering berakhir dengan
+opini yang saling bertabrakan tanpa keputusan yang jelas. Enterprise
+Architecture menyediakan kerangka analisis untuk memetakan kapabilitas, value
+stream, kondisi saat ini, target, kesenjangan, dan peta jalan. Dengan begitu,
+diskusi dapat bergerak dari adu pendapat menjadi argumen berbasis bukti.
+
+Pada akhir Bab~12, Bank Wanua (atau organisasi pilihan pembaca) akan memiliki
+peta kapabilitas bisnis dengan prioritas yang jelas, peta data beserta
+kepemilikan dan klasifikasi sensitivitasnya, portofolio aplikasi dengan
+rekomendasi tindak lanjut, rancangan arsitektur teknologi target, portofolio
+API yang diprioritaskan berdasarkan dampak dan kelayakan, model platform
+dengan analisis \emph{network effect}, piagam tata kelola platform yang
+mempertimbangkan regulasi Indonesia, analisis kesenjangan, serta peta jalan
+12--24 bulan. Semua artefak itu kemudian dirangkai menjadi satu makalah
+publikasi.
+
+\section{Memilih Target Publikasi}
+
+Salah satu keputusan paling penting di Sesi~1 adalah memilih dua atau tiga
+target publikasi. Target ini akan menentukan templat, panjang naskah, gaya
+sitasi, dan cara argumen disusun. Target yang dipilih sebaiknya realistis
+terhadap data dan akses yang dimiliki, sekaligus relevan dengan tema makalah.
+
+\subsection{Jenis Target Publikasi dan Karakteristiknya}
+
+Gambar~\ref{fig:venue-map} merangkum jenis target publikasi yang umum diakses oleh
+mahasiswa pascasarjana di Indonesia.
+
+\begin{figure}[htbp]
+\centering
+\resizebox{0.72\textwidth}{!}{
+\begin{tikzpicture}[
+  font=\small\bfseries,
+  level distance=14mm,
+  sibling distance=22mm,
+  node distance=10mm,
+  block/.style={
+    draw, rounded corners=1.5mm, align=center,
+    minimum width=30mm, minimum height=10mm
+  },
+  root/.style={block, fill=praditagreen!25, minimum width=70mm},
+  cat/.style={block, fill=orange!20},
+  ven/.style={block, fill=blue!10, minimum width=22mm, font=\footnotesize\bfseries}
+]
+\node[root] (root) {Target Publikasi};
+\node[cat, below left=of root, xshift=-10mm] (jur) {Jurnal Nasional\\(SINTA 2--4)};
+\node[cat, below=of root] (jurint) {Jurnal\\Internasional};
+\node[cat, below right=of root, xshift=10mm] (kon) {Konferensi};
+
+\node[ven, below=of jur] (j1) {JSI, JUTI};
+\node[ven, below=of j1] (j2) {JTIIK,\\TEKNOSI};
+\node[ven, below=of j2] (j3) {JATISI,\\RESTI};
+
+\node[ven, below=of jurint] (i1) {IJID};
+\node[ven, below=of i1] (i2) {Jurnal Q3/Q4\\sistem informasi};
+
+\node[ven, below=of kon] (k1) {ICITSI,\\ICACSIS};
+\node[ven, below=of k1] (k2) {ICOIACT,\\ICITISEE};
+\node[ven, below=of k2] (k3) {ICEEIE,\\ICoICT};
+
+\draw (root) -- (jur);
+\draw (root) -- (jurint);
+\draw (root) -- (kon);
+\draw (jur) -- (j1);
+\draw (j1) -- (j2);
+\draw (j2) -- (j3);
+\draw (jurint) -- (i1);
+\draw (i1) -- (i2);
+\draw (kon) -- (k1);
+\draw (k1) -- (k2);
+\draw (k2) -- (k3);
+\end{tikzpicture}
+}
+\caption{Tiga jenis target publikasi yang umum diakses oleh mahasiswa pascasarjana
+Indonesia. Daftar tidak eksklusif; status akreditasi/indeks wajib diverifikasi
+saat semester berjalan.}
+\label{fig:venue-map}
+\end{figure}
+
+\textbf{Jurnal nasional terakreditasi (SINTA 2--4)} cocok untuk makalah dengan
+kontribusi yang jelas dan analisis mendalam pada studi kasus Indonesia. Proses
+telaah biasanya berlangsung beberapa bulan; tidak selalu ada tenggat kaku,
+tetapi mahasiswa tetap perlu memperhatikan ritme penerbitan jurnal.
+
+\textbf{Jurnal internasional (Q3--Q4)} cocok jika mahasiswa ingin pengalaman
+proses telaah yang lebih ketat dan jangkauan pembaca yang lebih luas. Proses
+telaah dapat berlangsung lebih lama, dan biaya publikasi pada sebagian jurnal
+cukup besar. Reputasi jurnal harus selalu diperiksa agar mahasiswa terhindar
+dari jurnal yang dicurigai \emph{predatory}.
+
+\textbf{Konferensi nasional/internasional} cocok untuk mahasiswa yang ingin
+menyelesaikan makalah dengan tenggat yang lebih jelas. Konferensi seperti
+ICITSI, ICACSIS, ICOIACT, ICITISEE, ICEEIE, dan ICoICT dapat menjadi pintu
+masuk pertama mahasiswa pascasarjana ke komunitas akademik yang lebih luas.
+Status indeks, penerbit, jadwal, dan jalur/topik konferensi tetap harus
+diverifikasi pada semester berjalan.
+
+\subsection{Kriteria Pemilihan Target Publikasi}
+
+Lima kriteria praktis berikut dapat membantu mahasiswa memilih target
+publikasi:
+
+\begin{enumerate}
+  \item \textbf{Kesesuaian ruang lingkup:} apakah topik makalah cocok dengan
+        ruang lingkup atau jalur/topik target publikasi?
+  \item \textbf{Kelayakan akses data:} apakah data dan akses organisasi yang
+        dimiliki cukup untuk memenuhi kedalaman analisis yang diharapkan?
+  \item \textbf{Reputasi dan keberlanjutan:} apakah target publikasi memiliki
+        reputasi yang jelas, terindeks dengan benar, dan terbit secara
+        konsisten?
+  \item \textbf{Tenggat dan kalender:} apakah tenggat pengajuan cocok dengan
+        kalender akademik mata kuliah?
+  \item \textbf{Biaya:} berapa biaya \emph{article processing charge} (APC)
+        atau \emph{registration fee}? Apakah terjangkau atau tersedia subsidi?
+\end{enumerate}
+
+Pada Sesi~1, mahasiswa diharapkan memilih dua atau tiga target publikasi dan
+melakukan verifikasi singkat terhadap kelima kriteria di atas. Verifikasi ini
+bukan sekadar formalitas; ia akan memengaruhi struktur makalah yang ditulis
+sepanjang semester.
+
+\section{Tipe Makalah yang Dapat Dipilih}
+
+Makalah yang dihasilkan dari mata kuliah ini dapat mengambil salah satu dari
+empat bentuk berikut, sesuai minat mahasiswa dan akses data yang tersedia:
+
+\begin{enumerate}
+  \item \textbf{Studi kasus arsitektur enterprise:} analisis kondisi saat
+        ini, rancangan target, dan peta jalan transformasi pada satu
+        organisasi. Cocok jika mahasiswa
+        memiliki akses cukup pada dokumen, proses, atau narasumber organisasi.
+  \item \textbf{Design science atau rancangan solusi:} perancangan blueprint,
+        strategi API, atau model tata kelola sebagai artefak solusi. Cocok jika
+        masalah organisasi cukup jelas dan mahasiswa ingin menonjolkan
+        kontribusi rancangan.
+  \item \textbf{Evaluasi strategi platform/API:} analisis ekonomi API,
+        ekosistem platform, network effects, dan tata kelola pada satu kasus.
+        Cocok jika studi kasus memiliki aspek ekosistem, mitra, atau open API.
+  \item \textbf{Kajian konseptual berbasis kasus lokal:} sintesis literatur dan
+        contoh Indonesia untuk menghasilkan kerangka atau rekomendasi. Cocok
+        jika akses data organisasi terbatas namun literatur dan data sekunder
+        tersedia.
+\end{enumerate}
+
+Tipe makalah dipilih bersamaan dengan target publikasi di Sesi~1, lalu
+diperhalus kembali pada Sesi~2--3 setelah rumusan masalah dan akses data lebih
+jelas.
+
+\section{Glosarium Mini}
+
+Beberapa istilah kunci yang akan sering muncul:
+
+\begin{itemize}
+  \item \textbf{Enterprise Architecture (EA):} disiplin yang menyelaraskan
+        strategi organisasi dengan kapabilitas teknologi melalui pemetaan,
+        prinsip, dan keputusan terdokumentasi.
+  \item \textbf{TOGAF-lite:} versi sederhana dari The Open Group Architecture
+        Framework yang berfokus pada siklus inti: visi, kondisi saat ini,
+        target, kesenjangan, dan peta jalan, tanpa membawa seluruh
+        kompleksitas TOGAF.
+  \item \textbf{BDAT:} singkatan dari Business, Data, Application, Technology
+        sebagai empat domain arsitektur klasik.
+  \item \textbf{API (Application Programming Interface):} kontrak digital
+        terstandar yang memungkinkan satu sistem berinteraksi dengan sistem
+        lain.
+  \item \textbf{Platform multi-sided:} model bisnis yang menghubungkan dua atau
+        lebih kelompok pengguna dan menghasilkan \emph{network effect}.
+  \item \textbf{Network effect:} fenomena bahwa nilai sebuah produk/platform
+        meningkat bersamaan dengan bertambahnya pengguna pada satu atau lebih
+        sisi platform.
+  \item \textbf{Research question (RQ):} pertanyaan penelitian yang menjadi
+        arah utama makalah dan dijawab melalui analisis serta pembahasan.
+\end{itemize}
+
+\section{Integrasi ke Makalah Publikasi}
+
+Bab ini menyumbang bahan awal untuk dua bagian makalah:
+
+\begin{itemize}
+  \item \textbf{Pendahuluan:} pembaca akan menggunakan skenario organisasi
+        sendiri (serupa dengan Bank Wanua) sebagai latar belakang makalah,
+        kemudian
+        menuliskan motivasi mengapa transformasi digital pada organisasi
+        tersebut layak dianalisis.
+  \item \textbf{Pernyataan kontribusi:} pernyataan singkat 2--3 kalimat
+        tentang apa yang akan dihasilkan makalah dan mengapa hasil tersebut
+        bernilai bagi komunitas akademik atau praktik.
+\end{itemize}
+
+Pada Sesi~2, RQ dan pernyataan kontribusi akan dipertajam. Pada Sesi~1, yang
+dibutuhkan adalah draf awal yang cukup jelas untuk menjadi titik pijak.
+Naskah belum perlu sempurna; yang penting cukup konkret untuk ditinjau bersama
+dosen dan rekan sejawat.
+
+\section{Diskusi Kritis dan Perangkap Umum}
+
+Beberapa perangkap berikut sering muncul ketika mahasiswa pertama kali masuk
+ke materi Enterprise Architecture:
+
+\begin{enumerate}
+  \item \emph{Memulai dari teknologi.} Mahasiswa sering tergoda memilih
+        teknologi terlebih dahulu, misalnya ``saya ingin menulis tentang
+        microservices'', alih-alih memulai dari masalah organisasi.
+  \item \emph{Topik terlalu luas.} ``Transformasi digital BUMN energi
+        nasional'' adalah judul tesis lima tahun, bukan makalah satu semester.
+        Pilih satu organisasi, satu fokus.
+  \item \emph{Mengabaikan konteks Indonesia.} Mengutip teori platform Silicon
+        Valley tanpa menyelaraskan dengan UU PDP, OJK, atau realitas pasar
+        lokal akan menghasilkan rekomendasi yang tidak dapat
+        diimplementasikan.
+  \item \emph{Memilih target publikasi setelah makalah selesai.} Akibatnya
+        format, panjang, dan referensi tidak selaras dengan templat. Pilih
+        target publikasi di Sesi~1 dan ikuti templat tersebut sejak awal.
+  \item \emph{Menganggap blueprint sebagai luaran utama.} Blueprint adalah
+        bukti analisis; luaran utama tetap makalah.
+\end{enumerate}
+
+\section{Latihan Terapan Individual}
+
+Latihan pada bab ini sengaja dibuat ringan karena fungsinya adalah meletakkan
+fondasi yang akan ditindaklanjuti pada bab-bab selanjutnya.
+
+\subsection*{Latihan~1.1: Pemilihan Organisasi Studi Kasus (45 menit)}
+
+Pilihlah satu organisasi nyata atau hipotetis-realistis dalam konteks
+Indonesia yang akan Anda gunakan sebagai studi kasus sepanjang semester.
+Tuliskan jawaban atas pertanyaan berikut secara ringkas (maksimum satu
+halaman):
+
+\begin{enumerate}
+  \item Nama organisasi (boleh anonim/disamarkan, misalnya ``Bank Wanua'').
+  \item Sektor (publik, pendidikan, kesehatan, keuangan, retail, logistik,
+        manufaktur, sosial, layanan digital).
+  \item Skala dan jangkauan operasi singkat.
+  \item Mengapa organisasi ini menarik untuk dianalisis (1--2 paragraf).
+  \item Akses data yang Anda miliki: dokumen publik, wawancara, observasi,
+        data internal dengan izin, atau kombinasi.
+\end{enumerate}
+
+\subsection*{Latihan~1.2: Pernyataan Topik Awal (30 menit)}
+
+Tuliskan satu paragraf (4--6 kalimat) sebagai pernyataan topik awal makalah
+Anda. Paragraf ini sebaiknya menjawab tiga hal:
+
+\begin{itemize}
+  \item Apa masalah/peluang transformasi digital yang akan dianalisis?
+  \item Pendekatan analisis apa yang akan digunakan (TOGAF-lite, design
+        science, evaluasi platform, atau kajian konseptual)?
+  \item Apa potensi kontribusi makalah bagi komunitas akademik atau praktik?
+\end{itemize}
+
+\subsection*{Latihan~1.3: Identifikasi 2--3 Target Publikasi (60 menit)}
+
+Pilih dua atau tiga target publikasi (jurnal SINTA, jurnal internasional, atau
+konferensi) yang relevan dengan topik Anda. Buat tabel ringkas dengan kolom:
+nama target publikasi, ruang lingkup atau jalur/topik yang relevan, status
+indeks atau akreditasi, biaya publikasi/APC, tenggat atau jadwal terbit, dan
+tautan templat.
+
+\subsection*{Latihan~1.4: Telaah Singkat Satu Makalah Contoh (60 menit)}
+
+Cari satu makalah akademik (jurnal SINTA, jurnal internasional, atau prosiding
+konferensi) yang relevan dengan topik Anda. Tuliskan refleksi satu halaman:
+
+\begin{itemize}
+  \item Apa pertanyaan penelitian (research question) makalah tersebut?
+  \item Pendekatan/metode apa yang digunakan?
+  \item Apa kontribusinya?
+  \item Bagaimana makalah itu menempatkan konteks (Indonesia atau lainnya)?
+  \item Apa yang dapat Anda pelajari dari makalah itu untuk naskah Anda?
+\end{itemize}
+
+\subsection*{Pertanyaan Refleksi}
+
+\begin{enumerate}
+  \item Apakah organisasi yang Anda pilih cukup spesifik untuk dianalisis
+        dalam satu semester?
+  \item Apakah akses data yang Anda miliki memungkinkan tipe makalah yang
+        Anda pilih?
+  \item Target publikasi mana yang paling realistis dilihat dari tenggat,
+        biaya, dan kedalaman analisis yang dapat Anda capai?
+  \item Setelah menelaah satu makalah contoh, bagian mana yang menurut Anda
+        akan paling menantang ditulis?
+\end{enumerate}
+
+\section{Uji Mandiri}
+
+\subsection*{Pertanyaan Konseptual}
+
+\begin{enumerate}
+  \item Jelaskan dengan kata-kata Anda sendiri mengapa Enterprise Architecture
+        penting bagi pengambil keputusan non-IT.
+  \item Sebutkan empat domain BDAT dan beri satu contoh artefak per domain.
+  \item Apa yang dimaksud dengan \emph{network effect} pada platform
+        multi-sided? Beri satu contoh dari Indonesia.
+  \item Sebutkan minimal lima bagian pada anatomi makalah ilmiah dan jelaskan
+        fungsi komunikasi setiap bagian.
+  \item Apa perbedaan utama antara API \emph{private}, \emph{partner}, dan
+        \emph{public}?
+\end{enumerate}
+
+\subsection*{Pertanyaan Aplikatif}
+
+\begin{enumerate}
+  \item Sebuah rumah sakit daerah ingin membangun layanan telekonsultasi.
+        Sebutkan tiga keputusan EA strategis (lintas BDAT) yang perlu
+        dipertimbangkan oleh direksi rumah sakit.
+  \item Sebuah koperasi simpan-pinjam ingin membuka API agar UMKM dapat
+        mengintegrasikan layanan pembayarannya. Apa risiko utama dari sisi
+        regulasi dan tata kelola yang perlu diantisipasi?
+\end{enumerate}
+
+\subsection*{Pertanyaan Reflektif untuk Makalah}
+
+\begin{enumerate}
+  \item Bagian mana dari latihan~1.1--1.4 yang paling akan memengaruhi
+        struktur Pendahuluan makalah Anda?
+  \item Apakah ada kemungkinan organisasi studi kasus Anda berubah dalam dua
+        bab pertama? Apa indikatornya?
+\end{enumerate}
+
+\section{Ringkasan Bab}
+
+Bab ini memperkenalkan empat pilar yang menjadi dasar seluruh mata kuliah.
+Pertama, Enterprise Architecture diposisikan sebagai jembatan dua arah antara
+strategi organisasi dan kapabilitas teknologi. Kedua, kerangka BDAT (Business,
+Data, Application, Technology) diperkenalkan sebagai cara memecah kerumitan
+organisasi menjadi empat domain yang saling terkait. Ketiga, API dan platform
+diposisikan sebagai pengungkit nilai pada model bisnis digital modern, dengan
+studi kasus Indonesia sebagai sumber pembelajaran utama. Keempat, anatomi
+makalah ilmiah diperkenalkan sebagai kerangka komunikasi yang akan dibangun
+sesi demi sesi.
+
+Konteks Indonesia dipertegas sebagai bagian inti analisis melalui regulasi
+seperti UU PDP, UU ITE, PP 71/2019, Permenkominfo PSE, OJK, BSSN, dan SNAP
+BI, serta melalui ekosistem digital yang akan sering digunakan sebagai studi
+kasus. Pemilihan target publikasi juga diperkenalkan sebagai keputusan
+strategis yang memengaruhi struktur makalah. Lima kriteria praktisnya adalah
+kesesuaian ruang lingkup, kelayakan akses data, reputasi target publikasi,
+tenggat, dan biaya.
+
+Pada akhir bab, mahasiswa telah memilih satu organisasi studi kasus, menulis
+pernyataan topik awal, dan mengidentifikasi dua sampai tiga kandidat target
+publikasi. Tiga keluaran awal ini menjadi titik pijak Bab~2, ketika rumusan
+masalah, pertanyaan penelitian, dan pernyataan kontribusi dipertajam menggunakan
+kerangka strategi bisnis dan keselarasan bisnis--TI.
+
+\section{Jembatan ke Bab Berikutnya}
+
+Bab~2 akan memperdalam pertanyaan: \emph{mengapa banyak inisiatif transformasi
+digital di organisasi Indonesia tidak mencapai tujuannya, padahal teknologinya
+tersedia?} Jawabannya sering kali bukan terletak pada teknologi, melainkan
+pada ketidakselarasan antara strategi bisnis dan keputusan TI. Pembaca akan
+diajak menggunakan Business Model Canvas dan konsep Operating Model sebagai
+alat sederhana untuk memetakan strategi organisasi pilihan, lalu merumuskan
+masalah penelitian dan kontribusi makalah secara lebih tajam.
+
+\section{Bacaan Lanjutan}
+
+\subsection*{Bacaan Inti}
+
+\begin{itemize}
+  \item \emph{TOGAF Standard, 10th Edition}~\cite{togaf10}. Bagian pengantar
+        (\emph{Architecture Development Method overview}) memberi gambaran
+        besar sebelum pembaca masuk ke versi ``lite'' pada Bab~3.
+  \item \emph{Designed for Digital}~\cite{ross2019designed}. Cocok untuk
+        membangun intuisi tentang mengapa transformasi digital membutuhkan kerangka
+        arsitektur.
+  \item \emph{Platform Revolution}~\cite{parker2016platform}. Bab pertama
+        mengenai pergeseran dari model linear ke platform sangat membantu
+        untuk memahami kasus seperti Gojek dan Tokopedia.
+\end{itemize}
+
+\subsection*{Bacaan untuk Memperdalam}
+
+\begin{itemize}
+  \item \emph{APIs: A Strategy Guide}~\cite{jacobson2011apis}. Untuk pembaca
+        yang ingin memperluas wawasan API sebelum Bab~9.
+  \item \emph{The Business of Platforms}~\cite{cusumano2019business}.
+        Bacaan pelengkap untuk memahami strategi dan tata kelola platform.
+  \item \emph{Enterprise Architecture as Strategy}~\cite{ross2006enterprise}.
+        Rujukan klasik EA yang relevan untuk argumen keselarasan bisnis--TI.
+\end{itemize}
+
+\subsection*{Sumber Indonesia}
+
+\begin{itemize}
+  \item \emph{Standar Nasional Open API Pembayaran (SNAP BI)}~\cite{snapbi}.
+        Dokumen resmi bagi mahasiswa yang memilih topik perbankan/fintech.
+  \item \emph{Satu Data Indonesia}~\cite{satudata}. Kerangka tata kelola data
+        publik nasional yang relevan untuk studi kasus pemerintahan.
+  \item \emph{Undang-Undang Pelindungan Data Pribadi}~\cite{uupdp2022} dan
+        \emph{PP No.~71/2019}~\cite{pp712019} menjadi dua rujukan regulasi
+        yang akan sering muncul sepanjang buku.
+  \item Jurnal Sistem Informasi (JSI), JUTI, JTIIK, TEKNOSI, dan jurnal SINTA
+        lain dengan ruang lingkup EA, sistem informasi, atau platform; gunakan SINTA
+        \footnote{\url{https://sinta.kemdiktisaintek.go.id/}} dan Garuda
+        \footnote{\url{https://garuda.kemdiktisaintek.go.id/}} untuk mencari
+        makalah relevan.
+\end{itemize}

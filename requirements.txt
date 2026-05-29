@@ -1,0 +1,12 @@
+Create 14 sessions course for this:
+
+Nama: IT30713 — Enterprise & Platform Architecture (3 SKS)
+Deskripsi: Arsitektur enterprise dan ekonomi platform/API.
+Komponen:
+CPL-4 (System Design) CPL-6 (Leadership & Collaboration)
+CLO: Menyusun digital blueprint enterprise.
+Pokok Bahasan: TOGAF-lite; API strategy; platform governance
+Metode: Workshop
+Penilaian: Enterprise blueprint (60%), Presentasi (40%)
+Referensi: TOGAF 10; Platform Strategy Books
+Additional Information: Students are for master's degree with non-IT background and  are indonesian.

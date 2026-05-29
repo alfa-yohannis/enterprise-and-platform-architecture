@@ -1,0 +1,122 @@
+\documentclass[11pt,b5paper]{book}
+
+\usepackage{parskip}
+\setlength{\parskip}{0.5em}
+\setlength{\parindent}{1.5em}
+
+\usepackage{longtable}
+\usepackage{xcolor}
+\usepackage{fontspec}
+\setmainfont[
+Path = fonts/,
+UprightFont = TitilliumWeb-Regular.ttf,
+BoldFont = TitilliumWeb-Bold.ttf,
+ItalicFont = TitilliumWeb-Italic.ttf,
+BoldItalicFont = TitilliumWeb-BoldItalic.ttf
+]{TitilliumWeb}
+
+\usepackage{pgfplots}
+\usepgfplotslibrary{polar}
+\pgfplotsset{compat=1.18}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,
+    positioning, shapes, shapes.multipart, backgrounds, arrows.meta, calc, fit, trees, decorations.pathreplacing}
+
+\usepackage{amsmath}
+
+\usepackage{tabularx}
+\usepackage[b5paper,inner=2.5cm,
+  outer=2.0cm,
+  top=2.5cm,
+  bottom=2.5cm]{geometry}
+\usepackage[colorlinks=true, linkcolor=black, citecolor=blue, urlcolor=blue]{hyperref}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\graphicspath{{../figures/}}
+\usepackage{svg}
+
+\usepackage{subcaption}
+
+\usepackage{hyperref}
+\usepackage{xurl}
+
+\input{hyphenation}
+
+\usepackage{listings}
+
+\lstdefinelanguage{yaml}{
+    basicstyle=\ttfamily\scriptsize,
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{gray}\itshape,
+    stringstyle=\color{red},
+    showstringspaces=false,
+    breaklines=true,
+    frame=lines,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    backgroundcolor=\color{lightgray!10},
+    tabsize=2,
+    morecomment=[l]{\#},
+    literate=
+      *{-}{{{\color{blue}\bfseries-}}}1
+       {:}{{{\color{blue}\bfseries:}}}1
+}
+
+\lstdefinelanguage{bash}{
+    keywords={},
+    basicstyle=\ttfamily\scriptsize,
+    keywordstyle=\color{blue}\bfseries,
+    sensitive=true,
+    commentstyle=\color{gray},
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    breaklines=true,
+    frame=lines,
+    backgroundcolor=\color{lightgray!10},
+    tabsize=2,
+    comment=[l]{\#},
+    showstringspaces=false
+}
+
+\newcommand{\authors}[1]{{\chapterauthor{#1}\addtocontents{toc}{#1\par}}}
+\newcommand{\HUGE}{\fontsize{40}{48}\selectfont}
+
+\renewcommand{\contentsname}{Daftar Isi}
+\renewcommand{\chaptername}{Bab}
+\renewcommand{\figurename}{Gambar}
+\renewcommand{\tablename}{Tabel}
+
+\definecolor{praditagreen}{RGB}{37, 113, 71}
+
+\makeatletter
+\newcommand{\chapterauthor}[1]{%
+    {\parindent0pt\vspace*{-25pt}%
+        \linespread{1.1}\large\scshape#1%
+        \par\nobreak\vspace*{35pt}}
+    \@afterheading%
+}
+\makeatother
+
+\begin{document}
+
+    \include{titlepage}
+
+    \tableofcontents
+
+    \include{pendahuluan}
+    \include{chapter01}
+    \include{chapter02}
+    \include{chapter03}
+    \include{chapter04}
+    % Bab-bab berikutnya akan ditambahkan secara bertahap.
+    % ...
+    % \include{chapter14}
+
+    \backmatter
+    \addcontentsline{toc}{chapter}{Daftar Pustaka}
+    \bibliographystyle{plain}
+    \bibliography{references}
+
+\end{document}
