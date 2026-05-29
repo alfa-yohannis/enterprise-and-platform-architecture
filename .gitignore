@@ -333,3 +333,4 @@ slides_ref
 module_ref
 module/enterprise-platform-architecture.pdf
 slides/session*/session*.pdf
+videos/session*/**
