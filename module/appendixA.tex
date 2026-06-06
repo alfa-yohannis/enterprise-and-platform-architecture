@@ -1,0 +1,377 @@
+\chapter{Instalasi Perangkat Lunak dan Setup Archi MCP}
+\label{app:setup-archi-mcp}
+
+\lstset{
+  basicstyle=\ttfamily\scriptsize,
+  breaklines=true,
+  columns=fullflexible,
+  frame=lines,
+  showstringspaces=false
+}
+
+Lampiran ini memandu pembaca menyiapkan lingkungan kerja untuk latihan
+arsitektur enterprise: Python, Visual Studio Code (VS Code), Codex CLI, Claude
+Code CLI, Archi, dan plug-in Archi MCP Server. Instruksi diverifikasi terhadap
+dokumentasi resmi pada 1 Juni 2026. Karena versi perangkat lunak berubah secara
+berkala, gunakan tautan resmi dan pilih rilis stabil terbaru ketika mengunduh.
+
+\section{Hasil Akhir yang Diharapkan}
+
+Setelah mengikuti lampiran ini, pembaca memiliki lingkungan kerja berikut:
+
+\begin{enumerate}
+  \item Python dan VS Code untuk mengelola berkas, skrip, dan folder proyek.
+  \item Codex CLI dan Claude Code CLI sebagai klien AI berbasis terminal.
+  \item Archi untuk membuat serta menyimpan model ArchiMate.
+  \item Plug-in Archi MCP Server yang berjalan di dalam Archi.
+  \item Sambungan lokal dari Claude Code atau Codex menuju model yang sedang
+        terbuka di Archi melalui endpoint
+        \url{http://127.0.0.1:18090/mcp}.
+\end{enumerate}
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Perangkat lunak yang digunakan dalam lingkungan kerja.}
+\label{tab:software-setup}
+\begin{tabularx}{\textwidth}{@{}p{0.19\textwidth} p{0.26\textwidth} X@{}}
+\hline
+\textbf{Perangkat Lunak} & \textbf{Fungsi} & \textbf{Tautan Resmi} \\
+\hline
+Python & Menjalankan skrip bantu dan lingkungan virtual. &
+\href{https://www.python.org/downloads/}{python.org/downloads} \\
+Visual Studio Code & Menyunting berkas proyek dan membuka terminal terpadu. &
+\href{https://code.visualstudio.com/download}{code.visualstudio.com/download} \\
+Codex CLI & Klien AI OpenAI berbasis terminal. &
+\href{https://developers.openai.com/codex/cli}{developers.openai.com/codex/cli} \\
+Claude Code CLI & Klien AI Anthropic berbasis terminal. &
+\href{https://code.claude.com/docs/en/setup}{code.claude.com/docs/en/setup} \\
+Archi & Aplikasi lintas platform untuk pemodelan ArchiMate. &
+\href{https://www.archimatetool.com/download/}{archimatetool.com/download} \\
+Archi MCP Server & Plug-in yang mengekspos model Archi melalui protokol MCP. &
+\href{https://github.com/fanievh/archi-mcp-server}{github.com/fanievh/archi-mcp-server} \\
+\hline
+\end{tabularx}
+\end{table}
+
+\section{Persiapan Umum}
+
+Siapkan koneksi internet, hak untuk memasang aplikasi pada komputer, dan satu
+folder kerja. Codex CLI memerlukan akun ChatGPT yang mendukung Codex atau API
+key. Claude Code memerlukan akun Anthropic yang sesuai atau penyedia API yang
+didukung. Jalankan perintah instalasi pada terminal biasa; gunakan hak
+administrator hanya ketika sistem operasi memintanya.
+
+Repositori Archi MCP Server mensyaratkan Archi 5.7 atau lebih baru dan Java 21
+atau lebih baru. Paket Archi terbaru sudah menyertakan \emph{Java Runtime}
+yang sesuai. Pada 1 Juni 2026, rilis Archi stabil terbaru adalah 5.9.0 dan
+menyertakan Java Runtime 21. Jika memakai distribusi Archi khusus tanpa runtime
+terbundel, pasang Java 21 dari
+\url{https://adoptium.net/temurin/releases/?version=21}.
+
+\section{Instalasi pada Windows 10 atau Windows 11}
+
+\subsection{Python}
+
+Buka \url{https://www.python.org/downloads/}, unduh \emph{Python install
+manager} untuk Windows, lalu jalankan pemasangnya. Alternatifnya, gunakan
+PowerShell:
+
+\begin{lstlisting}
+winget install 9NQ7512CXL7T -e --accept-package-agreements --disable-interactivity
+py install default
+py --version
+\end{lstlisting}
+
+Perintah \texttt{py install default} memasang versi Python stabil bawaan yang
+direkomendasikan oleh pengelola Python.
+
+\subsection{Visual Studio Code}
+
+Buka \url{https://code.visualstudio.com/download}, pilih \emph{Windows User
+Installer} sesuai arsitektur komputer (umumnya x64), jalankan berkas pemasang,
+dan terima opsi untuk menambahkan perintah \texttt{code} ke \emph{PATH}. Tutup
+dan buka kembali terminal, lalu periksa:
+
+\begin{lstlisting}
+code --version
+\end{lstlisting}
+
+\subsection{Codex CLI}
+
+Jalankan PowerShell dan gunakan pemasang resmi Codex CLI:
+
+\begin{lstlisting}
+powershell -ExecutionPolicy ByPass -c "irm https://chatgpt.com/codex/install.ps1 | iex"
+codex --version
+\end{lstlisting}
+
+Jalankan perintah \texttt{codex}. Pilih masuk dengan akun ChatGPT atau API key,
+lalu ikuti petunjuk pada layar.
+
+\subsection{Claude Code CLI}
+
+Jalankan PowerShell:
+
+\begin{lstlisting}
+irm https://claude.ai/install.ps1 | iex
+claude --version
+claude doctor
+\end{lstlisting}
+
+Jalankan \texttt{claude} dan ikuti alur masuk pada peramban. Git for Windows
+bersifat opsional tetapi direkomendasikan agar Claude Code dapat memakai Git
+Bash. Unduh melalui
+\href{https://git-scm.com/download/win}{halaman resmi Git for Windows}.
+
+\subsection{Archi}
+
+Buka \url{https://www.archimatetool.com/download/}, pilih \emph{Windows
+Installer}, lalu jalankan pemasang. Halaman resmi Archi meminta pengguna
+menghapus versi lama sebelum memasang versi baru. Jalankan Archi dari menu
+Start setelah instalasi selesai.
+
+\section{Instalasi pada Ubuntu Linux}
+
+\subsection{Python dan Utilitas Dasar}
+
+Buka terminal, lalu jalankan:
+
+\begin{lstlisting}
+sudo apt update
+sudo apt install -y python3 python3-venv python3-pip curl
+python3 --version
+\end{lstlisting}
+
+\subsection{Visual Studio Code}
+
+Halaman unduhan VS Code menyediakan paket \texttt{.deb} untuk Ubuntu. Cara
+ringkas lain yang tercantum pada halaman resmi adalah memakai Snap:
+
+\begin{lstlisting}
+sudo snap install --classic code
+code --version
+\end{lstlisting}
+
+\subsection{Codex CLI dan Claude Code CLI}
+
+Gunakan pemasang native resmi:
+
+\begin{lstlisting}
+curl -fsSL https://chatgpt.com/codex/install.sh | sh
+codex --version
+
+curl -fsSL https://claude.ai/install.sh | bash
+claude --version
+claude doctor
+\end{lstlisting}
+
+Jalankan \texttt{codex} dan \texttt{claude} satu per satu untuk menyelesaikan
+autentikasi.
+
+\subsection{Archi}
+
+Unduh arsip Linux 64-bit dari
+\href{https://www.archimatetool.com/download/}{archimatetool.com/download}.
+Ekstrak arsip ke folder yang mudah ditemukan. Jalankan program \texttt{Archi}
+di dalam folder hasil ekstraksi. Contoh:
+
+\begin{lstlisting}
+tar -xzf Archi-Linux64-*.tgz
+cd Archi
+./Archi
+\end{lstlisting}
+
+\section{Instalasi pada macOS}
+
+\subsection{Python dan Visual Studio Code}
+
+Unduh pemasang Python terbaru dari \url{https://www.python.org/downloads/}.
+Paket Python resmi untuk macOS berbentuk \texttt{.pkg} universal yang
+mendukung Mac Apple Silicon dan Intel. Jalankan pemasang, lalu periksa:
+
+\begin{lstlisting}
+python3 --version
+\end{lstlisting}
+
+Unduh VS Code dari \url{https://code.visualstudio.com/download}. Pilih berkas
+\texttt{.dmg} yang sesuai, lalu pindahkan aplikasi ke folder
+\texttt{Applications}. Gunakan paket universal bila jenis prosesor belum
+diketahui.
+
+\subsection{Codex CLI dan Claude Code CLI}
+
+Buka Terminal dan jalankan:
+
+\begin{lstlisting}
+curl -fsSL https://chatgpt.com/codex/install.sh | sh
+codex --version
+
+curl -fsSL https://claude.ai/install.sh | bash
+claude --version
+claude doctor
+\end{lstlisting}
+
+Jalankan \texttt{codex} dan \texttt{claude} untuk menyelesaikan autentikasi.
+
+\subsection{Archi}
+
+Buka \url{https://www.archimatetool.com/download/}. Pilih \emph{macOS Silicon}
+untuk Apple Silicon atau \emph{macOS Intel} untuk Mac Intel. Buka berkas
+\texttt{.dmg}, lalu pindahkan aplikasi Archi ke folder \texttt{Applications}.
+
+\section{Memasang Plug-in Archi MCP Server}
+
+Langkah berikut berlaku sama pada Windows, Ubuntu Linux, dan macOS.
+
+\begin{enumerate}
+  \item Buka halaman rilis
+        \url{https://github.com/fanievh/archi-mcp-server/releases}.
+  \item Unduh aset terbaru dengan ekstensi \texttt{.archiplugin}. Pada 1 Juni
+        2026, rilis terbaru adalah v1.4.0. Gunakan rilis stabil terbaru bila
+        nomor versi sudah berubah.
+  \item Buka Archi, lalu pilih menu \texttt{Help > Manage Plug-ins > Install
+        New...}.
+  \item Pilih berkas \texttt{.archiplugin} yang baru diunduh dan selesaikan
+        instalasi.
+  \item Tutup dan buka kembali Archi.
+  \item Buat model baru atau buka berkas \texttt{.archimate} yang akan
+        dikerjakan.
+  \item Pilih menu \texttt{MCP Server > Start MCP Server}.
+\end{enumerate}
+
+Secara bawaan, server memakai endpoint lokal:
+
+\begin{lstlisting}
+http://127.0.0.1:18090/mcp
+\end{lstlisting}
+
+Alamat \texttt{127.0.0.1} berarti server hanya menerima sambungan dari komputer
+yang sama. Pertahankan pengaturan ini untuk latihan. Jangan membuka server ke
+jaringan umum tanpa memahami risiko akses dan konfigurasi TLS.
+
+Pengaturan tambahan tersedia melalui menu \texttt{Window > Preferences > MCP
+Server}. Jika port diubah, konfigurasi klien pada bagian berikut juga harus
+diubah.
+
+\section{Menghubungkan Claude Code ke Archi MCP}
+
+Cara paling mudah untuk folder proyek adalah membuat berkas
+\texttt{.mcp.json} pada akar folder:
+
+\begin{lstlisting}
+{
+  "mcpServers": {
+    "archi": {
+      "type": "http",
+      "url": "http://127.0.0.1:18090/mcp"
+    }
+  }
+}
+\end{lstlisting}
+
+Alternatifnya, daftarkan server melalui terminal dari folder proyek:
+
+\begin{lstlisting}
+claude mcp add --transport http --scope project archi http://127.0.0.1:18090/mcp
+claude mcp list
+\end{lstlisting}
+
+Jalankan \texttt{claude}. Claude Code akan meminta persetujuan sebelum memakai
+server yang didefinisikan pada tingkat proyek. Di dalam sesi Claude Code,
+gunakan perintah \texttt{/mcp} untuk memeriksa status sambungan.
+
+\section{Menghubungkan Codex ke Archi MCP}
+
+Codex memakai format konfigurasi TOML. Pilih lokasi konfigurasi yang sesuai:
+
+\begin{itemize}
+  \item konfigurasi pengguna: \path{~/.codex/config.toml};
+  \item proyek tepercaya: \path{.codex/config.toml} pada akar proyek.
+\end{itemize}
+
+Isi berkas tersebut dengan konfigurasi berikut:
+
+\begin{lstlisting}
+[mcp_servers.archi]
+url = "http://127.0.0.1:18090/mcp"
+\end{lstlisting}
+
+Jalankan \texttt{codex} dari folder proyek. Di dalam sesi Codex, gunakan
+perintah \texttt{/mcp} untuk memastikan server \texttt{archi} aktif. Codex CLI
+dan ekstensi IDE Codex memakai konfigurasi yang sama.
+
+\section{Uji Sambungan}
+
+Buka sebuah model di Archi dan nyalakan MCP Server. Kemudian, lakukan
+pemeriksaan berikut.
+
+\subsection{Uji Endpoint}
+
+Pada Windows PowerShell, Ubuntu, atau macOS, jalankan:
+
+\begin{lstlisting}
+curl -i http://127.0.0.1:18090/mcp
+\end{lstlisting}
+
+Respons galat HTTP masih dapat menunjukkan bahwa server hidup. Misalnya,
+\texttt{400 Bad Request} muncul karena perintah \texttt{curl} sederhana belum
+mengirim \emph{handshake} MCP. Sebaliknya, \texttt{Connection refused}
+menunjukkan bahwa server belum berjalan atau port tidak sesuai.
+
+\subsection{Uji dari Klien AI}
+
+Buka sesi Claude Code atau Codex yang baru, lalu minta:
+
+\begin{lstlisting}
+Berikan ringkasan model ArchiMate yang sedang terbuka di Archi.
+\end{lstlisting}
+
+Jika sambungan berhasil, klien akan memakai alat MCP untuk membaca model.
+Lanjutkan dengan permintaan kecil, misalnya mencari semua elemen
+\emph{Stakeholder} atau membuat sebuah view uji.
+
+\section{Masalah Umum dan Perbaikannya}
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Masalah umum ketika menyiapkan Archi MCP.}
+\label{tab:archi-mcp-troubleshooting}
+\begin{tabularx}{\textwidth}{@{}p{0.27\textwidth} X@{}}
+\hline
+\textbf{Gejala} & \textbf{Perbaikan} \\
+\hline
+Menu \texttt{MCP Server} tidak muncul & Pasang kembali berkas
+\texttt{.archiplugin}, lalu tutup dan buka kembali Archi. \\
+\texttt{Connection refused} & Buka sebuah model di Archi, pilih
+\texttt{MCP Server > Start MCP Server}, dan periksa port. \\
+\texttt{MODEL\_NOT\_LOADED} & Pastikan model sudah terbuka. Hentikan dan
+nyalakan kembali MCP Server bila perlu, lalu buka sesi klien AI yang baru. \\
+Model berubah di Archi tetapi klien membaca keadaan lama & Buka sesi MCP baru.
+Sesi klien mengikat keadaan model ketika sambungan dibuat. \\
+Perubahan model hilang setelah Archi ditutup & Tekan \texttt{Ctrl+S} pada
+Windows/Linux atau \texttt{Cmd+S} pada macOS. Perubahan melalui MCP berada di
+memori sampai model disimpan. \\
+Claude atau Codex tidak melihat server & Periksa akhiran
+\texttt{/mcp}, format berkas konfigurasi, dan status melalui \texttt{/mcp} di
+dalam klien. \\
+Port \texttt{18090} sudah dipakai aplikasi lain & Ubah port melalui
+\texttt{Window > Preferences > MCP Server}, lalu samakan URL pada semua
+konfigurasi klien. \\
+\hline
+\end{tabularx}
+\end{table}
+
+\section{Daftar Periksa Ringkas}
+
+\begin{enumerate}
+  \item Pastikan Python, VS Code, Codex CLI, dan Claude Code CLI dapat
+        dijalankan. Gunakan perintah pemeriksaan versi pada bagian instalasi.
+  \item Jalankan Archi dan buka model \texttt{.archimate}.
+  \item Pastikan plug-in Archi MCP Server sudah terpasang.
+  \item Pilih \texttt{MCP Server > Start MCP Server}.
+  \item Tambahkan konfigurasi Claude Code atau Codex.
+  \item Buka sesi klien AI baru dan periksa \texttt{/mcp}.
+  \item Uji pembacaan model dan simpan perubahan model secara eksplisit.
+\end{enumerate}

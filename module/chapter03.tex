@@ -1,146 +1,201 @@
-\chapter[TOGAF-lite, ADM, dan Tinjauan Pustaka]{TOGAF-lite, ADM, dan Tinjauan Pustaka: Menyusun Visi Arsitektur dan Fondasi Akademik}
+\chapter[Lapisan Strategi: Course of Action, Kapabilitas, dan Visi Arsitektur]{Lapisan
+Strategi: Course of Action, Kapabilitas, dan Visi Arsitektur (TOGAF-lite dan
+Tinjauan Pustaka)}
 \label{ch:togaf-lite}
 \setlength{\emergencystretch}{2em}
 
 \section*{Tujuan Pembelajaran}
 \begin{itemize}
-  \item Menjelaskan fungsi TOGAF-lite dan ADM sebagai kerangka kerja ringan
-        untuk menata perubahan arsitektur enterprise.
-  \item Menyusun visi arsitektur awal yang berangkat dari masalah, pertanyaan
-        riset, pemangku kepentingan, dan batasan organisasi.
-  \item Merancang strategi pencarian pustaka dan bibliografi awal yang relevan
-        dengan topik makalah individual.
-  \item Menghubungkan sintesis pustaka, visi arsitektur, dan metode
-        TOGAF-lite ke dalam rancangan awal makalah publikasi.
+  \item Menjelaskan elemen lapisan strategi ArchiMate---sumber daya
+        (\emph{resource}), kapabilitas (\emph{capability}), arah tindakan
+        (\emph{course of action}), dan value stream strategis.
+  \item Membaca model bisnis dan \emph{operating model} sebagai alat untuk
+        memilih arah tindakan strategis organisasi studi kasus.
+  \item Menyusun visi arsitektur dan peta jalan (\emph{roadmap}) yang
+        menerjemahkan strategi menjadi arah perubahan, menggunakan TOGAF-lite
+        dan ADM.
+  \item Merancang strategi pencarian pustaka dan bibliografi awal yang
+        mendukung argumen strategis makalah individual.
 \end{itemize}
 
-Bab ini terutama mendukung capaian pembelajaran yang berkaitan dengan
-pemahaman konsep arsitektur enterprise, analisis pemangku kepentingan,
-penyusunan argumen berbasis pustaka, dan penyiapan naskah publikasi
-individual.
+Bab ini menghubungkan lapisan motivasi (Bab~\ref{ch:strategi-bisnis}) dengan
+rancangan bisnis (Bab~\ref{ch:business-architecture}). Ia juga mendukung
+capaian pembelajaran tentang pemahaman konsep arsitektur, analisis pemangku
+kepentingan, penyusunan argumen berbasis pustaka, dan penyiapan naskah
+publikasi individual.
 
 \section{Ringkasan Awal Bab}
 
-Bab sebelumnya membantu pembaca memilih topik, merumuskan masalah, dan
-membentuk pertanyaan riset awal. Bab ini mengubah rumusan tersebut menjadi
-dua fondasi yang dapat dikerjakan secara terstruktur: visi arsitektur dan
-tinjauan pustaka awal. Visi arsitektur menjelaskan arah perubahan yang ingin
-dibahas dalam makalah. Tinjauan pustaka memberi dasar akademik agar arah
-perubahan tersebut tidak hanya menjadi opini pribadi, melainkan berdiri di
-atas konsep, temuan, standar, dan pengalaman yang sudah pernah dibahas dalam
-literatur.
+Bab sebelumnya menjawab \emph{mengapa} arsitektur dibangun melalui lapisan
+motivasi. Bab ini menjawab \emph{strategi apa} yang dipilih untuk mewujudkan
+sasaran tersebut. Dalam bahasa ArchiMate, jawaban itu berada pada
+\textbf{lapisan strategi}: sumber daya yang dimiliki, kapabilitas tingkat
+tinggi yang perlu dibangun, dan arah tindakan (\emph{course of action}) yang
+dipilih untuk mencapai sasaran. Lapisan strategi inilah yang menentukan urutan,
+prioritas, dan peta jalan perubahan.
 
-TOGAF digunakan secara ringan, bukan sebagai prosedur birokratis penuh. Yang
-diambil adalah cara berpikir ADM: memahami konteks, merumuskan visi,
-memetakan kondisi saat ini, membayangkan kondisi target, menemukan
-kesenjangan, lalu menyusun arah perubahan. Dalam konteks mata kuliah ini, ADM
-menjadi alat bantu untuk menulis makalah yang lebih rapi: masalahnya jelas,
-kerangka konseptualnya terlihat, metode analisisnya dapat dijelaskan, dan
-rekomendasinya dapat ditelusuri kembali ke bukti.
-
-Pada akhir bab, setiap mahasiswa menghasilkan visi arsitektur satu halaman,
-strategi pencarian pustaka, bibliografi awal minimal sepuluh rujukan, dan
-kerangka metode singkat untuk makalah individual.
+Untuk menyatakan strategi secara akademik, bab ini memakai TOGAF secara ringan
+(TOGAF-lite) dan menuangkan arah perubahan ke dalam \textbf{visi arsitektur}.
+Visi arsitektur menjelaskan arah; tinjauan pustaka memberi dasar akademik agar
+arah itu bukan sekadar opini. Sepanjang bab, lapisan strategi diterapkan pada
+kasus berjalan: keputusan Bank Wanua untuk membangun \textbf{rel API Transfer
+Dana lebih dahulu} sebelum layanan pembayaran lain. Pada akhir bab, setiap
+mahasiswa menghasilkan pernyataan arah tindakan, peta jalan ringkas, visi
+arsitektur satu halaman, strategi pencarian pustaka, dan bibliografi awal
+minimal sepuluh rujukan.
 
 \section{Pendahuluan}
 
-Makalah publikasi membutuhkan dua hal yang sering tertukar. Pertama, ia perlu
-arah perubahan yang jelas. Kedua, ia perlu dasar pustaka yang cukup untuk
-menunjukkan bahwa penulis memahami percakapan ilmiah dan profesional di
-bidangnya. Jika hanya ada arah perubahan, naskah mudah berubah menjadi
-proposal internal. Jika hanya ada pustaka, naskah mudah menjadi rangkuman
-artikel tanpa kontribusi.
+Sasaran yang jelas belum tentu menghasilkan arsitektur yang baik. Antara
+sasaran dan rancangan ada lapisan strategi: pilihan tentang kapabilitas apa
+yang dibangun lebih dahulu, sumber daya apa yang dikerahkan, dan urutan
+tindakan apa yang masuk akal. Tanpa lapisan ini, organisasi mudah mencoba
+membangun segalanya sekaligus, lalu kehabisan anggaran dan fokus.
 
-Bab ini mempertemukan keduanya. TOGAF-lite dipakai untuk menyusun arah
-perubahan melalui visi arsitektur. Tinjauan pustaka dipakai untuk membangun
-argumen, memilih konsep, dan menjelaskan mengapa usulan perubahan tersebut
-layak dibahas. Dengan begitu, mahasiswa tidak sekadar menulis bahwa organisasi
-perlu ``bertransformasi digital'', tetapi dapat menunjukkan perubahan apa yang
-dibahas, bukti apa yang mendukung, dan bagaimana analisis dilakukan.
+Makalah publikasi membutuhkan dua hal yang sering tertukar. Pertama, ia perlu
+arah perubahan yang jelas---inilah peran visi arsitektur. Kedua, ia perlu dasar
+pustaka yang cukup untuk menunjukkan bahwa penulis memahami percakapan ilmiah
+dan profesional di bidangnya. Jika hanya ada arah perubahan, naskah mudah
+berubah menjadi proposal internal. Jika hanya ada pustaka, naskah mudah menjadi
+rangkuman artikel tanpa kontribusi. Bab ini mempertemukan keduanya: strategi
+dinyatakan sebagai arah tindakan dan visi, lalu diperkuat oleh pustaka.
 
 Pendekatan ini sesuai dengan keluaran utama mata kuliah: satu makalah
-individual yang siap dikembangkan untuk jurnal atau konferensi. Artefak
-arsitektur tetap dibuat, tetapi posisinya sebagai penguat naskah. Artefak
-yang baik membantu penulis berpikir dan membantu pembaca memahami argumen.
+individual yang siap dikembangkan untuk jurnal atau konferensi. Rujukan
+Enterprise Architecture menekankan bahwa arsitektur adalah fondasi pelaksanaan
+strategi, bukan sekadar diagram teknologi \cite{ross2006enterprise}, dan bahwa
+organisasi digital perlu merancang kapabilitas secara sadar \cite{ross2019designed}.
+TOGAF menyediakan siklus kerja (ADM) untuk menata perubahan tersebut
+\cite{togaf10}.
 
 \section{Skenario Pembuka dan Pertanyaan Pemandu}
 
-Tim pengembangan layanan digital Bank Wanua mulai menyadari bahwa persoalan
-mereka bukan sekadar aplikasi yang lambat atau data nasabah yang tersebar.
-Masalah yang lebih besar adalah tidak adanya gambaran bersama tentang arah
-perubahan. Unit bisnis ingin layanan baru cepat diluncurkan. Unit kepatuhan
-menuntut tata kelola data yang lebih kuat. Tim teknologi ingin mengurangi
-ketergantungan pada sistem lama. Pimpinan meminta satu dokumen ringkas yang
-menjelaskan perubahan apa yang akan dilakukan, mengapa perubahan itu penting,
-dan dasar akademik apa yang mendukung pilihan tersebut.
+Setelah lapisan motivasi API Transfer Dana tergambar, pimpinan Bank Wanua
+menghadapi pertanyaan strategis: dari sekian banyak kapabilitas digital UMKM
+yang diinginkan, mana yang dibangun lebih dahulu? Tim pemasaran mendorong
+layanan penerimaan pembayaran QRIS karena terlihat menarik bagi merchant. Tim
+teknologi mengingatkan bahwa pembayaran QRIS, virtual account, lending, hingga
+analitik semuanya bertumpu pada satu hal yang sama: kemampuan memindahkan dana
+secara andal. Tanpa rel perpindahan dana yang terkelola, layanan di atasnya
+rapuh.
 
-Seorang mahasiswa yang memilih kasus Bank Wanua sebagai topik makalah
-menghadapi pertanyaan serupa. Ia sudah memiliki isu awal, misalnya integrasi
-layanan digital, tata kelola data, atau modernisasi API. Namun, ia belum tahu
-bagaimana menjadikan isu itu sebagai makalah yang layak dipublikasikan. Jika
-hanya menulis deskripsi masalah, naskah akan terasa seperti laporan internal.
-Jika hanya mengutip banyak artikel, naskah akan kehilangan arah praktis. Bab
-ini membantu menautkan keduanya: arah perubahan dirumuskan melalui visi
-arsitektur, sedangkan dasar akademiknya dibangun melalui tinjauan pustaka.
+Dari sini muncul keputusan strategis: bangun \textbf{rel API Transfer Dana}
+lebih dahulu sebagai fondasi, baru kemudian susun layanan pembayaran dan
+lainnya di atasnya. Keputusan ini adalah sebuah \emph{course of action}: pilihan
+urutan tindakan yang sadar, dengan alasan yang dapat dipertanggungjawabkan.
+Seorang mahasiswa yang memilih kasus ini menghadapi pertanyaan serupa---bagaimana
+menyatakan pilihan strategis itu sebagai visi arsitektur yang layak dianalisis,
+bukan sekadar daftar keinginan.
 
 \subsection*{Pertanyaan Pemandu}
 
 \begin{enumerate}
-  \item Perubahan arsitektur apa yang benar-benar ingin dijelaskan dalam
-        makalah?
-  \item Siapa pemangku kepentingan utama, dan kekhawatiran apa yang perlu
-        dijawab?
-  \item Bagaimana ADM dapat disederhanakan agar cocok untuk analisis akademik
-        individual?
-  \item Literatur apa yang diperlukan agar argumen makalah tidak berdiri di
+  \item Kapabilitas dan sumber daya strategis apa yang menentukan keberhasilan
+        kapabilitas sasaran?
+  \item Arah tindakan (\emph{course of action}) apa yang dipilih, dan mengapa
+        urutan itu masuk akal?
+  \item Bagaimana model bisnis dan operating model membantu membaca pilihan
+        strategis tersebut?
+  \item Bagaimana ADM disederhanakan untuk menyatakan visi arsitektur dan peta
+        jalan secara akademik?
+  \item Literatur apa yang diperlukan agar argumen strategis tidak berdiri di
         atas asumsi pribadi?
-  \item Bagaimana visi arsitektur dan tinjauan pustaka dapat menyatu dalam
-        metode penulisan makalah?
 \end{enumerate}
 
 \section{Mengapa Bab Ini Penting}
 
-Mahasiswa non-TI sering kali sudah memahami masalah organisasi dengan baik,
-tetapi belum tentu terbiasa mengubah masalah tersebut menjadi argumen akademik
-yang sistematis. Sebaliknya, mahasiswa juga dapat mengumpulkan banyak artikel
-tanpa benar-benar tahu bagaimana artikel itu akan dipakai dalam analisis.
-Keduanya berisiko menghasilkan naskah yang dangkal: kaya kutipan tetapi miskin
-arah, atau kaya pengalaman tetapi lemah dasar ilmiah.
+Mahasiswa non-TI sering sudah memahami sasaran organisasi, tetapi belum terbiasa
+menyatakan pilihan strategis secara eksplisit: apa yang dibangun lebih dahulu,
+apa yang ditunda, dan mengapa. Tanpa lapisan strategi, makalah cenderung
+melompat dari masalah langsung ke rancangan teknis, sehingga rekomendasinya
+sulit dipertanggungjawabkan.
 
-TOGAF-lite membantu mahasiswa menata arah perubahan. Tinjauan pustaka
-membantu mahasiswa menata dasar pengetahuan. Keduanya perlu berjalan bersama.
-Visi arsitektur tanpa pustaka dapat berubah menjadi klaim normatif. Tinjauan
-pustaka tanpa visi arsitektur dapat berubah menjadi daftar ringkasan artikel.
-Makalah publikasi membutuhkan keduanya: fokus perubahan yang tajam dan argumen
-yang dapat dipertanggungjawabkan.
+Lapisan strategi memberi bahasa untuk pilihan tersebut. \emph{Course of action}
+menyatakan arah; kapabilitas strategis menyatakan kemampuan tingkat tinggi yang
+dituju; sumber daya menyatakan aset yang dikerahkan; dan visi arsitektur
+merangkum semuanya menjadi arah perubahan yang dapat dianalisis. Tinjauan
+pustaka kemudian memastikan pilihan itu berdiri di atas konsep, temuan, dan
+standar, bukan sekadar intuisi.
 
 \section{Konsep Inti dan Glosarium Mini}
 
-\subsection{TOGAF-lite}
+\subsection{Lapisan Strategi ArchiMate}
+
+Lapisan strategi ArchiMate memuat empat elemen utama. \textbf{Sumber daya}
+(\emph{resource}) adalah aset yang dimiliki atau dikendalikan organisasi, baik
+berwujud (sistem inti, keanggotaan BI-FAST) maupun tak berwujud (lisensi,
+keahlian tim). \textbf{Kapabilitas} (\emph{capability}) adalah kemampuan tingkat
+tinggi yang dimiliki organisasi, misalnya ``kapabilitas perpindahan dana''.
+\textbf{Arah tindakan} (\emph{course of action}) adalah pendekatan atau rencana
+yang dipilih untuk mencapai sasaran, termasuk urutan dan prioritas.
+\textbf{Value stream} strategis menggambarkan alur penciptaan nilai tingkat
+tinggi yang didukung oleh kapabilitas.
+
+Perbedaan dengan lapisan bisnis (Bab~\ref{ch:business-architecture}) terletak
+pada tingkat abstraksi. Kapabilitas strategis bersifat kasar dan stabil
+(``perpindahan dana''), sedangkan lapisan bisnis merincinya menjadi proses,
+peran, dan layanan yang mewujudkannya.
+
+\subsection{Model Bisnis dan Operating Model sebagai Alat Baca Strategi}
+
+Untuk memilih arah tindakan, organisasi perlu membaca bagaimana ia menciptakan
+nilai. \textbf{Kanvas model bisnis} memetakan organisasi dalam komponen seperti
+segmen pelanggan, proposisi nilai, kanal, aktivitas kunci, sumber daya kunci,
+dan mitra. Komponen ini membantu menautkan strategi dengan kapabilitas
+arsitektur: jika proposisi nilai adalah ``perpindahan dana instan bagi UMKM'',
+maka kapabilitas transfer dan kemitraan API menjadi aktivitas serta sumber daya
+kunci.
+
+\textbf{Operating model} menjelaskan tingkat standardisasi proses dan integrasi
+data yang dibutuhkan agar strategi dapat dijalankan \cite{ross2006enterprise}.
+Dari dua dimensi ini muncul empat pola umum (Gambar~\ref{fig:operating-model}).
+Pemilihan pola membantu menjelaskan mengapa sebuah arah tindakan dipilih.
+Layanan transfer, misalnya, menuntut integrasi data dan standardisasi proses
+yang tinggi karena harus konsisten lintas kanal dan patuh standar nasional.
+
+\begin{figure}[htbp]
+\centering
+\scalebox{0.95}{
+\begin{tikzpicture}[
+  font=\small,
+  axis/.style={-Latex, thick},
+  cell/.style={draw, rounded corners=1.5mm, align=center,
+    minimum width=46mm, minimum height=24mm},
+  note/.style={font=\footnotesize\mdseries, align=center, text width=42mm}
+]
+  \draw[axis] (0,0) -- (10,0) node[right] {\textbf{Integrasi data tinggi}};
+  \draw[axis] (0,0) -- (0,6) node[above, align=center] {\textbf{Standardisasi}\\\textbf{proses tinggi}};
+
+  \node[cell, fill=gray!12] (div) at (2.5,1.5)
+    {\textbf{Diversification}\\\footnotesize unit otonom};
+  \node[cell, fill=blue!12] (coord) at (7.5,1.5)
+    {\textbf{Coordination}\\\footnotesize data terintegrasi};
+  \node[cell, fill=orange!18] (rep) at (2.5,4.5)
+    {\textbf{Replication}\\\footnotesize proses seragam};
+  \node[cell, fill=praditagreen!20] (uni) at (7.5,4.5)
+    {\textbf{Unification}\\\footnotesize proses dan data seragam};
+
+  \node[note, below=2mm of div] {proses berbeda, data tidak banyak dibagi};
+  \node[note, below=2mm of coord] {proses boleh berbeda, data perlu menyatu};
+  \node[note, above=2mm of rep] {proses sama, data lokal};
+  \node[note, above=2mm of uni] {proses sama, data bersama};
+\end{tikzpicture}
+}
+\caption{Empat pola operating model berdasarkan kebutuhan standardisasi proses
+dan integrasi data. Rel transfer cenderung ke arah \emph{Unification}.}
+\label{fig:operating-model}
+\end{figure}
+
+\subsection{TOGAF-lite dan ADM sebagai Siklus Berpikir}
 
 TOGAF adalah kerangka kerja arsitektur enterprise yang menyediakan konsep,
-siklus kerja, dan artefak untuk mengelola perubahan arsitektur organisasi
-\cite{togaf10}. Dalam praktik profesional, TOGAF dapat digunakan secara luas
-dan formal. Dalam mata kuliah ini, TOGAF digunakan secara ringan. Istilah
-``TOGAF-lite'' berarti mahasiswa tidak diminta meniru seluruh dokumentasi
-TOGAF, melainkan mengambil pola berpikir yang paling berguna untuk makalah:
-memahami konteks, menyatakan visi, membandingkan kondisi saat ini dan kondisi
-target, lalu menyusun rekomendasi perubahan.
-
-Pendekatan ringan ini penting karena keluaran utama mata kuliah adalah makalah
-individual, bukan proyek implementasi besar. Artefak arsitektur tetap dibuat,
-tetapi posisinya sebagai alat bantu analisis. Artefak tersebut harus
-memperjelas argumen naskah, bukan menjadi tumpukan lampiran yang terpisah dari
-tulisan.
-
-\subsection{ADM sebagai Siklus Berpikir}
-
-Architecture Development Method atau ADM adalah bagian penting dari TOGAF. ADM
-menggambarkan proses pengembangan arsitektur secara bertahap, mulai dari
-persiapan, visi, arsitektur bisnis, sistem informasi, teknologi, peluang dan
-solusi, perencanaan migrasi, implementasi, hingga tata kelola perubahan
-\cite{togaf10}. Untuk kebutuhan makalah individual, ADM dapat disederhanakan
-menjadi enam pertanyaan:
+siklus kerja, dan artefak untuk mengelola perubahan \cite{togaf10}. Dalam mata
+kuliah ini, TOGAF dipakai secara ringan. ``TOGAF-lite'' berarti mahasiswa tidak
+meniru seluruh dokumentasi TOGAF, melainkan mengambil pola berpikir Architecture
+Development Method (ADM) yang paling berguna untuk makalah: memahami konteks,
+menyatakan visi, membandingkan kondisi saat ini dan target, lalu menyusun arah
+perubahan. Untuk makalah individual, ADM dapat disederhanakan menjadi enam
+pertanyaan:
 
 \begin{enumerate}
   \item Apa masalah dan pertanyaan risetnya?
@@ -148,7 +203,7 @@ menjadi enam pertanyaan:
   \item Bagaimana kondisi saat ini?
   \item Seperti apa kondisi target yang masuk akal?
   \item Kesenjangan apa yang perlu dijembatani?
-  \item Rekomendasi perubahan apa yang paling layak dipertahankan secara
+  \item Rekomendasi dan peta jalan apa yang paling layak dipertahankan secara
         akademik?
 \end{enumerate}
 
@@ -183,72 +238,59 @@ menjadi enam pertanyaan:
   \draw[flow, dashed] (evidence) -- (gap);
 \end{tikzpicture}
 }
-\caption{Penyederhanaan ADM untuk analisis makalah individual.}
+\caption{Penyederhanaan ADM untuk menyatakan strategi dan visi arsitektur dalam
+makalah individual.}
 \label{fig:adm-lite-ch3}
 \end{figure}
 
 \subsection{Visi Arsitektur}
 
 Visi arsitektur adalah pernyataan awal tentang arah perubahan yang ingin
-dicapai. Visi ini tidak perlu panjang, tetapi harus cukup jelas untuk menjawab
-tiga hal: masalah apa yang ingin diubah, hasil apa yang diharapkan, dan batas
-mana yang tidak akan dibahas. Visi arsitektur juga perlu menyebut pemangku
-kepentingan utama karena perubahan arsitektur hampir selalu memengaruhi lebih
-dari satu pihak.
+dicapai. Visi ini tidak perlu panjang, tetapi harus menjawab tiga hal: masalah
+apa yang ingin diubah, hasil apa yang diharapkan, dan batas mana yang tidak akan
+dibahas. Visi arsitektur juga menyebut pemangku kepentingan utama dan arah
+tindakan strategis. Untuk kasus Bank Wanua, visi arsitektur menyatakan keputusan
+membangun rel transfer lebih dahulu beserta batas ruang lingkupnya.
 
-Dalam makalah, visi arsitektur membantu pembaca memahami posisi naskah sejak
-awal. Jika topik mahasiswa adalah integrasi layanan kesehatan daerah, visi
-arsitektur menjelaskan apakah fokusnya pada interoperabilitas data, alur
-layanan pasien, tata kelola API, kepatuhan data pribadi, atau kombinasi yang
-masih dapat dikelola. Tanpa visi semacam ini, makalah mudah melebar.
+\subsection{Tinjauan Pustaka dan Bibliografi Kerja}
 
-\subsection{Tinjauan Pustaka}
-
-Tinjauan pustaka bukan kumpulan ringkasan artikel. Tinjauan pustaka adalah
-cara menunjukkan bahwa penulis memahami percakapan akademik dan profesional
-yang relevan dengan topiknya. Pustaka dipilih untuk menjawab kebutuhan
-argumen: definisi konsep, temuan penelitian, kerangka kerja, praktik baik,
-standar, regulasi, dan celah yang masih dapat dikaji.
-
-Untuk bab ini, tinjauan pustaka awal sebaiknya memuat sedikitnya sepuluh
-rujukan yang bermakna. Jumlah tersebut bukan angka magis, tetapi batas awal
-agar mahasiswa tidak hanya bergantung pada satu atau dua sumber. Pada tahap
-berikutnya, daftar ini dapat berkembang sesuai kebutuhan analisis dan target
-jurnal atau konferensi.
-
-\subsection{Manajer Referensi dan Bibliografi Kerja}
-
-Manajer referensi membantu mahasiswa menyimpan metadata, mengelompokkan
-sumber, menulis catatan ringkas, dan menghasilkan daftar pustaka secara
-konsisten. Alat yang digunakan boleh berbeda, tetapi disiplin kerjanya sama:
-setiap sumber yang disimpan harus memiliki alasan pemakaian. Bibliografi kerja
-tidak cukup berisi judul dan tautan; ia perlu mencatat konsep utama, metode,
-konteks, temuan penting, dan hubungan sumber tersebut dengan pertanyaan riset.
+Tinjauan pustaka bukan kumpulan ringkasan artikel, melainkan cara menunjukkan
+bahwa penulis memahami percakapan akademik dan profesional yang relevan. Pustaka
+dipilih untuk menjawab kebutuhan argumen: definisi konsep, temuan, kerangka
+kerja, praktik baik, standar, regulasi, dan celah yang masih dapat dikaji. Untuk
+bab ini, bibliografi awal sebaiknya memuat sedikitnya sepuluh rujukan bermakna.
+Manajer referensi membantu menyimpan metadata dan menghasilkan daftar pustaka
+yang konsisten; setiap sumber yang disimpan harus memiliki alasan pemakaian dan
+catatan ringkas tentang konsep, metode, dan hubungannya dengan pertanyaan riset.
 
 \subsection*{Glosarium Mini}
 
 \begin{description}
-  \item[ADM] Siklus berpikir dalam TOGAF untuk mengembangkan arsitektur
-        enterprise secara bertahap.
+  \item[Sumber daya (resource)] Aset berwujud atau tak berwujud yang dimiliki
+        organisasi untuk menjalankan strategi.
+  \item[Kapabilitas strategis (capability)] Kemampuan tingkat tinggi yang
+        dituju, misalnya perpindahan dana atau integrasi mitra.
+  \item[Arah tindakan (course of action)] Pendekatan, rencana, atau urutan
+        tindakan yang dipilih untuk mencapai sasaran.
+  \item[Operating model] Pola pelaksanaan strategi yang menjelaskan kebutuhan
+        standardisasi proses dan integrasi data.
   \item[TOGAF-lite] Pemakaian prinsip TOGAF secara selektif dan ringan untuk
         kebutuhan analisis makalah.
-  \item[Visi arsitektur] Pernyataan arah perubahan arsitektur yang menjelaskan
-        masalah, hasil yang diharapkan, ruang lingkup, dan pemangku
-        kepentingan.
-  \item[Concern] Kepentingan, kebutuhan, risiko, atau kekhawatiran pemangku
-        kepentingan terhadap perubahan arsitektur.
-  \item[Bibliografi kerja] Daftar pustaka yang masih berkembang dan disertai
-        catatan kegunaan tiap sumber.
-  \item[Matriks sintesis] Tabel yang membandingkan beberapa sumber berdasarkan
-        konsep, metode, temuan, dan relevansinya dengan makalah.
+  \item[Visi arsitektur] Pernyataan arah perubahan yang menjelaskan masalah,
+        hasil, ruang lingkup, pemangku kepentingan, dan arah tindakan.
+  \item[Roadmap] Rencana bertahap yang menyatakan urutan dan prioritas
+        perubahan.
+  \item[Matriks sintesis] Tabel yang membandingkan sumber berdasarkan konsep,
+        metode, temuan, dan relevansinya dengan makalah.
 \end{description}
 
 \section{Kerangka Berpikir}
 
-Bab ini menggunakan alur berpikir yang sederhana: pertanyaan riset menentukan
-kebutuhan bukti; kebutuhan bukti mengarahkan pencarian pustaka; pustaka
-membantu mempertajam visi arsitektur; visi arsitektur menjadi dasar analisis
-kondisi saat ini, target, kesenjangan, dan rekomendasi.
+Bab ini memakai alur berpikir berikut: lapisan motivasi dan pertanyaan riset
+menentukan kebutuhan bukti; model bisnis dan operating model membantu memilih
+arah tindakan; arah tindakan dirangkum menjadi visi arsitektur dan peta jalan;
+tinjauan pustaka memperkuat pilihan tersebut; dan semuanya menjadi dasar metode
+serta kerangka makalah.
 
 \begin{figure}[htbp]
 \centering
@@ -258,101 +300,128 @@ kondisi saat ini, target, kesenjangan, dan rekomendasi.
     fill=green!8, thick, align=center, text width=34mm, minimum height=12mm},
   link/.style={-Latex, thick, draw=praditagreen}
 ]
-  \node[box] (rq) {Pertanyaan riset};
-  \node[box, right=7mm of rq] (stake) {Pemangku kepentingan\\dan concern};
-  \node[box, right=7mm of stake] (vision) {Visi arsitektur};
+  \node[box] (rq) {Motivasi dan\\pertanyaan riset};
+  \node[box, right=7mm of rq] (coa) {Course of action\\dan kapabilitas};
+  \node[box, right=7mm of coa] (vision) {Visi arsitektur\\dan roadmap};
   \node[box, below=8mm of vision] (search) {Strategi pencarian\\pustaka};
   \node[box, left=7mm of search] (matrix) {Matriks sintesis};
   \node[box, left=7mm of matrix] (method) {Metode dan kerangka\\makalah};
 
-  \draw[link] (rq) -- (stake);
-  \draw[link] (stake) -- (vision);
+  \draw[link] (rq) -- (coa);
+  \draw[link] (coa) -- (vision);
   \draw[link] (vision) -- (search);
   \draw[link] (search) -- (matrix);
   \draw[link] (matrix) -- (method);
   \draw[link, dashed] (method) -- (rq);
 \end{tikzpicture}
 }
-\caption{Hubungan antara visi arsitektur dan fondasi pustaka.}
+\caption{Hubungan antara pilihan strategis, visi arsitektur, dan fondasi
+pustaka.}
 \label{fig:vision-literature-loop}
 \end{figure}
 
 Kerangka ini sengaja dibuat berulang. Setelah membaca pustaka, mahasiswa
-mungkin menyadari bahwa pertanyaan risetnya terlalu lebar. Setelah memetakan
-pemangku kepentingan, mahasiswa mungkin melihat bahwa visi awalnya terlalu
-teknis dan belum menjawab kebutuhan organisasi. Revisi semacam ini bukan tanda
-kegagalan. Justru di situlah penulisan akademik mulai matang.
+mungkin menyadari bahwa arah tindakannya terlalu ambisius. Setelah membaca
+operating model, mahasiswa mungkin melihat bahwa kapabilitas transfer menuntut
+standardisasi yang belum siap. Revisi semacam ini bukan tanda kegagalan;
+justru di situlah penalaran strategis mulai matang.
 
 \section{Konteks Indonesia}
 
-Makalah yang baik tidak hanya mengutip konsep global, tetapi juga memahami
-konteks tempat masalah muncul. Untuk kasus Indonesia, konteks tersebut dapat
-mencakup regulasi, kebijakan tata kelola data, karakter organisasi, tingkat
-kematangan digital, serta ketersediaan sumber rujukan lokal. Misalnya, topik
-tata kelola data pribadi perlu membaca kerangka perlindungan data pribadi
-\cite{uupdp2022}. Topik sistem elektronik dan transaksi digital perlu
-memperhatikan aturan penyelenggaraan sistem elektronik \cite{pp712019}.
-Topik pertukaran data pemerintah dapat mengacu pada kerangka Satu Data
-Indonesia \cite{satudata}. Topik layanan keuangan digital dapat
-mempertimbangkan standar API pembayaran nasional \cite{snapbi}.
+Makalah yang baik memahami konteks tempat strategi dijalankan. Untuk layanan
+keuangan digital Indonesia, konteks itu mencakup standar API pembayaran nasional
+\cite{snapbi}, infrastruktur transfer seperti BI-FAST, perlindungan data pribadi
+\cite{uupdp2022}, dan ketentuan penyelenggaraan sistem elektronik
+\cite{pp712019}. Untuk topik pertukaran data pemerintah, kerangka Satu Data
+Indonesia juga relevan \cite{satudata}. Arah tindakan strategis yang mengabaikan
+konteks ini akan terlihat menarik di atas kertas tetapi sulit dijalankan.
 
-Pada saat yang sama, mahasiswa perlu berhati-hati. Dokumen regulasi bukan
-pengganti artikel ilmiah. Regulasi memberi batas dan konteks; artikel ilmiah
-membantu membangun konsep, metode, dan perbandingan. Keduanya saling
-melengkapi. Untuk pencarian literatur, mahasiswa dapat mengombinasikan sumber
-internasional, repositori nasional, artikel jurnal Indonesia, prosiding
+Pada saat yang sama, dokumen regulasi bukan pengganti artikel ilmiah. Regulasi
+memberi batas dan konteks; artikel ilmiah membantu membangun konsep, metode,
+dan perbandingan. Untuk pencarian literatur, mahasiswa dapat mengombinasikan
+sumber internasional, repositori nasional, jurnal Indonesia, prosiding
 konferensi, dokumen regulator, dan laporan institusi. Yang penting bukan
 banyaknya sumber, melainkan kemampuan menjelaskan mengapa sumber itu dipakai.
 
-\section{Studi Kasus Utama: Visi Arsitektur Bank Wanua}
+\section{Studi Kasus Utama: Strategi dan Visi Arsitektur Transfer Bank Wanua}
 
-Kasus Bank Wanua digunakan untuk menunjukkan bagaimana topik awal dapat diubah
-menjadi visi arsitektur dan kebutuhan pustaka. Misalkan topik mahasiswa adalah
-modernisasi layanan digital bank daerah. Rumusan masalah awalnya berbunyi:
-``Layanan digital Bank Wanua sulit berkembang karena data nasabah, proses
-persetujuan produk, dan kanal layanan masih tersebar di beberapa sistem
-lama.''
+Kasus Bank Wanua dipakai untuk menunjukkan bagaimana pilihan strategis diubah
+menjadi visi arsitektur. Membaca operating model, Bank Wanua menyimpulkan bahwa
+layanan transfer menuntut standardisasi proses dan integrasi data yang tinggi
+(arah \emph{Unification} pada Gambar~\ref{fig:operating-model}): proses transfer
+harus konsisten lintas kanal dan data nasabah harus terpadu agar limit dan
+penyaringan AML dapat berjalan otomatis.
 
-Rumusan tersebut sudah berguna, tetapi belum cukup untuk makalah. Mahasiswa
-perlu memperjelas arah perubahan. Salah satu visi arsitektur awal dapat
-dirumuskan sebagai berikut:
-
-\begin{quote}
-Bank Wanua membutuhkan arsitektur layanan digital yang memungkinkan integrasi
-data nasabah, orkestrasi proses produk, dan pembukaan API secara terkendali,
-sehingga pengembangan layanan baru dapat berlangsung lebih cepat tanpa
-mengabaikan keamanan, kepatuhan, dan keberlanjutan sistem lama.
-\end{quote}
-
-Visi ini memuat beberapa keputusan awal. Fokusnya bukan mengganti seluruh
-sistem inti bank, melainkan mengelola integrasi, proses, dan API. Nilai
-bisnisnya adalah percepatan layanan baru. Risikonya adalah keamanan,
-kepatuhan, dan keberlanjutan sistem lama. Dari sini, kebutuhan pustaka menjadi
-lebih jelas: mahasiswa perlu membaca tentang arsitektur enterprise, platform
-digital, tata kelola API, modernisasi sistem lama, dan regulasi sektor
-keuangan.
+Arah tindakan strategisnya adalah \textbf{membangun rel transfer terkelola lebih
+dahulu}, baru menyusun layanan pembayaran dan lainnya di atasnya.
+Tabel~\ref{tab:roadmap-transfer} merangkum peta jalan bertingkat yang menjadi
+konteks keputusan ini.
 
 \begin{table}[htbp]
 \centering
 \scriptsize
-\caption{Contoh pemetaan visi arsitektur Bank Wanua.}
+\caption{Peta jalan kapabilitas digital UMKM Bank Wanua dan posisi rel
+transfer.}
+\label{tab:roadmap-transfer}
+\begin{tabularx}{\textwidth}{@{}p{0.10\textwidth} p{0.34\textwidth} X@{}}
+\hline
+\textbf{Prioritas} & \textbf{Kapabilitas/API} & \textbf{Alasan Strategis} \\
+\hline
+P1 & Single-view nasabah UMKM & Fondasi data; menutup kesenjangan terbesar. \\
+P1 & Onboarding digital dan e-KYC & Pintu masuk value stream; bergantung pada
+kepatuhan. \\
+P1--P2 & \textbf{API Transfer/Perpindahan Dana (rel)} & Rel primitif yang
+membungkus BI-FAST; pemakaian tinggi, pembangunan relatif terkendali, fondasi
+semua perpindahan dana. \\
+P2 & API penerimaan pembayaran (QRIS/VA) & Magnet UMKM, tetapi menumpuk pada
+rel transfer dan butuh onboarding merchant serta rekonsiliasi. \\
+P2 & API gateway dan tata kelola & Pengaktif lintas-bidang bagi semua API. \\
+P3 & Penyaluran kredit/penilaian & Bertumpu pada data dan riwayat transaksi. \\
+P4 & Analitik, portal mitra, personalisasi & Optimasi setelah inti berjalan. \\
+\hline
+\end{tabularx}
+\end{table}
+
+Dari peta jalan tersebut, visi arsitektur untuk kapabilitas sasaran dapat
+dirumuskan:
+
+\begin{quote}
+Bank Wanua membutuhkan rel perpindahan dana terkelola yang membungkus BI-FAST
+dan dibuka sebagai API yang patuh SNAP BI, sehingga layanan transfer real-time
+dapat diluncurkan bertahap ke kanal digital dan mitra UMKM tanpa mengabaikan
+keamanan, penyaringan kepatuhan, dan keberlanjutan sistem inti yang ada.
+\end{quote}
+
+Visi ini memuat beberapa keputusan strategis. Fokusnya bukan mengganti seluruh
+sistem inti, melainkan membangun rel transfer di atasnya. Nilai bisnisnya adalah
+percepatan dan keandalan perpindahan dana bagi UMKM. Arah tindakannya adalah
+transfer lebih dahulu, pembayaran kemudian. Dari sini, kebutuhan pustaka menjadi
+lebih jelas: arsitektur enterprise, tata kelola API, modernisasi sistem lama,
+platform digital, dan standar pembayaran nasional.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Pemetaan visi arsitektur rel transfer Bank Wanua.}
 \label{tab:bank-wanua-vision}
 \begin{tabularx}{\textwidth}{@{}p{0.24\textwidth} X@{}}
 \hline
 \textbf{Elemen} & \textbf{Rumusan awal} \\
 \hline
-Masalah utama & Data nasabah, proses produk, dan kanal digital belum
-terintegrasi secara memadai. \\
-Pemangku kepentingan & Pimpinan bank, unit bisnis, unit kepatuhan, tim
-teknologi, mitra layanan digital, dan nasabah. \\
-Hasil yang diharapkan & Layanan baru dapat dirancang dan diluncurkan lebih
-cepat dengan kendali keamanan dan kepatuhan yang jelas. \\
-Ruang lingkup & Integrasi data, orkestrasi proses, tata kelola API, dan
-hubungan dengan sistem lama. \\
-Batasan & Tidak membahas penggantian penuh core banking dan tidak menyusun
-rancangan teknis rinci sampai level kode. \\
-Kebutuhan pustaka & EA, platform digital, API, tata kelola data, modernisasi
-sistem lama, dan regulasi keuangan digital. \\
+Masalah utama & Sasaran transfer real-time belum didukung rel perpindahan dana
+yang terkelola dan patuh standar. \\
+Arah tindakan & Membangun rel transfer (membungkus BI-FAST) lebih dahulu,
+sebelum layanan pembayaran dan lainnya. \\
+Pemangku kepentingan & Pimpinan, unit bisnis UMKM, kepatuhan, tim teknologi,
+mitra, nasabah, dan regulator. \\
+Hasil yang diharapkan & Transfer real-time 24/7 lewat kanal dan API, dengan
+penyaringan dan rekonsiliasi otomatis. \\
+Ruang lingkup & Rel transfer, integrasi BI-FAST, dan pembukaan API; bukan
+penggantian core banking. \\
+Batasan & Tidak menyusun rancangan teknis sampai level kode dan tidak membahas
+layanan pembayaran P2 secara rinci. \\
+Kebutuhan pustaka & EA, tata kelola API, modernisasi sistem lama, platform
+digital, dan standar pembayaran nasional. \\
 \hline
 \end{tabularx}
 \end{table}
@@ -362,261 +431,216 @@ sistem lama, dan regulasi keuangan digital. \\
 Bagian ini menjadi panduan kerja individual. Setiap langkah sebaiknya
 menghasilkan catatan yang dapat dipakai kembali dalam makalah.
 
-\subsection{Langkah 1: Kunci Pertanyaan Riset}
+\subsection{Langkah 1: Kunci Pertanyaan Riset dan Sasaran}
 
-Ambil pertanyaan riset dari Bab~\ref{ch:strategi-bisnis}. Pastikan pertanyaan
-tersebut tidak terlalu luas. Pertanyaan seperti ``Bagaimana transformasi
-digital memengaruhi perusahaan?'' masih terlalu umum. Pertanyaan yang lebih
-siap dianalisis misalnya: ``Bagaimana TOGAF-lite dapat digunakan untuk
-merancang integrasi layanan digital pada bank daerah dengan mempertimbangkan
-tata kelola API dan kepatuhan data?''
+Ambil pertanyaan riset dan model motivasi dari Bab~\ref{ch:strategi-bisnis}.
+Pastikan pertanyaan tidak terlalu luas dan terhubung dengan satu kapabilitas
+sasaran yang jelas.
 
-\subsection{Langkah 2: Peta Pemangku Kepentingan dan Concern}
+\subsection{Langkah 2: Identifikasi Kapabilitas dan Sumber Daya Strategis}
 
-Daftarkan pemangku kepentingan yang terdampak oleh perubahan arsitektur. Untuk
-masing-masing pihak, tuliskan kebutuhan atau kekhawatirannya. Jangan hanya
-menulis jabatan. Tuliskan kepentingan yang perlu dijawab dalam makalah.
-Pimpinan mungkin peduli pada biaya dan manfaat. Unit kepatuhan peduli pada
-risiko regulasi. Tim teknologi peduli pada kompleksitas integrasi. Pengguna
-peduli pada kenyamanan dan keandalan layanan.
+Tuliskan kapabilitas tingkat tinggi yang dituju dan sumber daya yang dimiliki
+atau perlu diperoleh. Untuk Bank Wanua: kapabilitas perpindahan dana, integrasi
+mitra, dan kepatuhan; sumber daya keanggotaan BI-FAST, sistem inti, dan tim
+arsitektur.
 
-\subsection{Langkah 3: Tetapkan Prinsip Arsitektur}
+\subsection{Langkah 3: Pilih Arah Tindakan (Course of Action)}
 
-Prinsip arsitektur adalah aturan berpikir yang membantu memilih solusi.
-Contohnya: data penting harus memiliki pemilik yang jelas; API yang dibuka ke
-mitra harus memiliki mekanisme pengendalian akses; perubahan sistem lama harus
-dilakukan bertahap; dan setiap rekomendasi harus dapat dikaitkan dengan nilai
-bisnis. Prinsip tidak perlu banyak. Tiga sampai lima prinsip yang tajam lebih
-berguna daripada daftar panjang yang tidak dipakai.
+Nyatakan pilihan strategis beserta alasannya. Untuk Bank Wanua: membangun rel
+transfer lebih dahulu karena menjadi fondasi semua perpindahan dana. Susun peta
+jalan bertingkat seperti Tabel~\ref{tab:roadmap-transfer}.
 
 \subsection{Langkah 4: Rumuskan Visi Arsitektur}
 
-Tuliskan visi arsitektur dalam satu paragraf utama. Paragraf itu harus
-menjawab masalah, arah perubahan, nilai yang diharapkan, ruang lingkup, dan
-batasan. Jika paragraf terasa terlalu panjang, pecah menjadi pernyataan visi
-dan daftar batasan. Visi yang baik tidak menjanjikan segalanya; ia memberi
-arah yang cukup jelas untuk dianalisis.
+Tuliskan visi arsitektur dalam satu paragraf yang menjawab masalah, arah
+tindakan, nilai, ruang lingkup, dan batasan. Visi yang baik tidak menjanjikan
+segalanya; ia memberi arah yang cukup jelas untuk dianalisis.
 
 \subsection{Langkah 5: Susun Strategi Pencarian Pustaka}
 
-Strategi pencarian pustaka sebaiknya ditulis sebelum mahasiswa mengumpulkan
-artikel. Mulailah dari konsep utama dalam pertanyaan riset. Untuk topik Bank
-Wanua, kata kunci dapat mencakup \textit{enterprise architecture},
-\textit{digital platform}, \textit{API governance},
-\textit{legacy system modernization}, \textit{banking digital transformation},
-\textit{data governance}, dan \textit{TOGAF}. Padankan kata kunci global
-dengan istilah Indonesia bila diperlukan, misalnya ``arsitektur enterprise'',
-``tata kelola data'', dan ``layanan keuangan digital''.
+Mulailah dari konsep utama dalam pertanyaan riset. Untuk kasus ini, kata kunci
+dapat mencakup \textit{enterprise architecture}, \textit{API governance},
+\textit{payment/transfer API}, \textit{open banking},
+\textit{legacy system modernization}, dan \textit{digital platform}. Padankan
+dengan istilah Indonesia seperti ``arsitektur enterprise'', ``tata kelola
+API'', dan ``layanan transfer dana''.
 
 \subsection{Langkah 6: Seleksi dan Catat Referensi}
 
-Setiap referensi perlu diseleksi berdasarkan relevansi, mutu, dan fungsi dalam
-makalah. Buku kerangka kerja dapat dipakai untuk definisi dan konsep dasar.
-Artikel jurnal membantu membangun temuan akademik. Regulasi memberi konteks
-batas. Standar profesional memberi bahasa praktik. Catatan referensi minimal
-memuat: tujuan sumber, konsep penting, metode atau konteks, temuan utama, dan
-alasan sumber tersebut dipakai.
+Seleksi referensi berdasarkan relevansi, mutu, dan fungsi dalam makalah. Buku
+kerangka kerja untuk definisi dan konsep; artikel jurnal untuk temuan; regulasi
+untuk konteks batas; standar profesional untuk bahasa praktik. Catatan referensi
+memuat tujuan sumber, konsep penting, metode/konteks, temuan utama, dan alasan
+pemakaian.
 
 \subsection{Langkah 7: Buat Matriks Sintesis}
 
-Matriks sintesis membantu mahasiswa membandingkan sumber, bukan sekadar
-meringkas satu per satu. Gunakan kolom yang sesuai dengan topik. Untuk topik
-platform digital, kolom dapat mencakup definisi platform, peran ekosistem,
-mekanisme tata kelola, implikasi arsitektur, dan celah riset. Literatur
-tentang platform dan ekosistem digital, misalnya, dapat membantu menjelaskan
-mengapa arsitektur tidak hanya berbicara tentang aplikasi internal, tetapi
-juga hubungan antara organisasi, pengguna, dan mitra
+Matriks sintesis membandingkan sumber, bukan sekadar meringkas. Untuk topik
+platform dan API, kolom dapat mencakup definisi, peran ekosistem, mekanisme tata
+kelola, implikasi arsitektur, dan celah riset. Literatur platform dan ekosistem
+membantu menjelaskan mengapa arsitektur tidak hanya berbicara tentang aplikasi
+internal, tetapi juga hubungan antara organisasi, pengguna, dan mitra
 \cite{parker2016platform,cusumano2019business,evans2016matchmakers}.
 
 \subsection{Langkah 8: Tulis Metode Awal}
 
-Metode awal menjelaskan bagaimana makalah akan menggunakan TOGAF-lite.
-Contohnya: penelitian konseptual ini menggunakan adaptasi ringan ADM untuk
-menyusun visi arsitektur, memetakan kondisi saat ini dan target, melakukan
-analisis kesenjangan, serta merumuskan roadmap awal. Tinjauan pustaka
-digunakan untuk membangun kerangka konseptual dan memvalidasi kategori
-analisis. Metode awal seperti ini belum final, tetapi sudah cukup untuk
-mengarahkan penulisan.
+Metode awal menjelaskan bagaimana makalah menggunakan TOGAF-lite: menyusun visi
+arsitektur, memetakan kondisi saat ini dan target, menganalisis kesenjangan,
+serta merumuskan roadmap. Tinjauan pustaka dipakai untuk membangun kerangka
+konseptual dan memvalidasi kategori analisis.
 
 \begin{table}[htbp]
 \centering
 \scriptsize
-\caption{Artefak pendukung Bab 3 dan fungsinya dalam makalah.}
+\caption{Artefak pendukung Bab 4 dan fungsinya dalam makalah.}
 \label{tab:artefak-bab3}
 \begin{tabularx}{\textwidth}{@{}p{0.25\textwidth} p{0.31\textwidth} X@{}}
 \hline
 \textbf{Artefak} & \textbf{Isi minimum} & \textbf{Dipakai untuk bagian makalah} \\
 \hline
-Visi arsitektur & Masalah, arah perubahan, nilai, ruang lingkup, batasan &
-Pendahuluan, metode, dan pembahasan awal. \\
-Peta stakeholder-concern & Pihak terdampak dan kepentingan utamanya & Latar
-belakang, analisis kebutuhan, diskusi risiko. \\
-Log pencarian pustaka & Kata kunci, sumber pencarian, kriteria seleksi &
-Metode tinjauan pustaka. \\
-Bibliografi kerja & Minimal sepuluh rujukan dengan catatan kegunaan &
-Tinjauan pustaka dan daftar pustaka. \\
-Matriks sintesis & Perbandingan konsep, metode, temuan, dan relevansi &
-Kerangka konseptual dan pembahasan. \\
-Outline metode & Penjelasan penggunaan TOGAF-lite dan ADM & Bagian metode atau
-pendekatan penelitian. \\
+Arah tindakan dan roadmap & Pilihan strategis, urutan, dan prioritas perubahan
+& Pendahuluan dan pembahasan strategi. \\
+Visi arsitektur & Masalah, arah, nilai, ruang lingkup, batasan & Pendahuluan,
+metode, pembahasan awal. \\
+Klasifikasi operating model & Kebutuhan standardisasi proses dan integrasi data
+& Justifikasi arah tindakan. \\
+Log pencarian pustaka & Kata kunci, sumber, kriteria seleksi & Metode tinjauan
+pustaka. \\
+Bibliografi kerja & Minimal sepuluh rujukan dengan catatan kegunaan & Tinjauan
+pustaka dan daftar pustaka. \\
+Matriks sintesis & Perbandingan konsep, metode, temuan, relevansi & Kerangka
+konseptual dan pembahasan. \\
 \hline
 \end{tabularx}
 \end{table}
 
 \section{Integrasi ke Makalah Publikasi}
 
-Bab ini berkontribusi langsung pada tiga bagian naskah: tinjauan pustaka,
-kerangka konseptual, dan metode. Visi arsitektur biasanya tidak ditempatkan
-sebagai artefak mentah yang berdiri sendiri. Ia diterjemahkan menjadi narasi
-dalam pendahuluan dan metode. Matriks sintesis tidak selalu perlu dimasukkan
-penuh ke naskah, tetapi hasil sintesisnya harus tampak dalam kerangka
-konseptual dan pembahasan.
+Bab ini berkontribusi pada tinjauan pustaka, kerangka konseptual, dan metode.
+Visi arsitektur dan arah tindakan diterjemahkan menjadi narasi pendahuluan dan
+metode, bukan ditempel sebagai artefak mentah.
 
-\subsection{Dari Visi ke Pendahuluan}
+\subsection{Dari Strategi ke Pendahuluan}
 
-Pendahuluan makalah dapat menggunakan visi arsitektur untuk menjelaskan
-urgensi. Contoh kalimat:
+Pendahuluan dapat menggunakan arah tindakan untuk menjelaskan urgensi. Contoh:
 
 \begin{quote}
-Penelitian ini membahas kebutuhan arsitektur layanan digital pada bank daerah
-yang menghadapi tekanan untuk mempercepat peluncuran layanan baru, menjaga
-kepatuhan data, dan tetap mempertahankan keberlanjutan sistem lama.
+Penelitian ini membahas keputusan strategis bank daerah untuk membangun rel
+perpindahan dana terkelola lebih dahulu sebagai fondasi layanan pembayaran
+UMKM, di tengah tekanan untuk mempercepat layanan, menjaga kepatuhan standar
+pembayaran nasional, dan mempertahankan keberlanjutan sistem inti.
 \end{quote}
-
-Kalimat tersebut lebih kuat daripada pernyataan umum bahwa ``transformasi
-digital sangat penting''. Ia menunjukkan konteks, tekanan perubahan, dan batas
-topik.
 
 \subsection{Dari Pustaka ke Kerangka Konseptual}
 
-Tinjauan pustaka perlu diolah menjadi hubungan antar-konsep. Misalnya, konsep
-platform digital membantu menjelaskan hubungan antara penyedia layanan,
-pengguna, dan mitra \cite{parker2016platform,cusumano2019business}. Konsep
-API membantu menjelaskan bagaimana kapabilitas organisasi dapat dibuka dan
-dikelola sebagai layanan \cite{jacobson2011apis,medjaoui2018continuous}.
-Konsep \textit{operating model} dan arsitektur enterprise membantu menautkan
-pilihan teknologi dengan proses dan tata kelola organisasi
+Tinjauan pustaka perlu diolah menjadi hubungan antar-konsep. Konsep platform
+digital menjelaskan hubungan penyedia, pengguna, dan mitra
+\cite{parker2016platform,cusumano2019business}. Konsep API menjelaskan
+bagaimana kapabilitas dibuka dan dikelola sebagai layanan
+\cite{jacobson2011apis,medjaoui2018continuous}. Konsep operating model dan
+arsitektur enterprise menautkan pilihan teknologi dengan proses dan tata kelola
 \cite{ross2006enterprise,ross2019designed}. Hubungan antar-konsep itulah yang
-menjadi kerangka konseptual, bukan sekadar daftar definisi.
+menjadi kerangka konseptual.
 
 \subsection{Dari ADM ke Metode}
 
 Metode makalah dapat menjelaskan bahwa analisis dilakukan melalui adaptasi
-ringan ADM. Tahapannya mencakup perumusan visi arsitektur, pemetaan kondisi
-saat ini, perumusan kondisi target, analisis kesenjangan, dan penyusunan
-roadmap. Karena makalah ini bersifat individual dan akademik, keluaran ADM
-dipilih secara selektif. Artefak yang dipakai hanyalah yang memperjelas
-argumen penelitian.
+ringan ADM: perumusan visi, pemetaan kondisi saat ini dan target, analisis
+kesenjangan, dan penyusunan roadmap. Karena makalah bersifat individual dan
+akademik, keluaran ADM dipilih secara selektif---hanya yang memperjelas argumen.
 
 \section{Diskusi Kritis, Trade-off, dan Perangkap Umum}
 
-\subsection{Trade-off Pemakaian TOGAF-lite}
+\subsection{Trade-off Pilihan Strategis dan TOGAF-lite}
 
-TOGAF-lite berguna karena memberi struktur tanpa menuntut dokumentasi yang
-terlalu berat. Namun, penyederhanaan memiliki risiko. Jika terlalu
-disederhanakan, TOGAF hanya menjadi label. Jika terlalu formal, makalah
-berubah menjadi dokumen prosedural yang sulit dibaca. Mahasiswa perlu menjaga
-keseimbangan: cukup disiplin untuk menunjukkan tahapan analisis, tetapi cukup
-ringkas agar naskah tetap fokus pada argumen.
+TOGAF-lite memberi struktur tanpa menuntut dokumentasi berat. Namun,
+penyederhanaan punya risiko: jika terlalu ringan, TOGAF hanya menjadi label;
+jika terlalu formal, makalah berubah menjadi dokumen prosedural. Pilihan arah
+tindakan juga punya trade-off: membangun rel transfer lebih dahulu memberi
+fondasi kuat tetapi menunda layanan yang lebih ``terlihat'' seperti QRIS.
 
 \begin{table}[htbp]
 \centering
 \scriptsize
-\caption{Trade-off dalam Bab 3.}
+\caption{Trade-off dalam Bab 4.}
 \label{tab:tradeoff-bab3}
 \begin{tabularx}{\textwidth}{@{}p{0.23\textwidth} X X@{}}
 \hline
 \textbf{Keputusan} & \textbf{Jika terlalu ringan} & \textbf{Jika terlalu berat} \\
 \hline
-TOGAF-lite & Menjadi tempelan istilah tanpa metode jelas & Naskah penuh
-artefak dan kehilangan argumen utama. \\
+TOGAF-lite & Menjadi tempelan istilah tanpa metode jelas & Naskah penuh artefak
+dan kehilangan argumen utama. \\
+Arah tindakan & Urutan tidak beralasan, terlihat sembarang & Peta jalan terlalu
+rinci dan kaku untuk satu makalah. \\
 Tinjauan pustaka & Sumber sedikit dan klaim lemah & Terlalu banyak kutipan
 tanpa sintesis. \\
 Visi arsitektur & Arah perubahan kabur & Visi terlalu luas dan tidak selesai
 dianalisis. \\
-Konteks Indonesia & Makalah terasa generik & Pembahasan regulasi menutupi
-fokus arsitektur. \\
-Metode & Pembaca tidak tahu cara analisis dilakukan & Metode terlalu teknis
-untuk target naskah. \\
+Konteks Indonesia & Makalah terasa generik & Pembahasan regulasi menutupi fokus
+arsitektur. \\
 \hline
 \end{tabularx}
 \end{table}
 
 \subsection{Perangkap Umum}
 
-Perangkap pertama adalah memakai TOGAF sebagai daftar fase yang ditempelkan ke
-makalah tanpa hubungan yang nyata dengan pertanyaan riset. Hindari menulis
-bahwa penelitian ``menggunakan ADM'' tetapi tidak menunjukkan bagaimana setiap
-tahap membantu analisis. Perangkap kedua adalah mengumpulkan referensi hanya
-karena judulnya mirip. Referensi harus dipilih karena memberi konsep, metode,
-temuan, atau konteks yang benar-benar diperlukan.
-
-Perangkap ketiga adalah menulis visi arsitektur terlalu normatif, misalnya
-``membangun sistem digital yang aman, cepat, efisien, dan terintegrasi''.
-Pernyataan seperti itu terdengar baik, tetapi belum analitis. Apa yang
-diintegrasikan? Aman terhadap risiko apa? Cepat untuk proses siapa? Efisien
-dibandingkan kondisi apa? Pertanyaan semacam ini perlu dijawab agar visi
-menjadi bahan analisis, bukan slogan.
+Perangkap pertama adalah memilih arah tindakan tanpa alasan---misalnya
+membangun QRIS lebih dahulu hanya karena populer, tanpa menyadari ia bertumpu
+pada rel transfer. Perangkap kedua adalah memakai TOGAF sebagai daftar fase yang
+ditempel tanpa hubungan dengan pertanyaan riset. Perangkap ketiga adalah menulis
+visi arsitektur terlalu normatif (``sistem yang aman, cepat, efisien, dan
+terintegrasi'') tanpa menjelaskan apa yang diintegrasikan, aman terhadap risiko
+apa, dan cepat untuk proses siapa. Pertanyaan semacam ini perlu dijawab agar
+visi menjadi bahan analisis, bukan slogan.
 
 \section{Latihan Terapan Individual}
 
 Latihan pada bab ini dikerjakan secara individual dan menjadi bahan langsung
 untuk makalah publikasi.
 
-\subsection*{Latihan 3.1: Visi Arsitektur Satu Halaman}
+\subsection*{Latihan 4.1: Arah Tindakan dan Peta Jalan}
 
-Tulis visi arsitektur untuk topik makalah masing-masing. Gunakan struktur
-berikut:
+Untuk organisasi studi kasus Anda, tuliskan kapabilitas dan sumber daya
+strategis, lalu nyatakan satu arah tindakan beserta alasannya. Susun peta jalan
+bertingkat (minimal tiga tingkat prioritas) dan jelaskan mengapa kapabilitas
+sasaran ditempatkan pada tingkat tertentu.
 
-\begin{enumerate}
-  \item judul topik;
-  \item masalah utama dalam dua sampai tiga kalimat;
-  \item pemangku kepentingan utama dan concern-nya;
-  \item pernyataan visi arsitektur;
-  \item ruang lingkup dan batasan;
-  \item nilai yang diharapkan;
-  \item risiko atau asumsi awal.
-\end{enumerate}
+\subsection*{Latihan 4.2: Visi Arsitektur Satu Halaman}
 
-\subsection*{Latihan 3.2: Strategi Pencarian dan Bibliografi Awal}
+Tulis visi arsitektur dengan struktur: judul topik; masalah utama dalam
+dua sampai tiga kalimat; pemangku kepentingan utama; arah tindakan; pernyataan
+visi; ruang lingkup dan batasan; nilai yang diharapkan; serta risiko atau asumsi
+awal.
 
-Susun strategi pencarian pustaka. Tuliskan kata kunci utama, kombinasi kata
-kunci, sumber pencarian, dan kriteria seleksi. Kumpulkan sedikitnya sepuluh
-referensi awal. Untuk setiap referensi, tuliskan satu sampai tiga kalimat
-tentang kegunaannya bagi makalah.
+\subsection*{Latihan 4.3: Strategi Pencarian dan Bibliografi Awal}
 
-\subsection*{Latihan 3.3: Matriks Sintesis Lima Referensi Terkuat}
+Susun strategi pencarian pustaka: kata kunci utama, kombinasi, sumber, dan
+kriteria seleksi. Kumpulkan sedikitnya sepuluh referensi awal, masing-masing
+dengan satu sampai tiga kalimat tentang kegunaannya bagi makalah.
 
-Pilih lima referensi yang paling relevan. Bandingkan kelimanya dalam matriks
-yang memuat konsep utama, konteks, metode atau pendekatan, temuan penting, dan
-hubungan dengan pertanyaan riset. Setelah itu, tulis satu paragraf sintesis.
-Paragraf tersebut harus menunjukkan hubungan antar-sumber, bukan meringkas
-sumber secara terpisah.
+\subsection*{Latihan 4.4: Matriks Sintesis dan Paragraf Metode}
 
-\subsection*{Latihan 3.4: Paragraf Metode Awal}
-
-Tulis satu paragraf yang menjelaskan bagaimana makalah menggunakan
-TOGAF-lite. Paragraf ini minimal memuat alasan memilih TOGAF-lite, tahapan
-analisis yang digunakan, artefak yang dihasilkan, dan peran tinjauan pustaka
-dalam analisis.
+Pilih lima referensi terkuat dan bandingkan dalam matriks (konsep, konteks,
+metode, temuan, hubungan dengan RQ), lalu tulis satu paragraf sintesis. Tambahkan
+satu paragraf metode yang menjelaskan pemakaian TOGAF-lite secara operasional.
 
 \begin{table}[htbp]
 \centering
 \scriptsize
-\caption{Rubrik latihan Bab 3.}
+\caption{Rubrik latihan Bab 4.}
 \label{tab:rubrik-bab3}
 \begin{tabularx}{\textwidth}{@{}p{0.25\textwidth} X X@{}}
 \hline
 \textbf{Komponen} & \textbf{Indikator baik} & \textbf{Perlu diperbaiki bila} \\
 \hline
-Visi arsitektur & Masalah, arah perubahan, nilai, ruang lingkup, dan batasan
-jelas & Masih berupa slogan atau terlalu luas. \\
-Stakeholder-concern & Pihak terdampak dan kepentingannya dapat dibedakan &
-Hanya berisi daftar jabatan. \\
+Arah tindakan & Pilihan dan urutan beralasan serta terkait sasaran & Urutan
+tampak sembarang atau tanpa alasan. \\
+Visi arsitektur & Masalah, arah, nilai, ruang lingkup, dan batasan jelas &
+Masih berupa slogan atau terlalu luas. \\
 Bibliografi awal & Minimal sepuluh sumber relevan dan diberi catatan kegunaan
 & Sumber dipilih hanya karena mudah ditemukan. \\
-Matriks sintesis & Menunjukkan hubungan antar-sumber & Berisi ringkasan
-artikel satu per satu. \\
+Matriks sintesis & Menunjukkan hubungan antar-sumber & Berisi ringkasan artikel
+satu per satu. \\
 Metode awal & Menjelaskan penggunaan TOGAF-lite secara operasional & Hanya
 menyebut TOGAF tanpa tahapan analisis. \\
 \hline
@@ -625,11 +649,11 @@ menyebut TOGAF tanpa tahapan analisis. \\
 
 \subsection*{Refleksi Singkat}
 
-Jawab tiga pertanyaan berikut dalam catatan pribadi:
-
 \begin{enumerate}
-  \item Bagian mana dari visi arsitektur yang masih paling kabur?
-  \item Referensi apa yang paling membantu mengubah cara Anda melihat masalah?
+  \item Bagian mana dari arah tindakan atau visi arsitektur yang masih paling
+        kabur?
+  \item Referensi apa yang paling membantu mengubah cara Anda melihat pilihan
+        strategis?
   \item Apa yang perlu dipersempit agar makalah dapat selesai sebagai naskah
         publikasi individual?
 \end{enumerate}
@@ -639,50 +663,46 @@ Jawab tiga pertanyaan berikut dalam catatan pribadi:
 \subsection*{Poin Kunci}
 
 \begin{itemize}
-  \item TOGAF-lite digunakan sebagai kerangka berpikir ringan, bukan sebagai
-        kewajiban membuat seluruh artefak TOGAF.
-  \item ADM membantu mahasiswa menata analisis dari masalah menuju visi,
-        kondisi saat ini, kondisi target, kesenjangan, dan rekomendasi.
+  \item Lapisan strategi menyatakan pilihan: kapabilitas dan sumber daya yang
+        dituju, serta arah tindakan untuk mencapainya.
+  \item Model bisnis dan operating model membantu membaca dan membenarkan arah
+        tindakan strategis.
+  \item TOGAF-lite dan ADM dipakai sebagai kerangka berpikir ringan untuk
+        menyatakan visi dan peta jalan.
   \item Visi arsitektur memberi arah perubahan yang jelas dan membatasi ruang
         lingkup makalah.
-  \item Tinjauan pustaka memberi dasar akademik untuk konsep, metode, dan
-        argumen.
-  \item Bibliografi kerja dan matriks sintesis adalah jembatan antara aktivitas
-        membaca dan penulisan naskah.
+  \item Tinjauan pustaka memberi dasar akademik bagi konsep, metode, dan
+        argumen strategis.
 \end{itemize}
 
 \subsection*{Menjawab Pertanyaan Pemandu}
 
-Perubahan arsitektur yang dibahas dalam makalah harus dinyatakan sebagai visi
-yang spesifik, bukan keinginan umum untuk ``bertransformasi digital''.
-Pemangku kepentingan perlu dipetakan karena setiap perubahan arsitektur
-membawa dampak yang berbeda bagi pimpinan, unit bisnis, unit kepatuhan, tim
-teknologi, mitra, dan pengguna. ADM dapat disederhanakan menjadi alur analisis
-yang menjawab masalah, visi, baseline, target, kesenjangan, dan rekomendasi.
-Literatur dipilih untuk memperkuat konsep, metode, konteks, dan pembahasan.
-Visi arsitektur dan tinjauan pustaka menyatu ketika keduanya digunakan untuk
-menulis kerangka konseptual dan metode makalah.
+Kapabilitas dan sumber daya strategis yang menentukan adalah yang paling
+langsung menopang kapabilitas sasaran---untuk Bank Wanua, kemampuan perpindahan
+dana dan keanggotaan BI-FAST. Arah tindakan dipilih dengan alasan: rel transfer
+lebih dahulu karena menjadi fondasi semua perpindahan dana. Model bisnis dan
+operating model membantu membaca pilihan tersebut. ADM disederhanakan menjadi
+alur analisis dari masalah ke visi, baseline, target, kesenjangan, dan roadmap.
+Literatur dipilih untuk memperkuat konsep, metode, dan konteks.
 
 \subsection*{Uji Mandiri}
 
 \begin{enumerate}
-  \item Jelaskan perbedaan antara menggunakan TOGAF secara penuh dan
-        menggunakan TOGAF-lite untuk makalah individual.
-  \item Ambil satu pertanyaan riset Anda. Tuliskan tiga kata kunci global dan
-        tiga kata kunci Indonesia yang relevan untuk pencarian pustaka.
-  \item Pilih satu referensi terkuat dari bibliografi awal. Jelaskan apakah
-        referensi itu dipakai untuk definisi, kerangka konsep, metode,
-        konteks, atau pembahasan.
+  \item Jelaskan perbedaan antara kapabilitas pada lapisan strategi dan proses
+        pada lapisan bisnis.
+  \item Mengapa membangun rel transfer lebih dahulu dapat disebut sebagai
+        \emph{course of action} yang beralasan?
+  \item Ambil satu pertanyaan riset Anda dan tuliskan tiga kata kunci global
+        serta tiga kata kunci Indonesia untuk pencarian pustaka.
 \end{enumerate}
 
 \subsection*{Jembatan ke Bab Berikutnya}
 
-Bab berikutnya masuk ke arsitektur bisnis. Jika Bab 3 menjawab arah perubahan
-dan fondasi akademik, Bab 4 mulai membedah proses, kapabilitas, nilai, dan
-pemangku kepentingan bisnis secara lebih rinci. Visi arsitektur yang sudah
-dibuat pada bab ini akan dipakai untuk memilih kapabilitas mana yang penting,
-proses mana yang bermasalah, dan nilai bisnis apa yang harus dijaga dalam
-rekomendasi makalah.
+Bab berikutnya turun ke \textbf{lapisan bisnis}. Jika Bab 4 menjawab arah
+tindakan dan visi, Bab 5 membedah layanan, proses, peran, kapabilitas, dan value
+stream bisnis yang mewujudkan rel transfer. Visi arsitektur dan peta jalan yang
+sudah dibuat akan dipakai untuk memilih proses mana yang dibedah dan kapabilitas
+mana yang diprioritaskan dalam analisis makalah.
 
 \section{Bacaan Lanjutan dan Lampiran}
 
@@ -691,7 +711,7 @@ rekomendasi makalah.
 \begin{itemize}
   \item The Open Group Architecture Framework versi terbaru sebagai rujukan
         utama TOGAF dan ADM \cite{togaf10}.
-  \item Ross, Weill, dan Robertson untuk memahami hubungan antara enterprise
+  \item Ross, Weill, dan Robertson untuk hubungan antara enterprise
         architecture, operating model, dan fondasi eksekusi
         \cite{ross2006enterprise}.
   \item Ross, Beath, dan Mocker untuk melihat bagaimana organisasi merancang
@@ -704,28 +724,28 @@ rekomendasi makalah.
   \item Untuk topik platform dan ekosistem digital, baca rujukan tentang
         platform dan pasar dua sisi
         \cite{parker2016platform,cusumano2019business,evans2016matchmakers}.
-  \item Untuk topik API dan integrasi layanan, baca rujukan tentang API
-        sebagai produk dan tata kelola API
+  \item Untuk topik API dan integrasi layanan, baca rujukan tentang API sebagai
+        produk dan tata kelola API
         \cite{jacobson2011apis,medjaoui2018continuous}.
   \item Untuk topik modernisasi sistem dan arsitektur perangkat lunak, baca
         pembahasan tentang monolith dan microservices \cite{newman2021building}.
-  \item Untuk konteks Indonesia, sesuaikan rujukan dengan topik: perlindungan
-        data pribadi \cite{uupdp2022}, penyelenggaraan sistem elektronik
-        \cite{pp712019}, Satu Data Indonesia \cite{satudata}, atau standar API
-        pembayaran nasional \cite{snapbi}.
+  \item Untuk konteks Indonesia, sesuaikan rujukan dengan topik: standar API
+        pembayaran nasional \cite{snapbi}, perlindungan data pribadi
+        \cite{uupdp2022}, penyelenggaraan sistem elektronik \cite{pp712019},
+        atau Satu Data Indonesia \cite{satudata}.
 \end{itemize}
 
-\subsection*{Lampiran Kerja Bab 3}
+\subsection*{Lampiran Kerja Bab 4}
 
 Gunakan templat ringkas berikut sebagai catatan kerja:
 
 \begin{description}
   \item[Topik makalah] Tuliskan topik dalam satu kalimat.
-  \item[Pertanyaan riset] Tuliskan pertanyaan riset utama dan, bila perlu,
-        satu subpertanyaan.
+  \item[Kapabilitas dan sumber daya] Tuliskan kapabilitas strategis dan sumber
+        daya kunci.
+  \item[Arah tindakan dan roadmap] Tuliskan pilihan strategis dan urutan
+        prioritas.
   \item[Visi arsitektur] Tuliskan arah perubahan dalam satu paragraf.
-  \item[Stakeholder-concern] Tuliskan minimal empat pihak dan concern
-        masing-masing.
   \item[Kata kunci pustaka] Tuliskan kata kunci utama dalam bahasa Inggris dan
         Indonesia.
   \item[Bibliografi awal] Tuliskan minimal sepuluh referensi beserta catatan

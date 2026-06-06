@@ -1,167 +1,156 @@
-\chapter[Business Architecture dan Tinjauan Pustaka v1]{Business Architecture: Memetakan Kapabilitas, Value Stream, dan Tinjauan Pustaka v1}
+\chapter[Lapisan Bisnis: Layanan, Proses, dan Kapabilitas]{Lapisan Bisnis:
+Layanan, Proses, Kapabilitas, dan Value Stream Transfer Dana}
 \label{ch:business-architecture}
 \setlength{\emergencystretch}{2em}
 
 \section*{Tujuan Pembelajaran}
 \begin{itemize}
-  \item Menjelaskan peran Business Architecture dalam menghubungkan strategi,
-        operating model, dan kebutuhan perubahan arsitektur enterprise.
+  \item Menjelaskan elemen lapisan bisnis ArchiMate---layanan bisnis, proses
+        bisnis, peran/aktor, dan objek bisnis---yang mewujudkan kapabilitas
+        sasaran.
   \item Menyusun peta kapabilitas bisnis yang membedakan kapabilitas inti,
-        pendukung, dan tata kelola.
-  \item Memetakan value stream untuk menemukan titik masalah, kebutuhan data,
-        aplikasi pendukung, dan peluang perbaikan.
-  \item Mengubah artefak Business Architecture menjadi narasi analisis domain
-        bisnis dan draf tinjauan pustaka v1 untuk makalah publikasi.
+        pendukung, dan tata kelola untuk rel transfer dana.
+  \item Memetakan value stream dan proses bisnis transfer untuk menemukan titik
+        masalah, kebutuhan data, dan peluang perbaikan.
+  \item Mengubah artefak lapisan bisnis menjadi narasi analisis dan draf
+        tinjauan pustaka v1, serta mempratinjau lapisan aplikasi, teknologi,
+        fisik, dan implementasi.
 \end{itemize}
 
-Tujuan pertama mendukung CLO 1 dan CLO 3. Tujuan kedua sampai keempat
-mendukung CLO 3, CLO 6, dan CLO 7 karena mahasiswa diminta menyusun artefak
-BDAT sekaligus menjadikannya argumen akademik dalam makalah individual.
+Tujuan pertama mendukung CLO 1 dan CLO 3. Tujuan kedua sampai keempat mendukung
+CLO 3, CLO 6, dan CLO 7 karena mahasiswa menyusun artefak lapisan bisnis
+sekaligus menjadikannya argumen akademik dalam makalah individual.
 
 \section{Ringkasan Awal Bab}
 
-Bab ini membahas Business Architecture sebagai jembatan antara strategi
-organisasi dan rancangan arsitektur yang lebih rinci. Pada Bab~\ref{ch:strategi-bisnis},
-mahasiswa telah merumuskan masalah, pertanyaan riset, dan kontribusi awal.
-Pada Bab~\ref{ch:togaf-lite}, mahasiswa menyusun visi arsitektur dan
-bibliografi awal. Bab ini mengubah keduanya menjadi analisis domain bisnis:
-kapabilitas apa yang harus dimiliki organisasi, alur nilai apa yang menjadi
-sumber masalah, dan prioritas perubahan apa yang masuk akal.
+Bab ini membahas \textbf{lapisan bisnis} sebagai jembatan antara strategi
+organisasi dan rancangan teknis yang lebih rinci. Pada
+Bab~\ref{ch:strategi-bisnis}, mahasiswa menyusun lapisan motivasi---pemangku
+kepentingan, pendorong, sasaran, kebutuhan, dan kendala. Pada
+Bab~\ref{ch:togaf-lite}, mahasiswa menetapkan arah tindakan strategis dan visi
+arsitektur: membangun rel transfer lebih dahulu. Bab ini menjawab pertanyaan
+berikutnya: \emph{layanan, proses, peran, dan kapabilitas bisnis apa} yang
+mewujudkan rel transfer itu bagi UMKM.
 
-Dua artefak utama yang digunakan adalah capability map dan value stream.
-Capability map menunjukkan kemampuan organisasi yang perlu dipertahankan,
-diperbaiki, atau dibangun. Value stream menunjukkan bagaimana nilai mengalir
-dari kebutuhan pengguna sampai hasil yang diterima. Bagi pembaca non-TI,
-kedua artefak ini penting karena membantu membahas arsitektur tanpa langsung
-tenggelam dalam aplikasi, database, atau infrastruktur.
-
-Keluaran bab ini adalah peta kapabilitas, value stream, prioritas kapabilitas,
-dan draf Literature Review v1. Semua keluaran tersebut dipakai untuk
-memperkuat bagian tinjauan pustaka, konteks studi kasus, dan analisis domain
-bisnis dalam makalah publikasi individual.
+Dalam ArchiMate, lapisan bisnis memuat layanan bisnis (apa yang ditawarkan),
+proses bisnis (bagaimana layanan dijalankan), peran dan aktor (siapa yang
+melakukan), serta objek bisnis (informasi yang diolah). Dua artefak analisis
+yang dipakai adalah capability map dan value stream. Capability map menunjukkan
+kemampuan yang perlu dipertahankan, diperbaiki, atau dibangun. Value stream
+menunjukkan bagaimana nilai mengalir dari kebutuhan sampai hasil. Keluaran bab
+ini adalah peta kapabilitas, value stream dan proses transfer, prioritas
+kapabilitas, draf Literature Review v1, serta pratinjau lapisan teknis.
 
 \section{Pendahuluan}
 
-Business Architecture menjawab pertanyaan yang tampak sederhana tetapi sering
-terabaikan: kemampuan bisnis apa yang harus dimiliki organisasi agar strategi
-digitalnya dapat berjalan? Pertanyaan ini berbeda dari pertanyaan tentang
-aplikasi apa yang perlu dibangun. Aplikasi adalah salah satu pendukung.
-Kemampuan bisnis mencakup proses, peran, aturan keputusan, data yang
-dibutuhkan, mitra yang terlibat, ukuran keberhasilan, dan kendali risiko.
+Lapisan bisnis menjawab pertanyaan yang tampak sederhana tetapi sering
+terabaikan: kemampuan dan proses bisnis apa yang harus dimiliki organisasi agar
+kapabilitas sasaran dapat berjalan? Pertanyaan ini berbeda dari pertanyaan
+tentang aplikasi apa yang perlu dibangun. Aplikasi adalah salah satu pendukung.
+Lapisan bisnis mencakup proses, peran, aturan keputusan, data yang dibutuhkan,
+mitra yang terlibat, ukuran keberhasilan, dan kendali risiko.
 
-Dalam Enterprise Architecture, Business Architecture menjadi pintu masuk
-untuk domain lain. Data Architecture membutuhkan kejelasan tentang informasi
-apa yang diperlukan bisnis. Application Architecture membutuhkan pemahaman
-tentang proses dan kapabilitas mana yang perlu didukung. Technology
-Architecture membutuhkan konteks prioritas, risiko, dan skala layanan.
-Karena itu, membahas data, aplikasi, dan teknologi sebelum memahami domain
-bisnis sering menghasilkan rancangan yang tampak canggih tetapi tidak menjawab
-masalah organisasi.
+Dalam Enterprise Architecture, lapisan bisnis menjadi pintu masuk untuk lapisan
+di bawahnya. Lapisan aplikasi membutuhkan pemahaman tentang proses dan
+kapabilitas mana yang perlu didukung. Lapisan teknologi membutuhkan konteks
+prioritas, risiko, dan skala layanan. Karena itu, membahas aplikasi dan
+teknologi sebelum memahami proses bisnis transfer sering menghasilkan rancangan
+yang tampak canggih tetapi tidak menjawab masalah organisasi.
 
-Untuk makalah publikasi, Business Architecture membantu mahasiswa membuat
-analisis yang lebih meyakinkan. Penulis dapat menunjukkan bahwa masalah yang
-dibahas tidak berdiri sendiri, melainkan muncul dari ketidakselarasan antara
-strategi, kapabilitas, value stream, dan tata kelola. Rujukan tentang
-Enterprise Architecture sebagai fondasi pelaksanaan strategi menekankan bahwa
-arsitektur harus menata hubungan antara model operasi, proses, data, dan
-keputusan bisnis \cite{ross2006enterprise}. Pandangan tentang organisasi
-digital juga menekankan pentingnya kapabilitas yang dirancang sadar, bukan
-hanya proyek teknologi yang berjalan terpisah \cite{ross2019designed}.
+Untuk makalah publikasi, lapisan bisnis membantu mahasiswa membuat analisis yang
+lebih meyakinkan. Penulis dapat menunjukkan bahwa masalah yang dibahas tidak
+berdiri sendiri, melainkan muncul dari ketidakselarasan antara sasaran,
+kapabilitas, proses, dan tata kelola. Rujukan Enterprise Architecture menekankan
+bahwa arsitektur harus menata hubungan antara model operasi, proses, data, dan
+keputusan bisnis \cite{ross2006enterprise}. Pandangan tentang organisasi digital
+menekankan pentingnya kapabilitas yang dirancang sadar, bukan hanya proyek
+teknologi yang berjalan terpisah \cite{ross2019designed}.
 
 \section{Skenario Pembuka dan Pertanyaan Pemandu}
 
-Bank Wanua telah memiliki visi arsitektur awal: memperkuat layanan digital
-dengan integrasi data nasabah, orkestrasi proses produk, dan API yang
-terkendali. Namun, begitu visi itu dibahas bersama unit bisnis, muncul
-pertanyaan yang lebih praktis. Kapabilitas apa yang sebenarnya lemah? Apakah
-masalah utama ada pada pemasaran digital, verifikasi nasabah, manajemen
-produk, kepatuhan data, layanan mitra, atau analitik nasabah? Jika semua
-dinyatakan penting, tidak ada prioritas yang dapat dipertanggungjawabkan.
+Bank Wanua telah memutuskan membangun rel API Transfer Dana lebih dahulu. Namun,
+begitu keputusan itu dibahas bersama unit bisnis dan operasi, muncul pertanyaan
+yang lebih praktis. Proses transfer yang mana yang sebenarnya bermasalah? Pada
+tahap mana data nasabah dan dana paling rawan tertahan? Apakah masalah utama ada
+pada inisiasi transfer, validasi, penyaringan AML, eksekusi ke BI-FAST,
+notifikasi, atau rekonsiliasi? Jika semua dinyatakan penting, tidak ada
+prioritas yang dapat dipertanggungjawabkan.
 
-Direktur bisnis meminta peta sederhana: kemampuan apa yang sudah cukup baik,
-kemampuan apa yang perlu diperbaiki, dan kemampuan apa yang harus dibangun
-agar Bank Wanua dapat menjadi mitra digital UMKM lokal. Unit kepatuhan
-menambahkan pertanyaan lain: pada alur layanan mana data pribadi paling banyak
-berpindah tangan? Tim teknologi juga meminta kejelasan: proses mana yang
-sebenarnya perlu didukung aplikasi baru, dan proses mana yang dapat diperbaiki
-dengan perubahan prosedur atau tata kelola?
+Direktur operasi meminta peta sederhana: kemampuan apa yang sudah cukup baik,
+kemampuan apa yang perlu diperbaiki, dan kemampuan apa yang harus dibangun agar
+transfer real-time dapat berjalan andal. Unit kepatuhan bertanya: pada langkah
+proses mana penyaringan AML dan pembatasan limit harus terjadi, dan bagaimana
+jejak auditnya? Tim teknologi meminta kejelasan: proses mana yang perlu
+didukung layanan baru, dan proses mana yang dapat diperbaiki dengan perubahan
+prosedur atau tata kelola.
 
-Di titik ini, diskusi tidak dapat lagi berhenti pada slogan strategi. Bank
-Wanua membutuhkan Business Architecture yang dapat dibaca bersama oleh
+Di titik ini, diskusi tidak dapat lagi berhenti pada visi. Bank Wanua
+membutuhkan rancangan lapisan bisnis transfer yang dapat dibaca bersama oleh
 pimpinan, unit bisnis, kepatuhan, dan tim teknologi. Mahasiswa yang menulis
-makalah tentang kasus ini juga membutuhkan hal yang sama: artefak yang
-mengubah masalah organisasi menjadi analisis yang runtut.
+makalah tentang kasus ini juga membutuhkan hal yang sama: artefak yang mengubah
+sasaran menjadi analisis proses dan kapabilitas yang runtut.
 
 \subsection*{Pertanyaan Pemandu}
 
 \begin{enumerate}
-  \item Kapabilitas bisnis apa yang paling menentukan keberhasilan visi
-        arsitektur?
-  \item Bagaimana capability map membantu membedakan masalah inti dari gejala?
-  \item Value stream mana yang paling relevan dengan pertanyaan riset?
-  \item Bukti apa yang diperlukan agar analisis domain bisnis tidak sekadar
-        berdasarkan dugaan?
-  \item Bagaimana hasil Business Architecture masuk ke tinjauan pustaka dan
-        analisis makalah publikasi?
+  \item Layanan dan proses bisnis apa yang mewujudkan kapabilitas transfer?
+  \item Kapabilitas bisnis apa yang paling menentukan keberhasilan rel transfer?
+  \item Value stream transfer mana yang paling relevan dengan pertanyaan riset,
+        dan di mana titik masalahnya?
+  \item Bukti apa yang diperlukan agar analisis tidak sekadar berdasarkan
+        dugaan?
+  \item Bagaimana hasil lapisan bisnis masuk ke tinjauan pustaka dan menyiapkan
+        lapisan aplikasi serta teknologi?
 \end{enumerate}
 
 \section{Mengapa Bab Ini Penting bagi Pembaca Non-TI}
 
 Pembaca non-TI tidak harus menjadi perancang sistem teknis untuk dapat
 berkontribusi pada arsitektur enterprise. Justru, banyak keputusan penting
-berada di wilayah bisnis: siapa pengguna prioritas, nilai apa yang dijanjikan,
-proses apa yang harus distandardisasi, data apa yang harus dipercaya,
-pengendalian risiko seperti apa yang wajib ada, dan kapabilitas mana yang
-layak didanai terlebih dahulu.
+berada di wilayah bisnis: siapa pengguna prioritas, proses apa yang harus
+distandardisasi, pada langkah mana kontrol kepatuhan wajib ada, dan kapabilitas
+mana yang layak didanai lebih dahulu.
 
-Business Architecture memberi bahasa bersama untuk diskusi tersebut. Dengan
-capability map, mahasiswa dapat membicarakan kemampuan organisasi tanpa
-terjebak pada nama aplikasi. Dengan value stream, mahasiswa dapat menjelaskan
-di bagian mana nilai tersendat, risiko muncul, atau pengalaman pengguna
-menurun. Dengan dua artefak ini, rekomendasi dalam makalah menjadi lebih
-mudah dipertanggungjawabkan karena pembaca dapat melihat hubungan antara
-masalah, bukti, prioritas, dan implikasi.
+Lapisan bisnis memberi bahasa bersama untuk diskusi tersebut. Dengan capability
+map, mahasiswa dapat membicarakan kemampuan organisasi tanpa terjebak pada nama
+aplikasi. Dengan value stream dan proses bisnis, mahasiswa dapat menjelaskan di
+langkah mana nilai tersendat, risiko muncul, atau pengalaman pengguna menurun.
+Dengan artefak ini, rekomendasi dalam makalah menjadi lebih mudah
+dipertanggungjawabkan karena pembaca dapat melihat hubungan antara masalah,
+bukti, prioritas, dan implikasi.
 
 \section{Konsep Inti dan Glosarium Mini}
 
-\subsection{Business Architecture}
+\subsection{Lapisan Bisnis ArchiMate}
 
-Business Architecture adalah deskripsi terstruktur tentang bagaimana organisasi
-menciptakan nilai melalui kapabilitas, proses, informasi, peran, kebijakan,
-dan hubungan dengan pemangku kepentingan. Dalam TOGAF, Business Architecture
-menjadi salah satu domain utama yang membantu menerjemahkan visi arsitektur ke
-dalam struktur bisnis yang dapat dianalisis \cite{togaf10}.
-
-Secara manajerial, Business Architecture dapat dibayangkan sebagai peta
-kemampuan organisasi. Peta ini tidak menggambarkan struktur jabatan, tetapi
-menggambarkan apa yang harus mampu dilakukan organisasi. Dua unit dapat
-berbeda dalam struktur organisasi, tetapi membutuhkan kapabilitas yang sama.
-Sebaliknya, satu unit dapat memegang beberapa kapabilitas sekaligus. Karena
-itu, capability map biasanya lebih stabil daripada bagan organisasi.
+Lapisan bisnis ArchiMate menggambarkan bagaimana organisasi menciptakan nilai
+melalui perilaku dan struktur bisnis. Elemen yang paling sering dipakai:
+\textbf{layanan bisnis} (\emph{business service})---apa yang ditawarkan kepada
+pengguna, misalnya ``Layanan Transfer Dana''; \textbf{proses bisnis}
+(\emph{business process})---urutan kegiatan yang menghasilkan layanan;
+\textbf{peran dan aktor} (\emph{business role/actor})---siapa yang menjalankan;
+serta \textbf{objek bisnis} (\emph{business object})---informasi yang diolah,
+misalnya ``Instruksi Transfer'' atau ``Catatan Rekonsiliasi''. Dalam TOGAF,
+lapisan bisnis adalah salah satu domain utama yang menerjemahkan visi arsitektur
+menjadi struktur yang dapat dianalisis \cite{togaf10}.
 
 \subsection{Business Capability}
 
 Business capability adalah kemampuan yang dibutuhkan organisasi untuk
-menciptakan nilai atau menjalankan mandatnya. Contoh kapabilitas pada bank
-daerah adalah akuisisi nasabah UMKM, penilaian kelayakan kredit, manajemen
-risiko, pengelolaan data nasabah, layanan kanal digital, pengelolaan mitra,
-dan kepatuhan regulasi.
-
-Kapabilitas tidak sama dengan proses. Proses menjelaskan urutan aktivitas.
-Kapabilitas menjelaskan kemampuan yang harus ada agar aktivitas dapat berjalan
-dengan baik. Satu kapabilitas dapat muncul dalam beberapa proses, dan satu
-proses dapat memerlukan beberapa kapabilitas. Perbedaan ini penting karena
-makalah arsitektur tidak cukup hanya menggambar alur kerja; ia perlu
-menjelaskan kemampuan organisasi yang perlu berubah.
+menciptakan nilai. Contoh kapabilitas pada rel transfer: inisiasi dan otorisasi
+transfer, penyaringan AML dan pembatasan limit, penyelesaian dan kliring melalui
+BI-FAST, notifikasi, serta rekonsiliasi. Kapabilitas tidak sama dengan proses.
+Proses menjelaskan urutan aktivitas; kapabilitas menjelaskan kemampuan yang
+harus ada agar aktivitas berjalan baik. Satu kapabilitas dapat muncul dalam
+beberapa proses, dan satu proses dapat memerlukan beberapa kapabilitas.
 
 \subsection{Capability Map}
 
-Capability map adalah visualisasi kapabilitas organisasi. Peta ini biasanya
-dikelompokkan ke dalam lapisan seperti kapabilitas strategis, kapabilitas inti
-pelayanan, dan kapabilitas pendukung. Untuk makalah individual, capability map
-tidak harus lengkap seperti dokumen konsultan. Yang lebih penting adalah peta
-itu relevan dengan pertanyaan riset dan cukup jelas untuk menjelaskan prioritas
-analisis.
+Capability map adalah visualisasi kapabilitas organisasi, biasanya dikelompokkan
+menjadi kapabilitas strategis/tata kelola, kapabilitas inti, dan kapabilitas
+pendukung. Untuk makalah individual, capability map tidak harus selengkap
+dokumen konsultan; yang lebih penting adalah relevan dengan pertanyaan riset dan
+cukup jelas untuk menjelaskan prioritas.
 
 \begin{figure}[htbp]
 \centering
@@ -179,83 +168,74 @@ analisis.
   layer/.style={font=\small\bfseries, align=right}
 ]
   \node[layer] at (-1.0,2.6) {Strategis\\dan tata kelola};
-  \node[capnode] (s1) at (1.0,2.6) {Arah produk\\digital};
-  \node[capnode] (s2) at (4.4,2.6) {Manajemen\\risiko};
+  \node[capnode] (s1) at (1.0,2.6) {Tata kelola\\API};
+  \node[capnode] (s2) at (4.4,2.6) {Manajemen risiko\\\& kepatuhan};
   \node[capnode] (s3) at (7.8,2.6) {Tata kelola\\data};
 
   \node[layer] at (-1.0,1.0) {Kapabilitas\\inti};
-  \node[core] (c1) at (1.0,1.0) {Akuisisi\\UMKM};
-  \node[core] (c2) at (4.4,1.0) {Penilaian\\kebutuhan};
-  \node[core] (c3) at (7.8,1.0) {Layanan\\produk};
+  \node[core] (c1) at (1.0,1.0) {Inisiasi \&\\otorisasi transfer};
+  \node[core] (c2) at (4.4,1.0) {Penyaringan AML\\\& limit};
+  \node[core] (c3) at (7.8,1.0) {Penyelesaian \&\\kliring (BI-FAST)};
 
   \node[layer] at (-1.0,-0.6) {Kapabilitas\\pendukung};
-  \node[support] (p1) at (1.0,-0.6) {Operasi\\cabang};
-  \node[support] (p2) at (4.4,-0.6) {Kemitraan\\digital};
-  \node[support] (p3) at (7.8,-0.6) {Analitik\\nasabah};
+  \node[support] (p1) at (1.0,-0.6) {Notifikasi};
+  \node[support] (p2) at (4.4,-0.6) {Rekonsiliasi};
+  \node[support] (p3) at (7.8,-0.6) {Manajemen\\mitra \& kanal};
 
   \draw[gray!45, rounded corners=2mm] (-2.6,-1.3) rectangle (9.4,3.25);
 \end{tikzpicture}
 }
-\caption{Contoh sederhana capability map untuk layanan digital Bank Wanua.}
+\caption{Capability map rel transfer dana Bank Wanua.}
 \label{fig:capability-map-bank-wanua}
 \end{figure}
 
-\subsection{Value Stream}
+\subsection{Proses Bisnis dan Value Stream}
 
-Value stream adalah alur penciptaan nilai dari kebutuhan awal sampai hasil
-yang diterima pengguna atau pemangku kepentingan. Jika capability map
-menunjukkan kemampuan yang dibutuhkan, value stream menunjukkan bagaimana
-kemampuan itu bekerja bersama dalam satu perjalanan nilai.
+\textbf{Proses bisnis} transfer menggambarkan urutan kegiatan yang mengubah
+sebuah instruksi menjadi dana yang berpindah dan tercatat. \textbf{Value stream}
+menggambarkan alur penciptaan nilai dari sudut pandang pemangku
+kepentingan---``UMKM memindahkan dana''---dari kebutuhan awal sampai hasil yang
+diterima. Jika capability map menunjukkan kemampuan yang dibutuhkan, value
+stream dan proses menunjukkan bagaimana kemampuan itu bekerja bersama. Pada
+setiap tahap, penulis dapat menanyakan: siapa aktornya, data apa yang digunakan,
+sistem apa yang mendukung, risiko apa yang muncul, dan metrik apa yang
+menunjukkan keberhasilan.
 
-Pada Bank Wanua, value stream untuk layanan UMKM dapat dimulai dari menarik
-minat calon nasabah, memahami kebutuhan, dan menilai kelayakan. Tahap
-berikutnya adalah menawarkan produk, melakukan persetujuan, mengaktifkan
-layanan, lalu memantau dan mendukung nasabah. Di setiap tahap, penulis dapat
-menanyakan: siapa aktornya, data apa yang digunakan, sistem apa yang
-mendukung, risiko apa yang muncul, dan metrik apa yang menunjukkan
-keberhasilan.
+\subsection{Operating Model dalam Lapisan Bisnis}
 
-\subsection{Operating Model dalam Business Architecture}
-
-Operating model menjelaskan tingkat integrasi data dan standardisasi proses
-yang dibutuhkan organisasi untuk menjalankan strategi \cite{ross2006enterprise}.
-Bab~\ref{ch:strategi-bisnis} telah memperkenalkan konsep ini sebagai alat
-membaca strategi. Dalam Bab 4, operating model dipakai lebih operasional:
-untuk menilai apakah kapabilitas tertentu perlu distandardisasi, diintegrasikan,
-atau dibiarkan berbeda sesuai konteks unit.
-
-Bank Wanua, misalnya, mungkin perlu data nasabah UMKM yang terintegrasi lintas
-cabang, tetapi proses pendampingan UMKM boleh tetap menyesuaikan karakter
-wilayah. Keputusan semacam ini adalah keputusan Business Architecture. Ia
-menentukan apa yang harus seragam, apa yang boleh lokal, dan apa yang harus
-terhubung melalui tata kelola data atau API.
+Operating model menjelaskan tingkat integrasi data dan standardisasi proses yang
+dibutuhkan \cite{ross2006enterprise}. Bab~\ref{ch:togaf-lite} memakainya sebagai
+alat memilih arah tindakan; di sini ia dipakai lebih operasional: untuk menilai
+apakah sebuah proses transfer perlu distandardisasi penuh atau boleh berbeda
+antarkanal. Rel transfer menuntut standardisasi proses dan integrasi data yang
+tinggi agar limit dan penyaringan AML konsisten lintas kanal, sementara
+pengalaman antarmuka di tiap kanal masih boleh berbeda.
 
 \subsection*{Glosarium Mini}
 
 \begin{description}
-  \item[Business Architecture] Deskripsi terstruktur tentang kapabilitas,
-        proses, informasi, peran, dan kebijakan yang memungkinkan organisasi
-        menciptakan nilai.
+  \item[Layanan bisnis] Layanan yang ditawarkan organisasi kepada pengguna,
+        misalnya Layanan Transfer Dana.
+  \item[Proses bisnis] Urutan kegiatan yang menghasilkan layanan.
+  \item[Peran/aktor bisnis] Pihak yang menjalankan kegiatan dalam proses.
+  \item[Objek bisnis] Informasi yang diolah proses, misalnya Instruksi Transfer.
   \item[Business capability] Kemampuan organisasi untuk menjalankan fungsi
-        tertentu, misalnya akuisisi nasabah, manajemen risiko, atau tata
-        kelola data.
-  \item[Capability map] Peta kapabilitas yang menunjukkan kemampuan inti,
-        pendukung, dan tata kelola yang relevan dengan strategi.
+        tertentu, misalnya penyelesaian transfer atau penyaringan AML.
+  \item[Capability map] Peta kapabilitas inti, pendukung, dan tata kelola yang
+        relevan dengan sasaran.
   \item[Value stream] Alur penciptaan nilai dari kebutuhan pemangku kepentingan
         sampai hasil yang diterima.
   \item[Pain point] Titik dalam alur nilai yang menimbulkan kelambatan, risiko,
         biaya, duplikasi, atau pengalaman buruk.
-  \item[Prioritas kapabilitas] Keputusan tentang kapabilitas mana yang perlu
-        dipertahankan, diperbaiki, atau dibangun terlebih dahulu.
 \end{description}
 
 \section{Kerangka Berpikir}
 
-Kerangka Bab 4 bergerak dari visi arsitektur menuju analisis domain bisnis.
-Pertanyaan riset dan visi arsitektur memberi arah. Capability map menunjukkan
-kemampuan yang dibutuhkan. Value stream membantu menemukan titik masalah.
-Analisis prioritas menentukan kapabilitas mana yang paling penting. Hasilnya
-menjadi bahan analisis domain bisnis dan draf tinjauan pustaka v1.
+Kerangka Bab 5 bergerak dari visi arsitektur menuju analisis lapisan bisnis.
+Visi dan arah tindakan memberi arah. Capability map menunjukkan kemampuan yang
+dibutuhkan. Value stream dan proses membantu menemukan titik masalah. Analisis
+prioritas menentukan kapabilitas mana yang paling penting. Hasilnya menjadi
+bahan analisis dan draf tinjauan pustaka v1.
 
 \begin{figure}[htbp]
 \centering
@@ -269,9 +249,9 @@ menjadi bahan analisis domain bisnis dan draf tinjauan pustaka v1.
 ]
   \node[box] (vision) {Visi arsitektur\\dan RQ};
   \node[box, right=7mm of vision] (cap) {Capability\\map};
-  \node[box, right=7mm of cap] (stream) {Value\\stream};
+  \node[box, right=7mm of cap] (stream) {Value stream\\\& proses};
   \node[box, below=8mm of stream] (priority) {Prioritas\\kapabilitas};
-  \node[outnode, left=7mm of priority] (analysis) {Analisis domain\\bisnis};
+  \node[outnode, left=7mm of priority] (analysis) {Analisis lapisan\\bisnis};
   \node[outnode, left=7mm of analysis] (lit) {Literature\\Review v1};
 
   \draw[link] (vision) -- (cap);
@@ -282,103 +262,95 @@ menjadi bahan analisis domain bisnis dan draf tinjauan pustaka v1.
   \draw[link, dashed] (lit) -- (vision);
 \end{tikzpicture}
 }
-\caption{Alur berpikir Business Architecture untuk makalah publikasi.}
+\caption{Alur berpikir lapisan bisnis untuk makalah publikasi.}
 \label{fig:business-architecture-flow}
 \end{figure}
 
-Alur ini tidak harus selalu linear. Saat menyusun capability map, mahasiswa
-dapat menemukan bahwa pertanyaan risetnya terlalu teknis. Saat menggambar
-value stream, mahasiswa dapat menyadari bahwa masalah utama bukan aplikasi,
-melainkan aturan keputusan yang tidak jelas. Saat menulis Literature Review
-v1, mahasiswa dapat menemukan konsep yang membuat prioritas kapabilitas perlu
-diubah. Revisi semacam ini adalah bagian wajar dari penulisan akademik.
+Alur ini tidak selalu linear. Saat menyusun capability map, mahasiswa dapat
+menemukan bahwa pertanyaan risetnya terlalu teknis. Saat menggambar value
+stream, mahasiswa dapat menyadari bahwa masalah utama bukan aplikasi, melainkan
+aturan keputusan yang tidak jelas. Revisi semacam ini adalah bagian wajar dari
+penulisan akademik.
 
 \section{Konteks Indonesia}
 
-Business Architecture di Indonesia perlu memperhatikan variasi kematangan
-organisasi. Banyak organisasi memiliki strategi digital yang ambisius, tetapi
-kapabilitas bisnisnya belum merata. Cabang atau unit daerah dapat memiliki
-cara kerja berbeda. Data pelanggan atau warga sering tersimpan di beberapa
-sistem. Proses persetujuan masih bergantung pada dokumen manual. Peran vendor
-besar, sementara kemampuan internal untuk mengelola perubahan belum selalu
-kuat.
+Lapisan bisnis di Indonesia perlu memperhatikan variasi kematangan organisasi.
+Banyak bank daerah memiliki sasaran digital ambisius, tetapi proses transfernya
+belum merata: sebagian real-time, sebagian masih batch. Data nasabah sering
+tersimpan di beberapa sistem. Proses penyaringan kepatuhan masih bergantung
+pada langkah manual.
 
-Regulasi juga memengaruhi prioritas kapabilitas. Organisasi yang mengelola
-data pribadi perlu memiliki kapabilitas pengelolaan persetujuan, pembatasan
-akses, pencatatan penggunaan data, dan penanganan insiden yang sejalan dengan
-perlindungan data pribadi \cite{uupdp2022}. Penyelenggara sistem elektronik
-perlu memperhatikan kewajiban pengelolaan sistem dan data elektronik
-\cite{pp712019}. Organisasi sektor publik yang bertukar data perlu memahami
-prinsip Satu Data Indonesia \cite{satudata}. Lembaga keuangan yang membuka
-integrasi pembayaran atau kemitraan digital perlu memperhatikan standar Open
-API pembayaran nasional \cite{snapbi}.
+Regulasi memengaruhi rancangan proses. Penyaringan APU-PPT, pembatasan limit,
+dan jejak audit harus melekat pada proses transfer. Organisasi yang mengelola
+data pribadi perlu kapabilitas pengelolaan persetujuan, pembatasan akses, dan
+pencatatan penggunaan data sesuai perlindungan data pribadi \cite{uupdp2022}.
+Penyelenggara sistem elektronik perlu memenuhi kewajiban pengelolaan sistem dan
+data \cite{pp712019}. Lembaga keuangan yang membuka API transfer perlu mengikuti
+standar Open API pembayaran nasional \cite{snapbi}. Untuk pertukaran data lintas
+instansi, prinsip Satu Data Indonesia dapat menjadi acuan \cite{satudata}.
 
-Konteks lokal juga memengaruhi value stream. Di banyak sektor, pengalaman
-pengguna tidak hanya terjadi di kanal digital. Nasabah bank daerah, pasien
-rumah sakit, petani, mahasiswa, atau pelaku UMKM masih berinteraksi melalui
-kantor cabang, petugas lapangan, agen, WhatsApp, dan dokumen fisik. Karena
-itu, Business Architecture yang baik tidak memaksakan narasi serba aplikasi.
-Ia membaca alur nilai secara utuh: digital, fisik, manusia, mitra, dan aturan.
+Konteks lokal juga memengaruhi value stream. Pengalaman UMKM tidak hanya terjadi
+di kanal digital; sebagian transfer masih diinisiasi di cabang atau melalui
+agen. Karena itu, lapisan bisnis yang baik membaca alur nilai secara
+utuh---digital, fisik, manusia, mitra, dan aturan---tanpa memaksakan narasi
+serba aplikasi.
 
-\section{Studi Kasus Utama: Business Architecture Bank Wanua}
+\section{Studi Kasus Utama: Lapisan Bisnis Transfer Bank Wanua}
 
-Visi Bank Wanua adalah menjadi mitra keuangan digital bagi UMKM lokal. Agar
-visi tersebut tidak berhenti sebagai slogan, mahasiswa perlu memetakan
-kapabilitas yang membuat visi itu mungkin. Peta awal dapat disusun dari tiga
-pertanyaan:
+Visi Bank Wanua adalah menyediakan rel transfer real-time bagi UMKM. Agar visi
+itu tidak berhenti sebagai slogan, mahasiswa perlu memetakan kapabilitas dan
+proses bisnis yang mewujudkannya. Peta awal disusun dari tiga pertanyaan:
 
 \begin{enumerate}
-  \item Kapabilitas apa yang langsung berhubungan dengan nilai bagi UMKM?
+  \item Kapabilitas apa yang langsung menciptakan nilai perpindahan dana?
   \item Kapabilitas apa yang menjaga risiko, kepatuhan, dan keberlanjutan?
-  \item Kapabilitas apa yang mendukung integrasi digital dan pembelajaran
-        organisasi?
+  \item Kapabilitas apa yang mendukung integrasi kanal, mitra, dan pencatatan?
 \end{enumerate}
 
-\subsection{Capability Map Bank Wanua}
+\subsection{Capability Map Transfer Bank Wanua}
 
 \begin{table}[htbp]
 \centering
 \scriptsize
-\caption{Capability map awal Bank Wanua untuk layanan digital UMKM.}
+\caption{Capability map rel transfer Bank Wanua dan prioritasnya.}
 \label{tab:capability-bank-wanua}
 \begin{tabularx}{\textwidth}{@{}p{0.22\textwidth} p{0.28\textwidth} X X@{}}
 \hline
 \textbf{Kelompok} & \textbf{Kapabilitas} & \textbf{Kondisi awal} & \textbf{Prioritas} \\
 \hline
-Strategis dan tata kelola & Perencanaan produk digital & Produk dirancang per
-inisiatif, belum memakai portofolio layanan yang jelas & Diperbaiki \\
+Strategis dan tata kelola & Tata kelola API & Belum ada API transfer terkelola
+sebagai produk & Dibangun \\
 Strategis dan tata kelola & Manajemen risiko dan kepatuhan & Kontrol kuat,
-tetapi sering masuk terlambat dalam rancangan layanan & Diperbaiki \\
-Strategis dan tata kelola & Tata kelola data nasabah & Definisi data dan
-kepemilikan belum konsisten lintas kanal & Dibangun \\
-Kapabilitas inti & Akuisisi nasabah UMKM & Masih bergantung pada cabang dan
-relasi lokal & Dipertahankan dan diperkuat \\
-Kapabilitas inti & Penilaian kebutuhan dan kelayakan & Data tersebar; asesmen
-sering berulang & Diperbaiki \\
-Kapabilitas inti & Layanan produk dan transaksi & Kanal digital tersedia,
-tetapi integrasi proses belum mulus & Diperbaiki \\
-Kapabilitas pendukung & Kemitraan digital & Peluang mitra ada, tetapi aturan
-integrasi belum matang & Dibangun \\
-Kapabilitas pendukung & Analitik nasabah & Laporan tersedia, tetapi belum
-menjadi dasar personalisasi layanan & Dibangun \\
+tetapi masuk terlambat dan sebagian manual & Diperbaiki \\
+Strategis dan tata kelola & Tata kelola data transaksi & Definisi dan
+kepemilikan data belum konsisten lintas kanal & Dibangun \\
+Kapabilitas inti & Inisiasi dan otorisasi transfer & Tersedia di kanal terbatas,
+belum seragam & Diperbaiki \\
+Kapabilitas inti & Penyaringan AML dan limit & Sebagian dicek manual dan batch &
+Dibangun \\
+Kapabilitas inti & Penyelesaian dan kliring (BI-FAST) & Sebagian transfer masih
+lewat SKNBI batch & Diperbaiki \\
+Kapabilitas pendukung & Notifikasi & Notifikasi belum real-time dan konsisten &
+Diperbaiki \\
+Kapabilitas pendukung & Rekonsiliasi & Rekonsiliasi manual, rawan kesalahan &
+Dibangun \\
 \hline
 \end{tabularx}
 \end{table}
 
-Tabel~\ref{tab:capability-bank-wanua} tidak dimaksudkan sebagai daftar final.
-Ia adalah peta kerja awal. Dalam makalah, mahasiswa perlu menjelaskan dari
-mana penilaian kondisi awal diperoleh: dokumen publik, wawancara, observasi,
-laporan tahunan, studi literatur, atau asumsi yang dinyatakan secara eksplisit
-bila kasus bersifat hipotetis-realistis.
+Tabel~\ref{tab:capability-bank-wanua} bukan daftar final, melainkan peta kerja
+awal. Dalam makalah, mahasiswa perlu menjelaskan dari mana penilaian kondisi awal
+diperoleh: dokumen publik, wawancara, observasi, laporan tahunan, studi
+literatur, atau asumsi yang dinyatakan eksplisit bila kasus bersifat
+hipotetis-realistis.
 
-\subsection{Value Stream Layanan UMKM}
+\subsection{Value Stream dan Proses Transfer Dana}
 
-Setelah kapabilitas dipetakan, mahasiswa perlu melihat bagaimana kapabilitas
-tersebut bekerja dalam alur nilai. Untuk Bank Wanua, salah satu value stream
-yang relevan adalah ``UMKM memperoleh layanan pembiayaan dan pembayaran
-digital''. Alur ini tidak hanya mencakup aplikasi mobile, tetapi juga
-interaksi cabang, verifikasi dokumen, penilaian risiko, aktivasi layanan, dan
-pendampingan.
+Setelah kapabilitas dipetakan, mahasiswa melihat bagaimana kapabilitas tersebut
+bekerja dalam alur nilai ``UMKM memindahkan dana''. Alur ini diwujudkan oleh
+proses bisnis transfer yang berurutan: inisiasi instruksi, validasi dan
+otorisasi, penyaringan AML serta pemeriksaan limit, eksekusi melalui BI-FAST
+atau antarrekening, konfirmasi dan notifikasi, lalu rekonsiliasi.
 
 \begin{figure}[htbp]
 \centering
@@ -391,12 +363,12 @@ pendampingan.
     font=\footnotesize},
   link/.style={-Latex, thick, draw=orange!80!black}
 ]
-  \node[stage] (s1) {Menarik\\minat UMKM};
-  \node[stage, right=5mm of s1] (s2) {Memahami\\kebutuhan};
-  \node[stage, right=5mm of s2] (s3) {Menilai\\kelayakan};
-  \node[stage, below=11mm of s3] (s4) {Menyetujui\\produk};
-  \node[stage, left=5mm of s4] (s5) {Mengaktifkan\\layanan};
-  \node[stage, left=5mm of s5] (s6) {Memantau dan\\mendukung};
+  \node[stage] (s1) {Inisiasi\\instruksi};
+  \node[stage, right=5mm of s1] (s2) {Validasi \&\\otorisasi};
+  \node[stage, right=5mm of s2] (s3) {Penyaringan\\AML \& limit};
+  \node[stage, below=11mm of s3] (s4) {Eksekusi\\(BI-FAST)};
+  \node[stage, left=5mm of s4] (s5) {Konfirmasi \&\\notifikasi};
+  \node[stage, left=5mm of s5] (s6) {Rekonsiliasi};
 
   \draw[link] (s1) -- (s2);
   \draw[link] (s2) -- (s3);
@@ -404,105 +376,103 @@ pendampingan.
   \draw[link] (s4) -- (s5);
   \draw[link] (s5) -- (s6);
 
-  \node[pain, below=4mm of s2] {Data kebutuhan\\belum terpadu};
-  \node[pain, above=4mm of s3] {Asesmen\\berulang};
-  \node[pain, below=4mm of s5] {Aktivasi kanal\\belum mulus};
+  \node[pain, below=4mm of s2] {Otorisasi belum\\seragam};
+  \node[pain, above=4mm of s3] {AML/limit\\dicek manual};
+  \node[pain, below=4mm of s6] {Rekonsiliasi\\manual};
 \end{tikzpicture}
 }
-\caption{Value stream awal layanan UMKM Bank Wanua.}
+\caption{Value stream dan proses transfer dana Bank Wanua beserta pain point.}
 \label{fig:value-stream-bank-wanua}
 \end{figure}
 
-Gambar~\ref{fig:value-stream-bank-wanua} membantu mahasiswa menemukan hubungan
-antara kapabilitas dan titik masalah. Jika data kebutuhan UMKM belum terpadu,
-kapabilitas tata kelola data dan analitik nasabah perlu diperkuat. Jika
-asesmen berulang, kapabilitas penilaian kelayakan dan orkestrasi proses perlu
-diperbaiki. Jika aktivasi kanal belum mulus, kapabilitas layanan produk,
-integrasi aplikasi, dan tata kelola API mulai terlihat sebagai kebutuhan bab
-berikutnya.
+Gambar~\ref{fig:value-stream-bank-wanua} membantu menemukan hubungan antara
+kapabilitas dan titik masalah. Jika otorisasi belum seragam, kapabilitas
+inisiasi dan tata kelola API perlu diperkuat. Jika AML dan limit dicek manual,
+kapabilitas penyaringan dan manajemen risiko perlu dibangun agar otomatis dan
+melekat pada proses. Jika rekonsiliasi masih manual, kapabilitas rekonsiliasi
+dan tata kelola data transaksi mulai terlihat sebagai kebutuhan lapisan
+aplikasi pada pratinjau di akhir bab. Aktor utama proses ini meliputi nasabah
+UMKM (penginisiasi), kanal/petugas, analis kepatuhan, unit operasi/penyelesaian,
+dan mitra; objek bisnis utamanya adalah Instruksi Transfer, Hasil Penyaringan,
+dan Catatan Rekonsiliasi.
 
 \section{Langkah Analisis dan Artefak Pendukung}
 
-Bagian ini menjadi panduan kerja individual untuk menghasilkan artefak Bab 4.
+Bagian ini menjadi panduan kerja individual untuk menghasilkan artefak Bab 5.
 Gunakan organisasi studi kasus yang sama dengan bab sebelumnya.
 
-\subsection{Langkah 1: Tetapkan Ruang Lingkup Domain Bisnis}
+\subsection{Langkah 1: Tetapkan Ruang Lingkup Lapisan Bisnis}
 
-Mulailah dari pertanyaan riset dan visi arsitektur. Tentukan layanan, produk,
-unit, atau proses yang akan dianalisis. Jangan mencoba memetakan seluruh
-organisasi jika makalah hanya membahas satu masalah. Ruang lingkup yang baik
-cukup sempit untuk dianalisis, tetapi cukup penting untuk menjawab RQ.
+Mulailah dari pertanyaan riset dan visi arsitektur. Tentukan layanan, proses,
+atau unit yang dianalisis. Jangan memetakan seluruh organisasi jika makalah
+hanya membahas rel transfer. Ruang lingkup yang baik cukup sempit untuk
+dianalisis, tetapi cukup penting untuk menjawab RQ.
 
 \subsection{Langkah 2: Daftarkan Kapabilitas Bisnis}
 
-Tuliskan kapabilitas yang dibutuhkan agar strategi berjalan. Gunakan kata
-benda abstrak yang menunjukkan kemampuan, bukan aktivitas terlalu rinci.
-Misalnya, tulis ``manajemen risiko kredit UMKM'', bukan ``mengisi formulir
-penilaian''. Tulis ``tata kelola data pelanggan'', bukan ``mengunduh file
-Excel''. Kapabilitas yang baik membantu pembaca melihat kemampuan organisasi
-yang perlu ditata.
+Tuliskan kapabilitas yang dibutuhkan agar layanan transfer berjalan. Gunakan
+kata benda abstrak yang menunjukkan kemampuan, bukan aktivitas terlalu rinci.
+Misalnya, tulis ``penyaringan AML dan limit'', bukan ``menjalankan skrip
+pengecekan''.
 
 \subsection{Langkah 3: Kelompokkan Kapabilitas}
 
-Kelompokkan kapabilitas ke dalam tiga sampai empat kategori. Kategori umum
-adalah strategis dan tata kelola, kapabilitas inti, kapabilitas pendukung, dan
-kapabilitas pembelajaran organisasi. Pengelompokan ini membantu pembaca non-TI
-memahami mana kemampuan yang langsung menciptakan nilai dan mana yang menjaga
-agar nilai itu dapat diberikan secara aman dan berulang.
+Kelompokkan kapabilitas ke dalam tiga sampai empat kategori: strategis dan tata
+kelola, kapabilitas inti, dan kapabilitas pendukung. Pengelompokan ini membantu
+pembaca non-TI membedakan kemampuan yang langsung menciptakan nilai dari yang
+menjaga agar nilai diberikan secara aman dan berulang.
 
 \subsection{Langkah 4: Nilai Kondisi Awal dan Prioritas}
 
-Untuk setiap kapabilitas, beri penilaian kondisi awal. Gunakan kategori
-sederhana: kuat, cukup, lemah, atau belum ada. Setelah itu, tuliskan prioritas:
-dipertahankan, diperbaiki, atau dibangun. Hindari memberi semua kapabilitas
-prioritas tinggi. Prioritas yang baik harus berani memilih.
+Untuk setiap kapabilitas, beri penilaian kondisi awal (kuat, cukup, lemah, atau
+belum ada) dan prioritas (dipertahankan, diperbaiki, atau dibangun). Hindari
+memberi semua kapabilitas prioritas tinggi; prioritas yang baik berani memilih.
 
-\subsection{Langkah 5: Pilih Value Stream Utama}
+\subsection{Langkah 5: Petakan Value Stream dan Proses}
 
-Pilih satu value stream yang paling relevan dengan RQ. Value stream dapat
-berupa perjalanan pengguna, alur layanan, alur persetujuan, atau alur
-penciptaan nilai. Tuliskan tahap utama dari awal sampai akhir. Pada setiap
-tahap, catat aktor, data, aplikasi, risiko, dan pain point.
+Pilih value stream yang paling relevan dengan RQ---untuk Bank Wanua, ``UMKM
+memindahkan dana''. Tuliskan tahap proses dari inisiasi sampai rekonsiliasi.
+Pada setiap tahap, catat aktor, objek bisnis/data, sistem pendukung, risiko, dan
+pain point.
 
 \subsection{Langkah 6: Hubungkan Value Stream dengan Kapabilitas}
 
-Tanyakan kapabilitas mana yang mendukung setiap tahap value stream. Hubungan
-ini penting karena menunjukkan mengapa sebuah kapabilitas perlu diprioritaskan.
-Jika satu kapabilitas muncul di banyak titik masalah, kapabilitas itu mungkin
-lebih penting daripada yang awalnya terlihat.
+Tanyakan kapabilitas mana yang mendukung setiap tahap. Jika satu kapabilitas
+muncul di banyak titik masalah, kapabilitas itu mungkin lebih penting daripada
+yang awalnya terlihat.
 
 \subsection{Langkah 7: Susun Bukti dan Literatur Pendukung}
 
-Business Architecture tidak boleh hanya berdasarkan intuisi. Catat sumber
-bukti untuk setiap klaim. Bukti dapat berupa dokumen organisasi, laporan
-tahunan, wawancara, observasi, regulasi, standar, atau literatur akademik.
-Gunakan literatur untuk menjelaskan konsep seperti Enterprise Architecture,
-operating model, kapabilitas digital, platform, dan tata kelola.
+Lapisan bisnis tidak boleh hanya berdasarkan intuisi. Catat sumber bukti untuk
+setiap klaim: dokumen organisasi, laporan tahunan, wawancara, observasi,
+regulasi, standar, atau literatur akademik. Gunakan literatur untuk menjelaskan
+konsep seperti Enterprise Architecture, operating model, kapabilitas digital,
+API, dan tata kelola.
 
-\subsection{Langkah 8: Tulis Narasi Analisis Domain Bisnis}
+\subsection{Langkah 8: Tulis Narasi Analisis Lapisan Bisnis}
 
 Ubah capability map dan value stream menjadi narasi. Narasi minimal menjawab:
-kapabilitas apa yang paling bermasalah, bagaimana masalah itu terlihat dalam
-alur nilai, mengapa masalah itu penting bagi strategi, dan apa implikasinya
-untuk domain data, aplikasi, teknologi, API, dan platform pada bab berikutnya.
+kapabilitas apa yang paling bermasalah, bagaimana masalah terlihat dalam alur
+nilai, mengapa penting bagi sasaran, dan apa implikasinya untuk lapisan
+aplikasi, teknologi, dan implementasi pada pratinjau bab ini.
 
 \begin{table}[htbp]
 \centering
 \scriptsize
-\caption{Artefak Bab 4 dan pemakaiannya dalam makalah.}
+\caption{Artefak Bab 5 dan pemakaiannya dalam makalah.}
 \label{tab:artefak-bab4}
 \begin{tabularx}{\textwidth}{@{}p{0.24\textwidth} p{0.32\textwidth} X@{}}
 \hline
 \textbf{Artefak} & \textbf{Isi minimum} & \textbf{Dipakai untuk bagian makalah} \\
 \hline
-Capability map & Kelompok kapabilitas, kondisi awal, prioritas & Konteks
-studi kasus dan analisis domain bisnis. \\
-Value stream & Tahap alur nilai, aktor, data, pain point, risiko & Analisis
-baseline dan pembahasan masalah. \\
+Capability map & Kelompok kapabilitas, kondisi awal, prioritas & Konteks studi
+kasus dan analisis lapisan bisnis. \\
+Value stream dan proses & Tahap alur nilai, aktor, objek, pain point, risiko &
+Analisis baseline dan pembahasan masalah. \\
 Tabel prioritas kapabilitas & Kapabilitas, alasan prioritas, bukti, dampak &
 Gap analysis dan implikasi manajerial. \\
-Matriks pustaka bisnis & Konsep, sumber, fungsi dalam argumen, hubungan ke RQ
-& Literature Review v1. \\
+Matriks pustaka bisnis & Konsep, sumber, fungsi dalam argumen, hubungan ke RQ &
+Literature Review v1. \\
 Narasi analisis bisnis & Dua sampai empat paragraf akademik & Bagian
 analysis/results atau studi kasus. \\
 \hline
@@ -512,88 +482,81 @@ analysis/results atau studi kasus. \\
 \section{Integrasi ke Makalah Publikasi}
 
 Bab ini memperkuat dua bagian utama makalah: tinjauan pustaka dan analisis
-domain bisnis. Pada tinjauan pustaka, mahasiswa menjelaskan konsep Enterprise
-Architecture, Business Architecture, operating model, kapabilitas digital, dan
-value stream. Pada analisis domain bisnis, mahasiswa menunjukkan bagaimana
-konsep tersebut dipakai untuk membaca kasus.
+lapisan bisnis. Pada tinjauan pustaka, mahasiswa menjelaskan konsep Enterprise
+Architecture, lapisan bisnis, operating model, kapabilitas digital, dan value
+stream. Pada analisis, mahasiswa menunjukkan bagaimana konsep tersebut dipakai
+untuk membaca kasus transfer.
 
 \subsection{Dari Artefak ke Tinjauan Pustaka}
 
-Literature Review v1 tidak perlu langsung sempurna. Pada tahap ini, tujuannya
-adalah membuat sintesis awal yang terhubung dengan artefak. Misalnya, jika
-capability map menunjukkan lemahnya tata kelola data dan analitik nasabah,
-tinjauan pustaka perlu memuat konsep tentang operating model, kapabilitas
-digital, dan arsitektur enterprise sebagai fondasi eksekusi strategi
-\cite{ross2006enterprise,ross2019designed}. Jika value stream menunjukkan
-kebutuhan kemitraan dan layanan API, tinjauan pustaka mulai dapat menyinggung
-literatur API dan platform sebagai pengantar untuk bab berikutnya
+Literature Review v1 tidak perlu langsung sempurna; tujuannya membuat sintesis
+awal yang terhubung dengan artefak. Jika capability map menunjukkan lemahnya
+tata kelola API dan penyaringan AML, tinjauan pustaka memuat konsep operating
+model, kapabilitas digital, dan arsitektur enterprise sebagai fondasi eksekusi
+strategi \cite{ross2006enterprise,ross2019designed}. Jika value stream
+menunjukkan kebutuhan API dan kemitraan, tinjauan pustaka mulai menyinggung
+literatur API dan platform sebagai pengantar lapisan berikutnya
 \cite{jacobson2011apis,parker2016platform}.
 
 \subsection{Struktur Literature Review v1}
 
-Untuk Bab 4, Literature Review v1 dapat disusun dengan pola berikut:
-
 \begin{enumerate}
-  \item paragraf tentang Enterprise Architecture sebagai penghubung strategi
-        dan eksekusi;
-  \item paragraf tentang Business Architecture, capability map, dan value
-        stream;
-  \item paragraf tentang konteks digital organisasi, misalnya platform, API,
-        atau tata kelola data sesuai topik;
-  \item paragraf sintesis yang menjelaskan celah atau kebutuhan analisis pada
-        studi kasus mahasiswa.
+  \item paragraf tentang Enterprise Architecture sebagai penghubung strategi dan
+        eksekusi;
+  \item paragraf tentang lapisan bisnis, capability map, dan value stream;
+  \item paragraf tentang konteks digital, misalnya API, tata kelola, atau
+        platform sesuai topik;
+  \item paragraf sintesis yang menjelaskan celah analisis pada studi kasus.
 \end{enumerate}
 
 Contoh paragraf sintesis:
 
 \begin{quote}
-Literatur Enterprise Architecture menekankan bahwa strategi digital perlu
+Literatur Enterprise Architecture menekankan bahwa sasaran digital perlu
 diterjemahkan ke dalam kapabilitas, proses, dan model operasi yang konsisten.
-Dalam kasus bank daerah, kebutuhan integrasi layanan UMKM tidak cukup dibaca
-sebagai masalah aplikasi, tetapi sebagai ketidakselarasan antara kapabilitas
-akuisisi nasabah, penilaian kelayakan, tata kelola data, dan kemitraan digital.
-Oleh karena itu, penelitian ini menggunakan capability map dan value stream
-untuk mengidentifikasi kapabilitas prioritas sebelum merumuskan rancangan
-arsitektur data, aplikasi, dan teknologi.
+Dalam kasus rel transfer bank daerah, kebutuhan transfer real-time tidak cukup
+dibaca sebagai masalah aplikasi, tetapi sebagai ketidakselarasan antara
+kapabilitas inisiasi, penyaringan AML, penyelesaian via BI-FAST, dan
+rekonsiliasi. Oleh karena itu, penelitian ini menggunakan capability map dan
+value stream untuk mengidentifikasi kapabilitas prioritas sebelum merumuskan
+rancangan aplikasi dan teknologi.
 \end{quote}
 
-\subsection{Dari Business Architecture ke Analisis}
+\subsection{Dari Lapisan Bisnis ke Analisis}
 
 Dalam bagian analisis, capability map dapat ditempatkan sebagai gambar atau
-tabel. Value stream dapat digunakan untuk menjelaskan alur masalah. Yang
-penting, artefak tidak berdiri sendiri. Setelah gambar atau tabel, selalu ada
-paragraf yang menjelaskan temuan: kapabilitas mana yang lemah, pain point apa
-yang muncul, dampaknya pada strategi, dan implikasinya bagi rancangan BDAT.
+tabel, dan value stream dipakai untuk menjelaskan alur masalah. Yang penting,
+artefak tidak berdiri sendiri. Setelah gambar atau tabel, selalu ada paragraf
+yang menjelaskan temuan: kapabilitas mana yang lemah, pain point apa yang
+muncul, dampaknya pada sasaran, dan implikasinya bagi lapisan berikutnya.
 
 \section{Diskusi Kritis, Trade-off, dan Perangkap Umum}
 
-\subsection{Trade-off dalam Business Architecture}
+\subsection{Trade-off dalam Lapisan Bisnis}
 
-Business Architecture memaksa penulis memilih tingkat abstraksi. Jika terlalu
-tinggi, capability map menjadi daftar kata besar yang sulit dipakai. Jika
-terlalu rinci, peta berubah menjadi prosedur operasional dan kehilangan
-fungsi strategis. Value stream juga memiliki trade-off serupa. Jika terlalu
-pendek, pain point tidak terlihat. Jika terlalu panjang, pembaca kehilangan
-alur utama.
+Lapisan bisnis memaksa penulis memilih tingkat abstraksi. Jika terlalu tinggi,
+capability map menjadi daftar kata besar yang sulit dipakai. Jika terlalu rinci,
+peta berubah menjadi prosedur operasional dan kehilangan fungsi strategis. Value
+stream juga punya trade-off serupa: terlalu pendek menyembunyikan pain point,
+terlalu panjang mengaburkan alur utama.
 
 \begin{table}[htbp]
 \centering
 \scriptsize
-\caption{Trade-off utama dalam Business Architecture.}
+\caption{Trade-off utama dalam lapisan bisnis.}
 \label{tab:tradeoff-bab4}
 \begin{tabularx}{\textwidth}{@{}p{0.23\textwidth} X X X@{}}
 \hline
 \textbf{Keputusan} & \textbf{Alternatif} & \textbf{Manfaat} & \textbf{Risiko} \\
 \hline
-Cakupan capability map & Seluruh organisasi atau satu domain prioritas &
-Cakupan luas memberi konteks; cakupan sempit lebih tajam & Terlalu luas
-membuat makalah melebar. \\
+Cakupan capability map & Seluruh organisasi atau domain transfer & Cakupan
+sempit lebih tajam & Terlalu luas membuat makalah melebar. \\
 Level detail kapabilitas & Kapabilitas besar atau subkapabilitas & Detail
 membantu prioritas & Terlalu rinci membuat peta sulit dibaca. \\
-Value stream & Alur end-to-end atau satu potongan kritis & End-to-end
+Value stream/proses & Alur end-to-end atau satu potongan kritis & End-to-end
 menunjukkan konteks utuh & Terlalu panjang menyulitkan analisis. \\
-Sumber bukti & Data internal, dokumen publik, atau asumsi eksplisit & Bukti
-kuat memperkuat klaim & Data sensitif perlu izin dan anonimisasi. \\
+Sumber bukti & Data internal, dokumen publik, atau asumsi eksplisit & Bukti kuat
+memperkuat klaim & Data sensitif perlu izin dan anonimisasi. \\
 Literature Review v1 & Ringkas terarah atau luas eksploratif & Ringkas lebih
 mudah disintesis & Terlalu sempit dapat melewatkan konsep penting. \\
 \hline
@@ -603,59 +566,52 @@ mudah disintesis & Terlalu sempit dapat melewatkan konsep penting. \\
 \subsection{Perangkap Umum}
 
 Perangkap pertama adalah menggambar capability map seperti bagan organisasi.
-Kapabilitas bukan unit kerja. ``Divisi pemasaran'' adalah struktur organisasi;
-``akuisisi nasabah digital'' adalah kapabilitas. Perangkap kedua adalah
-menilai semua kapabilitas sebagai prioritas tinggi. Jika semua penting, maka
-tidak ada strategi. Perangkap ketiga adalah membuat value stream sebagai
+Kapabilitas bukan unit kerja: ``divisi operasi'' adalah struktur; ``penyelesaian
+transfer'' adalah kapabilitas. Perangkap kedua adalah menilai semua kapabilitas
+sebagai prioritas tinggi. Perangkap ketiga adalah membuat value stream sebagai
 daftar aktivitas administratif tanpa menunjukkan nilai, aktor, pain point, dan
-risiko.
-
-Perangkap keempat adalah menulis Literature Review v1 sebagai ringkasan
-artikel satu per satu. Tinjauan pustaka harus mensintesis. Artinya, penulis
-perlu menunjukkan hubungan antar-konsep: bagaimana Enterprise Architecture
-menjelaskan keselarasan strategi, bagaimana Business Architecture memetakan
-kapabilitas, dan bagaimana value stream menunjukkan titik masalah yang perlu
-dianalisis lebih lanjut.
+risiko. Perangkap keempat adalah menulis Literature Review v1 sebagai ringkasan
+artikel satu per satu, bukan sintesis hubungan antar-konsep.
 
 \section{Latihan Terapan Individual}
 
 Latihan berikut dikerjakan sendiri oleh setiap mahasiswa dan langsung menjadi
 bahan makalah publikasi.
 
-\subsection*{Latihan 4.1: Capability Map Studi Kasus}
+\subsection*{Latihan 5.1: Capability Map Studi Kasus}
 
-Susun capability map untuk organisasi studi kasus Anda. Gunakan tiga sampai
-empat kelompok kapabilitas. Tandai setiap kapabilitas dengan salah satu status:
-dipertahankan, diperbaiki, atau dibangun. Setelah peta selesai, tulis satu
-paragraf yang menjelaskan mengapa dua kapabilitas dipilih sebagai prioritas.
+Susun capability map untuk kapabilitas sasaran organisasi Anda. Gunakan tiga
+sampai empat kelompok. Tandai setiap kapabilitas dengan status: dipertahankan,
+diperbaiki, atau dibangun. Tulis satu paragraf yang menjelaskan mengapa dua
+kapabilitas dipilih sebagai prioritas.
 
-\subsection*{Latihan 4.2: Value Stream Prioritas}
+\subsection*{Latihan 5.2: Value Stream dan Proses Prioritas}
 
-Pilih satu value stream yang paling relevan dengan RQ. Tuliskan tahap utama
-dari awal sampai akhir. Untuk setiap tahap, catat aktor, data yang dibutuhkan,
-aplikasi atau kanal pendukung, pain point, dan risiko. Pilih tiga pain point
-yang paling kuat untuk dibahas dalam makalah.
+Pilih satu value stream yang paling relevan dengan RQ. Tuliskan tahap proses
+dari awal sampai akhir. Untuk setiap tahap, catat aktor, objek bisnis/data,
+sistem pendukung, pain point, dan risiko. Pilih tiga pain point terkuat untuk
+dibahas.
 
-\subsection*{Latihan 4.3: Matriks Literatur untuk Business Architecture}
+\subsection*{Latihan 5.3: Matriks Literatur untuk Lapisan Bisnis}
 
-Ambil minimal lima referensi dari bibliografi awal Bab 3. Buat matriks yang
+Ambil minimal lima referensi dari bibliografi awal Bab 4. Buat matriks yang
 memuat konsep utama, fungsi dalam makalah, hubungan dengan capability map,
 hubungan dengan value stream, dan kalimat sintesis yang mungkin dipakai.
 Tambahkan referensi baru hanya bila benar-benar diperlukan dan dapat
 diverifikasi.
 
-\subsection*{Latihan 4.4: Draft Literature Review v1}
+\subsection*{Latihan 5.4: Draft Literature Review v1}
 
 Tulis Literature Review v1 sepanjang 600 sampai 900 kata. Draf minimal memuat:
-Enterprise Architecture sebagai konteks, Business Architecture sebagai alat
-analisis, konsep kapabilitas atau value stream, dan satu paragraf sintesis
-yang menjelaskan celah analisis pada studi kasus Anda. Draf ini belum final,
-tetapi harus sudah memiliki sitasi yang benar.
+Enterprise Architecture sebagai konteks, lapisan bisnis sebagai alat analisis,
+konsep kapabilitas atau value stream, dan satu paragraf sintesis yang
+menjelaskan celah analisis pada studi kasus Anda. Draf ini belum final, tetapi
+harus sudah memiliki sitasi yang benar.
 
 \begin{table}[htbp]
 \centering
 \scriptsize
-\caption{Rubrik mini latihan Bab 4.}
+\caption{Rubrik mini latihan Bab 5.}
 \label{tab:rubrik-bab4}
 \begin{tabularx}{\textwidth}{@{}p{0.24\textwidth} X X@{}}
 \hline
@@ -663,12 +619,12 @@ tetapi harus sudah memiliki sitasi yang benar.
 \hline
 Capability map & Kapabilitas relevan dengan RQ, dikelompokkan jelas, dan
 memiliki prioritas & Peta menyerupai bagan organisasi atau terlalu umum. \\
-Value stream & Alur nilai menunjukkan aktor, data, pain point, dan risiko &
+Value stream/proses & Alur menunjukkan aktor, objek, pain point, dan risiko &
 Hanya menjadi daftar aktivitas tanpa analisis. \\
 Prioritas & Alasan prioritas didukung bukti dan dampak & Semua kapabilitas
 diberi prioritas sama. \\
-Literature Review v1 & Sumber disintesis dan terhubung dengan artefak &
-Hanya meringkas artikel satu per satu. \\
+Literature Review v1 & Sumber disintesis dan terhubung dengan artefak & Hanya
+meringkas artikel satu per satu. \\
 Narasi makalah & Artefak dijelaskan sebagai bukti analisis & Gambar atau tabel
 tidak dijelaskan dalam teks. \\
 \hline
@@ -677,10 +633,9 @@ tidak dijelaskan dalam teks. \\
 
 \subsection*{Refleksi Singkat}
 
-Jawab tiga pertanyaan berikut:
-
 \begin{enumerate}
-  \item Kapabilitas apa yang paling menentukan keberhasilan topik makalah Anda?
+  \item Kapabilitas apa yang paling menentukan keberhasilan rel transfer dalam
+        makalah Anda?
   \item Pain point mana yang paling kuat sebagai bukti masalah penelitian?
   \item Konsep pustaka apa yang paling membantu menjelaskan temuan artefak?
 \end{enumerate}
@@ -690,59 +645,98 @@ Jawab tiga pertanyaan berikut:
 \subsection*{Poin Kunci}
 
 \begin{itemize}
-  \item Business Architecture menerjemahkan visi arsitektur menjadi peta
-        kemampuan bisnis yang dapat dianalisis.
+  \item Lapisan bisnis menerjemahkan visi arsitektur menjadi layanan, proses,
+        peran, dan kapabilitas yang dapat dianalisis.
   \item Capability map menunjukkan kapabilitas yang perlu dipertahankan,
-        diperbaiki, atau dibangun.
-  \item Value stream menunjukkan alur penciptaan nilai dan titik masalah yang
-        memengaruhi pengguna, proses, data, aplikasi, dan risiko.
+        diperbaiki, atau dibangun untuk rel transfer.
+  \item Value stream dan proses transfer menunjukkan alur penciptaan nilai dan
+        titik masalah dari inisiasi sampai rekonsiliasi.
   \item Operating model membantu menentukan apa yang perlu distandardisasi dan
-        apa yang perlu diintegrasikan.
+        diintegrasikan.
   \item Literature Review v1 harus mensintesis konsep yang dipakai dalam
         capability map dan value stream.
-  \item Artefak Business Architecture hanya berguna bila dijelaskan sebagai
-        bagian dari argumen makalah.
+  \item Artefak lapisan bisnis hanya berguna bila dijelaskan sebagai bagian dari
+        argumen makalah.
 \end{itemize}
 
 \subsection*{Menjawab Pertanyaan Pemandu}
 
-Kapabilitas bisnis yang paling penting adalah kapabilitas yang paling langsung
-menghubungkan visi arsitektur dengan nilai bagi pemangku kepentingan.
-Capability map membantu membedakan masalah inti dari gejala karena peta ini
-menunjukkan kemampuan organisasi, bukan sekadar aplikasi atau unit kerja.
-Value stream yang paling relevan adalah alur yang berhubungan langsung dengan
-RQ dan menampilkan pain point yang dapat dianalisis. Bukti yang diperlukan
+Layanan dan proses yang mewujudkan kapabilitas transfer adalah Layanan Transfer
+Dana beserta proses inisiasi sampai rekonsiliasi. Kapabilitas yang paling
+menentukan adalah yang paling langsung menopang perpindahan dana yang andal dan
+patuh. Value stream yang paling relevan adalah ``UMKM memindahkan dana'', dengan
+pain point pada otorisasi, AML/limit, dan rekonsiliasi. Bukti yang diperlukan
 meliputi dokumen organisasi, observasi, wawancara, regulasi, dan literatur.
-Hasil Business Architecture masuk ke makalah sebagai artefak analisis domain
-bisnis dan sebagai dasar Literature Review v1.
+Hasil lapisan bisnis masuk ke makalah sebagai artefak analisis dan dasar
+Literature Review v1, sekaligus menyiapkan lapisan aplikasi dan teknologi.
 
 \subsection*{Uji Mandiri}
 
 \begin{enumerate}
   \item Jelaskan perbedaan antara kapabilitas bisnis dan proses bisnis.
   \item Mengapa capability map lebih stabil daripada bagan organisasi?
-  \item Pilih satu kapabilitas pada studi kasus Anda. Data apa yang diperlukan
-        untuk menilai kondisi awalnya?
+  \item Pilih satu kapabilitas transfer. Data apa yang diperlukan untuk menilai
+        kondisi awalnya?
   \item Apa perbedaan antara pain point dan akar masalah?
-  \item Bagaimana value stream membantu menyiapkan analisis Data Architecture?
+  \item Pada langkah proses transfer mana penyaringan AML sebaiknya melekat, dan
+        mengapa?
   \item Mengapa Literature Review v1 tidak cukup berisi ringkasan artikel?
 \end{enumerate}
 
+\subsection*{Pratinjau Lapisan Aplikasi, Teknologi, Fisik, dan Implementasi}
+\label{sec:pratinjau-lapisan-teknis}
+
+Bab ini menutup tiga lapisan teratas (motivasi, strategi, bisnis) untuk rel
+transfer. Lapisan di bawahnya akan diperdalam pada sesi-sesi lanjutan, tetapi
+penting dipratinjau agar benang merah kasus tetap terjaga.
+Tabel~\ref{tab:pratinjau-lapisan} merangkum bagaimana layanan transfer turun ke
+lapisan aplikasi, teknologi, fisik, dan implementasi.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Pratinjau lapisan teknis yang merealisasikan rel transfer dana.}
+\label{tab:pratinjau-lapisan}
+\begin{tabularx}{\textwidth}{@{}p{0.22\textwidth} X@{}}
+\hline
+\textbf{Lapisan} & \textbf{Elemen kunci untuk rel transfer (pratinjau)} \\
+\hline
+Aplikasi & Komponen \emph{Transfer API Service}, adapter BI-FAST, layanan
+penyaringan AML/limit, layanan notifikasi, dan modul rekonsiliasi; layanan
+aplikasi yang merealisasikan tiap langkah proses bisnis. \\
+Teknologi & \emph{API gateway}, \emph{message broker}/antrian, basis data
+transaksi, integrasi ke \emph{core banking} lama, serta kontrol keamanan
+(enkripsi, otentikasi, audit log). \\
+Fisik & Pusat data atau \emph{cloud} penyelenggara, konektivitas ke jaringan
+BI-FAST, dan perangkat kanal (mesin EDC, server cabang) bila relevan. \\
+Implementasi dan Migrasi & Paket kerja bertahap: integrasi BI-FAST, eksposur API
+ber-\emph{gateway}, otomasi AML/rekonsiliasi, lalu sertifikasi SNAP BI; disertai
+peta migrasi dari proses batch ke real-time. \\
+\hline
+\end{tabularx}
+\end{table}
+
+Pratinjau ini menegaskan prinsip yang dijaga sejak Bab~\ref{ch:strategi-bisnis}:
+keputusan teknis pada lapisan aplikasi, teknologi, dan implementasi selalu dapat
+ditelusuri kembali ke proses bisnis, kapabilitas, arah tindakan, dan motivasi.
+Mahasiswa yang melanjutkan ke lapisan teknis sebaiknya membawa capability map dan
+value stream bab ini sebagai titik tumpu, bukan memulai dari pilihan teknologi.
+
 \subsection*{Jembatan ke Bab Berikutnya}
 
-Bab berikutnya membahas Data Architecture. Hasil Bab 4 menjadi masukan
-langsung untuk Bab 5. Capability map menunjukkan kapabilitas apa yang
-membutuhkan data. Value stream menunjukkan titik aliran data, perpindahan data
-antaraktor, dan risiko kualitas atau privasi. Dengan demikian, pembahasan data
-pada Bab 5 tidak dimulai dari tabel database, melainkan dari kebutuhan bisnis
-yang sudah terlihat dalam peta kapabilitas dan alur nilai.
+Bab berikutnya memperdalam lapisan teknis, dimulai dari Data Architecture. Hasil
+Bab 5 menjadi masukan langsung: capability map menunjukkan kapabilitas yang
+membutuhkan data, sedangkan value stream transfer menunjukkan titik aliran data,
+perpindahan data antaraktor, dan risiko kualitas atau privasi. Dengan demikian,
+pembahasan data tidak dimulai dari tabel basis data, melainkan dari kebutuhan
+bisnis yang sudah terlihat dalam peta kapabilitas dan alur nilai transfer.
 
 \section{Bacaan Lanjutan dan Lampiran}
 
 \subsection*{Bacaan Inti}
 
 \begin{itemize}
-  \item The TOGAF Standard untuk memahami posisi Business Architecture dalam
+  \item The TOGAF Standard untuk memahami posisi lapisan bisnis dalam
         pengembangan arsitektur enterprise \cite{togaf10}.
   \item Ross, Weill, dan Robertson untuk hubungan antara operating model,
         proses, data, dan eksekusi strategi \cite{ross2006enterprise}.
@@ -754,31 +748,32 @@ yang sudah terlihat dalam peta kapabilitas dan alur nilai.
 
 \begin{itemize}
   \item Untuk topik platform dan ekosistem, gunakan literatur platform sebagai
-        jembatan menuju Bab 11 \cite{parker2016platform,cusumano2019business}.
+        jembatan menuju bab platform \cite{parker2016platform,cusumano2019business}.
   \item Untuk topik integrasi layanan dan API, gunakan rujukan API sebagai
-        pengantar menuju Bab 9 dan Bab 10 \cite{jacobson2011apis,medjaoui2018continuous}.
+        pengantar menuju bab API Strategy dan Governance
+        \cite{jacobson2011apis,medjaoui2018continuous}.
   \item Untuk topik modernisasi sistem, gunakan pembahasan arsitektur aplikasi
         dan microservices secara selektif \cite{newman2021building}.
-  \item Untuk konteks Indonesia, pilih regulasi sesuai kasus: perlindungan data
-        pribadi \cite{uupdp2022}, sistem elektronik \cite{pp712019}, Satu Data
-        Indonesia \cite{satudata}, atau SNAP BI \cite{snapbi}.
+  \item Untuk konteks Indonesia, pilih regulasi sesuai kasus: standar API
+        pembayaran nasional \cite{snapbi}, perlindungan data pribadi
+        \cite{uupdp2022}, sistem elektronik \cite{pp712019}, atau Satu Data
+        Indonesia \cite{satudata}.
 \end{itemize}
 
-\subsection*{Lampiran Kerja Bab 4}
+\subsection*{Lampiran Kerja Bab 5}
 
 Gunakan templat berikut sebagai catatan kerja:
 
 \begin{description}
-  \item[RQ dan visi arsitektur] Salin versi terbaru dari Bab 2 dan Bab 3.
-  \item[Ruang lingkup bisnis] Tulis layanan, produk, unit, atau proses yang
-        dianalisis.
+  \item[RQ dan visi arsitektur] Salin versi terbaru dari Bab 3 dan Bab 4.
+  \item[Ruang lingkup bisnis] Tulis layanan, proses, atau unit yang dianalisis.
   \item[Capability map] Kelompokkan kapabilitas dan beri status prioritas.
-  \item[Value stream] Tuliskan tahap alur nilai, aktor, data, kanal, pain
-        point, dan risiko.
+  \item[Value stream dan proses] Tuliskan tahap, aktor, objek bisnis, sistem,
+        pain point, dan risiko.
   \item[Bukti] Catat sumber data atau asumsi untuk setiap klaim penting.
   \item[Lit Review v1] Tulis sintesis awal yang menghubungkan teori dengan
-        artefak Business Architecture.
-  \item[Implikasi Bab 5] Catat data apa yang perlu dipetakan pada Data
-        Architecture.
+        artefak lapisan bisnis.
+  \item[Pratinjau lapisan teknis] Catat komponen aplikasi, teknologi, fisik, dan
+        paket implementasi yang perlu dipetakan berikutnya.
 \end{description}
 \setlength{\emergencystretch}{0pt}

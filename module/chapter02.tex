@@ -1,36 +1,44 @@
-\chapter[Strategi Bisnis dan Rumusan Masalah]{Strategi Bisnis dan Rumusan
-Masalah: Menyelaraskan Arah Organisasi dengan Pertanyaan Penelitian}
+\chapter[Lapisan Motivasi: Pemangku Kepentingan, Pendorong, dan Sasaran]{Lapisan
+Motivasi: Pemangku Kepentingan, Pendorong, dan Sasaran Arsitektur API Transfer
+Dana}
 \label{ch:strategi-bisnis}
 
 
 
 \section*{Tujuan Pembelajaran}
 \begin{itemize}
-  \item Menjelaskan hubungan antara strategi organisasi, model bisnis,
-        kapabilitas utama, dan kebutuhan arsitektur enterprise dengan bahasa
-        manajerial.
-  \item Menggunakan kanvas model bisnis dan konsep \emph{operating model}
-        untuk membaca arah strategis organisasi studi kasus.
-  \item Mengidentifikasi ketidakselarasan antara strategi bisnis dan keputusan
-        teknologi sebagai sumber masalah penelitian.
+  \item Menjelaskan elemen lapisan motivasi ArchiMate---pemangku kepentingan,
+        pendorong, asesmen, sasaran, hasil, kebutuhan, kendala, dan
+        prinsip---dengan bahasa manajerial.
+  \item Menyusun model motivasi untuk satu kapabilitas sasaran organisasi studi
+        kasus, yaitu API Transfer dan Perpindahan Dana Bank Wanua.
+  \item Mengidentifikasi ketidakselarasan antara sasaran arsitektur dan kondisi
+        nyata organisasi sebagai sumber masalah penelitian.
   \item Merumuskan rumusan masalah, pertanyaan penelitian (RQ), dan kontribusi
-        awal yang layak dikembangkan menjadi makalah publikasi individual.
+        awal yang berakar pada lapisan motivasi dan layak dikembangkan menjadi
+        makalah publikasi individual.
 \end{itemize}
 
 
 \section{Ringkasan Awal Bab}
 
-Bab ini membahas cara mengubah topik awal menjadi rumusan masalah, pertanyaan
-penelitian, dan kontribusi makalah. Pembahasan dimulai dari dilema organisasi:
-strategi digital sering terdengar jelas di tingkat slogan, tetapi tidak selalu
-selaras dengan proses, data, aplikasi, teknologi, API, dan tata kelola yang
-dimiliki organisasi. Untuk membaca ketegangan tersebut, bab ini menggunakan
-kanvas model bisnis dan konsep \emph{operating model} sebagai alat analisis
-yang ramah bagi pembaca non-IT. Melalui studi kasus Bank Wanua, pembaca
-melihat bagaimana strategi menjadi mitra digital UMKM dapat diterjemahkan
-menjadi daftar ketidakselarasan, lalu diubah menjadi rumusan masalah, RQ, dan
-pernyataan kontribusi. Keluaran bab ini memperkuat bagian Pendahuluan makalah,
-terutama latar belakang masalah, RQ, dan kontribusi awal.
+Bab ini membahas \emph{mengapa} sebuah arsitektur dibangun sebelum membahas
+\emph{apa} dan \emph{bagaimana}. Dalam bahasa pemodelan ArchiMate, ``mengapa''
+itu ditampung oleh \textbf{lapisan motivasi}: siapa pemangku kepentingan, apa
+pendorong perubahan, bagaimana penilaian kondisi saat ini, sasaran apa yang
+ingin dicapai, kebutuhan dan kendala apa yang membatasinya, serta prinsip apa
+yang menuntun keputusan. Lapisan motivasi inilah yang membuat rekomendasi
+teknologi dapat ditelusuri kembali ke alasan bisnis, bukan sekadar selera
+teknis.
+
+Sepanjang bab, lapisan motivasi diterapkan pada satu kapabilitas sasaran yang
+tajam: \textbf{API Transfer dan Perpindahan Dana} Bank Wanua---``rel''
+perpindahan uang yang membungkus BI-FAST dan transaksi antarrekening (lihat
+Bagian~\ref{sec:studi-kasus-berjalan}). Melalui kasus ini pembaca melihat
+bagaimana motivasi yang belum selaras dengan kapabilitas nyata dapat diubah
+menjadi rumusan masalah, RQ, dan pernyataan kontribusi. Keluaran bab memperkuat
+bagian Pendahuluan makalah, terutama latar belakang masalah, RQ, dan kontribusi
+awal.
 
 \section{Pendahuluan}
 
@@ -38,439 +46,518 @@ Bab sebelumnya membantu pembaca memilih organisasi studi kasus, menulis
 pernyataan topik awal, dan mengenali target publikasi yang realistis. Bab ini
 melangkah satu tahap lebih jauh: topik awal tersebut harus diubah menjadi
 masalah penelitian yang tajam. Dalam makalah publikasi, masalah yang tajam
-lebih penting daripada topik yang terdengar menarik. Topik menyebut area
-umum, sedangkan masalah menjelaskan ketegangan yang layak dianalisis, bukti
-yang perlu dikumpulkan, dan kontribusi yang dapat diberikan.
+lebih penting daripada topik yang terdengar menarik. Topik menyebut area umum,
+sedangkan masalah menjelaskan ketegangan yang layak dianalisis, bukti yang
+perlu dikumpulkan, dan kontribusi yang dapat diberikan.
 
-Bagi pembaca non-IT, strategi bisnis menjadi titik mulai yang sehat. Banyak
+Bagi pembaca non-IT, lapisan motivasi menjadi titik mulai yang sehat. Banyak
 inisiatif digital gagal bukan karena teknologi yang dipilih terlalu lemah,
-melainkan karena arah bisnis, model operasi, dan prioritas teknologi tidak
-dibaca sebagai satu kesatuan. Organisasi ingin bergerak cepat, tetapi datanya
-tersebar. Organisasi ingin membuka layanan digital, tetapi proses internal
-masih manual. Organisasi ingin membangun platform, tetapi belum jelas siapa
-pengguna utama dan nilai apa yang dipertukarkan. Dalam bahasa Enterprise
+melainkan karena tidak ada kejelasan tentang siapa yang dilayani, pendorong apa
+yang sebenarnya mendesak, dan sasaran apa yang ingin dicapai. Organisasi ingin
+``membuka API'', tetapi tidak jelas pemangku kepentingan mana yang diuntungkan.
+Organisasi ingin ``transfer real-time'', tetapi belum menyatakan kendala
+regulasi dan sistem lama yang harus dihormati. Dalam bahasa Enterprise
 Architecture, persoalan seperti ini adalah persoalan keselarasan antara
-strategi dan kapabilitas.
+motivasi dan kapabilitas.
 
 Rujukan klasik Enterprise Architecture menempatkan arsitektur sebagai fondasi
 pelaksanaan strategi bisnis, bukan sekadar urusan diagram teknologi
 \cite{ross2006enterprise}. Pandangan yang lebih baru juga menekankan bahwa
 organisasi digital membutuhkan kapabilitas yang dirancang secara sadar agar
-strategi dapat dieksekusi berulang, aman, dan terukur \cite{ross2019designed}.
-Karena itu, Bab 2 mengajak pembaca membaca strategi organisasi dengan dua alat
-sederhana: kanvas model bisnis dan konsep \emph{operating model}. Keduanya
-dipakai untuk menyusun rumusan masalah, RQ, dan pernyataan kontribusi awal.
+sasaran dapat dieksekusi berulang, aman, dan terukur \cite{ross2019designed}.
+Kerangka TOGAF pun menempatkan analisis pemangku kepentingan, pendorong, dan
+sasaran sebagai fase awal sebelum rancangan dibuat \cite{togaf10}. Karena itu,
+Bab ini mengajak pembaca membaca \emph{motivasi} organisasi dengan elemen-elemen
+lapisan motivasi ArchiMate, lalu memakainya untuk menyusun rumusan masalah, RQ,
+dan kontribusi awal.
 
-\section{Skenario Pembuka: Ketika Strategi Digital Tidak Menyatu}
+\section[Skenario Pembuka: Janji Transfer Instan dan Rel yang Tepat]{Skenario
+Pembuka: Ketika Janji Transfer Instan Tidak Didukung Rel yang Tepat}
 
 Bank Wanua, yang diperkenalkan pada Bab~\ref{ch:orientasi}, kini sudah
 menetapkan ambisi strategis baru. Dalam tiga tahun, bank daerah ini ingin
-menjadi mitra keuangan digital utama bagi UMKM lokal. Direksi membayangkan
-aplikasi mobile yang lebih baik, layanan pembayaran yang terhubung dengan
-ekosistem QRIS, API untuk mitra koperasi dan marketplace lokal, serta program
-analitik sederhana untuk membaca kebutuhan nasabah UMKM.
+menjadi mitra keuangan digital utama bagi UMKM lokal. Dari portofolio prioritas
+yang disepakati, tiga prioritas pertama---single-view nasabah UMKM, onboarding
+digital, dan API Transfer Dana---dipandang sebagai fondasi. Bank memutuskan
+membedah lebih dalam \textbf{API Transfer dan Perpindahan Dana} sebagai rel yang
+menopang hampir semua perpindahan uang.
 
-Namun setelah beberapa bulan berjalan, tanda-tanda ketidakselarasan mulai
-muncul. Tim pemasaran menjanjikan pembukaan rekening digital yang cepat, tetapi
-tim operasional masih membutuhkan verifikasi manual berlapis. Tim TI diminta
-membangun API untuk mitra, tetapi daftar layanan prioritas belum disepakati.
-Divisi kepatuhan meminta kontrol data yang ketat, sementara unit bisnis ingin
-kampanye yang lebih personal. Kantor cabang ingin mempertahankan relasi tatap
-muka dengan nasabah, tetapi kantor pusat menekan efisiensi melalui kanal
-digital.
+Namun, di balik kata ``API Transfer'', kepentingan setiap pihak berbeda. Tim
+pemasaran menjanjikan transfer instan 24 jam kepada UMKM dan mitra marketplace.
+Tim operasional masih menjalankan sebagian transfer melalui proses batch dan
+pencatatan manual. Divisi kepatuhan menuntut penyaringan anti pencucian uang
+(APU-PPT), pembatasan limit, dan jejak audit yang ketat untuk setiap
+perpindahan dana. Tim teknologi mengingatkan bahwa integrasi ke BI-FAST dan
+sistem inti yang lama tidak dapat dibuka sembarangan. Bank Indonesia, sebagai
+regulator, menuntut kepatuhan pada Standar Nasional Open API Pembayaran (SNAP
+BI). Sementara itu, pimpinan ingin biaya terkendali dan peluncuran tetap cepat.
 
-Masalah Bank Wanua bukan sekadar ``belum punya aplikasi yang bagus''. Masalah
-yang lebih mendasar adalah belum jelasnya hubungan antara strategi, model
-bisnis, model operasi, dan keputusan arsitektur. Jika mahasiswa langsung
-menulis makalah tentang ``perancangan aplikasi mobile Bank Wanua'', naskahnya
-mungkin terlalu sempit. Jika mahasiswa menulis tentang ``transformasi digital
-Bank Wanua'', naskahnya mungkin terlalu luas. Tantangannya adalah menemukan
-rumusan masalah yang berada di tengah: cukup sempit untuk dianalisis dalam
-satu semester, tetapi cukup strategis untuk memberi kontribusi akademik dan
-praktis.
+Masalah Bank Wanua bukan sekadar ``belum punya API transfer''. Masalah yang
+lebih mendasar adalah belum adanya kejelasan tentang \emph{mengapa} API itu
+dibangun: pemangku kepentingan mana yang diprioritaskan, pendorong mana yang
+paling mendesak, sasaran terukur apa yang ingin dicapai, serta kendala regulasi
+dan sistem lama apa yang harus dihormati. Jika mahasiswa langsung menulis
+makalah tentang ``perancangan REST API transfer Bank Wanua'', naskahnya
+mungkin terlalu teknis dan kehilangan alasan bisnis. Tantangannya adalah
+menyatakan lebih dahulu lapisan motivasi yang jelas, lalu menurunkannya menjadi
+masalah penelitian yang dapat dianalisis dalam satu semester.
 
 \subsection*{Pertanyaan Pemandu Bab Ini}
 
 \begin{enumerate}
-  \item Strategi bisnis apa yang sebenarnya sedang dikejar organisasi studi
-        kasus?
-  \item Bagaimana model bisnis organisasi menghasilkan nilai bagi pelanggan,
-        mitra, dan pemangku kepentingan lain?
-  \item Model operasi seperti apa yang dibutuhkan agar strategi tersebut dapat
-        dijalankan secara konsisten?
-  \item Di mana letak ketidakselarasan antara strategi, proses, data, aplikasi,
-        teknologi, API, dan tata kelola?
+  \item Siapa pemangku kepentingan utama API Transfer Dana, dan apa
+        kekhawatiran (\emph{concern}) masing-masing?
+  \item Pendorong (\emph{driver}) apa yang sebenarnya mendesak pembangunan rel
+        transfer, dan bagaimana asesmen kondisi saat ini?
+  \item Sasaran, hasil, kebutuhan, dan kendala apa yang membingkai kapabilitas
+        ini?
+  \item Di mana letak ketidakselarasan antara sasaran arsitektur dan kondisi
+        proses, data, sistem, atau tata kelola saat ini?
   \item Bagaimana ketidakselarasan itu diubah menjadi rumusan masalah, RQ, dan
         kontribusi awal makalah?
 \end{enumerate}
 
 \section{Mengapa Topik Ini Penting bagi Pembaca Non-IT}
 
-Pembaca non-IT tidak harus menjadi arsitek teknis untuk dapat membaca masalah
-strategi digital. Yang dibutuhkan adalah kemampuan melihat pola: apa tujuan
-organisasi, siapa pengguna yang dilayani, nilai apa yang dijanjikan, proses apa
-yang harus berubah, data apa yang dibutuhkan, dan keputusan apa yang berisiko
-jika tidak dikelola. Kemampuan ini sering justru berada dekat dengan peran
-manajerial, karena manajer melihat dampak keputusan teknologi pada pelanggan,
-pegawai, anggaran, regulasi, dan reputasi.
+Pembaca non-IT tidak harus menjadi arsitek teknis untuk dapat membaca lapisan
+motivasi. Yang dibutuhkan adalah kemampuan melihat pola: siapa yang dilayani,
+mengapa perubahan mendesak, sasaran apa yang dijanjikan, kebutuhan apa yang
+wajib dipenuhi, dan kendala apa yang berisiko jika diabaikan. Kemampuan ini
+justru dekat dengan peran manajerial, karena manajer melihat dampak keputusan
+teknologi pada pelanggan, pegawai, anggaran, regulasi, dan reputasi.
 
 Dalam organisasi nyata, pertanyaan teknis hampir selalu membawa konsekuensi
-manajerial. Membuka API bukan hanya pekerjaan membuat endpoint; ia mengubah
-cara organisasi berhubungan dengan mitra. Memusatkan data pelanggan bukan
-hanya pekerjaan integrasi; ia memunculkan pertanyaan tentang kepemilikan data,
-izin pemrosesan, dan perlindungan privasi. Mengganti aplikasi lama bukan hanya
-pekerjaan pengadaan; ia mengganggu kebiasaan kerja, proses persetujuan, dan
-indikator kinerja.
+manajerial. Membuka API transfer bukan hanya pekerjaan membuat \emph{endpoint};
+ia mengubah cara bank berhubungan dengan mitra dan memikul kewajiban kepatuhan
+baru. Mempercepat perpindahan dana bukan hanya soal kecepatan jaringan; ia
+memunculkan pertanyaan tentang limit transaksi, penyaringan AML, dan
+perlindungan data pribadi. Karena itu, rumusan masalah dalam makalah Enterprise
+Architecture tidak cukup berbunyi ``transfer belum real-time''. Rumusan yang
+lebih kuat menjelaskan pemangku kepentingan, pendorong, sasaran, dan kendala
+yang melatarinya.
 
-Karena itu, rumusan masalah dalam makalah Enterprise Architecture tidak cukup
-berbunyi ``sistem belum terintegrasi''. Rumusan yang lebih kuat menjelaskan
-mengapa integrasi itu penting bagi strategi, siapa yang terkena dampaknya, apa
-bukti ketidakselarasannya, dan bagaimana analisis arsitektur dapat membantu
-pengambil keputusan. Bab ini memberi kerangka untuk melakukan penyempitan
-tersebut.
+\section{Konsep Inti: Lapisan Motivasi ArchiMate}
 
-\section{Konsep Inti: Strategi, Model Bisnis, dan RQ}
+Lapisan motivasi adalah bagian dari bahasa pemodelan ArchiMate yang merekam
+\emph{mengapa} sebuah arsitektur ada. Untuk kebutuhan bab ini, kita membahas
+delapan elemennya secara manajerial dalam empat tema: pemangku kepentingan dan
+concern; pendorong dan asesmen; sasaran, hasil, kebutuhan, dan kendala; serta
+prinsip. Dua elemen lainnya---\emph{makna} dan \emph{nilai}---diperkenalkan
+bersama notasi seluruh elemen pada subbagian notasi, sehingga kesepuluh jenis
+elemen lapisan motivasi tercakup. Semua elemen ini saling terhubung dan, pada
+akhirnya, menuntun rumusan masalah serta RQ makalah.
 
-Empat konsep inti digunakan dalam bab ini. Pertama, \textbf{strategi bisnis}
-menjelaskan pilihan organisasi tentang posisi, pelanggan, nilai, dan prioritas.
-Kedua, \textbf{model bisnis} menjelaskan bagaimana organisasi menciptakan,
-menyampaikan, dan menangkap nilai. Ketiga, \textbf{operating model} menjelaskan
-tingkat standardisasi proses dan integrasi data yang dibutuhkan agar strategi
-dapat dijalankan \cite{ross2006enterprise}. Keempat, \textbf{rumusan masalah
-dan RQ} menerjemahkan ketegangan strategis menjadi pertanyaan akademik yang
-dapat dijawab melalui analisis.
+\subsection{Pemangku Kepentingan dan Concern}
 
-\subsection{Strategi Bisnis: Pilihan, Bukan Slogan}
+\textbf{Pemangku kepentingan} (\emph{stakeholder}) adalah pihak yang
+berkepentingan atas hasil arsitektur: individu, peran, unit, organisasi mitra,
+atau regulator. \textbf{Concern} adalah kepentingan, kebutuhan, harapan, atau
+kekhawatiran pemangku kepentingan tersebut. Menuliskan concern penting karena
+satu kapabilitas yang sama, seperti API transfer, bermakna berbeda bagi
+nasabah, unit kepatuhan, dan regulator. Tanpa peta pemangku kepentingan dan
+concern, sebuah inisiatif mudah dirancang hanya untuk satu sudut pandang.
 
-Strategi sering ditulis sebagai slogan: ``menjadi pemimpin digital'', ``memberi
-layanan terbaik'', atau ``mendorong inovasi''. Slogan semacam itu tidak salah,
-tetapi belum cukup untuk menjadi dasar arsitektur. Strategi yang dapat
-diterjemahkan ke dalam arsitektur harus memperlihatkan pilihan. Pilihan itu
-meliputi pelanggan mana yang diprioritaskan, layanan mana yang menjadi
-pembeda, proses mana yang perlu distandardisasi, dan risiko mana yang bersedia
-ditanggung.
+\subsection{Pendorong dan Asesmen}
 
-Dalam konteks Bank Wanua, strategi ``menjadi mitra digital UMKM'' baru
-bermakna jika diterjemahkan ke pertanyaan yang lebih konkret. Apakah bank
-ingin memperluas basis nasabah baru, memperdalam hubungan dengan nasabah
-lama, menjadi penyedia API untuk mitra, atau menjadi bagian dari ekosistem
-platform yang lebih besar? Setiap pilihan membawa konsekuensi arsitektur yang
-berbeda. Strategi akuisisi nasabah membutuhkan kanal digital dan verifikasi
-identitas. Strategi kemitraan API membutuhkan kontrak layanan, keamanan, dan
-tata kelola mitra. Strategi efisiensi cabang membutuhkan perubahan proses
-operasi.
+\textbf{Pendorong} (\emph{driver}) adalah faktor internal atau eksternal yang
+mendorong perubahan, misalnya tuntutan regulasi, tekanan persaingan, ekspektasi
+pelanggan, atau kebutuhan efisiensi. \textbf{Asesmen} (\emph{assessment}) adalah
+hasil analisis terhadap suatu pendorong: penilaian kekuatan, kelemahan, peluang,
+atau ancaman pada kondisi saat ini. Pendorong menjawab ``apa yang mendesak'',
+sedangkan asesmen menjawab ``seberapa siap kita menghadapinya''. Asesmen yang
+jujur sering menjadi bukti awal yang kuat untuk rumusan masalah.
 
-\subsection{Kanvas Model Bisnis: Membaca Cara Organisasi Menghasilkan Nilai}
+\subsection{Sasaran, Hasil, Kebutuhan, dan Kendala}
 
-Kanvas model bisnis membantu pembaca memetakan organisasi dalam sembilan
-komponen yang mudah dibaca. Untuk kebutuhan bab ini, kanvas tidak dipakai
-sebagai latihan kewirausahaan, melainkan sebagai alat untuk menghubungkan
-strategi dengan kapabilitas arsitektur.
+\textbf{Sasaran} (\emph{goal}) menyatakan keadaan akhir yang ingin dicapai,
+sebaiknya terukur. \textbf{Hasil} (\emph{outcome}) adalah capaian konkret yang
+menandai sasaran tercapai. \textbf{Kebutuhan} (\emph{requirement}) menyatakan
+apa yang harus dipenuhi sistem atau organisasi agar sasaran terwujud,
+sedangkan \textbf{kendala} (\emph{constraint}) menyatakan batas yang tidak
+dapat dilanggar, misalnya keterbatasan anggaran, sistem lama, atau ketentuan
+regulasi. Membedakan keempatnya membantu mahasiswa menghindari pencampuran
+antara cita-cita, ukuran keberhasilan, kewajiban, dan batasan.
+
+\subsection{Prinsip Arsitektur}
+
+\textbf{Prinsip} (\emph{principle}) adalah aturan berpikir umum yang menuntun
+banyak keputusan arsitektur. Contohnya: ``keamanan dan kepatuhan dipertimbangkan
+sejak awal'', ``setiap kapabilitas dibuka sebagai API yang dikelola sebagai
+produk'', atau ``perubahan sistem inti dilakukan bertahap''. Prinsip tidak perlu
+banyak. Tiga sampai lima prinsip yang tajam lebih berguna daripada daftar
+panjang yang tidak dipakai. Prinsip menjembatani motivasi dengan keputusan
+desain pada lapisan berikutnya.
+
+\subsection{Notasi Elemen Lapisan Motivasi di Archi}
+
+Gambar~\ref{fig:motivation-legend} menampilkan sepuluh jenis elemen
+lapisan motivasi ArchiMate beserta notasinya di Archi. Semua elemen
+motivasi memakai bentuk oktagon (sudut terpotong) dan, secara baku,
+berwarna ungu; ikon kecil di pojok kanan atas membedakan jenisnya.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{motivation-legend.pdf}
+\caption{Sepuluh jenis elemen lapisan motivasi ArchiMate dan simbolnya
+di Archi.}
+\label{fig:motivation-legend}
+\end{figure}
 
 \begin{table}[htbp]
 \centering
 \scriptsize
-\caption{Pertanyaan panduan kanvas model bisnis untuk analisis arsitektur.}
-\label{tab:bmc-pertanyaan}
-\begin{tabularx}{\textwidth}{@{}p{0.26\textwidth} X@{}}
+\caption{Jenis elemen lapisan motivasi ArchiMate dan maknanya.}
+\label{tab:motivation-elements}
+\begin{tabularx}{\textwidth}{@{}p{0.18\textwidth} p{0.24\textwidth} X@{}}
 \hline
-\textbf{Komponen} & \textbf{Pertanyaan Arsitektural} \\
+\textbf{Elemen} & \textbf{Simbol (ikon)} & \textbf{Makna} \\
 \hline
-Segmen pelanggan & Kelompok pengguna mana yang paling penting, dan data apa
-yang dibutuhkan untuk memahami kebutuhan mereka? \\
-Proposisi nilai & Nilai apa yang dijanjikan, dan kapabilitas apa yang harus
-ada agar janji itu dapat ditepati? \\
-Kanal & Kanal fisik dan digital apa yang dipakai, dan bagaimana kanal tersebut
-perlu terintegrasi? \\
-Relasi pelanggan & Hubungan seperti apa yang dibangun: personal, otomatis,
-komunitas, atau berbasis mitra? \\
-Sumber pendapatan & Nilai ekonomi apa yang dihasilkan, dan metrik apa yang
-dapat menunjukkan keberhasilannya? \\
-Aktivitas kunci & Proses apa yang menentukan keberhasilan strategi? \\
-Sumber daya kunci & Data, aplikasi, SDM, infrastruktur, dan mitra apa yang
-menjadi sumber kemampuan utama? \\
-Mitra kunci & Pihak luar mana yang perlu terhubung, dan aturan integrasi apa
-yang dibutuhkan? \\
-Struktur biaya & Biaya apa yang paling besar, dan keputusan arsitektur apa
-yang dapat mengendalikannya? \\
+Stakeholder & Penanda peran (lingkaran) & Pihak yang berkepentingan atas hasil arsitektur. \\
+Driver & Roda kemudi & Faktor internal/eksternal yang mendorong perubahan. \\
+Assessment & Kaca pembesar & Hasil analisis kondisi terhadap suatu pendorong. \\
+Goal & Sasaran (\emph{bullseye}) & Keadaan akhir yang ingin dicapai. \\
+Outcome & \emph{Bullseye} berpanah & Hasil konkret yang menandai sasaran tercapai. \\
+Principle & Tanda seru & Aturan umum yang menuntun banyak keputusan arsitektur. \\
+Requirement & Jajaran genjang & Pernyataan yang harus dipenuhi sistem/organisasi. \\
+Constraint & Jajaran genjang ganda & Batas yang tidak dapat dilanggar. \\
+Meaning & Awan & Makna atau interpretasi yang melekat pada suatu elemen. \\
+Value & Elips & Nilai atau manfaat relatif bagi pemangku kepentingan. \\
 \hline
 \end{tabularx}
 \end{table}
 
-Kekuatan kanvas ini adalah kesederhanaannya. Pembaca dapat menggunakannya
-untuk melihat apakah masalah digital yang dipilih benar-benar terhubung dengan
-nilai organisasi. Jika sebuah inisiatif teknologi tidak jelas hubungannya
-dengan pelanggan, proposisi nilai, aktivitas kunci, atau mitra, maka inisiatif
-itu perlu dipertanyakan sebelum masuk ke rancangan arsitektur.
+\emph{Meaning} dan \emph{Value} melengkapi delapan elemen sebelumnya:
+\emph{Meaning} menyatakan arti yang disepakati atas sebuah konsep
+(misalnya apa yang dimaksud ``transfer''), sedangkan \emph{Value}
+menyatakan manfaat yang dirasakan pemangku kepentingan (misalnya
+likuiditas dan kepercayaan UMKM).
 
-\subsection{Operating Model: Tingkat Integrasi dan Standardisasi}
+\subsection{Dari Motivasi ke Rumusan Masalah dan RQ}
 
-\emph{Operating model} menjelaskan bagaimana organisasi menjalankan strategi
-melalui proses dan data. Dalam rujukan Enterprise Architecture, dua pertanyaan
-kunci digunakan untuk membaca model operasi: seberapa besar proses perlu
-distandardisasi, dan seberapa besar data perlu diintegrasikan
-\cite{ross2006enterprise}. Dari dua pertanyaan ini muncul empat pola umum.
-
-\begin{figure}[htbp]
-\centering
-\scalebox{0.95}{
-\begin{tikzpicture}[
-  font=\small,
-  axis/.style={-Latex, thick},
-  cell/.style={draw, rounded corners=1.5mm, align=center,
-    minimum width=46mm, minimum height=24mm},
-  note/.style={font=\footnotesize\mdseries, align=center, text width=42mm}
-]
-  \draw[axis] (0,0) -- (10,0) node[right] {\textbf{Integrasi data tinggi}};
-  \draw[axis] (0,0) -- (0,6) node[above, align=center] {\textbf{Standardisasi}\\\textbf{proses tinggi}};
-
-  \node[cell, fill=gray!12] (div) at (2.5,1.5)
-    {\textbf{Diversification}\\\footnotesize unit otonom};
-  \node[cell, fill=blue!12] (coord) at (7.5,1.5)
-    {\textbf{Coordination}\\\footnotesize data terintegrasi};
-  \node[cell, fill=orange!18] (rep) at (2.5,4.5)
-    {\textbf{Replication}\\\footnotesize proses seragam};
-  \node[cell, fill=praditagreen!20] (uni) at (7.5,4.5)
-    {\textbf{Unification}\\\footnotesize proses dan data seragam};
-
-  \node[note, below=2mm of div] {proses berbeda, data tidak banyak dibagi};
-  \node[note, below=2mm of coord] {proses boleh berbeda, data perlu menyatu};
-  \node[note, above=2mm of rep] {proses sama, data lokal};
-  \node[note, above=2mm of uni] {proses sama, data bersama};
-\end{tikzpicture}
-}
-\caption{Empat pola operating model berdasarkan kebutuhan standardisasi proses
-dan integrasi data.}
-\label{fig:operating-model}
-\end{figure}
-
-Pola \emph{Diversification} cocok ketika unit bisnis relatif mandiri. Pola
-\emph{Coordination} cocok ketika unit dapat bekerja berbeda, tetapi perlu
-berbagi data pelanggan atau transaksi. Pola \emph{Replication} cocok ketika
-organisasi ingin menyalin proses yang sama di banyak lokasi. Pola
-\emph{Unification} cocok ketika proses dan data perlu sangat seragam, misalnya
-untuk kepatuhan, layanan nasional, atau efisiensi besar-besaran.
-
-Pemilihan operating model bukan sekadar label. Ia membantu mahasiswa
-menjelaskan mengapa sebuah masalah arsitektur muncul. Jika strategi organisasi
-membutuhkan koordinasi data pelanggan lintas unit, tetapi setiap unit
-menyimpan data dengan definisi berbeda, maka ketidakselarasan itu dapat menjadi
-sumber rumusan masalah. Jika organisasi menginginkan layanan digital yang sama
-di seluruh cabang, tetapi proses cabang sangat berbeda, maka masalahnya bukan
-hanya aplikasi, melainkan standardisasi proses.
-
-\subsection{Rumusan Masalah, RQ, dan Kontribusi}
-
-Rumusan masalah adalah pernyataan tentang ketegangan yang layak dianalisis.
-Pertanyaan penelitian atau RQ adalah bentuk tanya yang membatasi arah
-analisis. Kontribusi adalah janji tentang nilai yang akan diberikan makalah
-kepada pembaca akademik atau praktisi.
-
-Hubungan ketiganya dapat diringkas sebagai berikut:
-
-\begin{itemize}
-  \item \textbf{Rumusan masalah} menjawab: apa ketegangan utama yang terjadi?
-  \item \textbf{RQ} menjawab: pertanyaan apa yang akan dijawab makalah?
-  \item \textbf{Kontribusi} menjawab: apa manfaat jawaban tersebut bagi
-        pengetahuan atau praktik?
-\end{itemize}
-
-Contoh rumusan yang masih lemah adalah: ``Bank Wanua perlu melakukan
-transformasi digital.'' Pernyataan ini terlalu luas dan belum menunjukkan
-ketegangan. Rumusan yang lebih baik: ``Strategi Bank Wanua untuk menjadi mitra
-digital UMKM belum didukung oleh model operasi yang jelas, terutama pada
-integrasi data nasabah, prioritas layanan API, dan pembagian tanggung jawab
-antara kantor pusat, cabang, dan mitra.'' Rumusan kedua lebih siap diubah
-menjadi RQ.
+Setelah lapisan motivasi tergambar, ketidakselarasan antara sasaran dan kondisi
+saat ini menjadi terlihat. Ketidakselarasan itulah yang diubah menjadi
+\textbf{rumusan masalah}: pernyataan tentang ketegangan yang layak dianalisis.
+\textbf{Pertanyaan penelitian (RQ)} membatasi arah analisis, sedangkan
+\textbf{kontribusi} menjanjikan nilai bagi pembaca akademik atau praktisi.
+Contoh rumusan yang lemah: ``Bank Wanua perlu API transfer.'' Rumusan yang lebih
+baik: ``Sasaran Bank Wanua menyediakan transfer real-time bagi UMKM belum
+didukung oleh rel perpindahan dana yang patuh SNAP BI dan terkendali risikonya,
+karena sebagian proses masih batch dan manual.''
 
 \section{Glosarium Mini}
 
 \begin{itemize}
-  \item \textbf{Strategi bisnis:} pilihan organisasi tentang pelanggan,
-        proposisi nilai, prioritas, dan cara bersaing atau melayani.
-  \item \textbf{Model bisnis:} cara organisasi menciptakan, menyampaikan, dan
-        menangkap nilai melalui pelanggan, kanal, aktivitas, sumber daya, dan
-        mitra.
-  \item \textbf{Operating model:} pola pelaksanaan strategi yang menjelaskan
-        kebutuhan standardisasi proses dan integrasi data.
-  \item \textbf{Ketidakselarasan bisnis--TI:} jarak antara tujuan bisnis dan
-        kapabilitas teknologi, proses, data, aplikasi, atau tata kelola yang
-        tersedia.
-  \item \textbf{Rumusan masalah:} penjelasan ringkas tentang ketegangan utama
-        yang layak dianalisis dalam makalah.
-  \item \textbf{Research question (RQ):} pertanyaan penelitian yang membatasi
-        arah analisis dan harus dijawab secara eksplisit dalam makalah.
-  \item \textbf{Pernyataan kontribusi:} penjelasan tentang nilai akademik atau
-        praktis yang diberikan makalah.
+  \item \textbf{Lapisan motivasi:} bagian model yang merekam alasan perubahan.
+        \emph{Contoh:} model motivasi API Transfer Dana dan model motivasi
+        pembukaan rekening digital.
+  \item \textbf{Pemangku kepentingan (stakeholder):} pihak dengan kepentingan
+        atas hasil arsitektur. \emph{Contoh:} Nasabah UMKM dan Divisi Kepatuhan.
+  \item \textbf{Concern:} kepentingan, harapan, atau kekhawatiran pemangku
+        kepentingan. \emph{Contoh:} transfer tersedia 24/7 dan tersedianya jejak
+        audit transaksi.
+  \item \textbf{Pendorong (driver):} faktor internal atau eksternal yang
+        mendorong perubahan. \emph{Contoh:} ekspektasi transfer instan dan
+        kepatuhan SNAP BI.
+  \item \textbf{Asesmen (assessment):} penilaian keadaan terhadap suatu
+        pendorong. \emph{Contoh:} transfer masih batch dan manual; AML serta
+        limit masih diperiksa manual.
+  \item \textbf{Sasaran (goal):} keadaan akhir yang ingin dicapai.
+        \emph{Contoh:} transfer dana real-time 24/7 dan layanan transfer dapat
+        dipakai mitra melalui API.
+  \item \textbf{Hasil (outcome):} capaian konkret yang menandai sasaran
+        tercapai. \emph{Contoh:} biaya per transaksi turun dan UMKM serta mitra
+        terhubung.
+  \item \textbf{Kebutuhan (requirement):} hal yang harus dipenuhi oleh sistem
+        atau organisasi. \emph{Contoh:} membungkus BI-FAST dan
+        mengotomatisasi pemeriksaan AML serta limit.
+  \item \textbf{Kendala (constraint):} batas yang tidak dapat dilanggar.
+        \emph{Contoh:} anggaran terbatas dan core banking lama yang harus
+        dimodernisasi bertahap.
+  \item \textbf{Prinsip (principle):} aturan umum yang menuntun keputusan
+        arsitektur. \emph{Contoh:} keamanan dan kepatuhan sejak awal; API
+        dikelola sebagai produk.
+  \item \textbf{Makna (meaning):} interpretasi yang disepakati atas sebuah
+        konsep. \emph{Contoh:} transfer berarti perpindahan dana
+        antarrekening; mitra berarti organisasi eksternal yang mengakses
+        layanan melalui kontrak API.
+  \item \textbf{Nilai (value):} manfaat relatif yang dirasakan pemangku
+        kepentingan. \emph{Contoh:} likuiditas UMKM dan meningkatnya kepercayaan
+        terhadap layanan bank.
+  \item \textbf{Rumusan masalah:} pernyataan ketidakselarasan yang layak
+        dianalisis. \emph{Contoh:} target real-time masih memakai proses batch;
+        kemitraan belum memiliki API terkelola.
+  \item \textbf{Pertanyaan penelitian (RQ):} pertanyaan yang membatasi arah
+        analisis. \emph{Contoh:} bagaimana merancang arah arsitektur API
+        transfer yang patuh SNAP BI? Bagaimana modernisasi bertahap dapat
+        dilakukan tanpa mengganti core banking sekaligus?
+  \item \textbf{Kontribusi:} nilai yang dijanjikan makalah kepada pembaca.
+        \emph{Contoh:} model motivasi API Transfer Dana dan daftar kebutuhan
+        prioritas untuk transformasi bertahap.
 \end{itemize}
 
-\section{Kerangka Berpikir: Dari Strategi ke Pertanyaan Penelitian}
+\section{Kerangka Berpikir: Dari Motivasi ke Pertanyaan Penelitian}
 
-Bab ini menggunakan alur berpikir yang sederhana. Pembaca mulai dari strategi
-organisasi, memetakan model bisnis, membaca operating model, menemukan
+Bab ini menggunakan alur berpikir yang sederhana. Pembaca mulai dari pemangku
+kepentingan dan pendorong, melakukan asesmen kondisi saat ini, menyatakan
+sasaran beserta kebutuhan dan kendala, menetapkan prinsip, menemukan
 ketidakselarasan, lalu merumuskan masalah, RQ, dan kontribusi awal. Alur ini
 ditunjukkan pada Gambar~\ref{fig:strategi-ke-rq}.
 
 \begin{figure}[htbp]
 \centering
-\scalebox{0.92}{
+\scalebox{0.90}{
 \begin{tikzpicture}[
   font=\small\bfseries,
   node distance=9mm,
   flowstep/.style={draw, rounded corners=1.5mm, align=center,
-    minimum width=28mm, minimum height=14mm, text width=27mm},
+    minimum width=31mm, minimum height=15mm, text width=30mm},
+  artifact/.style={draw=gray!55, fill=gray!6, rounded corners=1mm,
+    align=left, font=\footnotesize\mdseries, inner sep=2.5mm,
+    text width=100mm},
   arrow/.style={-Latex, very thick}
 ]
-  \node[flowstep, fill=praditagreen!20] (s) {Strategi\\organisasi};
-  \node[flowstep, fill=orange!18, right=of s] (bmc) {Model\\bisnis};
-  \node[flowstep, fill=blue!12, right=of bmc] (op) {Operating\\model};
-  \node[flowstep, fill=gray!16, below=of bmc] (mis) {Ketidak-\\selarasan};
+  \node[flowstep, fill=praditagreen!20] (s) {Stakeholder\\dan concern};
+  \node[flowstep, fill=orange!18, right=of s] (drv) {Driver\\dan asesmen};
+  \node[flowstep, fill=blue!12, right=of drv] (goal)
+    {Sasaran, kebutuhan,\\kendala, prinsip};
+  \node[flowstep, fill=gray!16, below=11mm of goal] (mis)
+    {Ketidak-\\selarasan};
   \node[flowstep, fill=orange!20, left=of mis] (prob) {Rumusan\\masalah};
-  \node[flowstep, fill=praditagreen!22, right=of mis] (rq) {RQ dan\\kontribusi};
+  \node[flowstep, fill=praditagreen!22, left=of prob] (rq)
+    {RQ dan\\kontribusi};
 
-  \draw[arrow] (s) -- (bmc);
-  \draw[arrow] (bmc) -- (op);
-  \draw[arrow] (op.south) -- (mis.north east);
-  \draw[arrow] (bmc.south) -- (mis.north);
+  \draw[arrow] (s) -- (drv);
+  \draw[arrow] (drv) -- (goal);
+  \draw[arrow] (drv.south) -- (mis.north west);
+  \draw[arrow] (goal.south) -- (mis.north);
   \draw[arrow] (mis) -- (prob);
-  \draw[arrow] (mis) -- (rq);
   \draw[arrow] (prob) -- (rq);
 
-  \node[align=center, font=\footnotesize\mdseries, text width=96mm,
-        below=12mm of mis]
-    {Artefak utama bab ini: ringkasan strategi, kanvas model bisnis,
-     klasifikasi operating model, daftar ketidakselarasan, draf rumusan
-     masalah, RQ, dan kontribusi awal.};
+  \node[artifact, below=10mm of prob]
+    {\textbf{Artefak utama bab ini:} peta stakeholder-concern, daftar driver dan
+     asesmen, pernyataan sasaran/kebutuhan/kendala, prinsip, daftar
+     ketidakselarasan, draf rumusan masalah, RQ, dan kontribusi awal.};
 \end{tikzpicture}
 }
-\caption{Alur berpikir Bab 2 dari strategi organisasi menuju pertanyaan
+\caption{Alur berpikir Bab 3 dari lapisan motivasi menuju pertanyaan
 penelitian dan kontribusi makalah.}
 \label{fig:strategi-ke-rq}
 \end{figure}
 
-Alur ini membantu mahasiswa menjaga fokus. Tanpa alur seperti ini, mahasiswa
-sering melompat dari cerita organisasi ke rekomendasi teknologi. Padahal
-makalah yang baik perlu memperlihatkan jejak penalaran: mengapa masalah itu
-dipilih, mengapa penting, mengapa kerangka analisis tertentu dipakai, dan
-mengapa rekomendasi yang muncul dapat dipertanggungjawabkan.
+Alur ini membantu mahasiswa menjaga fokus. Asesmen kondisi saat ini dan arah
+perubahan menjadi masukan untuk menemukan ketidakselarasan. Setelah kesenjangan
+jelas, mahasiswa merumuskan masalah, RQ, dan kontribusi. Urutan ini mencegah
+lompatan dari cerita organisasi ke rekomendasi teknologi serta memperlihatkan
+jejak penalaran yang dapat dipertanggungjawabkan.
 
-\section{Konteks Indonesia: Strategi Digital dalam Realitas Lokal}
+\section{Konteks Indonesia: Motivasi Layanan Keuangan Digital}
 
-Strategi digital organisasi Indonesia dibentuk oleh beberapa kondisi yang
-perlu diperhatikan sejak awal. Pertama, kematangan digital antarorganisasi dan
-antarwilayah tidak merata. Perusahaan besar di kota utama mungkin sudah
-terbiasa dengan layanan berbasis API, sedangkan koperasi, BPR, rumah sakit
-daerah, atau pemerintah kabupaten masih bergulat dengan integrasi dasar dan
-kualitas data. Ketidakmerataan ini memengaruhi kelayakan rekomendasi.
+Lapisan motivasi organisasi keuangan Indonesia dibentuk oleh beberapa kondisi
+yang perlu diperhatikan sejak awal. Pertama, regulasi menjadi pendorong sekaligus
+kendala yang kuat. Di sektor pembayaran, SNAP BI dari Bank Indonesia memberi
+standar integrasi Open API yang penting bagi organisasi keuangan dan fintech
+\cite{snapbi}. Layanan transfer real-time antarbank disalurkan melalui
+infrastruktur seperti BI-FAST, sehingga rel transfer bank daerah praktis harus
+selaras dengan ketentuan tersebut.
 
-Kedua, regulasi memberi batas dan arah. UU Pelindungan Data Pribadi menuntut
-organisasi lebih berhati-hati dalam mengumpulkan, memproses, dan membagikan
-data pribadi \cite{uupdp2022}. PP No.~71/2019 mengatur penyelenggaraan sistem
-dan transaksi elektronik, termasuk tanggung jawab penyelenggara sistem
-\cite{pp712019}. Di sektor pembayaran, SNAP BI dari Bank Indonesia memberi
-standar integrasi API yang penting bagi organisasi keuangan dan fintech
-\cite{snapbi}. Strategi yang tidak memperhitungkan regulasi dapat terlihat
-menarik di atas kertas tetapi rapuh saat dijalankan.
+Kedua, UU Pelindungan Data Pribadi menuntut organisasi lebih berhati-hati dalam
+mengumpulkan, memproses, dan membagikan data pribadi, termasuk data transaksi
+\cite{uupdp2022}. PP No.~71/2019 mengatur penyelenggaraan sistem dan transaksi
+elektronik, termasuk tanggung jawab penyelenggara sistem \cite{pp712019}.
+Pendorong kepatuhan ini wajib muncul dalam model motivasi layanan transfer,
+bukan ditambahkan belakangan.
 
-Ketiga, banyak organisasi Indonesia bekerja dalam struktur yang hierarkis.
-Keputusan digital sering tersentralisasi di kantor pusat, sementara
-implementasi terjadi di cabang, unit layanan, atau mitra lapangan. Situasi ini
-membuat operating model menjadi penting. Strategi digital yang menuntut
-standardisasi tinggi membutuhkan mekanisme pelaksanaan yang berbeda dari
-strategi yang memberi otonomi besar kepada unit lokal.
+Ketiga, kematangan digital antarorganisasi dan antarwilayah tidak merata. Bank
+daerah sering masih mengandalkan sistem inti lama dan sebagian proses manual,
+sementara ekspektasi nasabah UMKM dibentuk oleh pengalaman memakai dompet
+digital yang serba instan. Kesenjangan antara ekspektasi (pendorong) dan
+kesiapan (asesmen) inilah yang sering menjadi inti masalah penelitian.
 
-Keempat, biaya dan kapasitas SDM sering menjadi batas nyata. Mahasiswa tidak
-boleh menulis rekomendasi seperti ``bangun platform nasional berbasis cloud
-dan microservices'' tanpa menjelaskan prioritas, tahapan, risiko, dan
-kesiapan organisasi. Dalam makalah, kepekaan terhadap konteks Indonesia bukan
-hiasan; ia menentukan apakah analisis dapat dipercaya.
+Keempat, biaya dan kapasitas SDM menjadi kendala nyata. Mahasiswa tidak boleh
+menulis sasaran seperti ``transfer instan tanpa batas ke seluruh dunia'' tanpa
+menyatakan kendala anggaran, sertifikasi regulator, dan kesiapan sistem inti.
+Dalam makalah, kepekaan terhadap konteks Indonesia bukan hiasan; ia menentukan
+apakah sasaran dan rekomendasi dapat dipercaya.
 
-\section{Studi Kasus Utama: Menajamkan Masalah Bank Wanua}
+\section{Studi Kasus Utama: Model Motivasi API Transfer Bank Wanua}
 
-Untuk melihat cara kerja bab ini, kita kembali ke Bank Wanua. Strategi awal
-bank adalah menjadi mitra digital UMKM daerah. Strategi ini dapat dipetakan
-ke dalam beberapa elemen kanvas model bisnis sebagaimana Tabel~\ref{tab:bank-wanua-bmc}.
+Untuk melihat cara kerja bab ini, kita memetakan lapisan motivasi API Transfer
+Dana Bank Wanua. Langkah pertama adalah mengenali pemangku kepentingan dan
+concern-nya, sebagaimana Tabel~\ref{tab:bank-wanua-bmc}.
 
 \begin{table}[htbp]
 \centering
 \scriptsize
-\caption{Ringkasan model bisnis Bank Wanua untuk strategi UMKM digital.}
+\caption{Pemangku kepentingan dan concern atas API Transfer Dana Bank Wanua.}
 \label{tab:bank-wanua-bmc}
-\begin{tabularx}{\textwidth}{@{}p{0.24\textwidth} X X@{}}
+\begin{tabularx}{\textwidth}{@{}p{0.26\textwidth} X@{}}
 \hline
-\textbf{Elemen} & \textbf{Kondisi Saat Ini} & \textbf{Arah Strategis} \\
+\textbf{Pemangku Kepentingan} & \textbf{Concern Utama} \\
 \hline
-Segmen pelanggan & Nasabah ritel lokal, pegawai daerah, pelaku UMKM lama. &
-UMKM yang membutuhkan layanan pembayaran, pembiayaan, dan pencatatan transaksi
-digital. \\
-Proposisi nilai & Kedekatan lokal dan layanan cabang. & Layanan keuangan
-terintegrasi untuk UMKM: rekening, pembayaran, pembiayaan, dan akses mitra. \\
-Kanal & Cabang, agen, ATM, aplikasi mobile dasar. & Mobile banking, API mitra,
-QRIS, dan kanal cabang sebagai pendamping digital. \\
-Aktivitas kunci & Pembukaan rekening, transaksi, kredit, layanan cabang. &
-Onboarding digital UMKM, integrasi pembayaran, analitik risiko sederhana,
-tata kelola mitra API. \\
-Mitra kunci & Pemerintah daerah, koperasi, komunitas UMKM. & Fintech,
-marketplace lokal, koperasi, penyedia layanan pembayaran, pemerintah daerah. \\
+Pimpinan/Direksi & Biaya terkendali, peluncuran cepat, reputasi, dan
+pertumbuhan nasabah UMKM. \\
+Unit bisnis UMKM & Transfer instan 24/7 yang mudah dipakai dan dapat dijual
+kepada UMKM serta mitra. \\
+Divisi kepatuhan & Penyaringan APU-PPT, pembatasan limit, jejak audit, dan
+kesesuaian dengan SNAP BI serta UU PDP. \\
+Tim teknologi/arsitektur & Integrasi aman ke BI-FAST dan sistem inti lama,
+keandalan, serta beban pemeliharaan yang wajar. \\
+Nasabah UMKM dan mitra & Perpindahan dana cepat, andal, transparan biayanya,
+dan dapat diakses lewat aplikasi atau API mitra. \\
+Regulator (Bank Indonesia, OJK) & Kepatuhan standar pembayaran, keamanan
+transaksi, dan perlindungan konsumen. \\
 \hline
 \end{tabularx}
 \end{table}
 
-Dari tabel tersebut terlihat bahwa strategi baru menuntut koordinasi data dan
-standardisasi proses yang lebih tinggi. Bank Wanua tidak cukup hanya menambah
-fitur aplikasi. Ia perlu memastikan data nasabah UMKM dapat dibaca lintas
-kanal, proses pembukaan rekening dan verifikasi risiko cukup konsisten, dan
-aturan berbagi data dengan mitra dipahami sejak awal. Dengan kata lain, Bank
-Wanua bergerak dari model operasi yang cenderung cabang-sentris menuju model
-yang lebih terkoordinasi.
+Langkah berikutnya menghubungkan pendorong, asesmen kondisi saat ini, sasaran,
+dan hasil yang diharapkan. Tabel~\ref{tab:bank-wanua-motivasi} meringkasnya.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Pendorong, asesmen, sasaran, dan hasil untuk rel transfer Bank Wanua.}
+\label{tab:bank-wanua-motivasi}
+\begin{tabularx}{\textwidth}{@{}p{0.22\textwidth} X X@{}}
+\hline
+\textbf{Pendorong} & \textbf{Asesmen Kondisi Saat Ini} & \textbf{Sasaran/Hasil yang Diharapkan} \\
+\hline
+Ekspektasi UMKM akan transfer instan & Sebagian transfer masih batch (SKNBI)
+dan pencatatan manual; tidak real-time. & Transfer real-time 24/7 lewat kanal
+digital dan API mitra. \\
+Tekanan persaingan fintech/e-wallet & Bank kalah cepat; UMKM beralih ke dompet
+digital untuk perpindahan dana. & Bank menjadi pilihan rel transfer bagi UMKM
+dan mitra lokal. \\
+Kepatuhan SNAP BI dan APU-PPT & Integrasi BI-FAST belum dibuka sebagai API
+terkelola; AML dan limit dicek manual. & API transfer patuh SNAP BI dengan
+penyaringan dan limit otomatis. \\
+Efisiensi operasional & Rekonsiliasi manual menimbulkan biaya dan kesalahan. &
+Rekonsiliasi otomatis dan biaya per transaksi turun. \\
+\hline
+\end{tabularx}
+\end{table}
+
+\begin{figure}[tbp]
+\centering
+\includegraphics[width=\textwidth,height=0.85\textheight,keepaspectratio]{motivation-transfer.pdf}
+\caption{Model motivasi (ArchiMate) API Transfer Dana Bank Wanua,
+dibangun dengan Archi: pemangku kepentingan, pendorong, asesmen, sasaran,
+hasil, prinsip, kebutuhan, kendala, makna, dan nilai beserta
+keterhubungannya (pengaruh, realisasi, asosiasi).}
+\label{fig:motivation-transfer}
+\end{figure}
+
+\subsection{Cara Membaca Diagram Motivasi API Transfer Dana}
+
+Gambar~\ref{fig:motivation-transfer} menyatukan isi kedua tabel menjadi satu
+rantai argumentasi arsitektur. Diagram tersebut bukan sekadar ilustrasi dan
+bukan pula salinan lengkap seluruh concern pada
+Tabel~\ref{tab:bank-wanua-bmc}. Diagram sengaja memilih elemen yang paling
+menentukan untuk menjelaskan mengapa API Transfer Dana perlu dibangun, sasaran
+apa yang hendak dicapai, dan batas apa yang harus dihormati. Tabel memberi
+konteks yang lebih luas, sedangkan gambar memusatkan perhatian pada hubungan
+sebab-akibat yang akan dipakai dalam analisis berikutnya.
+
+Terdapat tiga jenis hubungan penting pada
+Gambar~\ref{fig:motivation-transfer}. Pertama, hubungan \emph{asosiasi}
+menautkan konsep yang berkaitan erat, misalnya Nasabah UMKM dengan ekspektasi
+transfer instan, serta nilai likuiditas dan kepercayaan dengan pihak yang
+menerima manfaatnya. Kedua, hubungan \emph{pengaruh} menunjukkan bahwa sebuah
+elemen mendorong, memperkuat, atau membatasi elemen lain. Sebagai contoh,
+persaingan fintech mendorong sasaran. Anggaran terbatas membatasi cara
+mewujudkannya. Ketiga, hubungan \emph{realisasi} menunjukkan elemen yang membuat
+sasaran menjadi konkret. Contohnya adalah kebutuhan membungkus BI-FAST dan
+hasil berupa penurunan biaya per transaksi.
+
+Bagian awal rantai argumentasi dimulai dari tiga pemangku kepentingan yang
+ditampilkan secara eksplisit. Nasabah UMKM diasosiasikan dengan ekspektasi
+transfer instan. Divisi Kepatuhan dan Bank Indonesia diasosiasikan dengan
+driver kepatuhan SNAP BI. Dua asesmen kondisi saat ini memperjelas kesenjangan:
+sebagian transfer masih batch dan manual, sedangkan pemeriksaan AML serta limit
+masih dilakukan manual. Pada gambar, kedua asesmen tersebut memengaruhi driver
+yang relevan sehingga pembaca dapat melihat bahwa perubahan tidak didorong oleh
+tren abstrak saja, tetapi oleh masalah operasional yang dapat diamati.
+
+Empat driver kemudian bertemu pada satu sasaran pusat, yaitu transfer dana
+real-time 24/7. Selain ekspektasi layanan instan dan kepatuhan SNAP BI, diagram
+menampilkan persaingan fintech serta efisiensi operasional. Penempatan satu
+sasaran pusat pada Gambar~\ref{fig:motivation-transfer} menjaga lingkup analisis.
+Bank Wanua tidak sedang memodernisasi seluruh bank sekaligus. Bank sedang
+memprioritaskan satu kapabilitas bernilai bagi UMKM yang cukup spesifik untuk
+diturunkan menjadi kebutuhan arsitektur.
+
+Tiga kebutuhan eksplisit merealisasikan sasaran pusat: membungkus BI-FAST,
+mengotomatisasi pemeriksaan AML dan limit, serta mematuhi format SNAP BI. Dua
+prinsip menuntun desainnya. Prinsip \emph{API sebagai Produk} memengaruhi
+kebutuhan membungkus BI-FAST sebagai layanan terkelola. Prinsip \emph{Keamanan
+dan Kepatuhan Sejak Awal} memengaruhi otomasi AML serta limit. Diagram
+menunjukkan bahwa kebutuhan bukan daftar fitur yang berdiri sendiri. Setiap
+kebutuhan harus dapat ditelusuri kembali ke sasaran dan prinsip desain.
+
+Dua kendala juga tampak pada Gambar~\ref{fig:motivation-transfer}. Anggaran
+terbatas memengaruhi prioritas perubahan. Core banking lama menuntut modernisasi
+bertahap. Kedua kendala mencegah rekomendasi menjadi terlalu idealistik. Pada
+sisi hasil, sasaran direalisasikan oleh penurunan biaya per transaksi serta
+keterhubungan UMKM dan mitra. Nilai yang hendak diterima adalah likuiditas dan
+kepercayaan UMKM. Terakhir, elemen \emph{Meaning} menetapkan makna bersama:
+transfer adalah perpindahan dana antarrekening. Definisi ini mencegah lingkup
+pembahasan melebar tanpa kendali.
+
+Dari model dan kedua tabel dapat diturunkan kebutuhan implementasi lanjutan.
+Pemrosesan harus real-time dan idempoten. Jejak audit harus disimpan.
+Perlindungan data pribadi harus dipenuhi. Integrasi juga perlu melalui proses
+sertifikasi regulator. Kebutuhan turunan tersebut belum seluruhnya digambar
+agar diagram motivasi tetap terbaca. Hal yang sama berlaku untuk keterbatasan
+SDM arsitektur. Faktor tersebut penting dalam perencanaan, tetapi belum perlu
+ditambahkan sebelum dianalisis lebih lanjut.
 
 Ketidakselarasan yang muncul dapat diringkas sebagai berikut:
 
 \begin{enumerate}
-  \item \textbf{Strategi pelanggan tidak selaras dengan data.} Bank ingin
-        memahami UMKM secara lebih baik, tetapi data nasabah, transaksi, dan
-        interaksi cabang belum menjadi satu pandangan yang konsisten.
-  \item \textbf{Strategi kemitraan tidak selaras dengan tata kelola API.} Bank
-        ingin terhubung dengan mitra, tetapi belum memiliki prioritas layanan
-        API, kriteria mitra, dan mekanisme pengawasan.
-  \item \textbf{Strategi efisiensi tidak selaras dengan proses cabang.} Bank
-        ingin mempercepat layanan, tetapi proses verifikasi dan persetujuan
-        masih berbeda antarcabang.
-  \item \textbf{Strategi personalisasi tidak selaras dengan kepatuhan data.}
-        Bank ingin memberi penawaran yang lebih personal, tetapi belum
-        menjelaskan batas penggunaan data pribadi dan persetujuan nasabah.
+  \item \textbf{Sasaran transfer instan vs. proses batch dan manual.} Bank
+        menjanjikan perpindahan dana real-time, tetapi sebagian alur masih
+        bergantung pada proses batch dan pencatatan manual.
+  \item \textbf{Ambisi kemitraan vs. ketiadaan API transfer terkelola.} Bank
+        ingin terhubung dengan marketplace dan koperasi, tetapi belum memiliki
+        API transfer yang patuh SNAP BI dan dikelola sebagai produk.
+  \item \textbf{Tuntutan kepatuhan vs. kontrol manual.} Penyaringan AML,
+        pembatasan limit, dan jejak audit masih manual sehingga lambat dan
+        rawan kesalahan.
+  \item \textbf{Sasaran efisiensi vs. rekonsiliasi manual.} Biaya dan risiko
+        kesalahan tinggi karena rekonsiliasi belum otomatis.
 \end{enumerate}
 
 Dari sini, rumusan masalah awal dapat ditulis:
 
 \begin{quote}
-Strategi Bank Wanua untuk menjadi mitra digital UMKM daerah belum didukung
-oleh model operasi dan arah arsitektur enterprise yang jelas. Ketidakselarasan
-terlihat pada integrasi data nasabah UMKM, standardisasi proses lintas cabang,
-prioritas layanan API untuk mitra, dan tata kelola penggunaan data pribadi.
-Kondisi ini menyulitkan bank untuk menerjemahkan ambisi digital menjadi
-kapabilitas yang dapat dijalankan secara bertahap dan sesuai konteks regulasi
-Indonesia.
+Sasaran Bank Wanua untuk menyediakan layanan transfer dana real-time bagi UMKM
+dan mitra belum didukung oleh rel perpindahan dana yang terkelola, patuh SNAP
+BI, dan terkendali risikonya. Ketidakselarasan terlihat pada proses transfer
+yang sebagian masih batch dan manual, ketiadaan API transfer yang dikelola
+sebagai produk, serta penyaringan kepatuhan yang belum otomatis. Kondisi ini
+menyulitkan bank menerjemahkan ambisi mitra digital UMKM menjadi kapabilitas
+yang dapat dijalankan secara bertahap dan sesuai konteks regulasi Indonesia.
 \end{quote}
 
 Rumusan tersebut dapat diubah menjadi RQ awal:
 
 \begin{quote}
-Bagaimana pendekatan Enterprise Architecture berbasis TOGAF-lite dan BDAT
-dapat digunakan untuk merumuskan arah arsitektur target yang menyelaraskan
-strategi Bank Wanua sebagai mitra digital UMKM dengan kebutuhan integrasi data,
-standardisasi proses, layanan API, dan tata kelola data pribadi?
+Bagaimana pendekatan Enterprise Architecture berbasis TOGAF-lite dan pemodelan
+motivasi ArchiMate dapat digunakan untuk merumuskan arah arsitektur API
+Transfer Dana Bank Wanua yang menyelaraskan kebutuhan transfer real-time UMKM,
+kepatuhan SNAP BI dan UU PDP, serta kendala sistem inti dan kapasitas yang ada?
 \end{quote}
 
 Kontribusi awal makalah dapat ditulis:
 
 \begin{quote}
-Makalah ini menawarkan analisis studi kasus Bank Wanua dengan memetakan
-ketidakselarasan antara strategi bisnis dan kapabilitas arsitektur enterprise.
-Kontribusi praktisnya adalah rancangan awal arah BDAT, prioritas API, dan
-prinsip tata kelola yang realistis untuk bank daerah di Indonesia. Kontribusi
-akademiknya adalah contoh penerapan TOGAF-lite untuk menjembatani strategi
-UMKM digital, operating model, dan konteks regulasi lokal.
+Makalah ini menawarkan analisis studi kasus Bank Wanua dengan memetakan lapisan
+motivasi---pemangku kepentingan, pendorong, sasaran, kebutuhan, dan
+kendala---untuk satu kapabilitas sasaran, yaitu API Transfer Dana. Kontribusi
+praktisnya adalah model motivasi, daftar kebutuhan, dan prinsip yang realistis
+untuk rel transfer bank daerah di Indonesia. Kontribusi akademiknya adalah
+contoh penerapan pemodelan motivasi ArchiMate dan TOGAF-lite untuk menjembatani
+ambisi UMKM digital dengan kendala regulasi dan sistem lokal.
 \end{quote}
 
 Contoh ini belum sempurna, tetapi sudah cukup untuk menjadi dasar konsultasi.
@@ -479,29 +566,26 @@ tersedia dan target publikasi yang dipilih.
 
 \section{Langkah Analisis dan Artefak Pendukung}
 
-Gunakan delapan langkah berikut untuk mengubah topik awal menjadi rumusan
-masalah, RQ, dan kontribusi awal.
+Gunakan delapan langkah berikut untuk mengubah topik awal menjadi model
+motivasi, rumusan masalah, RQ, dan kontribusi awal.
 
 \begin{enumerate}
-  \item \textbf{Tulis ulang strategi organisasi dalam satu paragraf.} Hindari
-        slogan. Sebutkan pelanggan, nilai, kanal, dan prioritas.
-  \item \textbf{Petakan model bisnis secara ringkas.} Gunakan komponen kanvas
-        model bisnis yang paling relevan. Tidak semua komponen harus sama
-        panjang.
-  \item \textbf{Tentukan operating model yang paling mendekati.} Apakah
-        organisasi membutuhkan integrasi data tinggi, standardisasi proses
-        tinggi, keduanya, atau justru otonomi unit?
-  \item \textbf{Daftar ketidakselarasan utama.} Cari jarak antara strategi dan
-        kondisi proses, data, aplikasi, teknologi, API, atau tata kelola.
-  \item \textbf{Pilih satu ketidakselarasan utama.} Makalah satu semester
-        sebaiknya tidak mencoba menjawab semua masalah sekaligus.
-  \item \textbf{Tulis rumusan masalah 1--2 paragraf.} Jelaskan konteks,
-        ketegangan, dampak, dan mengapa masalah ini penting dianalisis.
-  \item \textbf{Ubah menjadi RQ.} Gunakan bentuk tanya yang dapat dijawab
-        dengan analisis, bukan pertanyaan yang jawabannya sekadar ya atau
-        tidak.
-  \item \textbf{Tulis kontribusi awal.} Bedakan kontribusi praktis bagi
-        organisasi dan kontribusi akademik bagi pembaca makalah.
+  \item \textbf{Pilih satu kapabilitas sasaran.} Hindari memetakan seluruh
+        organisasi. Pilih satu kapabilitas tajam, seperti API Transfer Dana.
+  \item \textbf{Petakan pemangku kepentingan dan concern.} Sebutkan pihak yang
+        terdampak dan tuliskan kepentingan, bukan sekadar jabatan.
+  \item \textbf{Daftarkan pendorong dan lakukan asesmen.} Untuk setiap
+        pendorong, nilai kondisi saat ini secara jujur.
+  \item \textbf{Nyatakan sasaran dan hasil.} Usahakan terukur agar dapat
+        dievaluasi.
+  \item \textbf{Tuliskan kebutuhan dan kendala.} Bedakan apa yang wajib dipenuhi
+        dari batas yang tidak dapat dilanggar.
+  \item \textbf{Tetapkan tiga sampai lima prinsip.} Pilih prinsip yang benar-benar
+        akan dipakai untuk memutuskan.
+  \item \textbf{Identifikasi ketidakselarasan utama.} Cari jarak antara sasaran
+        dan kondisi proses, data, sistem, atau tata kelola.
+  \item \textbf{Tulis rumusan masalah, RQ, dan kontribusi.} Gunakan bentuk tanya
+        yang dapat dijawab dengan analisis, bukan sekadar ya atau tidak.
 \end{enumerate}
 
 Tabel~\ref{tab:rq-baik-buruk} memberi contoh perbaikan RQ.
@@ -515,16 +599,15 @@ Tabel~\ref{tab:rq-baik-buruk} memberi contoh perbaikan RQ.
 \hline
 \textbf{Versi Lemah} & \textbf{Masalahnya} & \textbf{Versi Lebih Kuat} \\
 \hline
-Bagaimana membuat aplikasi mobile Bank Wanua? & Terlalu teknis dan langsung
-melompat ke solusi. & Bagaimana arsitektur aplikasi dan data Bank Wanua perlu
-diselaraskan untuk mendukung layanan digital UMKM lintas kanal? \\
-Apakah API penting bagi bank daerah? & Jawabannya terlalu umum dan mudah
-ditebak. & Layanan API apa yang sebaiknya diprioritaskan bank daerah untuk
-mendukung kemitraan UMKM, dan risiko tata kelola apa yang perlu dikendalikan? \\
-Bagaimana transformasi digital rumah sakit? & Terlalu luas untuk satu makalah.
-& Bagaimana rumah sakit daerah dapat menyelaraskan proses pendaftaran, data
-pasien, dan kanal telekonsultasi dalam arsitektur target yang sesuai regulasi
-data pribadi? \\
+Bagaimana membuat REST API transfer Bank Wanua? & Terlalu teknis dan langsung
+melompat ke solusi. & Sasaran dan kendala apa yang harus dipenuhi rel transfer
+Bank Wanua agar selaras dengan ekspektasi UMKM dan kepatuhan SNAP BI? \\
+Apakah API transfer penting bagi bank daerah? & Jawabannya terlalu umum dan
+mudah ditebak. & Pendorong dan concern pemangku kepentingan apa yang menjadikan
+API transfer prioritas, dan ketidakselarasan apa yang menghambatnya? \\
+Bagaimana transformasi digital bank daerah? & Terlalu luas untuk satu makalah.
+& Bagaimana lapisan motivasi satu kapabilitas (transfer dana) dapat dipakai
+untuk merumuskan arah arsitektur yang patuh regulasi? \\
 \hline
 \end{tabularx}
 \end{table}
@@ -538,19 +621,21 @@ makalah.
 \begin{table}[htbp]
 \centering
 \scriptsize
-\caption{Artefak Bab 2 dan fungsi akademiknya.}
+\caption{Artefak Bab 3 dan fungsi akademiknya.}
 \label{tab:artefak-bab2}
 \begin{tabularx}{\textwidth}{@{}p{0.26\textwidth} X X@{}}
 \hline
 \textbf{Artefak} & \textbf{Fungsi Analisis} & \textbf{Masuk ke Makalah Sebagai} \\
 \hline
-Ringkasan strategi & Menjelaskan arah organisasi dan prioritas transformasi. &
-Latar belakang pada Pendahuluan. \\
-Kanvas model bisnis ringkas & Menghubungkan pelanggan, nilai, aktivitas,
-sumber daya, dan mitra. & Konteks organisasi atau lampiran ringkas. \\
-Klasifikasi operating model & Menjelaskan kebutuhan standardisasi proses dan
-integrasi data. & Justifikasi masalah dan metode analisis. \\
-Daftar ketidakselarasan & Menunjukkan jarak antara strategi dan kapabilitas
+Peta stakeholder-concern & Menunjukkan pihak terdampak dan kepentingannya. &
+Latar belakang dan analisis kebutuhan pada Pendahuluan. \\
+Daftar driver dan asesmen & Menjelaskan pendorong perubahan dan kesiapan saat
+ini. & Justifikasi masalah dan bukti awal. \\
+Pernyataan sasaran, kebutuhan, kendala & Membingkai apa yang ingin dicapai dan
+batasannya. & Konteks dan ruang lingkup penelitian. \\
+Daftar prinsip arsitektur & Menuntun keputusan desain berikutnya. & Metode atau
+kerangka analisis. \\
+Daftar ketidakselarasan & Menunjukkan jarak antara sasaran dan kapabilitas
 saat ini. & Bukti awal rumusan masalah. \\
 Draf RQ dan kontribusi & Mengarahkan struktur analisis semester berjalan. &
 Bagian akhir Pendahuluan. \\
@@ -569,8 +654,8 @@ menyelesaikan bab ini, mahasiswa seharusnya memiliki empat bahan yang langsung
 dapat dipindahkan ke naskah:
 
 \begin{enumerate}
-  \item satu paragraf konteks organisasi dan strategi digital;
-  \item satu paragraf rumusan masalah;
+  \item satu paragraf konteks organisasi dan kapabilitas sasaran;
+  \item satu paragraf rumusan masalah yang berakar pada lapisan motivasi;
   \item satu atau dua RQ yang dapat dijawab melalui analisis;
   \item satu paragraf kontribusi awal.
 \end{enumerate}
@@ -578,9 +663,10 @@ dapat dipindahkan ke naskah:
 Keempat bahan ini juga menjadi dasar bagian \textbf{Metode} dan
 \textbf{Analisis} pada bab-bab berikutnya. RQ menentukan data apa yang perlu
 dikumpulkan, kerangka apa yang dipakai, dan artefak apa yang harus dibuat. Jika
-RQ menekankan integrasi data, Bab 5 akan menjadi sangat penting. Jika RQ
-menekankan layanan API, Bab 9 dan Bab 10 perlu mendapat porsi lebih besar. Jika
-RQ menekankan platform, Bab 11 dan Bab 12 akan menjadi inti diskusi.
+RQ menekankan integrasi data, bab Data Architecture akan menjadi sangat penting.
+Jika RQ menekankan layanan API, bab API Strategy dan Governance perlu mendapat
+porsi lebih besar. Jika RQ menekankan platform, bab Platform akan menjadi inti
+diskusi.
 
 Ingat bahwa kontribusi awal masih boleh berubah. Pada tahap ini, kontribusi
 berfungsi sebagai arah kerja. Setelah literatur dibaca dan analisis kasus
@@ -588,61 +674,58 @@ dilakukan, kontribusi dapat dipertajam menjadi lebih spesifik.
 
 \subsection*{Contoh Paragraf Akademik}
 
-Contoh berikut menunjukkan cara mengubah artefak Bab 2 menjadi narasi
+Contoh berikut menunjukkan cara mengubah artefak Bab 3 menjadi narasi
 Pendahuluan:
 
 \begin{quote}
-Organisasi studi kasus menunjukkan ketidakselarasan antara ambisi digital dan
-model operasi yang tersedia. Meskipun strategi organisasi menekankan layanan
-digital lintas kanal, proses inti masih berjalan berbeda antarunit, sementara
-data pelanggan belum memiliki definisi dan kepemilikan yang konsisten. Kondisi
-ini menunjukkan bahwa masalah utama bukan sekadar keterbatasan aplikasi,
-melainkan belum tersedianya arah arsitektur enterprise yang menghubungkan
-strategi, integrasi data, standardisasi proses, dan tata kelola. Oleh karena
-itu, penelitian ini mengajukan pertanyaan bagaimana pendekatan Enterprise
-Architecture dapat digunakan untuk menyelaraskan strategi digital organisasi
-dengan kapabilitas bisnis dan teknologi yang realistis dalam konteks Indonesia.
+Organisasi studi kasus menunjukkan ketidakselarasan antara sasaran layanan
+digital dan kapabilitas yang tersedia. Meskipun sasarannya adalah perpindahan
+dana real-time bagi UMKM, sebagian proses transfer masih berjalan secara batch
+dan manual, sementara penyaringan kepatuhan belum otomatis. Kondisi ini
+menunjukkan bahwa masalah utama bukan sekadar keterbatasan aplikasi, melainkan
+belum tersedianya arah arsitektur yang menautkan pemangku kepentingan,
+pendorong, sasaran, kebutuhan, dan kendala secara konsisten. Oleh karena itu,
+penelitian ini mengajukan pertanyaan bagaimana pendekatan Enterprise
+Architecture dapat dipakai untuk menyelaraskan motivasi tersebut dengan
+kapabilitas yang realistis dalam konteks regulasi Indonesia.
 \end{quote}
 
 \section{Diskusi Kritis dan Perangkap Umum}
 
 Beberapa perangkap berikut sering terjadi ketika mahasiswa merumuskan masalah
-penelitian.
+penelitian dari lapisan motivasi.
 
 \begin{enumerate}
-  \item \textbf{Masalah terlalu luas.} ``Transformasi digital sektor kesehatan
+  \item \textbf{Masalah terlalu luas.} ``Transformasi digital sektor keuangan
         Indonesia'' tidak cocok untuk makalah satu semester. Persempit menjadi
-        organisasi, proses, kapabilitas, atau keputusan tertentu.
+        satu kapabilitas, seperti rel transfer.
   \item \textbf{Masalah terlalu teknis.} ``Implementasi REST API'' belum tentu
-        menjadi masalah EA. Jelaskan nilai bisnis, mitra, tata kelola, dan
-        risiko yang membuat API itu penting.
-  \item \textbf{RQ tidak dapat dijawab dengan data yang tersedia.} Jika
-        mahasiswa tidak punya akses ke data internal, pilih pendekatan yang
-        mengandalkan dokumen publik, wawancara terbatas, atau kajian
-        konseptual berbasis kasus.
+        menjadi masalah EA. Jelaskan pemangku kepentingan, pendorong, sasaran,
+        dan kendala yang membuat API itu penting.
+  \item \textbf{Mencampur sasaran, kebutuhan, dan solusi.} Sasaran adalah keadaan
+        akhir; kebutuhan adalah syarat; solusi muncul belakangan. Jangan tergesa
+        menulis solusi pada lapisan motivasi.
   \item \textbf{Kontribusi terdengar seperti janji konsultan.} Kalimat seperti
         ``meningkatkan efisiensi 50\%'' perlu bukti. Untuk makalah awal,
-        kontribusi yang lebih aman adalah kerangka analisis, rancangan awal,
-        atau rekomendasi berbasis bukti.
-  \item \textbf{Mengabaikan target publikasi.} Target publikasi memengaruhi
-        panjang, gaya sitasi, jumlah referensi, dan kedalaman metode. RQ harus
-        cukup cocok dengan ruang lingkup target publikasi.
-  \item \textbf{Tidak membedakan gejala dan masalah.} Aplikasi lambat,
-        data ganda, atau proses manual sering hanya gejala. Masalah yang lebih
-        dalam mungkin terletak pada model operasi, kepemilikan data, atau
-        prioritas strategi.
+        kontribusi yang lebih aman adalah model motivasi, daftar kebutuhan, atau
+        rekomendasi berbasis bukti.
+  \item \textbf{Mengabaikan kendala regulasi.} Untuk layanan transfer, mengabaikan
+        SNAP BI, APU-PPT, atau UU PDP membuat sasaran terlihat menarik tetapi
+        rapuh.
+  \item \textbf{Tidak membedakan gejala dan masalah.} Transfer lambat atau
+        rekonsiliasi salah sering hanya gejala. Masalah yang lebih dalam mungkin
+        terletak pada ketiadaan rel transfer terkelola atau kontrol manual.
 \end{enumerate}
 
-Trade-off utama pada bab ini adalah antara keluasan dan ketajaman. Rumusan
-yang terlalu sempit mudah dianalisis tetapi mungkin kurang bernilai akademik.
-Rumusan yang terlalu luas terdengar penting tetapi sulit diselesaikan. Pilih
-masalah yang cukup kecil untuk ditangani, tetapi cukup penting untuk
-dipublikasikan.
+Trade-off utama pada bab ini adalah antara keluasan dan ketajaman. Rumusan yang
+terlalu sempit mudah dianalisis tetapi mungkin kurang bernilai akademik. Rumusan
+yang terlalu luas terdengar penting tetapi sulit diselesaikan. Pilih masalah
+yang cukup kecil untuk ditangani, tetapi cukup penting untuk dipublikasikan.
 
 \begin{table}[htbp]
 \centering
 \scriptsize
-\caption{Trade-off saat merumuskan masalah dan RQ.}
+\caption{Trade-off saat merumuskan masalah dan RQ dari lapisan motivasi.}
 \label{tab:tradeoff-rq}
 \begin{tabularx}{\textwidth}{@{}p{0.22\textwidth} X X X@{}}
 \hline
@@ -651,52 +734,52 @@ dipublikasikan.
 RQ sangat sempit & Analisis lebih mudah dikendalikan. & Kontribusi dapat
 terlihat terlalu kecil. & Cocok bila data terbatas dan target publikasi
 praktis. \\
-RQ luas lintas domain & Kontribusi terasa strategis. & Sulit selesai dalam
+RQ luas lintas kapabilitas & Kontribusi terasa strategis. & Sulit selesai dalam
 satu semester. & Hanya dipilih jika data dan literatur cukup kuat. \\
-Fokus pada teknologi & Artefak teknis lebih jelas. & Argumen manajerial
-melemah. & Perlu selalu dikaitkan dengan strategi dan risiko. \\
-Fokus pada tata kelola & Relevan bagi manajemen dan regulasi. & Butuh bukti
-tentang peran, proses, dan keputusan. & Cocok untuk organisasi yang datanya
-sensitif atau bermitra luas. \\
+Fokus pada teknologi & Artefak teknis lebih jelas. & Argumen motivasi melemah.
+& Perlu selalu dikaitkan dengan pemangku kepentingan dan sasaran. \\
+Fokus pada kepatuhan & Relevan bagi manajemen dan regulasi. & Butuh bukti
+tentang pendorong, kendala, dan kontrol. & Cocok untuk layanan yang datanya
+sensitif atau diawasi regulator. \\
 \hline
 \end{tabularx}
 \end{table}
 
 \section{Latihan Terapan Individual}
 
-\subsection*{Latihan~2.1: Ringkasan Strategi dan Model Bisnis}
+\subsection*{Latihan~3.1: Peta Stakeholder dan Driver}
 
 Gunakan organisasi studi kasus yang sudah dipilih pada Bab~\ref{ch:orientasi}.
-Tuliskan ringkasan satu sampai dua halaman yang memuat:
+Pilih satu kapabilitas sasaran, lalu tuliskan ringkasan satu sampai dua halaman
+yang memuat:
 
 \begin{enumerate}
-  \item strategi digital organisasi dalam satu paragraf;
-  \item tiga segmen pengguna atau pemangku kepentingan utama;
-  \item proposisi nilai yang dijanjikan kepada masing-masing segmen;
-  \item aktivitas kunci, sumber daya kunci, dan mitra kunci;
-  \item satu masalah strategis yang paling tampak dari peta tersebut.
+  \item kapabilitas sasaran dalam satu kalimat;
+  \item tiga sampai lima pemangku kepentingan utama dan concern-nya;
+  \item tiga pendorong utama beserta asesmen kondisi saat ini;
+  \item satu ketidakselarasan yang paling tampak dari peta tersebut.
 \end{enumerate}
 
-\subsection*{Latihan~2.2: Klasifikasi Operating Model}
+\subsection*{Latihan~3.2: Sasaran, Kebutuhan, Kendala, dan Prinsip}
 
-Nilailah organisasi Anda menggunakan dua pertanyaan:
+Untuk kapabilitas sasaran yang sama, tuliskan:
 
 \begin{enumerate}
-  \item Seberapa tinggi kebutuhan standardisasi proses?
-  \item Seberapa tinggi kebutuhan integrasi data?
+  \item satu sampai dua sasaran terukur beserta hasil yang diharapkan;
+  \item tiga sampai lima kebutuhan (\emph{requirement});
+  \item tiga kendala (\emph{constraint}) yang tidak dapat dilanggar;
+  \item tiga sampai lima prinsip arsitektur yang akan menuntun keputusan.
 \end{enumerate}
 
-Pilih salah satu pola operating model: \emph{Diversification},
-\emph{Coordination}, \emph{Replication}, atau \emph{Unification}. Jelaskan
-alasan pemilihan tersebut dalam 2--3 paragraf. Jika organisasi Anda berada di
-antara dua pola, jelaskan ketegangan yang muncul.
+Jika organisasi Anda menghadapi ketegangan antara sasaran dan kendala, jelaskan
+ketegangan itu dalam 2--3 paragraf.
 
-\subsection*{Latihan~2.3: Draf Rumusan Masalah, RQ, dan Kontribusi}
+\subsection*{Latihan~3.3: Draf Rumusan Masalah, RQ, dan Kontribusi}
 
 Susun draf awal dengan format berikut:
 
 \begin{enumerate}
-  \item Rumusan masalah: 1--2 paragraf.
+  \item Rumusan masalah: 1--2 paragraf yang berakar pada lapisan motivasi.
   \item RQ utama: satu pertanyaan.
   \item Sub-RQ opsional: maksimum dua pertanyaan.
   \item Kontribusi praktis: 2--3 kalimat.
@@ -706,7 +789,7 @@ Susun draf awal dengan format berikut:
 Pastikan RQ tidak langsung melompat ke solusi. RQ yang baik membuka ruang
 analisis, bukan sekadar meminta pembaca menyetujui teknologi tertentu.
 
-\subsection*{Latihan~2.4: Uji Kelayakan Target Publikasi}
+\subsection*{Latihan~3.4: Uji Kelayakan Target Publikasi}
 
 Ambil satu target publikasi dari daftar Bab~\ref{ch:orientasi}. Periksa apakah
 rumusan masalah dan RQ Anda cocok dengan ruang lingkup target tersebut.
@@ -724,20 +807,20 @@ Tuliskan catatan singkat:
 \begin{table}[htbp]
 \centering
 \scriptsize
-\caption{Rubrik mini untuk keluaran latihan Bab 2.}
+\caption{Rubrik mini untuk keluaran latihan Bab 3.}
 \label{tab:rubrik-latihan-bab2}
 \begin{tabularx}{\textwidth}{@{}p{0.26\textwidth} X@{}}
 \hline
 \textbf{Kriteria} & \textbf{Indikator Kualitas} \\
 \hline
-Relevansi masalah & Masalah berasal dari strategi organisasi, bukan sekadar
-ketertarikan pada teknologi tertentu. \\
-Ketepatan konsep & Kanvas model bisnis dan operating model digunakan secara
-tepat untuk menjelaskan ketidakselarasan. \\
-Kejelasan artefak & Ringkasan strategi, klasifikasi operating model, dan
-daftar ketidakselarasan mudah dibaca audiens non-IT. \\
-Kekuatan argumen & Rumusan masalah menunjukkan konteks, bukti awal, dampak,
-dan urgensi akademik/praktis. \\
+Relevansi masalah & Masalah berasal dari lapisan motivasi (pemangku kepentingan,
+pendorong, sasaran), bukan sekadar ketertarikan pada teknologi tertentu. \\
+Ketepatan konsep & Elemen motivasi (stakeholder, driver, goal, requirement,
+constraint, principle) dibedakan dan dipakai secara tepat. \\
+Kejelasan artefak & Peta stakeholder-concern dan daftar driver/sasaran mudah
+dibaca audiens non-IT. \\
+Kekuatan argumen & Rumusan masalah menunjukkan ketidakselarasan, bukti awal,
+dampak, dan urgensi akademik/praktis. \\
 Kelayakan implementasi & RQ dapat dijawab dengan data, waktu, dan kapasitas
 yang tersedia dalam satu semester. \\
 Keterhubungan ke makalah & Kontribusi awal jelas masuk ke bagian Pendahuluan
@@ -749,14 +832,14 @@ dan memberi arah bagi metode serta analisis. \\
 \subsection*{Pertanyaan Refleksi}
 
 \begin{enumerate}
-  \item Apakah masalah yang Anda pilih berasal dari strategi organisasi atau
+  \item Apakah masalah yang Anda pilih berasal dari motivasi organisasi atau
         hanya dari ketertarikan pada teknologi tertentu?
   \item Apakah RQ Anda dapat dijawab dengan data dan waktu yang tersedia dalam
         satu semester?
   \item Apa risiko terbesar jika organisasi mengikuti rekomendasi yang mungkin
         muncul dari makalah Anda?
   \item Bagian mana yang perlu dikonsultasikan dengan dosen sebelum masuk ke
-        Bab 3?
+        Bab 4?
 \end{enumerate}
 
 \section{Ringkasan, Refleksi, dan Jembatan}
@@ -764,33 +847,33 @@ dan memberi arah bagi metode serta analisis. \\
 \subsection*{Poin Kunci}
 
 \begin{itemize}
-  \item Strategi bisnis harus dibaca sebagai pilihan tentang pelanggan,
-        proposisi nilai, prioritas, dan cara organisasi menciptakan nilai.
-  \item Kanvas model bisnis membantu menghubungkan strategi dengan aktivitas,
-        sumber daya, mitra, kanal, dan struktur biaya.
-  \item Operating model membantu membaca kebutuhan standardisasi proses dan
-        integrasi data.
-  \item Rumusan masalah yang baik menjelaskan ketegangan, bukti awal, dampak,
-        dan konteks.
-  \item RQ harus dapat dijawab melalui analisis, bukan sekadar menyatakan
-        solusi yang sudah dipilih sejak awal.
-  \item Kontribusi awal perlu membedakan nilai praktis bagi organisasi dan
-        nilai akademik bagi pembaca makalah.
+  \item Lapisan motivasi merekam \emph{mengapa} arsitektur dibangun: pemangku
+        kepentingan, pendorong, asesmen, sasaran, kebutuhan, kendala, dan
+        prinsip.
+  \item Peta stakeholder-concern membantu memastikan kapabilitas dirancang
+        untuk lebih dari satu sudut pandang.
+  \item Pendorong dan asesmen menyediakan bukti awal mengapa perubahan mendesak.
+  \item Sasaran, kebutuhan, dan kendala membingkai ruang solusi tanpa langsung
+        melompat ke teknologi.
+  \item Rumusan masalah yang baik menjelaskan ketidakselarasan antara sasaran
+        dan kapabilitas, beserta bukti dan dampaknya.
+  \item RQ harus dapat dijawab melalui analisis, dan kontribusi perlu membedakan
+        nilai praktis bagi organisasi dan nilai akademik bagi pembaca.
 \end{itemize}
 
 \subsection*{Jawaban Ringkas atas Pertanyaan Pemandu}
 
 \begin{enumerate}
-  \item Strategi organisasi dibaca dari pelanggan prioritas, nilai yang
-        dijanjikan, kanal, aktivitas kunci, dan mitra kunci.
-  \item Model bisnis menunjukkan bagaimana organisasi menghasilkan nilai,
-        sedangkan operating model menunjukkan bagaimana nilai itu dijalankan
-        melalui proses dan data.
-  \item Ketidakselarasan muncul ketika strategi menuntut kapabilitas yang
-        belum didukung proses, data, aplikasi, teknologi, API, atau tata
-        kelola.
-  \item Bukti awal dapat berupa dokumen publik, proses yang diamati, wawancara,
-        laporan tahunan, regulasi, atau artefak internal yang diizinkan.
+  \item Pemangku kepentingan API transfer mencakup pimpinan, unit bisnis,
+        kepatuhan, teknologi, nasabah/mitra, dan regulator, masing-masing dengan
+        concern berbeda.
+  \item Pendorong utama meliputi ekspektasi transfer instan, tekanan
+        persaingan, kepatuhan SNAP BI/APU-PPT, dan efisiensi; asesmen jujur
+        mengungkap proses batch dan kontrol manual.
+  \item Sasaran dinyatakan terukur, lalu diturunkan menjadi kebutuhan dan
+        kendala yang spesifik.
+  \item Ketidakselarasan muncul ketika sasaran menuntut kapabilitas yang belum
+        didukung proses, data, sistem, atau tata kelola.
   \item Hasil analisis menjadi argumen akademik ketika artefak dipakai untuk
         mendukung klaim, bukan hanya ditempel sebagai gambar.
 \end{enumerate}
@@ -798,11 +881,12 @@ dan memberi arah bagi metode serta analisis. \\
 \subsection*{Uji Mandiri: Pertanyaan Konseptual}
 
 \begin{enumerate}
-  \item Mengapa strategi bisnis perlu dibaca sebelum menyusun arsitektur
-        enterprise?
-  \item Jelaskan perbedaan antara strategi bisnis dan model bisnis.
-  \item Apa fungsi operating model dalam analisis Enterprise Architecture?
-  \item Sebutkan dua dimensi utama operating model dan jelaskan artinya.
+  \item Mengapa lapisan motivasi perlu dibaca sebelum menyusun rancangan
+        arsitektur?
+  \item Jelaskan perbedaan antara pendorong (driver) dan asesmen (assessment).
+  \item Apa perbedaan antara sasaran (goal), hasil (outcome), kebutuhan
+        (requirement), dan kendala (constraint)?
+  \item Apa fungsi prinsip arsitektur dalam menuntun keputusan?
   \item Apa perbedaan antara rumusan masalah, RQ, dan pernyataan kontribusi?
   \item Mengapa RQ yang terlalu teknis dapat melemahkan makalah Enterprise
         Architecture?
@@ -811,24 +895,20 @@ dan memberi arah bagi metode serta analisis. \\
 \subsection*{Pertanyaan Aplikatif}
 
 \begin{enumerate}
-  \item Sebuah universitas ingin membangun layanan akademik terpadu. Mahasiswa,
-        dosen, keuangan, dan administrasi memakai aplikasi berbeda. Rumuskan
-        satu masalah penelitian yang lebih tajam daripada ``sistem belum
-        terintegrasi''.
-  \item Sebuah koperasi ingin menjual produk anggotanya melalui marketplace
-        lokal. Pilih operating model yang paling mendekati dan jelaskan
-        alasannya.
-  \item Sebuah rumah sakit daerah ingin memperluas telekonsultasi, tetapi data
-        pasien tersebar antara unit pendaftaran, poli, laboratorium, dan
-        farmasi. Buat satu RQ yang menghubungkan strategi layanan digital dan
-        arsitektur data.
+  \item Sebuah universitas ingin membuka API pembayaran uang kuliah. Petakan
+        tiga pemangku kepentingan dan satu pendorong utamanya.
+  \item Sebuah koperasi ingin menyalurkan dana ke anggota secara digital. Pilih
+        satu sasaran terukur dan dua kendala yang harus dihormati.
+  \item Sebuah rumah sakit daerah ingin transfer klaim BPJS lebih cepat, tetapi
+        data tersebar antarunit. Buat satu RQ yang menghubungkan sasaran layanan
+        dan kendala data.
 \end{enumerate}
 
 \subsection*{Pertanyaan Reflektif untuk Makalah}
 
 \begin{enumerate}
-  \item Apakah RQ Anda lebih dekat dengan domain Business, Data, Application,
-        Technology, API, atau platform? Apa konsekuensinya bagi bab-bab
+  \item Apakah RQ Anda lebih dekat dengan domain Bisnis, Data, Aplikasi,
+        Teknologi, API, atau platform? Apa konsekuensinya bagi bab-bab
         berikutnya?
   \item Apakah kontribusi yang Anda tulis lebih kuat sebagai kontribusi
         praktis, akademik, atau keduanya? Mengapa?
@@ -837,31 +917,32 @@ dan memberi arah bagi metode serta analisis. \\
 \subsection*{Ringkasan Naratif}
 
 Bab ini menunjukkan bahwa rumusan masalah makalah tidak boleh muncul dari
-ketertarikan teknologi semata. Rumusan yang baik berangkat dari strategi
-organisasi, model bisnis, model operasi, dan ketidakselarasan yang dapat
-dibuktikan. Kanvas model bisnis membantu pembaca melihat bagaimana organisasi
-menciptakan nilai, sedangkan operating model membantu membaca kebutuhan
-standardisasi proses dan integrasi data.
+ketertarikan teknologi semata. Rumusan yang baik berangkat dari lapisan
+motivasi: pemangku kepentingan, pendorong, asesmen, sasaran, kebutuhan, kendala,
+dan prinsip. Untuk kasus Bank Wanua, lapisan motivasi API Transfer Dana
+mengungkap ketegangan antara janji transfer instan dan kenyataan proses batch
+serta kontrol manual.
 
-Dalam konteks Indonesia, strategi digital harus mempertimbangkan kematangan
-organisasi yang beragam, regulasi seperti UU PDP dan PP No.~71/2019,
-ketentuan sektor seperti SNAP BI, struktur organisasi yang sering hierarkis,
-serta keterbatasan biaya dan SDM. Kepekaan terhadap konteks ini membuat RQ
-lebih realistis dan kontribusi lebih dapat dipercaya.
+Dalam konteks Indonesia, motivasi layanan keuangan digital harus
+mempertimbangkan SNAP BI, BI-FAST, UU PDP, PP No.~71/2019, struktur organisasi
+yang sering hierarkis, serta keterbatasan biaya dan SDM. Kepekaan terhadap
+konteks ini membuat sasaran lebih realistis dan kontribusi lebih dapat
+dipercaya.
 
-Keluaran utama bab ini adalah draf rumusan masalah, RQ, dan kontribusi awal.
-Ketiganya akan menjadi kompas bagi bab-bab berikutnya. Jika kompas ini kabur,
-artefak arsitektur yang dibuat pada Bab 3 sampai Bab 12 akan mudah menjadi
-kumpulan gambar yang tidak menyatu dengan argumen makalah.
+Keluaran utama bab ini adalah model motivasi serta draf rumusan masalah, RQ,
+dan kontribusi awal. Semuanya menjadi kompas bagi bab-bab berikutnya. Jika
+kompas ini kabur, artefak arsitektur yang dibuat pada bab-bab strategi, bisnis,
+dan teknis akan mudah menjadi kumpulan gambar yang tidak menyatu dengan argumen
+makalah.
 
 \subsection*{Jembatan ke Bab Berikutnya}
 
-Bab berikutnya memperkenalkan TOGAF-lite dan cara menyusun tinjauan pustaka
-awal. Setelah strategi dan RQ mulai jelas, pembaca perlu memilih kerangka
-analisis yang dapat dipertanggungjawabkan. TOGAF-lite akan dipakai sebagai
-bahasa kerja untuk menyusun visi arsitektur, kondisi saat ini, arsitektur
-target, analisis kesenjangan, dan peta jalan. Pada saat yang sama, mahasiswa
-mulai membangun bibliografi awal agar rumusan masalah tidak hanya kuat secara
+Bab berikutnya naik ke \textbf{lapisan strategi}. Setelah motivasi dan RQ mulai
+jelas, pembaca perlu memilih \emph{course of action}, kapabilitas, dan sumber
+daya strategis yang mewujudkan sasaran---serta menyatakannya sebagai visi
+arsitektur. TOGAF-lite akan dipakai sebagai bahasa kerja untuk menyusun visi,
+peta jalan, dan analisis kesenjangan. Pada saat yang sama, mahasiswa mulai
+membangun bibliografi awal agar rumusan masalah tidak hanya kuat secara
 praktis, tetapi juga tersambung dengan percakapan akademik.
 
 \section{Bacaan Lanjutan}
@@ -870,14 +951,14 @@ praktis, tetapi juga tersambung dengan percakapan akademik.
 
 \begin{itemize}
   \item \emph{Enterprise Architecture as Strategy}~\cite{ross2006enterprise}.
-        Rujukan utama untuk memahami operating model dan hubungan strategi
-        bisnis dengan fondasi arsitektur.
+        Rujukan utama untuk memahami hubungan strategi bisnis dengan fondasi
+        arsitektur dan motivasi perubahan.
   \item \emph{Designed for Digital}~\cite{ross2019designed}. Membantu pembaca
-        memahami kapabilitas organisasi digital dan mengapa strategi perlu
+        memahami kapabilitas organisasi digital dan mengapa sasaran perlu
         diterjemahkan menjadi kemampuan yang dapat dijalankan.
   \item \emph{TOGAF Standard, 10th Edition}~\cite{togaf10}. Bacaan awal untuk
-        melihat bagaimana visi arsitektur dan kebutuhan bisnis ditempatkan
-        dalam siklus pengembangan arsitektur.
+        melihat bagaimana pemangku kepentingan, pendorong, dan visi arsitektur
+        ditempatkan pada fase awal pengembangan arsitektur.
 \end{itemize}
 
 \subsection*{Bacaan untuk Memperdalam}
@@ -887,42 +968,42 @@ praktis, tetapi juga tersambung dengan percakapan akademik.
         mahasiswa yang rumusan masalahnya mengarah ke ekosistem platform dan
         \emph{network effects}.
   \item \emph{The Business of Platforms}~\cite{cusumano2019business}. Cocok
-        untuk memperdalam diskusi tentang strategi dan tata kelola model
-        bisnis platform.
-  \item \emph{APIs: A Strategy Guide}~\cite{jacobson2011apis}. Bermanfaat jika
-        ketidakselarasan utama organisasi berkaitan dengan kemitraan API,
-        integrasi layanan, atau pembukaan kanal digital untuk pihak luar.
+        untuk memperdalam diskusi tentang strategi dan tata kelola model bisnis
+        platform.
+  \item \emph{APIs: A Strategy Guide}~\cite{jacobson2011apis}. Bermanfaat bila
+        kapabilitas sasaran berkaitan dengan kemitraan API, integrasi layanan,
+        atau pembukaan kanal digital untuk pihak luar.
 \end{itemize}
 
 \subsection*{Sumber Indonesia}
 
 \begin{itemize}
-  \item \emph{Undang-Undang Pelindungan Data Pribadi}~\cite{uupdp2022}.
-        Penting untuk mahasiswa yang rumusan masalahnya menyentuh data
-        pelanggan, personalisasi layanan, atau integrasi data lintas kanal.
-  \item \emph{PP No.~71/2019}~\cite{pp712019}. Relevan untuk memahami
-        tanggung jawab penyelenggara sistem elektronik.
   \item \emph{Standar Nasional Open API Pembayaran (SNAP BI)}~\cite{snapbi}.
         Sangat relevan untuk topik open banking, fintech, pembayaran digital,
-        dan API sektor keuangan.
+        dan API transfer sektor keuangan.
+  \item \emph{Undang-Undang Pelindungan Data Pribadi}~\cite{uupdp2022}. Penting
+        untuk mahasiswa yang rumusan masalahnya menyentuh data transaksi,
+        personalisasi layanan, atau integrasi data lintas kanal.
+  \item \emph{PP No.~71/2019}~\cite{pp712019}. Relevan untuk memahami tanggung
+        jawab penyelenggara sistem dan transaksi elektronik.
 \end{itemize}
 
-\subsection*{Lampiran: Worksheet Ringkas Bab 2}
+\subsection*{Lampiran: Worksheet Ringkas Bab 3}
 
-Gunakan format berikut sebagai catatan kerja sebelum menulis bagian
-Pendahuluan makalah.
+Gunakan format berikut sebagai catatan kerja sebelum menulis bagian Pendahuluan
+makalah.
 
 \begin{enumerate}
-  \item \textbf{Strategi organisasi:} tuliskan 4--6 kalimat tentang pelanggan,
-        nilai, kanal, prioritas, dan batasan utama.
-  \item \textbf{Model bisnis:} rangkum segmen pelanggan, proposisi nilai,
-        aktivitas kunci, sumber daya kunci, dan mitra kunci.
-  \item \textbf{Operating model:} pilih salah satu pola dan jelaskan alasan
-        berdasarkan kebutuhan standardisasi proses dan integrasi data.
+  \item \textbf{Kapabilitas sasaran:} tuliskan dalam satu kalimat.
+  \item \textbf{Stakeholder-concern:} rangkum 4--6 pihak dan kepentingannya.
+  \item \textbf{Driver dan asesmen:} tuliskan 3--4 pendorong dan kondisi saat
+        ini.
+  \item \textbf{Sasaran, kebutuhan, kendala:} nyatakan sasaran terukur,
+        kebutuhan utama, dan kendala yang tidak dapat dilanggar.
+  \item \textbf{Prinsip:} tuliskan 3--5 prinsip arsitektur.
   \item \textbf{Ketidakselarasan utama:} tuliskan tiga jarak paling penting
-        antara strategi dan kondisi saat ini.
-  \item \textbf{Rumusan masalah:} tulis 1--2 paragraf yang menjelaskan konteks,
-        ketegangan, dampak, dan pentingnya analisis.
-  \item \textbf{RQ dan kontribusi:} tulis satu RQ utama, maksimum dua sub-RQ,
-        kontribusi praktis, dan kontribusi akademik.
+        antara sasaran dan kondisi saat ini.
+  \item \textbf{Rumusan masalah, RQ, dan kontribusi:} tulis 1--2 paragraf
+        masalah, satu RQ utama, maksimum dua sub-RQ, kontribusi praktis, dan
+        kontribusi akademik.
 \end{enumerate}

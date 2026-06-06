@@ -229,11 +229,21 @@ kapabilitas tersebut, serta bagaimana aplikasi saling terhubung. Domain
 \textbf{Technology} menjawab: infrastruktur, keamanan, dan platform teknis apa
 yang menopang semuanya.
 
-Empat domain ini akan dipetakan secara bertahap pada Bab~4 sampai Bab~7. Pada
+Empat domain ini akan dipetakan secara bertahap pada Bab~5 sampai Bab~8. Pada
 bab pengantar ini, pembaca cukup memahami satu hal: hampir setiap keputusan
 organisasi akan menyentuh keempat domain tersebut, baik disadari maupun tidak.
 Tugas arsitektur enterprise adalah membuat hubungan itu terlihat, sehingga
 keputusan dapat dijelaskan dan dipertanggungjawabkan.
+
+Sepanjang buku ini, domain BDAT dinyatakan secara lebih formal menggunakan
+\emph{ArchiMate}, bahasa pemodelan standar untuk arsitektur enterprise.
+ArchiMate menata arsitektur ke dalam beberapa lapisan: \emph{motivasi} dan
+\emph{strategi} di puncak (mengapa dan dengan cara apa), lalu lapisan
+\emph{bisnis}, \emph{aplikasi}, serta \emph{teknologi dan fisik} (apa dan
+bagaimana), dan akhirnya \emph{implementasi dan migrasi}. Karena itu, sebelum
+membedah domain BDAT, Bab~3 dan Bab~4 lebih dahulu menegaskan lapisan motivasi
+dan lapisan strategi, baru Bab~5 masuk ke lapisan bisnis. Pemetaan lapisan ke
+bab ditampilkan pada Tabel~\ref{tab:peta-lapisan} di bagian Pendahuluan.
 
 \subsection{API dan Platform: Pengungkit Nilai Digital}
 
@@ -379,7 +389,14 @@ Architecture menyediakan kerangka analisis untuk memetakan kapabilitas, value
 stream, kondisi saat ini, target, kesenjangan, dan peta jalan. Dengan begitu,
 diskusi dapat bergerak dari adu pendapat menjadi argumen berbasis bukti.
 
-Pada akhir Bab~12, Bank Wanua (atau organisasi pilihan pembaca) akan memiliki
+Buku ini mengikuti keputusan tersebut secara konkret. Dari portofolio
+kapabilitas yang disepakati Bank Wanua, \textbf{API Transfer dan Perpindahan
+Dana}---``rel'' perpindahan uang yang membungkus BI-FAST---dipilih sebagai
+kapabilitas sasaran yang dibedah lapis demi lapis sepanjang Bab~3 sampai Bab~5
+(lihat Bagian~\ref{sec:studi-kasus-berjalan} di Pendahuluan). Pembaca menerapkan
+pola analisis yang sama pada organisasi pilihannya sendiri.
+
+Pada akhir Bab~13, Bank Wanua (atau organisasi pilihan pembaca) akan memiliki
 peta kapabilitas bisnis dengan prioritas yang jelas, peta data beserta
 kepemilikan dan klasifikasi sensitivitasnya, portofolio aplikasi dengan
 rekomendasi tindak lanjut, rancangan arsitektur teknologi target, portofolio
@@ -535,6 +552,9 @@ Beberapa istilah kunci yang akan sering muncul:
         kompleksitas TOGAF.
   \item \textbf{BDAT:} singkatan dari Business, Data, Application, Technology
         sebagai empat domain arsitektur klasik.
+  \item \textbf{ArchiMate:} bahasa pemodelan standar untuk arsitektur
+        enterprise; menyusun arsitektur ke dalam lapisan motivasi, strategi,
+        bisnis, aplikasi, teknologi/fisik, serta implementasi dan migrasi.
   \item \textbf{API (Application Programming Interface):} kontrak digital
         terstandar yang memungkinkan satu sistem berinteraksi dengan sistem
         lain.
@@ -595,7 +615,7 @@ ke materi Enterprise Architecture:
 Latihan pada bab ini sengaja dibuat ringan karena fungsinya adalah meletakkan
 fondasi yang akan ditindaklanjuti pada bab-bab selanjutnya.
 
-\subsection*{Latihan~1.1: Pemilihan Organisasi Studi Kasus (45 menit)}
+\subsection*{Latihan~2.1: Pemilihan Organisasi Studi Kasus (45 menit)}
 
 Pilihlah satu organisasi nyata atau hipotetis-realistis dalam konteks
 Indonesia yang akan Anda gunakan sebagai studi kasus sepanjang semester.
@@ -612,7 +632,7 @@ halaman):
         data internal dengan izin, atau kombinasi.
 \end{enumerate}
 
-\subsection*{Latihan~1.2: Pernyataan Topik Awal (30 menit)}
+\subsection*{Latihan~2.2: Pernyataan Topik Awal (30 menit)}
 
 Tuliskan satu paragraf (4--6 kalimat) sebagai pernyataan topik awal makalah
 Anda. Paragraf ini sebaiknya menjawab tiga hal:
@@ -624,7 +644,7 @@ Anda. Paragraf ini sebaiknya menjawab tiga hal:
   \item Apa potensi kontribusi makalah bagi komunitas akademik atau praktik?
 \end{itemize}
 
-\subsection*{Latihan~1.3: Identifikasi 2--3 Target Publikasi (60 menit)}
+\subsection*{Latihan~2.3: Identifikasi 2--3 Target Publikasi (60 menit)}
 
 Pilih dua atau tiga target publikasi (jurnal SINTA, jurnal internasional, atau
 konferensi) yang relevan dengan topik Anda. Buat tabel ringkas dengan kolom:
@@ -632,7 +652,7 @@ nama target publikasi, ruang lingkup atau jalur/topik yang relevan, status
 indeks atau akreditasi, biaya publikasi/APC, tenggat atau jadwal terbit, dan
 tautan templat.
 
-\subsection*{Latihan~1.4: Telaah Singkat Satu Makalah Contoh (60 menit)}
+\subsection*{Latihan~2.4: Telaah Singkat Satu Makalah Contoh (60 menit)}
 
 Cari satu makalah akademik (jurnal SINTA, jurnal internasional, atau prosiding
 konferensi) yang relevan dengan topik Anda. Tuliskan refleksi satu halaman:
@@ -688,7 +708,7 @@ konferensi) yang relevan dengan topik Anda. Tuliskan refleksi satu halaman:
 \subsection*{Pertanyaan Reflektif untuk Makalah}
 
 \begin{enumerate}
-  \item Bagian mana dari latihan~1.1--1.4 yang paling akan memengaruhi
+  \item Bagian mana dari latihan~2.1--2.4 yang paling akan memengaruhi
         struktur Pendahuluan makalah Anda?
   \item Apakah ada kemungkinan organisasi studi kasus Anda berubah dalam dua
         bab pertama? Apa indikatornya?
@@ -716,19 +736,21 @@ tenggat, dan biaya.
 
 Pada akhir bab, mahasiswa telah memilih satu organisasi studi kasus, menulis
 pernyataan topik awal, dan mengidentifikasi dua sampai tiga kandidat target
-publikasi. Tiga keluaran awal ini menjadi titik pijak Bab~2, ketika rumusan
-masalah, pertanyaan penelitian, dan pernyataan kontribusi dipertajam menggunakan
-kerangka strategi bisnis dan keselarasan bisnis--TI.
+publikasi. Tiga keluaran awal ini menjadi titik pijak Bab~3, ketika rumusan
+masalah, pertanyaan penelitian, dan pernyataan kontribusi dipertajam melalui
+\emph{lapisan motivasi} ArchiMate---pemangku kepentingan, pendorong, sasaran,
+kebutuhan, dan kendala---pada studi kasus API Transfer Dana.
 
 \section{Jembatan ke Bab Berikutnya}
 
-Bab~2 akan memperdalam pertanyaan: \emph{mengapa banyak inisiatif transformasi
-digital di organisasi Indonesia tidak mencapai tujuannya, padahal teknologinya
-tersedia?} Jawabannya sering kali bukan terletak pada teknologi, melainkan
-pada ketidakselarasan antara strategi bisnis dan keputusan TI. Pembaca akan
-diajak menggunakan Business Model Canvas dan konsep Operating Model sebagai
-alat sederhana untuk memetakan strategi organisasi pilihan, lalu merumuskan
-masalah penelitian dan kontribusi makalah secara lebih tajam.
+Bab~3 masuk ke \emph{lapisan motivasi}---lapisan teratas dalam bahasa pemodelan
+ArchiMate yang merekam \emph{mengapa} sebuah arsitektur dibangun. Untuk studi
+kasus berjalan, yaitu API Transfer dan Perpindahan Dana Bank Wanua
+(Bagian~\ref{sec:studi-kasus-berjalan}), pembaca memetakan pemangku kepentingan
+beserta kekhawatirannya, pendorong perubahan, asesmen kondisi saat ini, sasaran,
+hasil, kebutuhan, kendala, dan prinsip. Dari peta motivasi itu, ketidakselarasan
+antara sasaran dan kapabilitas yang tersedia diubah menjadi rumusan masalah,
+pertanyaan penelitian, dan pernyataan kontribusi makalah secara lebih tajam.
 
 \section{Bacaan Lanjutan}
 
@@ -737,7 +759,7 @@ masalah penelitian dan kontribusi makalah secara lebih tajam.
 \begin{itemize}
   \item \emph{TOGAF Standard, 10th Edition}~\cite{togaf10}. Bagian pengantar
         (\emph{Architecture Development Method overview}) memberi gambaran
-        besar sebelum pembaca masuk ke versi ``lite'' pada Bab~3.
+        besar sebelum pembaca masuk ke versi ``lite'' pada Bab~4.
   \item \emph{Designed for Digital}~\cite{ross2019designed}. Cocok untuk
         membangun intuisi tentang mengapa transformasi digital membutuhkan kerangka
         arsitektur.
@@ -750,7 +772,7 @@ masalah penelitian dan kontribusi makalah secara lebih tajam.
 
 \begin{itemize}
   \item \emph{APIs: A Strategy Guide}~\cite{jacobson2011apis}. Untuk pembaca
-        yang ingin memperluas wawasan API sebelum Bab~9.
+        yang ingin memperluas wawasan API sebelum Bab~10.
   \item \emph{The Business of Platforms}~\cite{cusumano2019business}.
         Bacaan pelengkap untuk memahami strategi dan tata kelola platform.
   \item \emph{Enterprise Architecture as Strategy}~\cite{ross2006enterprise}.
