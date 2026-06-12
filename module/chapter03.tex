@@ -136,6 +136,50 @@ pada tingkat abstraksi. Kapabilitas strategis bersifat kasar dan stabil
 (``perpindahan dana''), sedangkan lapisan bisnis merincinya menjadi proses,
 peran, dan layanan yang mewujudkannya.
 
+\subsection{Notasi Elemen Lapisan Strategi di Archi}
+
+Gambar~\ref{fig:strategy-legend} menampilkan empat jenis elemen lapisan
+strategi ArchiMate beserta notasinya di Archi. Berbeda dengan elemen motivasi
+yang memakai oktagon ungu (Bab~\ref{ch:strategi-bisnis}), elemen strategi
+memakai bentuk persegi panjang membulat dan, secara baku, berwarna kuning
+keemasan; ikon kecil di pojok kanan atas membedakan jenisnya.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{strategy-legend.pdf}
+\caption{Empat jenis elemen lapisan strategi ArchiMate dan simbolnya di
+Archi.}
+\label{fig:strategy-legend}
+\end{figure}
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Jenis elemen lapisan strategi ArchiMate dan maknanya.}
+\label{tab:strategy-elements}
+\begin{tabularx}{\textwidth}{@{}p{0.22\textwidth} p{0.26\textwidth} X@{}}
+\hline
+\textbf{Elemen} & \textbf{Simbol (ikon/bentuk)} & \textbf{Makna} \\
+\hline
+Sumber daya (\emph{resource}) & Ikon batang di pojok kanan atas & Aset berwujud
+atau tak berwujud yang dimiliki atau dikendalikan organisasi. \\
+Kapabilitas (\emph{capability}) & Ikon petak/kotak & Kemampuan tingkat tinggi
+yang dimiliki organisasi untuk mewujudkan suatu hasil. \\
+Arah tindakan (\emph{course of action}) & Ikon panah menuju sasaran & Pendekatan
+atau rencana tindakan yang dipilih untuk mencapai sasaran. \\
+Value stream & Bentuk chevron (panah ke kanan) & Rangkaian tahap bernilai tambah
+yang menciptakan hasil bagi pemangku kepentingan. \\
+\hline
+\end{tabularx}
+\end{table}
+
+Elemen strategi sengaja bersifat kasar dan stabil. Sumber daya dan kapabilitas
+menyatakan apa yang dimiliki dan dapat dilakukan organisasi, arah tindakan
+menyatakan pilihan yang diambil, sedangkan value stream menautkan kapabilitas
+dengan nilai yang diterima pemangku kepentingan. Keempatnya dipakai pada bab ini
+untuk menerjemahkan lapisan motivasi menjadi pilihan strategis yang dapat
+ditelusuri kembali ke sasaran dan kebutuhan.
+
 \subsection{Model Bisnis dan Operating Model sebagai Alat Baca Strategi}
 
 Untuk memilih arah tindakan, organisasi perlu membaca bagaimana ia menciptakan
@@ -425,6 +469,79 @@ digital, dan standar pembayaran nasional. \\
 \hline
 \end{tabularx}
 \end{table}
+
+\subsection{Model Strategi API Transfer Dana di Archi}
+
+Untuk menyatukan pilihan strategis di atas ke dalam satu gambar, lapisan
+strategi API Transfer Dana dimodelkan dengan Archi seperti pada
+Gambar~\ref{fig:strategy-transfer}. Model ini diturunkan langsung dari lapisan
+motivasi pada Bab~\ref{ch:strategi-bisnis}: sasaran, kebutuhan, prinsip, dan
+hasil yang sama kini ditopang oleh sumber daya, kapabilitas, arah tindakan, dan
+value stream yang konkret.
+
+\begin{figure}[tbp]
+\centering
+\includegraphics[width=\textwidth,height=0.85\textheight,keepaspectratio]{strategy-transfer.pdf}
+\caption{Model strategi (ArchiMate) API Transfer Dana Bank Wanua yang diturunkan
+dari lapisan motivasi: sumber daya, kapabilitas, arah tindakan, dan value stream
+beserta keterhubungannya (penugasan, layanan, asosiasi, realisasi, dan pengaruh)
+ke sasaran, kebutuhan, prinsip, dan hasil.}
+\label{fig:strategy-transfer}
+\end{figure}
+
+\subsubsection{Cara Membaca Diagram Strategi API Transfer Dana}
+
+Gambar~\ref{fig:strategy-transfer} dibaca dari kiri ke kanan dan dari atas ke
+bawah. Kolom paling kiri memuat \textbf{sumber daya}: Platform API \& Integrasi,
+Konektivitas BI-FAST, dan Tim Rekayasa Digital. Kolom kedua memuat
+\textbf{kapabilitas} tingkat tinggi: Pembayaran Real-time 24/7, Kepatuhan \& AML
+Otomatis, dan Manajemen API sebagai Produk. Kolom ketiga memuat \textbf{arah
+tindakan} yang dipilih Bank Wanua, sedangkan kolom paling kanan menampilkan
+kembali elemen lapisan motivasi---sasaran, kebutuhan, prinsip, dan hasil---agar
+keterkaitan antar-lapisan terlihat. Pita di bagian bawah adalah \textbf{value
+stream} Eksekusi Transfer Dana beserta tahap-tahapnya.
+
+Hubungan \emph{penugasan} (assignment) menautkan sumber daya dengan kapabilitas
+yang ditopangnya. Platform API \& Integrasi dan Konektivitas BI-FAST ditugaskan
+pada kapabilitas Pembayaran Real-time 24/7, karena rel transfer real-time hanya
+mungkin bila ada platform integrasi dan koneksi ke BI-FAST. Tim Rekayasa Digital
+ditugaskan pada kapabilitas Kepatuhan \& AML Otomatis serta Manajemen API
+sebagai Produk, sebab keduanya bertumpu pada keahlian tim. Ketiga kapabilitas
+ini sejalan dengan kapabilitas strategis yang disebut pada Langkah~2:
+perpindahan dana, kepatuhan, dan kemitraan/produk API.
+
+Empat \emph{arah tindakan} menyatakan pilihan strategis. Bangun API Transfer
+Real-time dan Modernisasi Core Banking Bertahap berasosiasi dengan kapabilitas
+Pembayaran Real-time 24/7; Otomasi AML \& Limit berasosiasi dengan Kepatuhan \&
+AML Otomatis; dan Adopsi Standar SNAP BI berasosiasi dengan Manajemen API
+sebagai Produk. Hubungan \emph{asosiasi} ini menunjukkan kapabilitas yang
+dibutuhkan tiap arah tindakan tanpa menyiratkan urutan pelaksanaan. Selanjutnya,
+hubungan \emph{realisasi} menautkan arah tindakan dengan kebutuhan pada lapisan
+motivasi: Bangun API merealisasikan kebutuhan Membungkus BI-FAST, Otomasi AML \&
+Limit merealisasikan AML \& limit otomatis, dan Adopsi SNAP BI merealisasikan
+Patuh format SNAP BI. Dengan demikian setiap pilihan strategis dapat ditelusuri
+kembali ke kebutuhan yang sudah dirumuskan pada Bab~\ref{ch:strategi-bisnis}.
+
+Kapabilitas tidak berdiri sendiri. Kapabilitas Pembayaran Real-time 24/7
+\emph{merealisasikan} sasaran Transfer Dana Real-time 24/7, sedangkan Manajemen
+API sebagai Produk merealisasikan prinsip API sebagai Produk. Ketiga kapabilitas
+\emph{melayani} (serving) value stream Eksekusi Transfer Dana, yang pada
+gilirannya merealisasikan hasil UMKM \& mitra terhubung. Arah tindakan
+Modernisasi Core Banking Bertahap \emph{memengaruhi} hasil Biaya per transaksi
+turun, karena modernisasi bertahap menekan biaya operasional tanpa harus
+mengganti sistem inti sekaligus. Pola ini menegaskan bahwa lapisan strategi
+adalah jembatan: ia menerjemahkan sasaran motivasi menjadi kapabilitas dan arah
+tindakan yang konkret.
+
+Pita value stream di bagian bawah memerinci bagaimana nilai diciptakan tahap
+demi tahap. Eksekusi Transfer Dana \emph{tersusun} (komposisi) atas empat tahap
+berurutan yang dihubungkan \emph{pemicuan} (triggering): Inisiasi Transfer,
+Validasi \& AML, Eksekusi via BI-FAST, dan Settlement \& Notifikasi. Tahap-tahap
+inilah yang ditopang oleh kapabilitas pada kolom kedua---misalnya Validasi \& AML
+bergantung pada kapabilitas Kepatuhan \& AML Otomatis, sedangkan Eksekusi via
+BI-FAST bergantung pada Pembayaran Real-time 24/7. Memerinci value stream menjadi
+tahap membantu pembaca melihat di mana tiap kapabilitas memberi nilai, sekaligus
+menyiapkan transisi ke lapisan bisnis pada bab berikutnya.
 
 \section{Langkah Analisis dan Artefak Pendukung}
 

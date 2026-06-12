@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archimate:model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:archimate="http://www.archimatetool.com/archimate" name="session-03" id="id-c349a2babc3d499ab609bb44deadbd09" version="5.0.0">
+  <folder name="Strategy" id="id-bcd219967cea4b61b49a1e3e3f684b7c" type="strategy">
+    <documentation>Folder untuk elemen lapisan strategi. Belum digunakan pada model motivasi sesi 02.</documentation>
+    <element xsi:type="archimate:Resource" name="Resource" id="id-10e34c21459540e181c3c7bf3464b832">
+      <documentation>Contoh notasi Resource pada legenda. Resource adalah aset (berwujud maupun tidak berwujud) yang dimiliki atau dikendalikan oleh organisasi dan dapat digunakan untuk mencapai tujuan.</documentation>
+    </element>
+    <element xsi:type="archimate:Capability" name="Capability" id="id-06eac3375b0a453eaac90647247410dc">
+      <documentation>Contoh notasi Capability pada legenda. Capability adalah kemampuan yang dimiliki organisasi (orang, proses, dan sumber daya) untuk mewujudkan suatu hasil.</documentation>
+    </element>
+    <element xsi:type="archimate:CourseOfAction" name="Course of Action" id="id-176c39f91b854bcc9c90731928d0aa27">
+      <documentation>Contoh notasi Course of Action pada legenda. Course of Action adalah pendekatan atau rencana tindakan yang dipilih organisasi untuk mencapai sasarannya.</documentation>
+    </element>
+    <element xsi:type="archimate:ValueStream" name="Value Stream" id="id-8e73f1b622a24dd2bf39671a02e1c832">
+      <documentation>Contoh notasi Value Stream pada legenda. Value Stream adalah rangkaian aktivitas bernilai tambah yang menciptakan hasil bagi pemangku kepentingan.</documentation>
+    </element>
+    <element xsi:type="archimate:Resource" name="Platform API &amp; Integrasi" id="id-fa09ae83e0364b9fba15d70b69eceb56">
+      <documentation>Aset teknologi inti: API gateway, layer integrasi, dan middleware yang membungkus sistem internal bank menjadi API yang dapat dikonsumsi mitra.</documentation>
+    </element>
+    <element xsi:type="archimate:Resource" name="Konektivitas BI-FAST" id="id-a897fa2ee6304623887c9590026f5bf8">
+      <documentation>Lisensi, sertifikasi, dan koneksi ke infrastruktur pembayaran ritel nasional BI-FAST sebagai sumber daya untuk transfer real-time.</documentation>
+    </element>
+    <element xsi:type="archimate:Resource" name="Tim Rekayasa Digital" id="id-26b85facdcd84868b4e1e9a31305ae75">
+      <documentation>Sumber daya manusia: tim engineering, keamanan, dan kepatuhan yang membangun serta mengoperasikan layanan API transfer dana.</documentation>
+    </element>
+    <element xsi:type="archimate:Capability" name="Pembayaran Real-time 24/7" id="id-45e96320b04349bfadd3e99a18c58e24">
+      <documentation>Kemampuan organisasi untuk mengeksekusi transfer dana antarbank secara seketika, tersedia 24 jam sehari, 7 hari seminggu.</documentation>
+    </element>
+    <element xsi:type="archimate:Capability" name="Kepatuhan &amp; AML Otomatis" id="id-c85c6a70498e46b397906b431186d9e3">
+      <documentation>Kemampuan memeriksa AML, limit, dan aturan kepatuhan secara otomatis pada setiap transaksi sesuai ketentuan regulator.</documentation>
+    </element>
+    <element xsi:type="archimate:Capability" name="Manajemen API sebagai Produk" id="id-aff9602d438f4996ac19ab0069a5591a">
+      <documentation>Kemampuan merancang, menerbitkan, mengamankan, dan mengelola API sebagai produk yang dikonsumsi UMKM dan mitra.</documentation>
+    </element>
+    <element xsi:type="archimate:CourseOfAction" name="Bangun API Transfer Real-time" id="id-b9ef41c515904ae090d03c9b4e90eb72">
+      <documentation>Membangun dan membungkus BI-FAST menjadi API transfer dana real-time 24/7 sebagai inisiatif strategis utama.</documentation>
+    </element>
+    <element xsi:type="archimate:CourseOfAction" name="Adopsi Standar SNAP BI" id="id-021bfa0b5b6d489cb03ade0ec74a04b2">
+      <documentation>Mengadopsi Standar Nasional Open API Pembayaran (SNAP) Bank Indonesia agar API patuh dan interoperabel.</documentation>
+    </element>
+    <element xsi:type="archimate:CourseOfAction" name="Otomasi AML &amp; Limit" id="id-6de53543b51b49be84ed3463c7ee7b23">
+      <documentation>Mengotomasi pengecekan AML dan limit transaksi untuk menggantikan proses manual yang lambat dan berisiko.</documentation>
+    </element>
+    <element xsi:type="archimate:CourseOfAction" name="Modernisasi Core Banking Bertahap" id="id-2e73e85dc4ed42de8ab7a013dcee5916">
+      <documentation>Memodernisasi core banking lama secara bertahap (strangler) agar mendukung layanan real-time tanpa mengganggu operasi berjalan.</documentation>
+    </element>
+    <element xsi:type="archimate:ValueStream" name="Eksekusi Transfer Dana" id="id-6e2dfcbcc4894d3bb7fcd8dbeff47fab">
+      <documentation>Aliran nilai ujung-ke-ujung: Inisiasi -> Validasi &amp; AML -> Eksekusi via BI-FAST -> Settlement &amp; Notifikasi, yang memberi nilai bagi nasabah UMKM.</documentation>
+    </element>
+  </folder>
+  <folder name="Business" id="id-399f62ee9a50424f89be4b1dfe3f7cde" type="business">
+    <documentation>Folder untuk elemen lapisan bisnis. Belum digunakan pada model motivasi sesi 02.</documentation>
+  </folder>
+  <folder name="Application" id="id-ebe6c990642d402eb5e9515cf252a914" type="application">
+    <documentation>Folder untuk elemen lapisan aplikasi. Belum digunakan pada model motivasi sesi 02.</documentation>
+  </folder>
+  <folder name="Technology &amp; Physical" id="id-45817f853f7b4576989c519fd910bdf4" type="technology">
+    <documentation>Folder untuk elemen teknologi dan fisik. Belum digunakan pada model motivasi sesi 02.</documentation>
+  </folder>
+  <folder name="Motivation" id="id-c4956eae965e46c6a884d9a2cd0226d1" type="motivation">
+    <documentation>Folder utama studi kasus yang menyimpan elemen motivasi API Transfer Dana dan sepuluh contoh notasi untuk legenda.</documentation>
+    <element xsi:type="archimate:Stakeholder" name="Nasabah UMKM" id="id-b1131add95d445b48360f56122ca7225">
+      <documentation>Pelaku usaha mikro, kecil, dan menengah yang membutuhkan layanan transfer dana cepat, tersedia sepanjang waktu, dan dapat dipercaya untuk menjaga kelancaran arus kas usaha.</documentation>
+    </element>
+    <element xsi:type="archimate:Stakeholder" name="Divisi Kepatuhan" id="id-0718e9f432f841a9995004183db8e424">
+      <documentation>Unit internal bank yang memastikan layanan transfer memenuhi aturan, pengendalian risiko, pemeriksaan AML, batas transaksi, dan ketentuan regulator.</documentation>
+    </element>
+    <element xsi:type="archimate:Stakeholder" name="Bank Indonesia" id="id-1fe7e1e2cabb47ca8ec6bf5dc2ef3b88">
+      <documentation>Regulator dan otoritas sistem pembayaran yang menetapkan standar interoperabilitas, kepatuhan, dan tata kelola layanan transfer dana.</documentation>
+    </element>
+    <element xsi:type="archimate:Driver" name="Ekspektasi Transfer Instan" id="id-16e95ca963ac4b53a7aaaaede26b01c8">
+      <documentation>Tekanan kebutuhan pengguna agar transfer dapat diproses secara real-time selama 24 jam sehari dan 7 hari seminggu.</documentation>
+    </element>
+    <element xsi:type="archimate:Driver" name="Kepatuhan SNAP BI" id="id-05bc9b8809bd4e9893382133167b23ac">
+      <documentation>Kebutuhan untuk memenuhi Standar Nasional Open API Pembayaran Bank Indonesia agar integrasi layanan pembayaran konsisten dan patuh regulasi.</documentation>
+    </element>
+    <element xsi:type="archimate:Driver" name="Persaingan Fintech" id="id-57916d7f0bad49daba6a978ce2899112">
+      <documentation>Tekanan kompetitif dari penyedia layanan keuangan digital yang menawarkan pengalaman transfer lebih cepat dan mudah digunakan.</documentation>
+    </element>
+    <element xsi:type="archimate:Driver" name="Efisiensi Operasional" id="id-3b0c6bec5c4d49cdb6b8d859a1875926">
+      <documentation>Dorongan untuk menurunkan biaya pemrosesan, mengurangi aktivitas manual, dan meningkatkan skalabilitas operasional layanan transfer.</documentation>
+    </element>
+    <element xsi:type="archimate:Assessment" name="Transfer masih batch &amp; manual" id="id-04eefe34689340838a5fb58dbb46158b">
+      <documentation>Temuan kondisi saat ini bahwa sebagian alur transfer masih mengandalkan pemrosesan batch dan pekerjaan manual sehingga belum memenuhi ekspektasi layanan instan.</documentation>
+    </element>
+    <element xsi:type="archimate:Assessment" name="AML &amp; limit dicek manual" id="id-b945a2253f6d403f8f5b1ded162b9726">
+      <documentation>Temuan kondisi saat ini bahwa pemeriksaan anti pencucian uang dan batas transaksi masih membutuhkan langkah manual yang memperlambat proses.</documentation>
+    </element>
+    <element xsi:type="archimate:Goal" name="Transfer Dana Real-time 24/7" id="id-f53a66f205fd48929156f55fe5ea4a26">
+      <documentation>Sasaran utama arsitektur: menyediakan kapabilitas transfer dana real-time yang tersedia 24 jam sehari dan 7 hari seminggu dengan pengendalian yang memadai.</documentation>
+    </element>
+    <element xsi:type="archimate:Outcome" name="Biaya per transaksi turun" id="id-dddfbbbe3d72443aaa358376943946d3">
+      <documentation>Hasil terukur yang diharapkan dari otomasi dan penyederhanaan proses: biaya operasional rata-rata untuk setiap transaksi transfer menurun.</documentation>
+    </element>
+    <element xsi:type="archimate:Outcome" name="UMKM &amp; mitra terhubung" id="id-299fb7d378bf45bebf5cf28e6fdaa039">
+      <documentation>Hasil yang diharapkan berupa konektivitas layanan bagi nasabah UMKM dan mitra melalui integrasi transfer dana yang konsisten.</documentation>
+    </element>
+    <element xsi:type="archimate:Principle" name="Keamanan &amp; Kepatuhan Sejak Awal" id="id-af47ca8208fc43e5a07e05770335de0e">
+      <documentation>Prinsip desain bahwa kontrol keamanan, AML, batas transaksi, auditabilitas, dan kepatuhan harus dibangun sejak tahap awal solusi.</documentation>
+    </element>
+    <element xsi:type="archimate:Principle" name="API sebagai Produk" id="id-fb4ec8edbf8e4d49aae42a27356f56e2">
+      <documentation>Prinsip desain bahwa API dikelola sebagai produk dengan kontrak yang jelas, pengalaman pengembang, versi, dokumentasi, dan pemantauan layanan.</documentation>
+    </element>
+    <element xsi:type="archimate:Requirement" name="Membungkus BI-FAST" id="id-bd8fc943782c48b8b841bdcd41426af8">
+      <documentation>Kebutuhan solusi untuk menyediakan lapisan layanan API yang membungkus integrasi BI-FAST secara terkelola dan mudah digunakan konsumen internal maupun mitra.</documentation>
+    </element>
+    <element xsi:type="archimate:Requirement" name="AML &amp; limit otomatis" id="id-77a237ec64234d3faba1decc49ca81d1">
+      <documentation>Kebutuhan solusi untuk menjalankan pemeriksaan anti pencucian uang dan batas transaksi secara otomatis sebelum transaksi diteruskan.</documentation>
+    </element>
+    <element xsi:type="archimate:Requirement" name="Patuh format SNAP BI" id="id-4452d0285075461cb8722c2950b9f8ef">
+      <documentation>Kebutuhan solusi agar kontrak API dan pertukaran data mengikuti format serta ketentuan SNAP Bank Indonesia yang berlaku.</documentation>
+    </element>
+    <element xsi:type="archimate:Constraint" name="Anggaran terbatas" id="id-b8e9fc0363e64736b5f0a2b8918fe8a2">
+      <documentation>Batas pelaksanaan bahwa perubahan harus diprioritaskan dan direncanakan sesuai ketersediaan anggaran transformasi.</documentation>
+    </element>
+    <element xsi:type="archimate:Constraint" name="Core banking lama (bertahap)" id="id-407bd5935f54461b96a3a128f3d471cc">
+      <documentation>Batas teknis bahwa modernisasi harus dilakukan bertahap karena layanan tetap bergantung pada core banking lama yang tidak dapat diganti sekaligus.</documentation>
+    </element>
+    <element xsi:type="archimate:Meaning" name="Transfer = perpindahan dana antarrekening" id="id-fb1d57e8dd41481ba3325664474a76ed">
+      <documentation>Definisi bersama bahwa transfer pada lingkup model berarti perpindahan dana antarrekening yang diproses melalui layanan bank.</documentation>
+    </element>
+    <element xsi:type="archimate:Value" name="Likuiditas &amp; kepercayaan UMKM" id="id-7de891289e71497d9a00024110e52cef">
+      <documentation>Nilai yang diterima nasabah UMKM: perputaran dana lebih lancar dan meningkatnya kepercayaan terhadap layanan transaksi bank.</documentation>
+    </element>
+    <element xsi:type="archimate:Stakeholder" name="Stakeholder" id="id-31404775cac644a590765571e298249b">
+      <documentation>Contoh notasi Stakeholder pada legenda. Stakeholder adalah individu, tim, organisasi, atau kelas pihak yang memiliki kepentingan terhadap hasil arsitektur.</documentation>
+    </element>
+    <element xsi:type="archimate:Driver" name="Driver" id="id-362a1b8abd844c9eb595d86894307ad5">
+      <documentation>Contoh notasi Driver pada legenda. Driver adalah kondisi internal atau eksternal yang memotivasi organisasi untuk menetapkan sasaran dan melakukan perubahan.</documentation>
+    </element>
+    <element xsi:type="archimate:Assessment" name="Assessment" id="id-913b6ad6bab84b96915064defcd013e5">
+      <documentation>Contoh notasi Assessment pada legenda. Assessment adalah hasil analisis atas keadaan organisasi dalam kaitannya dengan suatu driver.</documentation>
+    </element>
+    <element xsi:type="archimate:Goal" name="Goal" id="id-6bde712ab5584bd5a7fa0ead738ee50c">
+      <documentation>Contoh notasi Goal pada legenda. Goal adalah pernyataan tingkat tinggi mengenai maksud, arah, atau keadaan akhir yang ingin dicapai.</documentation>
+    </element>
+    <element xsi:type="archimate:Outcome" name="Outcome" id="id-6a8f5691bab74550bb87818cf695ef10">
+      <documentation>Contoh notasi Outcome pada legenda. Outcome adalah hasil konkret yang dapat diamati atau diukur ketika sasaran berhasil diwujudkan.</documentation>
+    </element>
+    <element xsi:type="archimate:Principle" name="Principle" id="id-419876c013174fd48816c0fdc00d6a67">
+      <documentation>Contoh notasi Principle pada legenda. Principle adalah aturan umum yang menuntun keputusan desain dan pelaksanaan arsitektur.</documentation>
+    </element>
+    <element xsi:type="archimate:Requirement" name="Requirement" id="id-c72ea4e7e03a4304a91a0a88da98f149">
+      <documentation>Contoh notasi Requirement pada legenda. Requirement adalah pernyataan kebutuhan yang harus direalisasikan oleh arsitektur atau solusi.</documentation>
+    </element>
+    <element xsi:type="archimate:Constraint" name="Constraint" id="id-1cbe943a99634a109ee4a5dc55a4c220">
+      <documentation>Contoh notasi Constraint pada legenda. Constraint adalah batasan yang membatasi cara sasaran dapat dicapai atau solusi dapat dirancang.</documentation>
+    </element>
+    <element xsi:type="archimate:Meaning" name="Meaning" id="id-d14183bd79ba416cb59758e9b9d6ab28">
+      <documentation>Contoh notasi Meaning pada legenda. Meaning adalah pengetahuan, interpretasi, atau arti yang diberikan kepada sebuah konsep dalam konteks tertentu.</documentation>
+    </element>
+    <element xsi:type="archimate:Value" name="Value" id="id-c8b3f0ed3ee144ef9c290f3235c86d1f">
+      <documentation>Contoh notasi Value pada legenda. Value adalah manfaat, kegunaan, atau kepentingan relatif yang diterima oleh suatu stakeholder.</documentation>
+    </element>
+  </folder>
+  <folder name="Implementation &amp; Migration" id="id-40f41ebc1dfd423d8dcc2e4eabfd3edc" type="implementation_migration">
+    <documentation>Folder untuk elemen implementasi dan migrasi. Belum digunakan pada model motivasi sesi 02.</documentation>
+  </folder>
+  <folder name="Other" id="id-ea862924396140ada676a2eeb65e00ce" type="other">
+    <documentation>Folder untuk objek tambahan di luar lapisan utama. Belum digunakan pada model motivasi sesi 02.</documentation>
+  </folder>
+  <folder name="Relations" id="id-87ec6000da8b4ab1aa982c91c5383cb8" type="relations">
+    <documentation>Folder relasi yang menghubungkan elemen-elemen motivasi dan menjelaskan alur argumentasi arsitektur.</documentation>
+    <element xsi:type="archimate:AssociationRelationship" id="id-42590023c4ad464c990ecd53138a8dfc" source="id-b1131add95d445b48360f56122ca7225" target="id-16e95ca963ac4b53a7aaaaede26b01c8">
+      <documentation>Mengasosiasikan kebutuhan Nasabah UMKM dengan dorongan untuk menyediakan transfer instan.</documentation>
+    </element>
+    <element xsi:type="archimate:AssociationRelationship" id="id-46551b34396c4f79b0755dd9f4cbc08a" source="id-0718e9f432f841a9995004183db8e424" target="id-05bc9b8809bd4e9893382133167b23ac">
+      <documentation>Mengasosiasikan perhatian Divisi Kepatuhan dengan kebutuhan kepatuhan terhadap SNAP Bank Indonesia.</documentation>
+    </element>
+    <element xsi:type="archimate:AssociationRelationship" id="id-a99a49d2e0d245f0af5e428f675496cd" source="id-1fe7e1e2cabb47ca8ec6bf5dc2ef3b88" target="id-05bc9b8809bd4e9893382133167b23ac">
+      <documentation>Mengasosiasikan Bank Indonesia sebagai regulator dengan driver kepatuhan SNAP Bank Indonesia.</documentation>
+    </element>
+    <element xsi:type="archimate:InfluenceRelationship" id="id-817ad3cb28bf4f3595fc3ce4be16bde4" source="id-04eefe34689340838a5fb58dbb46158b" target="id-16e95ca963ac4b53a7aaaaede26b01c8">
+      <documentation>Temuan bahwa transfer masih batch dan manual memperkuat urgensi untuk memenuhi ekspektasi transfer instan.</documentation>
+    </element>
+    <element xsi:type="archimate:InfluenceRelationship" id="id-c6307c55a0d14151b9bf08d22b6496bb" source="id-b945a2253f6d403f8f5b1ded162b9726" target="id-05bc9b8809bd4e9893382133167b23ac">
+      <documentation>Temuan bahwa AML dan limit masih diperiksa manual memperkuat kebutuhan untuk memenuhi kepatuhan SNAP Bank Indonesia.</documentation>
+    </element>
+    <element xsi:type="archimate:InfluenceRelationship" id="id-52c404bfefe740d19dccffa57cd541e5" source="id-16e95ca963ac4b53a7aaaaede26b01c8" target="id-f53a66f205fd48929156f55fe5ea4a26">
+      <documentation>Ekspektasi transfer instan mendorong sasaran penyediaan transfer dana real-time 24/7.</documentation>
+    </element>
+    <element xsi:type="archimate:InfluenceRelationship" id="id-a0a193a9d3104511938f2fa46c813f94" source="id-05bc9b8809bd4e9893382133167b23ac" target="id-f53a66f205fd48929156f55fe5ea4a26">
+      <documentation>Kepatuhan SNAP Bank Indonesia memengaruhi sasaran transfer dana real-time 24/7 agar layanan tetap sesuai regulasi.</documentation>
+    </element>
+    <element xsi:type="archimate:InfluenceRelationship" id="id-58a4b1046518448f9b83160bb58a23f1" source="id-57916d7f0bad49daba6a978ce2899112" target="id-f53a66f205fd48929156f55fe5ea4a26">
+      <documentation>Persaingan dengan fintech mendorong percepatan sasaran transfer dana real-time 24/7.</documentation>
+    </element>
+    <element xsi:type="archimate:InfluenceRelationship" id="id-8577f924c4434ee899327136040fc2e2" source="id-3b0c6bec5c4d49cdb6b8d859a1875926" target="id-f53a66f205fd48929156f55fe5ea4a26">
+      <documentation>Dorongan efisiensi operasional mendukung sasaran transfer dana real-time 24/7 melalui otomasi dan penyederhanaan proses.</documentation>
+    </element>
+    <element xsi:type="archimate:RealizationRelationship" id="id-50ac0021bd1441dfa04b748fab99121c" source="id-bd8fc943782c48b8b841bdcd41426af8" target="id-f53a66f205fd48929156f55fe5ea4a26">
+      <documentation>Kebutuhan membungkus BI-FAST merealisasikan sebagian sasaran transfer dana real-time 24/7.</documentation>
+    </element>
+    <element xsi:type="archimate:RealizationRelationship" id="id-d1c0b0a8d8f04eb1aa5464a19cce234e" source="id-77a237ec64234d3faba1decc49ca81d1" target="id-f53a66f205fd48929156f55fe5ea4a26">
+      <documentation>Kebutuhan pemeriksaan AML dan limit otomatis merealisasikan sebagian sasaran transfer dana real-time 24/7 dengan kontrol yang memadai.</documentation>
+    </element>
+    <element xsi:type="archimate:RealizationRelationship" id="id-3dc33f39fc3f4b0aa13f2bfb5bb632d1" source="id-4452d0285075461cb8722c2950b9f8ef" target="id-f53a66f205fd48929156f55fe5ea4a26">
+      <documentation>Kebutuhan patuh format SNAP Bank Indonesia merealisasikan sebagian sasaran transfer dana real-time 24/7.</documentation>
+    </element>
+    <element xsi:type="archimate:RealizationRelationship" id="id-b5b6f33327144ecba3b180699e7c77f8" source="id-dddfbbbe3d72443aaa358376943946d3" target="id-f53a66f205fd48929156f55fe5ea4a26">
+      <documentation>Penurunan biaya per transaksi merupakan hasil konkret yang merealisasikan manfaat dari sasaran transfer dana real-time 24/7.</documentation>
+    </element>
+    <element xsi:type="archimate:RealizationRelationship" id="id-4619603f18184b0c895222c0a452be7b" source="id-299fb7d378bf45bebf5cf28e6fdaa039" target="id-f53a66f205fd48929156f55fe5ea4a26">
+      <documentation>Keterhubungan UMKM dan mitra merupakan hasil konkret yang merealisasikan manfaat dari sasaran transfer dana real-time 24/7.</documentation>
+    </element>
+    <element xsi:type="archimate:InfluenceRelationship" id="id-c5a6485704b1419abf4de07f9c100112" source="id-af47ca8208fc43e5a07e05770335de0e" target="id-77a237ec64234d3faba1decc49ca81d1">
+      <documentation>Prinsip keamanan dan kepatuhan sejak awal memengaruhi perancangan kebutuhan pemeriksaan AML dan limit otomatis.</documentation>
+    </element>
+    <element xsi:type="archimate:InfluenceRelationship" id="id-0c84feffb8174c22bb0a3d80cde5d12d" source="id-fb4ec8edbf8e4d49aae42a27356f56e2" target="id-bd8fc943782c48b8b841bdcd41426af8">
+      <documentation>Prinsip API sebagai produk memengaruhi kebutuhan untuk membungkus integrasi BI-FAST sebagai layanan API terkelola.</documentation>
+    </element>
+    <element xsi:type="archimate:InfluenceRelationship" id="id-a02f08a884bc4c4eb6848ee5aa8bf1c4" source="id-b8e9fc0363e64736b5f0a2b8918fe8a2" target="id-f53a66f205fd48929156f55fe5ea4a26">
+      <documentation>Keterbatasan anggaran membatasi pendekatan dan prioritas untuk mencapai sasaran transfer dana real-time 24/7.</documentation>
+    </element>
+    <element xsi:type="archimate:InfluenceRelationship" id="id-a79c752432b9417bba1a82c20d4a0918" source="id-407bd5935f54461b96a3a128f3d471cc" target="id-f53a66f205fd48929156f55fe5ea4a26">
+      <documentation>Ketergantungan pada core banking lama membatasi kecepatan perubahan dan menuntut modernisasi bertahap.</documentation>
+    </element>
+    <element xsi:type="archimate:AssociationRelationship" id="id-7e8a6b4401c1422d805f1fbf45390ac2" source="id-7de891289e71497d9a00024110e52cef" target="id-b1131add95d445b48360f56122ca7225">
+      <documentation>Mengasosiasikan nilai likuiditas dan kepercayaan dengan Nasabah UMKM sebagai penerima manfaat utama.</documentation>
+    </element>
+    <element xsi:type="archimate:AssociationRelationship" id="id-2595fa7d551447449525e26c0c0285ba" source="id-7de891289e71497d9a00024110e52cef" target="id-299fb7d378bf45bebf5cf28e6fdaa039">
+      <documentation>Mengasosiasikan nilai likuiditas dan kepercayaan UMKM dengan hasil keterhubungan UMKM dan mitra.</documentation>
+    </element>
+    <element xsi:type="archimate:AssociationRelationship" id="id-ce862ec86e95477cb582b4e61308cd54" source="id-fb1d57e8dd41481ba3325664474a76ed" target="id-f53a66f205fd48929156f55fe5ea4a26">
+      <documentation>Mengasosiasikan definisi transfer sebagai perpindahan dana antarrekening dengan sasaran transfer dana real-time 24/7.</documentation>
+    </element>
+    <element xsi:type="archimate:AssignmentRelationship" id="id-b3bcfbc91124457caf747f89bece5e45" source="id-fa09ae83e0364b9fba15d70b69eceb56" target="id-45e96320b04349bfadd3e99a18c58e24"/>
+    <element xsi:type="archimate:AssignmentRelationship" id="id-93f6465861e04e3c81cdea72c580c50f" source="id-a897fa2ee6304623887c9590026f5bf8" target="id-45e96320b04349bfadd3e99a18c58e24"/>
+    <element xsi:type="archimate:AssignmentRelationship" id="id-89a85f274715432f828959e17c0b17f3" source="id-26b85facdcd84868b4e1e9a31305ae75" target="id-aff9602d438f4996ac19ab0069a5591a"/>
+    <element xsi:type="archimate:AssignmentRelationship" id="id-c4e5212ed2724dc3a7256a32afde2f3d" source="id-26b85facdcd84868b4e1e9a31305ae75" target="id-c85c6a70498e46b397906b431186d9e3"/>
+    <element xsi:type="archimate:ServingRelationship" id="id-fdb9e562e1a446569b06cf9cf2ed8a63" source="id-45e96320b04349bfadd3e99a18c58e24" target="id-6e2dfcbcc4894d3bb7fcd8dbeff47fab"/>
+    <element xsi:type="archimate:ServingRelationship" id="id-19321bbac84340d3848b68e6a8336b99" source="id-c85c6a70498e46b397906b431186d9e3" target="id-6e2dfcbcc4894d3bb7fcd8dbeff47fab"/>
+    <element xsi:type="archimate:ServingRelationship" id="id-23e53abe412a4580956d7dee0846cc88" source="id-aff9602d438f4996ac19ab0069a5591a" target="id-6e2dfcbcc4894d3bb7fcd8dbeff47fab"/>
+    <element xsi:type="archimate:AssociationRelationship" id="id-95fdab79ea8c46bc8d509a8a49c1970a" source="id-b9ef41c515904ae090d03c9b4e90eb72" target="id-45e96320b04349bfadd3e99a18c58e24"/>
+    <element xsi:type="archimate:AssociationRelationship" id="id-6ec793babeeb46619ed122f9945504ef" source="id-021bfa0b5b6d489cb03ade0ec74a04b2" target="id-aff9602d438f4996ac19ab0069a5591a"/>
+    <element xsi:type="archimate:AssociationRelationship" id="id-f7b0f2e670ad43c38399ad9adef2896f" source="id-6de53543b51b49be84ed3463c7ee7b23" target="id-c85c6a70498e46b397906b431186d9e3"/>
+    <element xsi:type="archimate:AssociationRelationship" id="id-4240596fb9eb4fb69607aa8b010f1ab9" source="id-2e73e85dc4ed42de8ab7a013dcee5916" target="id-45e96320b04349bfadd3e99a18c58e24"/>
+    <element xsi:type="archimate:RealizationRelationship" id="id-b9d68ae595674110bc16b45e63e81f52" source="id-b9ef41c515904ae090d03c9b4e90eb72" target="id-bd8fc943782c48b8b841bdcd41426af8"/>
+    <element xsi:type="archimate:RealizationRelationship" id="id-8423408c2c164a75b280c36a65723279" source="id-021bfa0b5b6d489cb03ade0ec74a04b2" target="id-4452d0285075461cb8722c2950b9f8ef"/>
+    <element xsi:type="archimate:RealizationRelationship" id="id-8164957cd029416594c59d2ca0e1c25a" source="id-6de53543b51b49be84ed3463c7ee7b23" target="id-77a237ec64234d3faba1decc49ca81d1"/>
+    <element xsi:type="archimate:RealizationRelationship" id="id-e9617221f9eb4a049db88368f6a2f41a" source="id-45e96320b04349bfadd3e99a18c58e24" target="id-f53a66f205fd48929156f55fe5ea4a26"/>
+    <element xsi:type="archimate:RealizationRelationship" id="id-0bd49491508a4db9ba71255e80f9c91f" source="id-aff9602d438f4996ac19ab0069a5591a" target="id-fb4ec8edbf8e4d49aae42a27356f56e2"/>
+    <element xsi:type="archimate:RealizationRelationship" id="id-08c134175a534b878446175bf63c5c3f" source="id-6e2dfcbcc4894d3bb7fcd8dbeff47fab" target="id-299fb7d378bf45bebf5cf28e6fdaa039"/>
+    <element xsi:type="archimate:InfluenceRelationship" id="id-317f7066c11c4ffdb81ef3a5d354b5bb" source="id-2e73e85dc4ed42de8ab7a013dcee5916" target="id-dddfbbbe3d72443aaa358376943946d3"/>
+  </folder>
+  <folder name="Views" id="id-91db20392fa3419896b2d350fe96283f" type="diagrams">
+    <documentation>Folder view yang menyimpan diagram studi kasus dan legenda notasi motivasi.</documentation>
+    <element xsi:type="archimate:ArchimateDiagramModel" name="Default View" id="id-882e07d390094ed69fd6672fed772e08">
+      <documentation>View awal bawaan model. Dipertahankan sebagai kanvas kosong untuk eksplorasi atau latihan lanjutan.</documentation>
+    </element>
+    <element xsi:type="archimate:ArchimateDiagramModel" name="Motivasi - API Transfer Dana" id="id-75def7f05aca4a8f81d3f1b1dcb22998">
+      <child xsi:type="archimate:DiagramObject" id="id-6cf85cf7e39140579422722fde2f7f47" targetConnections="id-549a2d7125564eb081aae68b1c1eb62f" textPosition="1" archimateElement="id-b1131add95d445b48360f56122ca7225">
+        <bounds x="232" y="20" width="175" height="84"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-79d1e7f2f489447bbae9e9ba7cd43cae" source="id-6cf85cf7e39140579422722fde2f7f47" target="id-5a5119ed61bb413698c53c731bbcd40b" archimateRelationship="id-42590023c4ad464c990ecd53138a8dfc"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-d973135f9c764006a4b072baf7038b4c" textPosition="1" archimateElement="id-0718e9f432f841a9995004183db8e424">
+        <bounds x="632" y="20" width="175" height="84"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-0da3ec706dc54eb5b8d872e72af5dbdc" source="id-d973135f9c764006a4b072baf7038b4c" target="id-70e5c8e1e7de4279a1760d4eef6a18ab" archimateRelationship="id-46551b34396c4f79b0755dd9f4cbc08a"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-61673e0b7be04ef983cb4a7fac31a1b0" textPosition="1" archimateElement="id-1fe7e1e2cabb47ca8ec6bf5dc2ef3b88">
+        <bounds x="832" y="20" width="175" height="84"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-2542ccc843fe40a4b42337b1cf262603" source="id-61673e0b7be04ef983cb4a7fac31a1b0" target="id-70e5c8e1e7de4279a1760d4eef6a18ab" archimateRelationship="id-a99a49d2e0d245f0af5e428f675496cd">
+          <bendpoint startX="-18" startY="59" endX="182" endY="-92"/>
+          <bendpoint startX="-162" startY="71" endX="38" endY="-80"/>
+        </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-5a5119ed61bb413698c53c731bbcd40b" targetConnections="id-79d1e7f2f489447bbae9e9ba7cd43cae id-fd53e044e13444e3b8532b8be367caf9" textPosition="1" archimateElement="id-16e95ca963ac4b53a7aaaaede26b01c8">
+        <bounds x="232" y="170" width="175" height="84"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-aae5dcc40e9e4d059b4c6765d1561d79" source="id-5a5119ed61bb413698c53c731bbcd40b" target="id-d13ae12e36de4c97a0ddacc42ed73dd4" archimateRelationship="id-52c404bfefe740d19dccffa57cd541e5">
+          <bendpoint startX="42" startY="88" endX="-360" endY="-76"/>
+          <bendpoint startX="174" startY="136" endX="-228" endY="-28"/>
+        </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-70e5c8e1e7de4279a1760d4eef6a18ab" targetConnections="id-0da3ec706dc54eb5b8d872e72af5dbdc id-2542ccc843fe40a4b42337b1cf262603 id-35185123b2604c83ac52f308460d8b6f" textPosition="1" archimateElement="id-05bc9b8809bd4e9893382133167b23ac">
+        <bounds x="632" y="170" width="175" height="84"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-5a81bf2435d547bc9c3a181069ee6230" source="id-70e5c8e1e7de4279a1760d4eef6a18ab" target="id-d13ae12e36de4c97a0ddacc42ed73dd4" archimateRelationship="id-a0a193a9d3104511938f2fa46c813f94"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-9692d9ed40fd4942b44b60f992ff2054" textPosition="1" archimateElement="id-57916d7f0bad49daba6a978ce2899112">
+        <bounds x="432" y="170" width="175" height="84"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-2c15f1d4add34ff4b52e8ca1c8465032" source="id-9692d9ed40fd4942b44b60f992ff2054" target="id-d13ae12e36de4c97a0ddacc42ed73dd4" archimateRelationship="id-58a4b1046518448f9b83160bb58a23f1">
+          <bendpoint startX="-2" startY="76" endX="-204" endY="-88"/>
+          <bendpoint startX="142" startY="76" endX="-60" endY="-88"/>
+        </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-c0701c35759d4902b26dc4d1d5a253c0" textPosition="1" archimateElement="id-3b0c6bec5c4d49cdb6b8d859a1875926">
+        <bounds x="832" y="170" width="175" height="84"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-e9c30ee76b0a45cb899f6a74f7bd5424" source="id-c0701c35759d4902b26dc4d1d5a253c0" target="id-d13ae12e36de4c97a0ddacc42ed73dd4" archimateRelationship="id-8577f924c4434ee899327136040fc2e2">
+          <bendpoint startX="6" startY="76" endX="204" endY="-88"/>
+          <bendpoint startX="-138" startY="76" endX="60" endY="-88"/>
+        </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-70e02179f11447c7805d797551697db4" textPosition="1" archimateElement="id-04eefe34689340838a5fb58dbb46158b">
+        <bounds x="432" y="20" width="175" height="84"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-fd53e044e13444e3b8532b8be367caf9" source="id-70e02179f11447c7805d797551697db4" target="id-5a5119ed61bb413698c53c731bbcd40b" archimateRelationship="id-817ad3cb28bf4f3595fc3ce4be16bde4">
+          <bendpoint startX="10" startY="71" endX="210" endY="-80"/>
+          <bendpoint startX="-146" startY="71" endX="54" endY="-80"/>
+        </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-c93d45ccce5a4ea8a1c8cccebf0fe4d0" textPosition="1" archimateElement="id-b945a2253f6d403f8f5b1ded162b9726">
+        <bounds x="1032" y="20" width="175" height="84"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-35185123b2604c83ac52f308460d8b6f" source="id-c93d45ccce5a4ea8a1c8cccebf0fe4d0" target="id-70e5c8e1e7de4279a1760d4eef6a18ab" archimateRelationship="id-c6307c55a0d14151b9bf08d22b6496bb">
+          <bendpoint startX="10" startY="59" endX="410" endY="-92"/>
+          <bendpoint startX="-278" startY="83" endX="122" endY="-68"/>
+        </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-d13ae12e36de4c97a0ddacc42ed73dd4" targetConnections="id-aae5dcc40e9e4d059b4c6765d1561d79 id-5a81bf2435d547bc9c3a181069ee6230 id-2c15f1d4add34ff4b52e8ca1c8465032 id-e9c30ee76b0a45cb899f6a74f7bd5424 id-3069a0ec2cce4b5cb3efdfb825b86bd4 id-2e9a7dad4fab4f80a7c91eb07db3f71e id-d34376ef896d41b5a3350d65e3039c0d id-9b88c0a5571e4a148f0e290ba36a9b70 id-28c723ed14d34a85bff4639d9033be29 id-f950c3319f9c4ab1af744533dfe06c78 id-73a7ed7e6f3042c79108d4c2a00e6620 id-f88da6d552564c51bf9c5c57b1008b57" font="1|Sans|12.0|1|GTK|1|" textPosition="1" archimateElement="id-f53a66f205fd48929156f55fe5ea4a26">
+        <bounds x="620" y="330" width="200" height="92"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-dada019c056c4c09a1e30041def29cb1" textPosition="1" archimateElement="id-dddfbbbe3d72443aaa358376943946d3">
+        <bounds x="232" y="500" width="175" height="84"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-9b88c0a5571e4a148f0e290ba36a9b70" source="id-dada019c056c4c09a1e30041def29cb1" target="id-d13ae12e36de4c97a0ddacc42ed73dd4" archimateRelationship="id-b5b6f33327144ecba3b180699e7c77f8">
+          <bendpoint startX="125" startY="-134" endX="-276" endY="32"/>
+        </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-68af5391e68e4cbc8ef858eeb943af02" targetConnections="id-eb7b9d413b1948719ebd21f8fdce476c" textPosition="1" archimateElement="id-299fb7d378bf45bebf5cf28e6fdaa039">
+        <bounds x="180" y="396" width="175" height="84"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-28c723ed14d34a85bff4639d9033be29" source="id-68af5391e68e4cbc8ef858eeb943af02" target="id-d13ae12e36de4c97a0ddacc42ed73dd4" archimateRelationship="id-4619603f18184b0c895222c0a452be7b">
+          <bendpoint startX="154" startY="-54" endX="-300" endY="8"/>
+        </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-db4e5771a12c4b59a3acc759dd2dfa5a" textPosition="1" archimateElement="id-af47ca8208fc43e5a07e05770335de0e">
+        <bounds x="632" y="660" width="175" height="84"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-431e3878a22446238d91b18468153c83" source="id-db4e5771a12c4b59a3acc759dd2dfa5a" target="id-ed17e19134024e798aefd9c8620aa46f" archimateRelationship="id-c5a6485704b1419abf4de07f9c100112"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-8015ec74404a420294370f3e2e9a021b" textPosition="1" archimateElement="id-fb4ec8edbf8e4d49aae42a27356f56e2">
+        <bounds x="432" y="660" width="175" height="84"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-9d4c866221b8410bb3780dc44e8c9d09" source="id-8015ec74404a420294370f3e2e9a021b" target="id-4e27bf64c9d74ff9808b9201595258be" archimateRelationship="id-0c84feffb8174c22bb0a3d80cde5d12d"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-4e27bf64c9d74ff9808b9201595258be" targetConnections="id-9d4c866221b8410bb3780dc44e8c9d09" textPosition="1" archimateElement="id-bd8fc943782c48b8b841bdcd41426af8">
+        <bounds x="432" y="500" width="175" height="84"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-3069a0ec2cce4b5cb3efdfb825b86bd4" source="id-4e27bf64c9d74ff9808b9201595258be" target="id-d13ae12e36de4c97a0ddacc42ed73dd4" archimateRelationship="id-50ac0021bd1441dfa04b748fab99121c">
+          <bendpoint startX="130" startY="-73" endX="-72" endY="92"/>
+        </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-ed17e19134024e798aefd9c8620aa46f" targetConnections="id-431e3878a22446238d91b18468153c83" textPosition="1" archimateElement="id-77a237ec64234d3faba1decc49ca81d1">
+        <bounds x="632" y="500" width="175" height="84"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-2e9a7dad4fab4f80a7c91eb07db3f71e" source="id-ed17e19134024e798aefd9c8620aa46f" target="id-d13ae12e36de4c97a0ddacc42ed73dd4" archimateRelationship="id-d1c0b0a8d8f04eb1aa5464a19cce234e"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-96c18cc41f2943f9a6f8effef4411752" textPosition="1" archimateElement="id-4452d0285075461cb8722c2950b9f8ef">
+        <bounds x="832" y="660" width="175" height="84"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-d34376ef896d41b5a3350d65e3039c0d" source="id-96c18cc41f2943f9a6f8effef4411752" target="id-d13ae12e36de4c97a0ddacc42ed73dd4" archimateRelationship="id-3dc33f39fc3f4b0aa13f2bfb5bb632d1">
+          <bendpoint startX="-42" startY="-161" endX="156" endY="164"/>
+          <bendpoint startX="-126" startY="-233" endX="72" endY="92"/>
+        </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-a5eea9781aaa41c28e04907382f44010" textPosition="1" archimateElement="id-b8e9fc0363e64736b5f0a2b8918fe8a2">
+        <bounds x="912" y="468" width="175" height="84"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-f950c3319f9c4ab1af744533dfe06c78" source="id-a5eea9781aaa41c28e04907382f44010" target="id-d13ae12e36de4c97a0ddacc42ed73dd4" archimateRelationship="id-a02f08a884bc4c4eb6848ee5aa8bf1c4">
+          <bendpoint startX="-110" startY="-113" endX="168" endY="20"/>
+        </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-2aff9c2a9e0f41ca9435f7ad7f10a58b" textPosition="1" archimateElement="id-407bd5935f54461b96a3a128f3d471cc">
+        <bounds x="1006" y="334" width="175" height="84"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-73a7ed7e6f3042c79108d4c2a00e6620" source="id-2aff9c2a9e0f41ca9435f7ad7f10a58b" target="id-d13ae12e36de4c97a0ddacc42ed73dd4" archimateRelationship="id-a79c752432b9417bba1a82c20d4a0918"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-a3a6f65006de43449b9e474161597acf" textPosition="1" archimateElement="id-fb1d57e8dd41481ba3325664474a76ed">
+        <bounds x="1032" y="170" width="175" height="84"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-f88da6d552564c51bf9c5c57b1008b57" source="id-a3a6f65006de43449b9e474161597acf" target="id-d13ae12e36de4c97a0ddacc42ed73dd4" archimateRelationship="id-ce862ec86e95477cb582b4e61308cd54">
+          <bendpoint startX="-14" startY="64" endX="384" endY="-100"/>
+          <bendpoint startX="-182" startY="136" endX="216" endY="-28"/>
+        </sourceConnection>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-44f9b59a8b50483c939fb4549ca62dbf" textPosition="1" archimateElement="id-7de891289e71497d9a00024110e52cef">
+        <bounds x="144" y="276" width="175" height="84"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-549a2d7125564eb081aae68b1c1eb62f" source="id-44f9b59a8b50483c939fb4549ca62dbf" target="id-6cf85cf7e39140579422722fde2f7f47" archimateRelationship="id-7e8a6b4401c1422d805f1fbf45390ac2">
+          <bendpoint startX="10" startY="-162" endX="-174" endY="130"/>
+        </sourceConnection>
+        <sourceConnection xsi:type="archimate:Connection" id="id-eb7b9d413b1948719ebd21f8fdce476c" source="id-44f9b59a8b50483c939fb4549ca62dbf" target="id-68af5391e68e4cbc8ef858eeb943af02" archimateRelationship="id-2595fa7d551447449525e26c0c0285ba"/>
+      </child>
+      <documentation>View studi kasus utama yang merangkum model motivasi API Transfer Dana Bank Wanua: stakeholder, driver, assessment, goal, outcome, principle, requirement, constraint, meaning, value, dan relasi argumentasinya.</documentation>
+    </element>
+    <element xsi:type="archimate:ArchimateDiagramModel" name="Legenda Notasi Motivasi" id="id-3eed2857af54482a8ea992d983a4221d">
+      <child xsi:type="archimate:DiagramObject" id="id-7a25799bcd804926baaf663493fd699b" archimateElement="id-31404775cac644a590765571e298249b">
+        <bounds x="20" y="20" width="160" height="70"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-e58f6bf98753486982832e717bf167a9" archimateElement="id-362a1b8abd844c9eb595d86894307ad5">
+        <bounds x="220" y="20" width="160" height="70"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-83b678d039cd41318bc8ae5a61bee51f" archimateElement="id-913b6ad6bab84b96915064defcd013e5">
+        <bounds x="20" y="110" width="160" height="70"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-429cd505a9f14128b91825d26fe95389" archimateElement="id-6bde712ab5584bd5a7fa0ead738ee50c">
+        <bounds x="220" y="110" width="160" height="70"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-23ca6d38945d4b98b2401bc860d8f162" archimateElement="id-6a8f5691bab74550bb87818cf695ef10">
+        <bounds x="20" y="200" width="160" height="70"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-c49404e8ac34443e8a54bc99309aa7eb" archimateElement="id-419876c013174fd48816c0fdc00d6a67">
+        <bounds x="220" y="200" width="160" height="70"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-3849a2f252bd482f93f90dc2ff32b5b0" archimateElement="id-c72ea4e7e03a4304a91a0a88da98f149">
+        <bounds x="20" y="290" width="160" height="70"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-d3850d5c6dbc4075ae54213162459011" archimateElement="id-1cbe943a99634a109ee4a5dc55a4c220">
+        <bounds x="220" y="290" width="160" height="70"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-3ab86014d86c4d048a5afc86fa0563ee" archimateElement="id-d14183bd79ba416cb59758e9b9d6ab28">
+        <bounds x="20" y="380" width="160" height="70"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-eed238b5ce0d4cbfac05738be857a344" archimateElement="id-c8b3f0ed3ee144ef9c290f3235c86d1f">
+        <bounds x="220" y="380" width="160" height="70"/>
+      </child>
+      <documentation>View referensi pedagogis yang menampilkan sepuluh jenis elemen lapisan motivasi ArchiMate beserta notasi visualnya di Archi.</documentation>
+    </element>
+    <element xsi:type="archimate:ArchimateDiagramModel" name="Legenda Notasi Strategi" id="id-8e8d52efa2144b02b97bc1921633459a">
+      <child xsi:type="archimate:DiagramObject" id="id-a1472b077e4e4b57b2bef86f39007c60" archimateElement="id-10e34c21459540e181c3c7bf3464b832">
+        <bounds x="20" y="20" width="160" height="70"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-11865b8e0c01427ea93a685c3de9d069" archimateElement="id-06eac3375b0a453eaac90647247410dc">
+        <bounds x="220" y="20" width="160" height="70"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-f181e8c7c810470e864e896f6dc7dfc8" archimateElement="id-176c39f91b854bcc9c90731928d0aa27">
+        <bounds x="20" y="110" width="160" height="70"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-d1d392ec08c94fdd8e6a9499eb1e65bb" archimateElement="id-8e73f1b622a24dd2bf39671a02e1c832">
+        <bounds x="220" y="110" width="160" height="70"/>
+      </child>
+    </element>
+    <element xsi:type="archimate:ArchimateDiagramModel" name="Strategi - API Transfer Dana" id="id-be7968629f2246a397c3b9094855db5a">
+      <child xsi:type="archimate:DiagramObject" id="id-56624d0d456c46c0b665ca311f91aa7f" archimateElement="id-fa09ae83e0364b9fba15d70b69eceb56">
+        <bounds x="40" y="70" width="200" height="75"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-700469e5f3764a1e828763b257ad78e8" source="id-56624d0d456c46c0b665ca311f91aa7f" target="id-0b0783f3c42f4f3ba2498e6e3014d196" archimateRelationship="id-b3bcfbc91124457caf747f89bece5e45"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-5d33e4d954aa462ab9bab7d8dcdffafd" archimateElement="id-a897fa2ee6304623887c9590026f5bf8">
+        <bounds x="40" y="185" width="200" height="75"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-a29d62ffc31a4a4592e158cd46fcd66f" source="id-5d33e4d954aa462ab9bab7d8dcdffafd" target="id-0b0783f3c42f4f3ba2498e6e3014d196" archimateRelationship="id-93f6465861e04e3c81cdea72c580c50f"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-c4a9425f71a54626aa32ebc26017a187" archimateElement="id-26b85facdcd84868b4e1e9a31305ae75">
+        <bounds x="40" y="300" width="200" height="75"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-f9c1c52464fb4b4c97d3ae0a39ded0c0" source="id-c4a9425f71a54626aa32ebc26017a187" target="id-bbc6db5c3a95416783e05dd49f4b59ab" archimateRelationship="id-89a85f274715432f828959e17c0b17f3"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-e5470536cb314d83b625ef669e12e232" source="id-c4a9425f71a54626aa32ebc26017a187" target="id-2ea8dce830cb4cd982ccfff9d8f11d02" archimateRelationship="id-c4e5212ed2724dc3a7256a32afde2f3d"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-0b0783f3c42f4f3ba2498e6e3014d196" targetConnections="id-700469e5f3764a1e828763b257ad78e8 id-a29d62ffc31a4a4592e158cd46fcd66f id-731db5fee3d449f9bfe603a11083235d id-78362f16c2b2489b90c372436aef2152" archimateElement="id-45e96320b04349bfadd3e99a18c58e24">
+        <bounds x="300" y="60" width="210" height="75"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-60f74f5a31e1414c92c33cf980be66a0" source="id-0b0783f3c42f4f3ba2498e6e3014d196" target="id-fe37a7ac0e8a4ce08f061e9e77f512e9" archimateRelationship="id-fdb9e562e1a446569b06cf9cf2ed8a63"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-c31a1ee913694ce1b8e6c35d6ab3b53e" source="id-0b0783f3c42f4f3ba2498e6e3014d196" target="id-fda8d02b2b8643dca620a27ecab9b2de" archimateRelationship="id-e9617221f9eb4a049db88368f6a2f41a"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-2ea8dce830cb4cd982ccfff9d8f11d02" targetConnections="id-e5470536cb314d83b625ef669e12e232 id-159e8033c5f0446caee91f60eafc9a30" archimateElement="id-c85c6a70498e46b397906b431186d9e3">
+        <bounds x="300" y="200" width="210" height="75"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-d2ebc9e00a924deba54fb661ffa86f8f" source="id-2ea8dce830cb4cd982ccfff9d8f11d02" target="id-fe37a7ac0e8a4ce08f061e9e77f512e9" archimateRelationship="id-19321bbac84340d3848b68e6a8336b99"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-bbc6db5c3a95416783e05dd49f4b59ab" targetConnections="id-f9c1c52464fb4b4c97d3ae0a39ded0c0 id-d1569103128c465c98e8dd05be8db5b2" archimateElement="id-aff9602d438f4996ac19ab0069a5591a">
+        <bounds x="300" y="340" width="210" height="75"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-5910aab98a4048f48362789855ddcdde" source="id-bbc6db5c3a95416783e05dd49f4b59ab" target="id-fe37a7ac0e8a4ce08f061e9e77f512e9" archimateRelationship="id-23e53abe412a4580956d7dee0846cc88"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-e31e736d140942e69b0c25049b5be58e" source="id-bbc6db5c3a95416783e05dd49f4b59ab" target="id-5eae9ab8e6e7425ab7da0a92c5ea5288" archimateRelationship="id-0bd49491508a4db9ba71255e80f9c91f"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-2722d4518523496e8efe34200d03d05b" archimateElement="id-b9ef41c515904ae090d03c9b4e90eb72">
+        <bounds x="570" y="40" width="220" height="75"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-731db5fee3d449f9bfe603a11083235d" source="id-2722d4518523496e8efe34200d03d05b" target="id-0b0783f3c42f4f3ba2498e6e3014d196" archimateRelationship="id-95fdab79ea8c46bc8d509a8a49c1970a"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-b6e17d3081b3496e88236165186d0b63" source="id-2722d4518523496e8efe34200d03d05b" target="id-664458c9576e46a1974f59b8d68241bb" archimateRelationship="id-b9d68ae595674110bc16b45e63e81f52"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-5883fc9d4dfe4c8ca59134e43cb3f838" archimateElement="id-021bfa0b5b6d489cb03ade0ec74a04b2">
+        <bounds x="570" y="160" width="220" height="75"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-d1569103128c465c98e8dd05be8db5b2" source="id-5883fc9d4dfe4c8ca59134e43cb3f838" target="id-bbc6db5c3a95416783e05dd49f4b59ab" archimateRelationship="id-6ec793babeeb46619ed122f9945504ef"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-4013428d0e9e4e76b8d17dfde2a7aca8" source="id-5883fc9d4dfe4c8ca59134e43cb3f838" target="id-e284d4e0d9404da9b012b37fcc510fd8" archimateRelationship="id-8423408c2c164a75b280c36a65723279"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-f98e6015bd044efc85bd41e3bae3842b" archimateElement="id-6de53543b51b49be84ed3463c7ee7b23">
+        <bounds x="570" y="280" width="220" height="75"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-159e8033c5f0446caee91f60eafc9a30" source="id-f98e6015bd044efc85bd41e3bae3842b" target="id-2ea8dce830cb4cd982ccfff9d8f11d02" archimateRelationship="id-f7b0f2e670ad43c38399ad9adef2896f"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-16b289522b504026ab0d73dc8d337d9b" source="id-f98e6015bd044efc85bd41e3bae3842b" target="id-4e835a4c734c47be99331b4b3f6d4349" archimateRelationship="id-8164957cd029416594c59d2ca0e1c25a"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-f244493570714e2eb4edbe3e97c64f01" archimateElement="id-2e73e85dc4ed42de8ab7a013dcee5916">
+        <bounds x="570" y="400" width="220" height="75"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-78362f16c2b2489b90c372436aef2152" source="id-f244493570714e2eb4edbe3e97c64f01" target="id-0b0783f3c42f4f3ba2498e6e3014d196" archimateRelationship="id-4240596fb9eb4fb69607aa8b010f1ab9"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-02e340352c0a487d9544e4ca91876d31" source="id-f244493570714e2eb4edbe3e97c64f01" target="id-596a5c0206364535b7ce10ba11f1a6dc" archimateRelationship="id-317f7066c11c4ffdb81ef3a5d354b5bb"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-fe37a7ac0e8a4ce08f061e9e77f512e9" targetConnections="id-60f74f5a31e1414c92c33cf980be66a0 id-d2ebc9e00a924deba54fb661ffa86f8f id-5910aab98a4048f48362789855ddcdde" archimateElement="id-6e2dfcbcc4894d3bb7fcd8dbeff47fab">
+        <bounds x="40" y="560" width="750" height="90"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-167b7a1b47a14a86a38e3c0ebc65d7ec" source="id-fe37a7ac0e8a4ce08f061e9e77f512e9" target="id-737ea0a2667e46a2a87ecedab0209119" archimateRelationship="id-08c134175a534b878446175bf63c5c3f"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-fda8d02b2b8643dca620a27ecab9b2de" targetConnections="id-c31a1ee913694ce1b8e6c35d6ab3b53e id-29eb796535e34547b835eac4533b7ad1 id-3fb832e317f543098094b2204716c0d1 id-a6d456142bd64331bac6575c5d015662 id-f62f3334ad624d54a5f642a427e4ce4c id-641e2bb20be34116832db06d81b5b216" archimateElement="id-f53a66f205fd48929156f55fe5ea4a26">
+        <bounds x="880" y="40" width="200" height="75"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-664458c9576e46a1974f59b8d68241bb" targetConnections="id-b6e17d3081b3496e88236165186d0b63 id-2438be53b006484292876025d9943eaf" archimateElement="id-bd8fc943782c48b8b841bdcd41426af8">
+        <bounds x="880" y="150" width="200" height="70"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-29eb796535e34547b835eac4533b7ad1" source="id-664458c9576e46a1974f59b8d68241bb" target="id-fda8d02b2b8643dca620a27ecab9b2de" archimateRelationship="id-50ac0021bd1441dfa04b748fab99121c"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-e284d4e0d9404da9b012b37fcc510fd8" targetConnections="id-4013428d0e9e4e76b8d17dfde2a7aca8" archimateElement="id-4452d0285075461cb8722c2950b9f8ef">
+        <bounds x="880" y="235" width="200" height="70"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-a6d456142bd64331bac6575c5d015662" source="id-e284d4e0d9404da9b012b37fcc510fd8" target="id-fda8d02b2b8643dca620a27ecab9b2de" archimateRelationship="id-3dc33f39fc3f4b0aa13f2bfb5bb632d1"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-4e835a4c734c47be99331b4b3f6d4349" targetConnections="id-16b289522b504026ab0d73dc8d337d9b" archimateElement="id-77a237ec64234d3faba1decc49ca81d1">
+        <bounds x="880" y="320" width="200" height="70"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-3fb832e317f543098094b2204716c0d1" source="id-4e835a4c734c47be99331b4b3f6d4349" target="id-fda8d02b2b8643dca620a27ecab9b2de" archimateRelationship="id-d1c0b0a8d8f04eb1aa5464a19cce234e"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-5eae9ab8e6e7425ab7da0a92c5ea5288" targetConnections="id-e31e736d140942e69b0c25049b5be58e" archimateElement="id-fb4ec8edbf8e4d49aae42a27356f56e2">
+        <bounds x="880" y="420" width="200" height="70"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-2438be53b006484292876025d9943eaf" source="id-5eae9ab8e6e7425ab7da0a92c5ea5288" target="id-664458c9576e46a1974f59b8d68241bb" archimateRelationship="id-0c84feffb8174c22bb0a3d80cde5d12d"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-737ea0a2667e46a2a87ecedab0209119" targetConnections="id-167b7a1b47a14a86a38e3c0ebc65d7ec" archimateElement="id-299fb7d378bf45bebf5cf28e6fdaa039">
+        <bounds x="880" y="520" width="200" height="70"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-641e2bb20be34116832db06d81b5b216" source="id-737ea0a2667e46a2a87ecedab0209119" target="id-fda8d02b2b8643dca620a27ecab9b2de" archimateRelationship="id-4619603f18184b0c895222c0a452be7b"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-596a5c0206364535b7ce10ba11f1a6dc" targetConnections="id-02e340352c0a487d9544e4ca91876d31" archimateElement="id-dddfbbbe3d72443aaa358376943946d3">
+        <bounds x="880" y="610" width="200" height="70"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-f62f3334ad624d54a5f642a427e4ce4c" source="id-596a5c0206364535b7ce10ba11f1a6dc" target="id-fda8d02b2b8643dca620a27ecab9b2de" archimateRelationship="id-b5b6f33327144ecba3b180699e7c77f8"/>
+      </child>
+    </element>
+  </folder>
+  <purpose>Model motivasi ArchiMate untuk studi kasus API Transfer Dana Bank Wanua. Model memetakan stakeholder, driver, assessment, goal, outcome, principle, requirement, constraint, meaning, value, serta relasi yang menjelaskan alasan transformasi layanan transfer real-time 24/7.</purpose>
+</archimate:model>
