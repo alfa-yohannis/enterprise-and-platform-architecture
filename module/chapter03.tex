@@ -207,8 +207,8 @@ yang tinggi karena harus konsisten lintas kanal dan patuh standar nasional.
     minimum width=46mm, minimum height=24mm},
   note/.style={font=\footnotesize\mdseries, align=center, text width=42mm}
 ]
-  \draw[axis] (0,0) -- (10,0) node[right] {\textbf{Integrasi data tinggi}};
-  \draw[axis] (0,0) -- (0,6) node[above, align=center] {\textbf{Standardisasi}\\\textbf{proses tinggi}};
+  \draw[axis] (0,0) -- (10,0) node[right, align=left] {\textbf{Integrasi}\\\textbf{data}\\\textbf{tinggi}};
+  \draw[axis] (0,0) -- (0,6) node[above, align=left] {\textbf{Standardisasi}\\\textbf{proses tinggi}};
 
   \node[cell, fill=gray!12] (div) at (2.5,1.5)
     {\textbf{Diversification}\\\footnotesize unit otonom};
@@ -221,8 +221,8 @@ yang tinggi karena harus konsisten lintas kanal dan patuh standar nasional.
 
   \node[note, below=2mm of div] {proses berbeda, data tidak banyak dibagi};
   \node[note, below=2mm of coord] {proses boleh berbeda, data perlu menyatu};
-  \node[note, above=2mm of rep] {proses sama, data lokal};
-  \node[note, above=2mm of uni] {proses sama, data bersama};
+  \node[note, above=0mm of rep] {proses sama, data lokal};
+  \node[note, above=0mm of uni] {proses sama, data bersama};
 \end{tikzpicture}
 }
 \caption{Empat pola operating model berdasarkan kebutuhan standardisasi proses
@@ -265,7 +265,7 @@ pertanyaan:
   \node[admphase] (problem) {Masalah dan\\pertanyaan riset};
   \node[admphase, right=7mm of problem] (vision) {Visi\\arsitektur};
   \node[admphase, right=7mm of vision] (baseline) {Kondisi\\saat ini};
-  \node[admphase, below=9mm of baseline] (target) {Kondisi\\target};
+  \node[admphase, below=22mm of baseline] (target) {Kondisi\\target};
   \node[admphase, left=7mm of target] (gap) {Analisis\\kesenjangan};
   \node[admphase, left=7mm of gap] (roadmap) {Rekomendasi\\dan roadmap};
 

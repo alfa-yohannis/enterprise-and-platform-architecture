@@ -25,9 +25,9 @@
   {\footnotesize #1}
 }
 
-\title{\huge Lapisan Strategi:\\
+\title{\huge Lapisan Strategi\\
   \vspace{8pt}
-  Course of Action, Kapabilitas \& Visi Arsitektur}
+  pada ArchiMate}
 \subtitle{IT30713 - Enterprise \& Platform Architecture}
 \author{\textbf{Alfa Yohannis}}
 \date{13 Juni 2026}
@@ -139,6 +139,7 @@
         (mot) {M\\O\\T\\I\\V\\A\\S\\I\\[2mm]\footnotesize\mdseries (mengapa)};
     \end{tikzpicture}
   }
+
   \takeaway{Strategi berada \emph{di atas} lapisan bisnis: paling kasar dan
   stabil; dipetakan ke fase \textbf{A (Visi Arsitektur)} TOGAF ADM.}
 \end{frame}
@@ -152,7 +153,7 @@
   \begin{columns}[c]
     \column{0.5\textwidth}
     \centering
-    \includegraphics[height=0.66\textheight]{strategy-legend.pdf}
+    \includegraphics[width=\linewidth]{strategy-legend.pdf}
     \column{0.5\textwidth}
     \footnotesize
     \begin{itemize}\setlength{\itemsep}{4pt}
@@ -207,8 +208,10 @@
         (uni) at (6.7,3.9) {\textbf{Unification}\\\footnotesize proses \& data seragam};
     \end{tikzpicture}
   }
+
   \takeaway{Rel transfer menuntut \textbf{Unification}: proses konsisten lintas
-  kanal dan data nasabah terpadu agar limit \& AML otomatis.}
+  kanal dan data nasabah terpadu agar limit \& AML
+  (\emph{anti-money laundering}) otomatis.}
 \end{frame}
 
 \begin{frame}{Dari Model Bisnis ke Kapabilitas}
@@ -246,7 +249,7 @@
       \node[box] (problem) {Masalah \&\\pertanyaan riset};
       \node[box, right=6mm of problem] (vision) {Visi\\arsitektur};
       \node[box, right=6mm of vision] (baseline) {Kondisi\\saat ini};
-      \node[box, below=8mm of baseline] (target) {Kondisi\\target};
+      \node[box, below=20mm of baseline] (target) {Kondisi\\target};
       \node[box, left=6mm of target] (gap) {Analisis\\kesenjangan};
       \node[box, left=6mm of gap] (roadmap) {Rekomendasi\\\& roadmap};
       \draw[flow] (problem) -- (vision);
@@ -261,6 +264,7 @@
       \draw[flow, dashed] (evidence) -- (gap);
     \end{tikzpicture}
   }
+  
   \takeaway{TOGAF-lite = ambil \emph{pola berpikir} ADM, bukan seluruh
   dokumentasi. Pustaka memperkuat visi dan analisis kesenjangan.}
 \end{frame}
@@ -303,7 +307,7 @@
   \vspace{2pt}
   \scriptsize
   \setlength{\extrarowheight}{2pt}
-  \arrayrulecolor{black!65}\setlength{\arrayrulewidth}{0.4pt}
+  \arrayrulecolor{black}\setlength{\arrayrulewidth}{0.5pt}
   \begin{tabularx}{\textwidth}{|p{0.12\textwidth}|p{0.34\textwidth}|X|}
     \hline
     \rowcolor{praditagreen!18}

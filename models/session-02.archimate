@@ -5,12 +5,15 @@
   </folder>
   <folder name="Business" id="id-399f62ee9a50424f89be4b1dfe3f7cde" type="business">
     <documentation>Folder untuk elemen lapisan bisnis. Belum digunakan pada model motivasi sesi 02.</documentation>
+    <element xsi:type="archimate:BusinessActor" name="Business Actor" id="id-69876911ad544e89b5d07630160dc17f"/>
+    <element xsi:type="archimate:BusinessRole" name="Business Role" id="id-ed79039c1e634998846056675eed8aa5"/>
   </folder>
   <folder name="Application" id="id-ebe6c990642d402eb5e9515cf252a914" type="application">
     <documentation>Folder untuk elemen lapisan aplikasi. Belum digunakan pada model motivasi sesi 02.</documentation>
   </folder>
   <folder name="Technology &amp; Physical" id="id-45817f853f7b4576989c519fd910bdf4" type="technology">
     <documentation>Folder untuk elemen teknologi dan fisik. Belum digunakan pada model motivasi sesi 02.</documentation>
+    <element xsi:type="archimate:Artifact" name="Artifact" id="id-3a61d73f11dd4086958b70d1272ab2c1"/>
   </folder>
   <folder name="Motivation" id="id-c4956eae965e46c6a884d9a2cd0226d1" type="motivation">
     <documentation>Folder utama studi kasus yang menyimpan elemen motivasi API Transfer Dana dan sepuluh contoh notasi untuk legenda.</documentation>
@@ -179,10 +182,21 @@
     <element xsi:type="archimate:AssociationRelationship" id="id-ce862ec86e95477cb582b4e61308cd54" source="id-fb1d57e8dd41481ba3325664474a76ed" target="id-f53a66f205fd48929156f55fe5ea4a26">
       <documentation>Mengasosiasikan definisi transfer sebagai perpindahan dana antarrekening dengan sasaran transfer dana real-time 24/7.</documentation>
     </element>
+    <element xsi:type="archimate:AssociationRelationship" id="id-d2a7db4704b44ca3a2a29df6dd9ab2ed" source="id-69876911ad544e89b5d07630160dc17f" target="id-ed79039c1e634998846056675eed8aa5"/>
   </folder>
   <folder name="Views" id="id-91db20392fa3419896b2d350fe96283f" type="diagrams">
     <documentation>Folder view yang menyimpan diagram studi kasus dan legenda notasi motivasi.</documentation>
     <element xsi:type="archimate:ArchimateDiagramModel" name="Default View" id="id-882e07d390094ed69fd6672fed772e08">
+      <child xsi:type="archimate:DiagramObject" id="id-bce9c9da73334ae098bdb64d71be10b0" archimateElement="id-69876911ad544e89b5d07630160dc17f">
+        <bounds x="84" y="48" width="120" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-abb0b964f2904557a9c92e6137f525c3" source="id-bce9c9da73334ae098bdb64d71be10b0" target="id-56d7c7dbfe32482c91a2912015d51986" archimateRelationship="id-d2a7db4704b44ca3a2a29df6dd9ab2ed"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-56d7c7dbfe32482c91a2912015d51986" targetConnections="id-abb0b964f2904557a9c92e6137f525c3" archimateElement="id-ed79039c1e634998846056675eed8aa5">
+        <bounds x="300" y="66" width="120" height="55"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-4f6d9d9ed76c424c9048c9f514970e3d" archimateElement="id-3a61d73f11dd4086958b70d1272ab2c1">
+        <bounds x="203" y="156" width="120" height="55"/>
+      </child>
       <documentation>View awal bawaan model. Dipertahankan sebagai kanvas kosong untuk eksplorasi atau latihan lanjutan.</documentation>
     </element>
     <element xsi:type="archimate:ArchimateDiagramModel" name="Motivasi - API Transfer Dana" id="id-75def7f05aca4a8f81d3f1b1dcb22998">

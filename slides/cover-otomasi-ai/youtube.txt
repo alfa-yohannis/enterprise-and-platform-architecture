@@ -1,0 +1,64 @@
+==================================================
+JUDUL YOUTUBE (≤ 100 karakter)
+==================================================
+Otomasi Desain Enterprise Architecture (ArchiMate) dengan AI/LLM Claude
+
+
+==================================================
+DESKRIPSI (≤ 5000 karakter)
+==================================================
+Bagaimana jika model Enterprise Architecture yang biasanya butuh berhari-hari untuk digambar bisa dirancang hanya dalam hitungan menit dengan bantuan AI? Di video ini kita membahas otomasi desain Enterprise Architecture menggunakan notasi ArchiMate dengan bantuan AI/LLM Claude dari Anthropic. Anda akan melihat bagaimana sebuah Large Language Model (LLM) dapat membaca konteks bisnis, menalar kebutuhan arsitektur, lalu menghasilkan model ArchiMate yang valid dan siap dibuka di Archi.
+
+Video ini adalah bagian dari mata kuliah IT30713 - Enterprise & Platform Architecture di Pradita University, dengan studi kasus berjalan: API (Application Programming Interface) Transfer dan Perpindahan Dana Bank Wanua—sebuah "payment rails" yang membungkus BI-FAST (Bank Indonesia Fast Payment) dan transaksi antarrekening.
+
+YANG AKAN ANDA PELAJARI
+• Konsep dasar Enterprise Architecture (EA) dan mengapa organisasi membutuhkannya sebelum membangun sistem.
+• Pengenalan ArchiMate sebagai bahasa pemodelan standar dari The Open Group, beserta lapisannya: Motivation, Strategy, Business, Application, dan Technology.
+• Fokus pada Lapisan Motivasi (Motivation Layer): pemangku kepentingan (stakeholder), pendorong (driver), asesmen (assessment), sasaran (goal), hasil (outcome), kebutuhan (requirement), kendala (constraint), prinsip (principle), makna (meaning), dan nilai (value).
+• Bagaimana TOGAF ADM (Architecture Development Method) menjadi kerangka kerja yang memandu pengembangan arsitektur dari "mengapa" menuju "apa" dan "bagaimana".
+• Cara memanfaatkan AI/LLM Claude untuk mengotomasi pembuatan model: dari deskripsi bahasa alami menjadi elemen, relasi, dan view ArchiMate.
+• Teknik prompt engineering agar Claude menghasilkan keluaran format model yang konsisten, dapat ditelusuri, dan minim halusinasi.
+• Validasi dan penyempurnaan model hasil AI: memeriksa keselarasan antara sasaran bisnis dan kondisi nyata.
+
+MENGAPA AI UNTUK ENTERPRISE ARCHITECTURE?
+Banyak inisiatif transformasi digital gagal bukan karena teknologinya lemah, melainkan karena tidak jelas siapa yang dilayani, pendorong mana yang mendesak, dan sasaran apa yang dikejar. Pemodelan arsitektur yang baik membuat keputusan teknologi dapat ditelusuri kembali ke alasan bisnis—pelanggan, anggaran, regulasi, risiko, dan reputasi.
+
+Menggambar model secara manual itu lambat dan rawan tidak konsisten. Di sinilah AI/LLM seperti Claude berperan: mempercepat draf awal, menjaga konsistensi penamaan dan relasi, serta membebaskan arsitek untuk fokus pada penalaran strategis. AI bukan menggantikan arsitek, tetapi menjadi co-pilot yang mempercepat iterasi dari ide ke model.
+
+STUDI KASUS: BANK WANUA
+Kita memodelkan kapabilitas "API Transfer dan Perpindahan Dana" untuk Bank Wanua: dari mengidentifikasi pemangku kepentingan dan pendorong bisnis, menyusun sasaran dan hasil terukur, hingga merumuskan kendala regulasi dan keterbatasan sistem lama (legacy). Dari model motivasi inilah kita menurunkan rumusan masalah, pertanyaan penelitian (RQ), dan kontribusi awal sebuah makalah.
+
+ALAT & TEKNOLOGI YANG DIBAHAS
+• ArchiMate 3.x & aplikasi Archi (open-source modelling tool)
+• AI/LLM Claude (Anthropic) sebagai mesin otomasi
+• TOGAF ADM sebagai kerangka metodologi
+• Konsep payment rails, BI-FAST, dan integrasi API perbankan
+
+UNTUK SIAPA VIDEO INI?
+Mahasiswa Sistem Informasi & Teknik Informatika, enterprise architect, solution architect, business analyst, product manager, serta praktisi IT yang ingin memahami cara memadukan pemodelan arsitektur dengan kekuatan AI generatif. Tidak wajib punya latar belakang teknis mendalam—konsep dijelaskan dari dasar.
+
+TENTANG PENGAJAR
+Materi disusun dan dibawakan oleh Alfa Yohannis untuk mata kuliah Enterprise & Platform Architecture, Program Studi Informatika, Pradita University.
+
+TIMESTAMP / BAB
+00:00 Pembuka & gambaran umum
+01:00 Apa itu Enterprise Architecture?
+03:00 Mengenal ArchiMate & lapisan-lapisannya
+06:00 Lapisan Motivasi: dari "mengapa" ke masalah
+09:00 TOGAF ADM secara singkat
+11:00 Studi kasus Bank Wanua: API Transfer Dana
+14:00 Otomasi model dengan AI/LLM Claude
+18:00 Validasi & penyempurnaan hasil AI
+21:00 Dari model ke rumusan masalah penelitian
+24:00 Penutup & rangkuman
+
+JANGAN LUPA
+Like, komentar, dan Subscribe untuk materi Enterprise Architecture, AI, dan rekayasa perangkat lunak lainnya. Tinggalkan pertanyaan Anda di kolom komentar—akan kita bahas di video berikutnya!
+
+#EnterpriseArchitecture #ArchiMate #ArtificialIntelligence #LLM #Claude #AnthropicAI #TOGAF #SolutionArchitecture #DigitalTransformation #AIForArchitecture #SoftwareEngineering #SistemInformasi #PraditaUniversity #ModelDrivenEngineering #BusinessArchitecture #PromptEngineering #GenerativeAI #ArsitekturEnterprise #BIFAST #Fintech
+
+
+==================================================
+KEYWORDS (comma-separated)
+==================================================
+enterprise architecture, archimate, otomasi enterprise architecture, ai enterprise architecture, llm claude, claude ai, anthropic claude, togaf, togaf adm, enterprise architecture tutorial, archimate tutorial, archimate indonesia, ai untuk arsitektur, generative ai, prompt engineering, model driven engineering, motivation layer, lapisan motivasi, stakeholder, business architecture, solution architecture, digital transformation, transformasi digital, software engineering, rekayasa perangkat lunak, sistem informasi, pradita university, alfa yohannis, archi tool, pemodelan arsitektur, ai co-pilot, bi-fast, payment rails, api perbankan, bank wanua, fintech, arsitektur enterprise, enterprise platform architecture, automasi desain arsitektur, ai modelling
