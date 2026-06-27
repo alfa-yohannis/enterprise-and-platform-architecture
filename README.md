@@ -560,3 +560,56 @@ MCP update tool before saving.
 - [ ] **SAVE NEEDED:** the manual positions live in Archi's in-memory model;
       press **Ctrl+S** in Archi to persist them to `models/session-02.archimate`
       (no MCP save tool).
+
+## 15. Follow-on: Strategy + Business layers, per-element examples, as-is/to-be (DONE)
+
+> **The forward runbook is now [`TODO.md`](TODO.md) at the repo root** — a
+> self-contained, per-ArchiMate-layer playbook. To continue with the next layers
+> (Application/Data, Technology, Implementation) just point an agent at `TODO.md`.
+> The active model file is now **`models/session-03.archimate`** (all layers live
+> in it). Edit the model **only via the Archi MCP server** (`http://127.0.0.1:18090/mcp`),
+> never by hand. The MCP tools are now exposed in-session as `mcp__archi__*`
+> (`bulk-mutate`, `export-view`, `auto-connect-view`, `auto-route-connections`,
+> `assess-layout`, …).
+
+**Strategy layer (`chapter03.tex`, `slides/session03`).** Added the strategy
+ArchiMate model (Resource/Capability/CourseOfAction/ValueStream + value-stream
+stages, cross-linked to the Motivation goals/requirements/outcomes), several
+views, and figures `strategy-legend`, `strategy-transfer`, `strategy-contoh`.
+Chapter gained a *"Notasi Elemen Lapisan Strategi di Archi"* subsection (legend +
+table), a *"Model Strategi … di Archi"* + *"Cara Membaca Diagram Strategi"*
+walkthrough, and a *"Contoh Interaksi Antar-Elemen Strategi"* example.
+
+**Business layer (`chapter04.tex`, `slides/session04`).** Built the full Business
+ArchiMate model (actors, roles, interfaces, services, functions, the 6-stage
+transfer process, objects, product/contract, event) + cross-layer realizations to
+the Strategy capabilities/value stream. Views: overview, *Aktor & Peran*, *Proses
+Transfer Dana*, *Fungsi & Layanan*, *Objek Informasi*, *Penyelarasan ke Strategi*,
+a notation legend, plus **As-Is (Baseline)** and **To-Be (Target)** views
+(annotated with notes, mirroring the TOGAF **Phase B** baseline→target table).
+Figures: `business-legend/-transfer/-overview/-asis/-tobe/-contoh`. Chapter gained
+the legend subsection, a **TOGAF ADM Fase B** subsection (baseline→target→gap
+table + as-is/to-be figures), the model diagram + *"Cara Membaca Diagram Bisnis"*,
+and the example subsection. `chapter03.tex` carries the analogous **Fase A**
+content.
+
+**Per-element teaching examples (all three layers).** Each layer has per-element
+`Contoh <Layer> - N. <Type>` views (focal element + 1–2 neighbours) and a `Contoh
+Komprehensif - <Layer>` view, using a shared **restaurant ("restoran cepat saji")**
+example separate from Bank Wanua. Their comprehensive views are exported as
+`motivation-contoh` / `strategy-contoh` / `business-contoh` and embedded as a
+*"Contoh Interaksi Antar-Elemen"* subsection in `chapter02/03/04` and as one slide
+in `session02/03/04`.
+
+**Slides.** Decks `session02/03/04` build with `latexmk -xelatex`. Each reuses the
+**"Siklus TOGAF ADM"** wheel frame (from `session02`, current phase highlighted)
+and a full-bleed example/diagram frame. Per user, a blank line follows every
+`tikzpicture`/`scalebox` closing `}` that precedes text so captions don't butt the
+figure. Two TikZ fixes in ch4/session04: capability-map row labels (were clipped)
+and the value-stream "Otorisasi belum seragam" pain box (was overlapping a stage).
+
+**Build status.** Book compiles clean with
+`cd module && latexmk -xelatex -interaction=nonstopmode enterprise-platform-architecture.tex`
+(108 pages, 0 undefined refs); all three decks compile clean
+(`latexmk -xelatex` in each `slides/sessionNN/`). The book still builds with
+LuaLaTeX too (fontspec); XeLaTeX is what was used here.

@@ -15,9 +15,12 @@ Layanan, Proses, Kapabilitas, dan Value Stream Transfer Dana}
   \item Mengubah artefak lapisan bisnis menjadi narasi analisis dan draf
         tinjauan pustaka v1, serta mempratinjau lapisan aplikasi, teknologi,
         fisik, dan implementasi.
+  \item Menempatkan analisis lapisan bisnis dalam kerangka TOGAF ADM
+        \textbf{Fase B (Arsitektur Bisnis)}: menyusun arsitektur bisnis
+        \emph{baseline} dan \emph{target} serta menganalisis kesenjangannya.
 \end{itemize}
 
-Tujuan pertama mendukung CLO 1 dan CLO 3. Tujuan kedua sampai keempat mendukung
+Tujuan pertama mendukung CLO 1 dan CLO 3. Tujuan kedua sampai kelima mendukung
 CLO 3, CLO 6, dan CLO 7 karena mahasiswa menyusun artefak lapisan bisnis
 sekaligus menjadikannya argumen akademik dalam makalah individual.
 
@@ -134,6 +137,87 @@ misalnya ``Instruksi Transfer'' atau ``Catatan Rekonsiliasi''. Dalam TOGAF,
 lapisan bisnis adalah salah satu domain utama yang menerjemahkan visi arsitektur
 menjadi struktur yang dapat dianalisis \cite{togaf10}.
 
+\subsection{Notasi Elemen Lapisan Bisnis di Archi}
+
+Gambar~\ref{fig:business-legend} menampilkan jenis elemen lapisan bisnis
+ArchiMate beserta notasinya di Archi. Berbeda dengan elemen motivasi (oktagon
+ungu, Bab~\ref{ch:strategi-bisnis}) dan strategi (persegi membulat kuning
+keemasan, Bab~\ref{ch:togaf-lite}), elemen bisnis memakai bentuk persegi panjang
+dan, secara baku, berwarna kuning muda; ikon kecil di pojok kanan atas
+membedakan jenisnya.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{business-legend.pdf}
+\caption{Jenis elemen lapisan bisnis ArchiMate dan simbolnya di Archi.}
+\label{fig:business-legend}
+\end{figure}
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Jenis elemen lapisan bisnis ArchiMate dan maknanya.}
+\label{tab:business-elements}
+\begin{tabularx}{\textwidth}{@{}p{0.24\textwidth} p{0.24\textwidth} X@{}}
+\hline
+\textbf{Elemen} & \textbf{Simbol (ikon/bentuk)} & \textbf{Makna} \\
+\hline
+Aktor bisnis (\emph{business actor}) & Ikon orang & Entitas yang menjalankan
+perilaku, misalnya Nasabah UMKM atau Bank Wanua. \\
+Peran bisnis (\emph{business role}) & Ikon peran (silinder) & Tanggung jawab yang
+dapat diemban aktor, misalnya Analis Kepatuhan. \\
+Kolaborasi bisnis (\emph{business collaboration}) & Dua lingkaran beririsan &
+Kerja sama dua peran atau lebih. \\
+Antarmuka bisnis (\emph{business interface}) & Lingkaran bertangkai & Titik akses
+layanan, misalnya API atau kanal \emph{mobile}. \\
+Proses bisnis (\emph{business process}) & Anak panah & Urutan kegiatan yang
+menghasilkan layanan. \\
+Fungsi bisnis (\emph{business function}) & Ikon ``cabang'' & Pengelompokan
+perilaku menurut kemampuan, misalnya Manajemen Risiko \& Kepatuhan. \\
+Interaksi bisnis (\emph{business interaction}) & Lingkaran terbelah & Perilaku
+kolektif beberapa peran. \\
+Peristiwa bisnis (\emph{business event}) & Anak panah cekung & Kejadian yang
+memicu atau dihasilkan perilaku, misalnya Permintaan Transfer Diterima. \\
+Layanan bisnis (\emph{business service}) & Lonjong membulat & Perilaku yang
+ditawarkan ke lingkungan, misalnya Layanan Transfer Dana. \\
+Objek bisnis (\emph{business object}) & Persegi berkepala & Informasi yang
+diolah, misalnya Instruksi Transfer. \\
+Kontrak (\emph{contract}) & Persegi bergaris & Perjanjian formal yang mengatur
+layanan, misalnya SLA. \\
+Representasi (\emph{representation}) & Bentuk dokumen & Perwujudan objek yang
+dapat dipersepsi, misalnya resi atau bukti transaksi. \\
+Produk (\emph{product}) & Ikon label & Bungkusan layanan dan kontrak yang
+ditawarkan sebagai satu kesatuan. \\
+\hline
+\end{tabularx}
+\end{table}
+
+Tidak semua jenis elemen perlu dipakai dalam satu makalah. Bab ini berfokus pada
+aktor dan peran, layanan, proses, objek bisnis, fungsi, serta produk dan
+kontrak---cukup untuk menjelaskan bagaimana rel transfer bekerja sebagai struktur
+bisnis yang dapat dianalisis.
+
+\subsection{Contoh Interaksi Antar-Elemen Bisnis}
+
+Untuk melihat notasi bekerja, Gambar~\ref{fig:business-contoh} memakai contoh
+sederhana di luar kasus Bank Wanua---sebuah \textbf{restoran cepat saji}---agar
+ketiga belas jenis elemen bisnis dan interaksinya terlihat sekaligus. Aktor
+Pelanggan Restoran diberi peran Pemesan; antarmuka Meja Kasir melayani pemesan
+dan ditugaskan ke Layanan Makan di Tempat; proses Menyajikan Pesanan dipicu
+peristiwa Pesanan Masuk, mengakses objek Pesanan, dan merealisasikan layanan;
+fungsi Manajemen Dapur melayani proses; produk Paket Menu Hemat menggabungkan
+layanan dengan kontrak Ketentuan Layanan; dan representasi Struk Pembayaran
+mewujudkan objek Pesanan. Di dalam model Archi, tiap jenis elemen juga memiliki
+view contoh tersendiri (``Contoh Bisnis -- N'').
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{business-contoh.pdf}
+\caption{Contoh interaksi antar-elemen lapisan bisnis pada kasus sederhana
+restoran cepat saji---ketiga belas jenis elemen bisnis dan relasinya.}
+\label{fig:business-contoh}
+\end{figure}
+
 \subsection{Business Capability}
 
 Business capability adalah kemampuan yang dibutuhkan organisasi untuk
@@ -154,7 +238,7 @@ cukup jelas untuk menjelaskan prioritas.
 
 \begin{figure}[htbp]
 \centering
-\scalebox{0.86}{
+\scalebox{0.80}{
 \begin{tikzpicture}[
   capnode/.style={rectangle, rounded corners=1.5mm, draw=praditagreen,
     fill=praditagreen!10, thick, align=center, text width=30mm,
@@ -165,24 +249,24 @@ cukup jelas untuk menjelaskan prioritas.
   support/.style={rectangle, rounded corners=1.5mm, draw=blue!70!black,
     fill=blue!10, thick, align=center, text width=30mm,
     minimum height=10mm},
-  layer/.style={font=\small\bfseries, align=right}
+  layer/.style={font=\small\bfseries, align=right, text width=22mm, anchor=east}
 ]
-  \node[layer] at (-1.0,2.6) {Strategis\\dan tata kelola};
-  \node[capnode] (s1) at (1.0,2.6) {Tata kelola\\API};
-  \node[capnode] (s2) at (4.4,2.6) {Manajemen risiko\\\& kepatuhan};
-  \node[capnode] (s3) at (7.8,2.6) {Tata kelola\\data};
+  \node[layer] at (-0.6,2.6) {Strategis\\dan tata kelola};
+  \node[capnode] (s1) at (1.4,2.6) {Tata kelola\\API};
+  \node[capnode] (s2) at (4.8,2.6) {Manajemen risiko\\\& kepatuhan};
+  \node[capnode] (s3) at (8.2,2.6) {Tata kelola\\data};
 
-  \node[layer] at (-1.0,1.0) {Kapabilitas\\inti};
-  \node[core] (c1) at (1.0,1.0) {Inisiasi \&\\otorisasi transfer};
-  \node[core] (c2) at (4.4,1.0) {Penyaringan AML\\\& limit};
-  \node[core] (c3) at (7.8,1.0) {Penyelesaian \&\\kliring (BI-FAST)};
+  \node[layer] at (-0.6,1.0) {Kapabilitas\\inti};
+  \node[core] (c1) at (1.4,1.0) {Inisiasi \&\\otorisasi transfer};
+  \node[core] (c2) at (4.8,1.0) {Penyaringan AML\\\& limit};
+  \node[core] (c3) at (8.2,1.0) {Penyelesaian \&\\kliring (BI-FAST)};
 
-  \node[layer] at (-1.0,-0.6) {Kapabilitas\\pendukung};
-  \node[support] (p1) at (1.0,-0.6) {Notifikasi};
-  \node[support] (p2) at (4.4,-0.6) {Rekonsiliasi};
-  \node[support] (p3) at (7.8,-0.6) {Manajemen\\mitra \& kanal};
+  \node[layer] at (-0.6,-0.6) {Kapabilitas\\pendukung};
+  \node[support] (p1) at (1.4,-0.6) {Notifikasi};
+  \node[support] (p2) at (4.8,-0.6) {Rekonsiliasi};
+  \node[support] (p3) at (8.2,-0.6) {Manajemen\\mitra \& kanal};
 
-  \draw[gray!45, rounded corners=2mm] (-2.6,-1.3) rectangle (9.4,3.25);
+  \draw[gray!45, rounded corners=2mm] (-3.0,-1.3) rectangle (10.1,3.25);
 \end{tikzpicture}
 }
 \caption{Capability map rel transfer dana Bank Wanua.}
@@ -210,6 +294,77 @@ apakah sebuah proses transfer perlu distandardisasi penuh atau boleh berbeda
 antarkanal. Rel transfer menuntut standardisasi proses dan integrasi data yang
 tinggi agar limit dan penyaringan AML konsisten lintas kanal, sementara
 pengalaman antarmuka di tiap kanal masih boleh berbeda.
+
+\subsection{TOGAF ADM Fase B: Arsitektur Bisnis}
+
+Dalam siklus TOGAF ADM, lapisan bisnis dikerjakan terutama pada \textbf{Fase B:
+Arsitektur Bisnis}. Jika Fase A (Bab~\ref{ch:togaf-lite}) menetapkan visi dan
+arah tindakan, Fase B menerjemahkan visi itu menjadi arsitektur bisnis yang
+konkret: kapabilitas, layanan, proses, peran, dan objek bisnis yang mewujudkan
+sasaran. Fase B menghasilkan dua potret---arsitektur bisnis \emph{baseline}
+(kondisi saat ini) dan \emph{target} (kondisi yang dituju)---lalu menganalisis
+kesenjangan di antara keduanya sebagai bahan peta jalan \cite{togaf10}.
+
+Untuk makalah individual, Fase B dapat disederhanakan menjadi lima langkah:
+(1)~menetapkan ruang lingkup dan prinsip bisnis; (2)~menyusun arsitektur bisnis
+baseline; (3)~menyusun arsitektur bisnis target; (4)~menganalisis kesenjangan;
+serta (5)~menyiapkan masukan bagi fase berikutnya, yaitu arsitektur sistem
+informasi. Tabel~\ref{tab:adm-phase-b} memetakan langkah-langkah ini ke artefak
+kasus Bank Wanua.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Pemetaan langkah TOGAF ADM Fase B ke artefak lapisan bisnis Bank Wanua.}
+\label{tab:adm-phase-b}
+\begin{tabularx}{\textwidth}{@{}p{0.27\textwidth} X@{}}
+\hline
+\textbf{Langkah Fase B} & \textbf{Artefak / keluaran pada kasus Bank Wanua} \\
+\hline
+Ruang lingkup dan prinsip & Lingkup rel API Transfer Dana; prinsip patuh SNAP BI,
+API sebagai produk, serta keamanan dan kepatuhan sejak awal. \\
+Arsitektur bisnis baseline & Transfer sebagian batch/manual; otorisasi belum
+seragam; penyaringan AML dan rekonsiliasi masih manual. \\
+Arsitektur bisnis target & Layanan Transfer Dana real-time; proses transfer
+terstandardisasi; penyaringan dan rekonsiliasi otomatis melekat pada proses. \\
+Analisis kesenjangan & Selisih baseline--target: kapabilitas yang \emph{dibangun}
+vs.\ \emph{diperbaiki} (Tabel~\ref{tab:capability-bank-wanua}). \\
+Masukan ke fase berikutnya & Kebutuhan lapisan aplikasi dan data: layanan AML,
+mesin rekonsiliasi, dan integrasi BI-FAST. \\
+\hline
+\end{tabularx}
+\end{table}
+
+Kedua potret Fase B dapat digambar sebagai model ArchiMate untuk memperjelas
+kontrasnya. Gambar~\ref{fig:business-asis} menunjukkan arsitektur \emph{as-is}
+(baseline): alur transfer yang sebagian masih batch dan manual, dengan titik
+masalah pada otorisasi, penyaringan AML, dan rekonsiliasi.
+Gambar~\ref{fig:business-tobe} menunjukkan arsitektur \emph{to-be} (target):
+transfer real-time 24/7 yang otomatis dan terstandardisasi, dibuka sebagai API
+yang patuh SNAP BI dan dibungkus sebagai produk. Selisih kedua potret itulah yang
+dianalisis sebagai kesenjangan.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{business-asis.pdf}
+\caption{Arsitektur bisnis \emph{as-is} (baseline) transfer Bank Wanua: proses
+transfer dengan titik masalah yang sebagian masih batch dan manual.}
+\label{fig:business-asis}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{business-tobe.pdf}
+\caption{Arsitektur bisnis \emph{to-be} (target) transfer Bank Wanua: layanan
+transfer real-time 24/7 yang otomatis, terstandardisasi, dan dibuka sebagai
+produk API yang patuh SNAP BI.}
+\label{fig:business-tobe}
+\end{figure}
+
+Keluaran utama Fase B yang dipakai dalam makalah adalah capability map, model
+layanan dan proses bisnis, serta analisis kesenjangan. Ketiganya menjadi jembatan
+dari visi arsitektur (Fase A) menuju rancangan arsitektur sistem informasi
+(Fase C) yang dibahas pada bab berikutnya.
 
 \subsection*{Glosarium Mini}
 
@@ -376,7 +531,7 @@ atau antarrekening, konfirmasi dan notifikasi, lalu rekonsiliasi.
   \draw[link] (s4) -- (s5);
   \draw[link] (s5) -- (s6);
 
-  \node[pain, below=4mm of s2] {Otorisasi belum\\seragam};
+  \node[pain, above=4mm of s2] {Otorisasi belum\\seragam};
   \node[pain, above=4mm of s3] {AML/limit\\dicek manual};
   \node[pain, below=4mm of s6] {Rekonsiliasi\\manual};
 \end{tikzpicture}
@@ -395,6 +550,70 @@ aplikasi pada pratinjau di akhir bab. Aktor utama proses ini meliputi nasabah
 UMKM (penginisiasi), kanal/petugas, analis kepatuhan, unit operasi/penyelesaian,
 dan mitra; objek bisnis utamanya adalah Instruksi Transfer, Hasil Penyaringan,
 dan Catatan Rekonsiliasi.
+
+\subsection{Model Bisnis Transfer di Archi}
+
+Capability map dan value stream di atas dapat dipadukan menjadi model lapisan
+bisnis yang utuh di Archi. Karena lapisan bisnis memuat banyak jenis elemen,
+modelnya dipecah menjadi beberapa \emph{view} agar tetap terbaca: ikhtisar
+layanan, aktor dan peran, proses transfer, fungsi dan layanan, objek informasi,
+serta penyelarasan ke lapisan strategi. Gambar~\ref{fig:business-overview}
+menampilkan ikhtisarnya, sedangkan Gambar~\ref{fig:business-transfer} memerinci
+proses transfer dana.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{business-overview.pdf}
+\caption{Ikhtisar lapisan bisnis API Transfer Dana Bank Wanua: proses
+merealisasikan layanan, layanan melayani aktor melalui antarmuka, dan produk
+membungkus layanan beserta kontraknya.}
+\label{fig:business-overview}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth,height=0.55\textheight,keepaspectratio]{business-transfer.pdf}
+\caption{Proses bisnis Transfer Dana sebagai rangkaian tahap (inisiasi sampai
+rekonsiliasi) yang dipicu sebuah peristiwa, dijalankan oleh peran-peran bisnis,
+dan merealisasikan Layanan Transfer Dana.}
+\label{fig:business-transfer}
+\end{figure}
+
+\subsubsection{Cara Membaca Diagram Bisnis}
+
+Gambar~\ref{fig:business-overview} dibaca dari kiri ke kanan. Di kiri,
+\textbf{Proses Transfer Dana} \emph{merealisasikan} (panah putus-putus berkepala
+segitiga) \textbf{Layanan Transfer Dana} di tengah. Layanan tersebut
+\emph{melayani} (serving) dua aktor di kanan---Nasabah UMKM serta Mitra Fintech
+\& Agregator---melalui dua \textbf{antarmuka}: API Transfer Dana (SNAP BI) dan
+Mobile \& Internet Banking. Di bawah, \textbf{Produk API Transfer Dana}
+\emph{menggabungkan} (agregasi) Layanan Transfer Dana, Penyaringan Kepatuhan, dan
+Notifikasi beserta \textbf{Kontrak Layanan API}. Ikhtisar ini menjawab tiga hal
+sekaligus: apa yang ditawarkan (layanan dan produk), siapa yang menerima (aktor),
+dan lewat mana (antarmuka).
+
+Gambar~\ref{fig:business-transfer} memerinci perilakunya. Peristiwa
+\textbf{Permintaan Transfer Diterima} \emph{memicu} (triggering) tahap pertama.
+Proses Transfer Dana \emph{tersusun} atas enam tahap berurutan---Inisiasi
+Instruksi, Validasi \& Otorisasi, Penyaringan AML \& Limit, Eksekusi (BI-FAST),
+Konfirmasi \& Notifikasi, dan Rekonsiliasi---yang dirangkai relasi pemicuan.
+Setiap tahap \emph{ditugaskan} (assignment) kepada peran yang menjalankannya:
+Penginisiasi Transfer, Petugas Kanal, Analis Kepatuhan, serta Unit Operasi \&
+Penyelesaian. Keseluruhan proses lalu \emph{merealisasikan} Layanan Transfer
+Dana. Tahap-tahap ini sejajar dengan value stream pada
+Gambar~\ref{fig:value-stream-bank-wanua}, tetapi dinyatakan sebagai proses bisnis
+yang dapat ditelusuri ke peran, objek, dan layanan.
+
+Dua relasi lain melengkapi pembacaan. Pertama, pada view objek informasi tiap
+tahap \emph{mengakses} (access) objek bisnis: Inisiasi menulis Instruksi
+Transfer, Penyaringan menulis Hasil Penyaringan, Eksekusi menulis Catatan
+Transaksi, dan Rekonsiliasi menulis Catatan Rekonsiliasi. Kedua, pada view
+penyelarasan, \textbf{fungsi bisnis} (Manajemen Pembayaran \& Penyelesaian,
+Manajemen Risiko \& Kepatuhan, serta Tata Kelola API \& Produk)
+\emph{merealisasikan} kapabilitas strategi (Bab~\ref{ch:togaf-lite}), dan Proses
+Transfer Dana merealisasikan value stream Eksekusi Transfer Dana. Dengan
+demikian lapisan bisnis tidak berdiri sendiri: ia menurunkan strategi menjadi
+perilaku konkret dan menyiapkan kebutuhan bagi lapisan aplikasi.
 
 \section{Langkah Analisis dan Artefak Pendukung}
 

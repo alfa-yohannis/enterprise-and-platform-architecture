@@ -184,6 +184,13 @@
   proses bisnis \emph{merincinya} menjadi langkah konkret.}
 \end{frame}
 
+\begin{frame}{}
+  \centering
+  \vspace{1mm}
+  \includegraphics[height=.82\textheight,keepaspectratio]{strategy-contoh.pdf}\\
+  {\scriptsize Contoh interaksi antar-elemen strategi (kasus restoran cepat saji).}
+\end{frame}
+
 % ============================================================
 \section{Membaca Strategi: Model Bisnis \& Operating Model}
 \sectionframe{Membaca Strategi:\\ Model Bisnis \& Operating Model}
@@ -232,6 +239,57 @@
 % ============================================================
 \section{TOGAF-lite dan Visi Arsitektur}
 \sectionframe{TOGAF-lite dan Visi Arsitektur}
+
+\begin{frame}{Siklus TOGAF ADM}
+  \vspace{8pt}
+  \begin{columns}[c]
+    \column{0.4\textwidth}
+    \centering
+    \scalebox{0.85}{
+      \begin{tikzpicture}[
+        font=\footnotesize\bfseries,
+        phase/.style={circle, draw=praditagreen, line width=0.4mm,
+          fill=praditagreen!15, minimum size=11mm, inner sep=0pt},
+        reqman/.style={circle, draw=blueColor, line width=0.4mm, fill=blueColor!15,
+          minimum size=21mm, inner sep=1pt, align=center, font=\scriptsize\bfseries},
+        prelim/.style={circle, draw=orange!80!black, line width=0.4mm,
+          fill=orange!25, minimum size=13mm, inner sep=0pt, align=center,
+          font=\scriptsize\bfseries},
+        ring/.style={-Latex, draw=praditagreen!75, line width=0.4mm},
+        spoke/.style={draw=blueColor!35, line width=0.25mm},
+      ]
+        \node[reqman] (rm) at (0,0) {Manajemen\\Requirements};
+        \foreach \ang/\lab in {90/A, 45/B, 0/C, -45/D, -90/E, -135/F, 180/G, 135/H}
+          \node[phase] (\lab) at (\ang:2.6cm) {\lab};
+        \node[prelim] (P) at (90:4.1cm) {Prelim.};
+        \foreach \lab in {A,B,C,D,E,F,G,H} \draw[spoke] (\lab) -- (rm);
+        \foreach \a/\b in {A/B, B/C, C/D, D/E, E/F, F/G, G/H, H/A}
+          \draw[ring] (\a) to[bend left=12] (\b);
+        \draw[ring, draw=orange!80!black] (P) -- (A);
+        \node[phase, fill=orange!45, line width=0.7mm] at (90:2.6cm) {A};
+      \end{tikzpicture}
+    }
+    \column{0.6\textwidth}
+    {\footnotesize TOGAF (\emph{The Open Group Architecture Framework}); ADM
+    (\emph{Architecture Development Method})---metode pengembangan arsitektur
+    dengan siklus berulang.\par}
+    \vspace{5pt}
+    \footnotesize
+    \begin{itemize}\setlength{\itemsep}{1.0pt}
+      \item \textbf{Prelim.}---Persiapan \& prinsip
+      \item \textbf{\textcolor{orange!80!black}{A---Visi Arsitektur}}
+            $\leftarrow$ \emph{fokus sesi ini}
+      \item \textbf{B}---Arsitektur Bisnis
+      \item \textbf{C}---Arsitektur Sistem Informasi (Data \& Aplikasi)
+      \item \textbf{D}---Arsitektur Teknologi
+      \item \textbf{E}---Peluang \& Solusi
+      \item \textbf{F}---Perencanaan Migrasi
+      \item \textbf{G}---Tata Kelola Implementasi
+      \item \textbf{H}---Manajemen Perubahan Arsitektur
+      \item \textbf{Manajemen Requirements}---di pusat, menyetir semua fase
+    \end{itemize}
+  \end{columns}
+\end{frame}
 
 \begin{frame}{ADM-lite: Enam Pertanyaan}
   \vspace{6pt}
