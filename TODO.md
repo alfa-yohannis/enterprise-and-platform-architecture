@@ -18,17 +18,18 @@ fund transfer, wraps BI-FAST, complies with SNAP BI).
 | **Business** | ✅ | `business-legend/-transfer/-overview/-asis/-tobe/-contoh` | `chapter04.tex` (Bab 5) | `session04` |
 | **Data** | ✅ | `data-legend/-transfer/-akses/-asis/-tobe/-contoh` | `chapter05.tex` (Bab 6) | `session05` |
 | **Application** | ✅ | `app-legend/-transfer/-stack/-contoh` | `chapter06.tex` (Bab 7) | `session06` |
-| **Technology & Physical** | ⬜ TODO (next) | — | `chapter07.tex` | `session07` |
-| **Implementation & Migration** | ⬜ TODO | — | `chapter08.tex` | `session08` |
+| **Technology & Physical** | ✅ | `technology-legend/-transfer/-stack/-contoh` | `chapter07.tex` (Bab 8) | `session07` |
+| **Implementation & Migration** | ⬜ TODO (next) | — | `chapter08.tex` | `session08` |
 
 > Chapter file numbering is offset by one from the book "Bab" number
-> (`chapter02.tex` = Bab 3, so `chapter06.tex` = Bab 7). Data (`chapter05`, Fase C
-> Data) and Application (`chapter06`, Fase C Application) are **done**. **The next
-> chapter is Technology (`chapter07.tex`, Bab 8, TOGAF Fase D)** — the bridge at
-> the end of `chapter06.tex` points to it (node/system software deploy components,
-> artifact realizes data object).
+> (`chapter02.tex` = Bab 3, so `chapter07.tex` = Bab 8). Data (`chapter05`, Fase C
+> Data), Application (`chapter06`, Fase C Application), and Technology
+> (`chapter07`, Fase D) are **done**. **The next chapter is Implementation &
+> Migration (`chapter08.tex`, Bab 9, TOGAF Fase E/F)** — the bridge at the end of
+> `chapter07.tex` points to it (work package / deliverable / plateau / gap turn the
+> target architecture into a phased roadmap).
 
-Model now (session-06): Motivation 41, Strategy 27, Business 61, Application 46 (16 DataObjects + 30 application elements). Technology/Implementation folders are empty.
+Model now (session-07): Motivation 41, Strategy 27, Business 61, Application 46 (16 DataObjects + 30 application elements), Technology 33 (3 Nodes + Device + 4 SystemSoftware + 3 TechnologyService + 3 Artifact + 2 CommunicationNetwork for Bank Wanua, plus restaurant example + 12 legend exemplars). Implementation folder is empty. Key cross-layer links: **Node → serving → ApplicationComponent** ("menggelar"; Node→Assignment→Component is rejected by Archi), **Artifact → realizes → DataObject** ("mewujudkan"), Node → composition → Device/SystemSoftware, Node → realizes → TechnologyService.
 
 **Per-layer view set delivered for each completed layer** (replicate for the next
 layers): a notation **legend** view; a main case-study **transfer** view; for
@@ -47,7 +48,7 @@ restaurant example into new layers.
 ## 2. Hard rules
 
 1. **Edit the model ONLY through the `archi` MCP server.** Never edit
-   `models/session-06.archimate` directly (it is open in a live Archi instance at
+   `models/session-07.archimate` directly (it is open in a live Archi instance at
    `http://127.0.0.1:18090/mcp`). Native tools are `mcp__archi__*`; if they are
    not loaded in-session, drive the same server over MCP HTTP/SSE with a tiny
    Python client (see §7).
@@ -74,7 +75,7 @@ restaurant example into new layers.
   (primary case-study diagram), `<layer>-contoh.{pdf,svg}` (the `Contoh
   Komprehensif` per-element example), optional `<layer>-overview/-asis/-tobe.{pdf,svg}`.
   `<layer>` ∈ {motivation, strategy, business, application, technology, implementation}.
-- `models/session-06.archimate` — the single model (all layers live here).
+- `models/session-07.archimate` — the single model (all layers live here).
 
 ### View naming convention (match existing)
 - `"<Layer> - API Transfer Dana"` — main/overview case-study view.
@@ -104,8 +105,8 @@ Put new elements in their layer folder via `folderId`.
 - A — Vision → Strategy (`chapter03`, done)
 - **B — Business Architecture** → Business (`chapter04`, done)
 - **C — Information Systems** → **Data** (`chapter05`, done) + **Application** (`chapter06`, done)
-- **D — Technology Architecture** → Technology chapter (`chapter07`, next)
-- **E/F — Opportunities & Solutions / Migration Planning** → Implementation chapter
+- **D — Technology Architecture** → Technology chapter (`chapter07`, done)
+- **E/F — Opportunities & Solutions / Migration Planning** → Implementation chapter (`chapter08`, next)
 
 Each chapter gets a `\subsection{TOGAF ADM Fase <X>: ...}` with a
 baseline→target→gap table mapped to Bank Wanua (see `chapter04.tex` Fase B as the

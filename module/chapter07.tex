@@ -1,0 +1,513 @@
+\chapter[Lapisan Teknologi: Node, Artefak, dan Penggelaran]{Lapisan Teknologi:
+Node, Artefak, dan Penggelaran Sistem Transfer Dana}
+\label{ch:technology-architecture}
+\setlength{\emergencystretch}{2em}
+
+\section*{Tujuan Pembelajaran}
+\begin{itemize}
+  \item Menjelaskan elemen lapisan teknologi ArchiMate---node, perangkat
+        (\emph{device}), perangkat lunak sistem (\emph{system software}), layanan
+        teknologi, artefak (\emph{artifact}), dan jaringan komunikasi.
+  \item Menyusun arsitektur teknologi acuan yang menggelar komponen aplikasi dan
+        mewujudkan objek data pada infrastruktur.
+  \item Menempatkan analisis teknologi dalam TOGAF ADM \textbf{Fase D (Arsitektur
+        Teknologi)}: menyusun \emph{baseline}, \emph{target}, dan analisis
+        kesenjangan.
+  \item Menutup rantai keterlacakan motivasi--strategi--bisnis--aplikasi--data--
+        teknologi, serta mengaitkannya dengan pola penggelaran dan konteks
+        infrastruktur Indonesia.
+\end{itemize}
+
+Tujuan pertama dan kedua mendukung CLO 3; tujuan ketiga mendukung CLO 2 dan
+CLO 3; tujuan keempat mendukung CLO 6 dan CLO 7 karena mahasiswa menautkan
+rancangan teknologi dengan regulasi infrastruktur dan argumen akademik.
+
+\section{Ringkasan Awal Bab}
+
+Bab~\ref{ch:application-architecture} memetakan \emph{perangkat lunak apa} yang
+menjalankan proses dan mengolah data. Bab ini menutup lapisan teknis dengan
+menjawab \emph{di atas apa} perangkat lunak itu berjalan: node, perangkat,
+perangkat lunak sistem, jaringan, dan artefak yang tersimpan. Dalam ArchiMate,
+lapisan teknologi memuat \textbf{node} (sumber daya komputasi), \textbf{device}
+(perangkat fisik), \textbf{system software} (sistem operasi, runtime, DBMS),
+\textbf{technology service}, \textbf{communication network}, dan
+\textbf{artifact} (wujud fisik data dan komponen).
+
+Di sinilah rantai keterlacakan tertutup. \textbf{Node menggelar komponen
+aplikasi} (Bab~\ref{ch:application-architecture}); \textbf{artefak mewujudkan
+objek data} (Bab~\ref{ch:data-architecture}). Dengan demikian setiap kebutuhan
+dapat ditelusuri dari motivasi sampai ke node dan artefak yang menjalankannya.
+Keluaran bab memperkuat bagian \textbf{Analisis} dan menjadi \textbf{kerangka
+akhir} naskah.
+
+\section{Pendahuluan}
+
+Teknologi sering dianggap urusan paling teknis, padahal keputusannya sangat
+manajerial: pusat data sendiri atau awan (\emph{cloud}), satu server besar atau
+banyak node kecil, mengganti atau membungkus sistem inti lama. Keputusan ini
+menentukan biaya, keandalan, kepatuhan, dan kelincahan. Arsitektur teknologi yang
+baik membuat pilihan itu terlihat---node apa menjalankan komponen apa, artefak
+apa menyimpan data apa, dan jaringan apa menghubungkannya---tanpa perlu masuk ke
+konfigurasi rinci.
+
+Bagi makalah, lapisan teknologi mengubah rekomendasi menjadi konkret dan dapat
+dinilai kelayakannya. Pilihan kontainer dan penggelaran bertahap dapat
+dijustifikasi dengan pembahasan modularisasi dan penggelaran perangkat lunak
+modern \cite{newman2021building}, sedangkan kewajiban penyelenggaraan sistem
+elektronik memberi batas dan konteks \cite{pp712019}.
+
+\section{Skenario Pembuka dan Pertanyaan Pemandu}
+
+Setelah komponen aplikasi rel transfer dirancang, tim infrastruktur Bank Wanua
+menghadapi pertanyaan: di mana komponen digelar? Sistem inti lama berjalan di
+\emph{mainframe} yang tidak dapat dipindah cepat, sedangkan komponen baru cocok
+digelar sebagai kontainer. Koneksi ke BI-FAST menuntut jaringan yang aman dan
+andal, dan data transaksi menuntut basis data yang tahan gagal serta berjejak.
+
+\subsection*{Pertanyaan Pemandu}
+\begin{enumerate}
+  \item Node dan perangkat lunak sistem apa yang diperlukan untuk menggelar
+        komponen aplikasi?
+  \item Artefak apa yang mewujudkan objek data, dan di node mana ia disimpan?
+  \item Layanan teknologi dan jaringan apa yang menopang lanskap?
+  \item Bagaimana sistem inti lama diintegrasikan tanpa penggantian sekaligus?
+  \item Bagaimana kondisi infrastruktur saat ini berbeda dari target, dan apa
+        kesenjangannya?
+\end{enumerate}
+
+\section{Mengapa Bab Ini Penting bagi Pembaca Non-TI}
+
+Pembaca non-TI tidak perlu mengelola server, tetapi perlu memahami keputusan
+teknologi yang menentukan biaya dan risiko: awan atau pusat data sendiri,
+kedaulatan data, ketahanan terhadap gangguan, dan kepatuhan. Dengan beberapa
+notasi sederhana---node, perangkat lunak sistem, layanan teknologi, artefak, dan
+jaringan---seorang analis dapat menjelaskan arsitektur teknologi dan trade-off-nya
+sebagai keputusan manajemen, bukan sekadar konfigurasi.
+
+\section{Konsep Inti dan Glosarium Mini}
+
+\subsection{Lapisan Teknologi ArchiMate}
+
+\textbf{Node} adalah sumber daya komputasi yang menjalankan perilaku dan
+menggelar perangkat lunak, misalnya kluster kontainer. \textbf{Device} adalah
+node fisik, misalnya server di pusat data. \textbf{System software} adalah
+perangkat lunak sistem, seperti sistem operasi, runtime kontainer, atau DBMS.
+\textbf{Technology service} adalah layanan yang ditawarkan node, misalnya layanan
+komputasi. \textbf{Communication network} menghubungkan node. \textbf{Artifact}
+adalah wujud fisik data atau perangkat lunak yang dapat digelar---misalnya
+\emph{container image} atau skema basis data.
+
+\subsection{Notasi Elemen Teknologi di Archi}
+
+Gambar~\ref{fig:technology-legend} menampilkan jenis elemen lapisan teknologi di
+Archi. Semua elemen teknologi berwarna kehijauan; ikon di pojok kanan atas
+membedakan jenisnya.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{technology-legend.pdf}
+\caption{Jenis elemen lapisan teknologi ArchiMate dan simbolnya di Archi.}
+\label{fig:technology-legend}
+\end{figure}
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Elemen lapisan teknologi ArchiMate, kegunaan, dan contohnya.}
+\label{tab:tech-elements}
+\begin{tabularx}{\textwidth}{@{}p{0.24\textwidth} p{0.22\textwidth} X@{}}
+\hline
+\textbf{Elemen} & \textbf{Kegunaan} & \textbf{Contoh} \\
+\hline
+Node & Sumber daya komputasi yang menggelar perangkat lunak. & Kluster Kontainer,
+Server Basis Data, Sistem Inti (Mainframe). \\
+Device & Node fisik (perangkat keras). & Server Fisik (Data Center). \\
+System Software & Sistem operasi, runtime, atau DBMS. & Runtime Kontainer \& OS,
+Sistem Basis Data (PostgreSQL). \\
+Technology Service & Layanan yang ditawarkan node ke lapisan aplikasi. & Layanan
+Komputasi Kontainer, Layanan Basis Data. \\
+Artifact & Wujud fisik data/komponen yang dapat digelar. & Container Image, Skema
+Basis Data, Berkas Ledger. \\
+Communication Network & Penghubung antar-node. & Jaringan Internal Bank, Koneksi
+Aman BI-FAST. \\
+Path & Jalur logis komunikasi antar-node. & (mis.) jalur antar pusat data. \\
+\hline
+\end{tabularx}
+\end{table}
+
+\subsection{Penggelaran: Node, Artefak, dan Komponen}
+
+Cara sebuah komponen aplikasi ``sampai'' ke infrastruktur disebut penggelaran
+(\emph{deployment}). Dalam ArchiMate, penggelaran dinyatakan melalui dua relasi
+(Gambar~\ref{fig:deployment}): sebuah \textbf{node menggelar} (assignment atau
+serving) komponen aplikasi, dan sebuah \textbf{artefak mewujudkan} objek data
+atau komponen. Node tidak ``menjadi'' komponen; ia menyediakan tempat komponen
+berjalan, sedangkan artefak adalah bentuk fisik yang dapat disimpan dan disalin.
+
+\begin{figure}[htbp]
+\centering
+\scalebox{0.95}{
+\begin{tikzpicture}[
+  font=\footnotesize,
+  app/.style={rectangle, rounded corners=1.5mm, draw=blue!70!black, fill=blue!12,
+    thick, align=center, text width=34mm, minimum height=11mm},
+  tech/.style={rectangle, rounded corners=1.5mm, draw=praditagreen,
+    fill=praditagreen!16, thick, align=center, text width=34mm, minimum height=11mm},
+  data/.style={rectangle, rounded corners=1.5mm, draw=cyan!60!black, fill=cyan!12,
+    thick, align=center, text width=30mm, minimum height=11mm},
+  link/.style={-Latex, thick, draw=gray!60}
+]
+  \node[app] (comp) {Komponen Aplikasi};
+  \node[tech, below=12mm of comp] (node) {Node};
+  \node[tech, right=16mm of node] (art) {Artifact};
+  \node[data, below=12mm of art] (do) {Objek Data};
+  \draw[link] (node) -- node[right,font=\scriptsize]{menggelar} (comp);
+  \draw[link] (node) -- node[above,font=\scriptsize]{menggelar} (art);
+  \draw[link, densely dashed] (art) -- node[right,font=\scriptsize]{mewujudkan} (do);
+\end{tikzpicture}
+}
+\caption{Pola penggelaran: node menggelar komponen aplikasi dan artefak; artefak
+mewujudkan objek data.}
+\label{fig:deployment}
+\end{figure}
+
+\subsection{TOGAF ADM Fase D: Arsitektur Teknologi}
+
+Fase D menyusun arsitektur teknologi acuan: node, platform, jaringan, dan pola
+penggelaran---baseline dan target---lalu menganalisis kesenjangan \cite{togaf10}.
+Keluaran utamanya adalah katalog teknologi, diagram penggelaran, dan matriks
+komponen-terhadap-teknologi. Tabel~\ref{tab:adm-phase-d} memetakan langkahnya ke
+kasus Bank Wanua.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Pemetaan TOGAF ADM Fase D (Arsitektur Teknologi) ke artefak Bank Wanua.}
+\label{tab:adm-phase-d}
+\begin{tabularx}{\textwidth}{@{}p{0.27\textwidth} X@{}}
+\hline
+\textbf{Langkah Fase D} & \textbf{Artefak / keluaran pada kasus Bank Wanua} \\
+\hline
+Ruang lingkup dan prinsip teknologi & Lingkup infrastruktur rel transfer; prinsip
+kontainer, ketahanan, keamanan, dan kedaulatan data. \\
+Arsitektur teknologi baseline & Sistem inti di \emph{mainframe}; server terpisah;
+integrasi dan jaringan belum seragam. \\
+Arsitektur teknologi target & Kluster kontainer menggelar komponen; server basis
+data; artefak mewujudkan objek data; jaringan aman ke BI-FAST. \\
+Analisis kesenjangan & Selisih baseline--target: platform yang dibangun,
+dimodernisasi, atau dibungkus dari sistem lama. \\
+Masukan ke fase berikutnya & Kebutuhan implementasi \& migrasi: work package,
+plateau, dan gap penggelaran (bab berikutnya). \\
+\hline
+\end{tabularx}
+\end{table}
+
+\subsection{Contoh Interaksi Antar-Elemen Teknologi}
+
+Gambar~\ref{fig:technology-contoh} memakai contoh restoran cepat saji: node
+\emph{Server Restoran} tersusun atas \emph{OS Restoran}, mewujudkan \emph{Layanan
+Komputasi Restoran}, menggelar komponen \emph{Aplikasi Kasir} dan artefak
+\emph{Basis Data Restoran}, serta terhubung lewat \emph{Jaringan Restoran};
+artefak basis data mewujudkan objek data \emph{Data Pesanan}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth,height=0.4\textheight,keepaspectratio]{technology-contoh.pdf}
+\caption{Contoh interaksi antar-elemen teknologi pada kasus restoran cepat saji.}
+\label{fig:technology-contoh}
+\end{figure}
+
+\subsection*{Glosarium Mini}
+\begin{description}
+  \item[Node] Sumber daya komputasi yang menggelar perangkat lunak.
+  \item[Device] Node fisik (perangkat keras).
+  \item[System software] Perangkat lunak sistem: OS, runtime, DBMS.
+  \item[Technology service] Layanan yang ditawarkan node ke aplikasi.
+  \item[Artifact] Wujud fisik data atau komponen yang dapat digelar.
+  \item[Communication network] Penghubung antar-node.
+  \item[Penggelaran (deployment)] Penempatan komponen dan artefak pada node.
+\end{description}
+
+\section{Kerangka Berpikir}
+
+Alur berpikir bab ini bergerak dari komponen aplikasi menuju infrastruktur
+(Gambar~\ref{fig:tech-flow}). Komponen aplikasi menentukan kebutuhan node dan
+platform; node menggelar komponen dan artefak; artefak mewujudkan objek data;
+jaringan dan layanan teknologi menopang semuanya; dan pola penggelaran menata
+baseline serta target. Hasilnya menjadi bahan analisis dan kerangka akhir naskah.
+
+\begin{figure}[htbp]
+\centering
+\scalebox{0.86}{
+\begin{tikzpicture}[
+  box/.style={rectangle, rounded corners=1.5mm, draw=praditagreen,
+    fill=praditagreen!12, thick, align=center, text width=30mm, minimum height=11mm},
+  outnode/.style={rectangle, rounded corners=1.5mm, draw=orange!80!black,
+    fill=orange!16, thick, align=center, text width=32mm, minimum height=11mm},
+  link/.style={-Latex, thick, draw=praditagreen}
+]
+  \node[box] (comp) {Komponen aplikasi\\(dari Bab 7)};
+  \node[box, right=7mm of comp] (node) {Node \&\\perangkat lunak sistem};
+  \node[box, right=7mm of node] (art) {Artefak \&\\objek data};
+  \node[box, below=8mm of art] (net) {Jaringan \&\\layanan teknologi};
+  \node[outnode, left=7mm of net] (deploy) {Pola penggelaran\\\& kesenjangan};
+  \node[outnode, left=7mm of deploy] (an) {Analisis \&\\kerangka akhir};
+  \draw[link] (comp) -- (node); \draw[link] (node) -- (art); \draw[link] (art) -- (net);
+  \draw[link] (net) -- (deploy); \draw[link] (deploy) -- (an);
+  \draw[link, dashed] (an) -- (comp);
+\end{tikzpicture}
+}
+\caption{Alur berpikir lapisan teknologi untuk makalah publikasi.}
+\label{fig:tech-flow}
+\end{figure}
+
+\section{Konteks Indonesia}
+
+Arsitektur teknologi layanan keuangan Indonesia dibentuk oleh kewajiban
+penyelenggaraan sistem elektronik: keandalan, keamanan, pengelolaan pusat data,
+dan jejak sistem \cite{pp712019}. Penempatan data (\emph{data residency}) dan
+kedaulatan data menjadi pertimbangan penting ketika memilih awan atau pusat data
+sendiri. Untuk rel transfer, konektivitas ke BI-FAST menuntut jaringan yang aman
+dan andal sesuai standar pembayaran nasional \cite{snapbi}, sedangkan pemrosesan
+data pribadi pada node dan artefak harus memenuhi perlindungan data pribadi
+\cite{uupdp2022}. Realitas sistem inti lama membuat pendekatan hibrida---kontainer
+untuk komponen baru, \emph{mainframe} yang dibungkus adaptor---lebih realistis
+daripada penggantian menyeluruh.
+
+\section{Studi Kasus Utama: Arsitektur Teknologi Transfer Bank Wanua}
+
+Komponen aplikasi pada Bab~\ref{ch:application-architecture} digelar di atas
+sekumpulan node pada Gambar~\ref{fig:technology-transfer}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth,height=0.62\textheight,keepaspectratio]{technology-transfer.pdf}
+\caption{Lanskap teknologi (ArchiMate) API Transfer Dana Bank Wanua: node tersusun
+atas perangkat dan perangkat lunak sistem, mewujudkan layanan teknologi, menggelar
+artefak, dan terhubung lewat jaringan.}
+\label{fig:technology-transfer}
+\end{figure}
+
+\subsection{Cara Membaca Diagram Teknologi}
+
+Gambar~\ref{fig:technology-transfer} memuat tiga \textbf{node} di kiri.
+\emph{Kluster Kontainer} \textbf{tersusun atas} (komposisi, ditunjukkan lewat
+pelingkupan) \emph{Server Fisik}, \emph{Runtime Kontainer \& OS}, \emph{Platform
+Manajemen API}, dan \emph{Message Broker}. \emph{Server Basis Data} tersusun atas
+\emph{Sistem Basis Data (PostgreSQL)}. \emph{Sistem Inti (Mainframe)} mewakili
+sistem lama. Tiap node \textbf{mewujudkan} sebuah \textbf{layanan teknologi}
+(Layanan Komputasi Kontainer, Layanan Basis Data, Layanan Jaringan Aman) dan
+\textbf{menggelar} \textbf{artefak} (Container Image, Skema Basis Data, Berkas
+Ledger). Di bawah, dua \textbf{jaringan komunikasi}---Jaringan Internal Bank dan
+Koneksi Aman BI-FAST---\textbf{menghubungkan} node-node tersebut.
+
+\subsection{Penyelarasan Aplikasi, Teknologi, dan Data}
+
+Rantai keterlacakan tertutup ketika lapisan aplikasi, teknologi, dan data
+disandingkan (Gambar~\ref{fig:technology-stack}). Diagram ini menyatakan dua
+relasi lintas-lapisan yang menentukan: \textbf{node menggelar} komponen
+aplikasi---Kluster Kontainer menggelar keenam komponen rel transfer---dan
+\textbf{artefak mewujudkan} objek data---Skema Basis Data dan Berkas Ledger
+mewujudkan Data Transaksi, Instruksi, dan seterusnya, sedangkan Server Basis Data
+menggelar kedua artefak itu.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth,height=0.62\textheight,keepaspectratio]{technology-stack.pdf}
+\caption{Penyelarasan lintas-lapisan (ArchiMate): komponen aplikasi digelar oleh
+node, objek data diwujudkan oleh artefak yang digelar di node basis data.}
+\label{fig:technology-stack}
+\end{figure}
+
+Dengan ini seluruh rantai lengkap: sasaran motivasi diwujudkan kapabilitas dan
+value stream strategi; dijalankan proses, peran, dan layanan bisnis; ditopang
+layanan, fungsi, dan komponen aplikasi; yang mengakses objek data; dan pada
+akhirnya digelar di node serta diwujudkan sebagai artefak pada infrastruktur.
+
+\section{Langkah Analisis dan Artefak Pendukung}
+
+\subsection{Langkah 1: Ambil Komponen Aplikasi dan Objek Data}
+Mulai dari komponen aplikasi (Bab~\ref{ch:application-architecture}) dan objek
+data (Bab~\ref{ch:data-architecture}) yang perlu digelar dan disimpan.
+
+\subsection{Langkah 2: Rancang Node dan Perangkat Lunak Sistem}
+Tentukan node yang menggelar komponen, beserta perangkat dan perangkat lunak
+sistem yang menyusunnya.
+
+\subsection{Langkah 3: Tentukan Artefak}
+Tentukan artefak yang mewujudkan objek data dan komponen, serta node tempatnya
+digelar.
+
+\subsection{Langkah 4: Rancang Jaringan dan Layanan Teknologi}
+Tentukan jaringan komunikasi antar-node dan layanan teknologi yang ditawarkan.
+
+\subsection{Langkah 5: Pilih Pola Penggelaran}
+Tetapkan pola penggelaran (kontainer, awan/pusat data, hibrida) dan alasannya
+terhadap kondisi sistem inti dan kepatuhan.
+
+\subsection{Langkah 6: Susun Baseline dan Target}
+Bandingkan infrastruktur saat ini dan target, lalu catat kesenjangan.
+
+\subsection{Langkah 7: Kaitkan dengan Regulasi Infrastruktur}
+Tautkan penempatan data dan keamanan dengan PP 71 dan konektivitas dengan SNAP BI.
+
+\subsection{Langkah 8: Tulis Narasi Analisis Teknologi}
+Ubah lanskap dan matriks menjadi paragraf yang menjelaskan keputusan teknologi dan
+implikasinya bagi implementasi.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Artefak pendukung Bab~8 dan fungsinya dalam makalah.}
+\label{tab:artefak-bab7-tech}
+\begin{tabularx}{\textwidth}{@{}p{0.26\textwidth} p{0.30\textwidth} X@{}}
+\hline
+\textbf{Artefak} & \textbf{Isi minimum} & \textbf{Dipakai untuk bagian makalah} \\
+\hline
+Katalog teknologi & Node, perangkat lunak sistem, layanan, artefak & Analisis
+domain teknologi. \\
+Diagram lanskap teknologi & Node \& penyusunnya, jaringan & Analisis dan lampiran. \\
+Diagram penyelarasan lintas-lapisan & Aplikasi--teknologi--data & Keterlacakan
+end-to-end \& kerangka akhir. \\
+Analisis pola penggelaran & Pilihan pola + alasan & Diskусi \& implikasi
+manajerial. \\
+\hline
+\end{tabularx}
+\end{table}
+
+\section{Integrasi ke Makalah Publikasi}
+
+Lapisan teknologi memperkuat bagian \textbf{Analisis} dan menutup \textbf{kerangka
+akhir} naskah. Diagram penyelarasan menjadi bukti bahwa rancangan dapat digelar
+secara realistis dan patuh. Contoh paragraf:
+
+\begin{quote}
+Analisis teknologi menunjukkan bahwa komponen rel transfer paling baik digelar
+sebagai kontainer pada sebuah kluster, sementara sistem inti lama dibungkus melalui
+adaptor---bukan diganti sekaligus. Objek data diwujudkan sebagai artefak basis
+data yang berjejak audit, dan konektivitas ke BI-FAST diamankan sesuai kewajiban
+penyelenggaraan sistem elektronik.
+\end{quote}
+
+\section{Diskusi Kritis, Trade-off, dan Perangkap Umum}
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Trade-off dalam arsitektur teknologi.}
+\label{tab:tradeoff-bab7-tech}
+\begin{tabularx}{\textwidth}{@{}p{0.24\textwidth} X X@{}}
+\hline
+\textbf{Keputusan} & \textbf{Jika terlalu ringan} & \textbf{Jika terlalu berat} \\
+\hline
+Awan vs pusat data & Ketergantungan vendor, isu kedaulatan data & Investasi
+infrastruktur besar dan lambat. \\
+Granularitas node & Satu server besar, sulit diskalakan & Terlalu banyak node,
+operasi rumit. \\
+Sistem inti lama & Diabaikan, integrasi rapuh & Diganti sekaligus, risiko tinggi. \\
+Keamanan \& jejak & Rentan dan tak patuh & Kontrol berlebihan, biaya tinggi. \\
+\hline
+\end{tabularx}
+\end{table}
+
+Perangkap umum: (1) merancang teknologi tanpa menautkannya ke komponen dan data;
+(2) mengabaikan sistem inti lama; (3) memilih awan/pusat data tanpa
+mempertimbangkan kedaulatan dan kepatuhan; dan (4) melupakan jejak audit serta
+keamanan jaringan.
+
+\section{Latihan Terapan Individual}
+
+\subsection*{Latihan~8.1: Lanskap Teknologi}
+Untuk organisasi studi kasus Anda, susun lanskap teknologi: node, perangkat lunak
+sistem, layanan teknologi, artefak, dan jaringan.
+
+\subsection*{Latihan~8.2: Penyelarasan Lintas-Lapisan}
+Buat diagram yang menautkan komponen aplikasi, node/artefak teknologi, dan objek
+data untuk satu kapabilitas sasaran.
+
+\subsection*{Latihan~8.3: Pola Penggelaran dan Baseline--Target}
+Pilih pola penggelaran beserta alasannya, lalu bandingkan infrastruktur baseline
+dan target dan catat kesenjangan.
+
+\subsection*{Latihan~8.4: Paragraf Analisis Teknologi}
+Tulis satu paragraf analisis teknologi yang menautkan keputusan infrastruktur
+dengan kebutuhan aplikasi dan kelayakan implementasi.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Rubrik latihan Bab~8.}
+\label{tab:rubrik-bab7-tech}
+\begin{tabularx}{\textwidth}{@{}p{0.25\textwidth} X X@{}}
+\hline
+\textbf{Komponen} & \textbf{Indikator baik} & \textbf{Perlu diperbaiki bila} \\
+\hline
+Lanskap teknologi & Node, perangkat lunak, artefak jelas \& tertaut & Sekadar
+daftar server tanpa relasi. \\
+Penyelarasan lintas-lapisan & Menautkan aplikasi--teknologi--data & Teknologi
+berdiri sendiri tanpa jejak. \\
+Pola penggelaran & Pilihan beralasan terhadap konteks & Tanpa pertimbangan sistem
+lama/kepatuhan. \\
+Narasi analisis & Menautkan teknologi ke kebutuhan \& kelayakan & Deskriptif tanpa
+argumen. \\
+\hline
+\end{tabularx}
+\end{table}
+
+\section{Ringkasan, Refleksi, dan Jembatan}
+
+\subsection*{Poin Kunci}
+\begin{itemize}
+  \item Lapisan teknologi memuat node, device, system software, layanan teknologi,
+        artefak, dan jaringan.
+  \item \textbf{Node menggelar} komponen aplikasi; \textbf{artefak mewujudkan}
+        objek data.
+  \item Penggelaran menutup rantai keterlacakan dari motivasi sampai infrastruktur.
+  \item Pola penggelaran (kontainer, awan/pusat data, hibrida) menentukan biaya,
+        keandalan, dan kepatuhan.
+  \item Fase D menghasilkan baseline, target, dan analisis kesenjangan teknologi.
+\end{itemize}
+
+\subsection*{Uji Mandiri}
+\begin{enumerate}
+  \item Jelaskan perbedaan node, device, system software, dan artefak.
+  \item Mengapa penggelaran dinyatakan melalui node yang menggelar komponen dan
+        artefak yang mewujudkan data, bukan node yang ``menjadi'' komponen?
+  \item Ambil satu komponen aplikasi pada kasus Anda dan sebutkan node serta
+        artefak yang menggelarnya.
+\end{enumerate}
+
+\subsection*{Jembatan ke Bab Berikutnya}
+Bab berikutnya beralih ke \textbf{lapisan implementasi dan migrasi}: work package,
+deliverable, plateau, dan gap yang mengubah arsitektur target menjadi rencana
+bertahap. Seluruh artefak dari Bab~2 sampai Bab~8---motivasi, strategi, bisnis,
+data, aplikasi, dan teknologi---menjadi masukan untuk menyusun peta jalan
+implementasi yang realistis.
+
+\section{Bacaan Lanjutan dan Lampiran}
+
+\subsection*{Bacaan Inti}
+\begin{itemize}
+  \item The Open Group untuk Fase D ADM dan artefak arsitektur teknologi
+        \cite{togaf10}.
+  \item Newman untuk penggelaran, kontainer, dan modularisasi
+        \cite{newman2021building}.
+\end{itemize}
+
+\subsection*{Bacaan untuk Memperdalam}
+\begin{itemize}
+  \item Untuk hubungan teknologi dengan operating model dan fondasi eksekusi
+        \cite{ross2006enterprise}.
+  \item Untuk konteks Indonesia: penyelenggaraan sistem elektronik dan pusat data
+        \cite{pp712019}, standar API pembayaran \cite{snapbi}, dan perlindungan
+        data pribadi \cite{uupdp2022}.
+\end{itemize}
+
+\subsection*{Lampiran Kerja Bab~8}
+\begin{description}
+  \item[Katalog teknologi] Daftar node, perangkat lunak sistem, layanan, artefak.
+  \item[Diagram lanskap teknologi] Node dan penyusunnya.
+  \item[Diagram penyelarasan] Aplikasi--teknologi--data.
+  \item[Analisis penggelaran] Pola penggelaran dan kesenjangan baseline--target.
+\end{description}
+\setlength{\emergencystretch}{0pt}
