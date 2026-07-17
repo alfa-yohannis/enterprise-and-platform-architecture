@@ -1,0 +1,574 @@
+\chapter[Lapisan Data: Objek Data, Model Data, dan Tata Kelola Informasi]{Lapisan
+Data: Objek Data, Model Data, dan Tata Kelola Informasi Transfer Dana}
+\label{ch:data-architecture}
+\setlength{\emergencystretch}{2em}
+
+\section*{Tujuan Pembelajaran}
+\begin{itemize}
+  \item Menjelaskan elemen informasi ArchiMate lintas tingkat abstraksi---objek
+        bisnis (\emph{business object}), objek data (\emph{data object}), dan
+        representasi (\emph{representation})---serta relasi realisasi dan akses
+        yang menautkannya.
+  \item Menyusun model data konseptual dan logis untuk kapabilitas sasaran, serta
+        memetakan objek data ke proses bisnis yang mengaksesnya.
+  \item Menempatkan analisis data dalam kerangka TOGAF ADM \textbf{Fase C
+        (Arsitektur Sistem Informasi)}, khususnya sub-fase \textbf{Arsitektur
+        Data}: menyusun arsitektur data \emph{baseline} dan \emph{target} serta
+        menganalisis kesenjangannya.
+  \item Mengaitkan rancangan data dengan konteks tata kelola dan perlindungan
+        data pribadi di Indonesia, lalu mengubahnya menjadi narasi analisis untuk
+        makalah.
+\end{itemize}
+
+Tujuan pertama dan kedua mendukung CLO 3; tujuan ketiga mendukung CLO 2 dan
+CLO 3; tujuan keempat mendukung CLO 6 dan CLO 7 karena mahasiswa menautkan
+rancangan data dengan regulasi dan argumen akademik.
+
+\section{Ringkasan Awal Bab}
+
+Bab sebelumnya (Bab~\ref{ch:business-architecture}) memetakan lapisan bisnis:
+layanan, proses, peran, dan objek bisnis yang mewujudkan rel transfer. Bab ini
+turun satu tingkat ke \textbf{lapisan data}: informasi apa yang mengalir dalam
+proses transfer, bagaimana ia disusun sebagai objek data, dan bagaimana data itu
+ditelusuri kembali ke objek bisnis serta ke proses yang menggunakannya.
+
+Dalam ArchiMate, data adalah bagian dari lapisan aplikasi: \emph{data object}
+menempati struktur pasif lapisan aplikasi, sedangkan pada tingkat bisnis
+informasi dinyatakan sebagai \emph{business object}. Dalam TOGAF, keduanya
+dikerjakan pada \textbf{Fase C}. Bab ini mengambil sisi \textbf{Data}-nya; sisi
+\textbf{Application} dibahas pada Bab~\ref{ch:application-architecture}. Keluaran
+bab memperkuat bagian \textbf{Metode} dan \textbf{Analisis} makalah: model data,
+katalog entitas data, dan matriks data-ke-proses.
+
+\section{Pendahuluan}
+
+Banyak masalah transformasi digital sebenarnya adalah masalah data: definisi yang
+tidak konsisten antarkanal, kepemilikan yang tidak jelas, kualitas yang rendah,
+dan kepatuhan privasi yang belum melekat. Sasaran transfer real-time tidak dapat
+diwujudkan bila data rekening tersebar, hasil penyaringan tidak tercatat rapi,
+atau jejak audit tidak lengkap. Karena itu, sebelum berbicara tentang aplikasi
+dan teknologi, arsitektur perlu menegaskan \emph{data apa} yang dikelola dan
+\emph{aturan main}-nya.
+
+Bagi makalah publikasi, lapisan data memberi dua hal. Pertama, ia membuat analisis
+lebih konkret: alih-alih menyebut ``sistem transfer'', penulis dapat menunjukkan
+entitas Instruksi Transfer, Catatan Transaksi, dan Hasil Penyaringan beserta
+relasinya. Kedua, ia menautkan rancangan dengan regulasi perlindungan data
+pribadi \cite{uupdp2022} dan tata kelola data lintas instansi \cite{satudata},
+sehingga rekomendasi tidak berhenti sebagai gambar teknis tetapi menjadi argumen
+yang sadar-konteks.
+
+\section{Skenario Pembuka dan Pertanyaan Pemandu}
+
+Setelah proses transfer Bank Wanua dipetakan, tim data menemukan bahwa istilah
+``rekening'', ``limit'', dan ``status transaksi'' didefinisikan berbeda di kanal
+mobile, internet banking, dan sistem inti. Rekonsiliasi manual sering gagal karena
+catatan transaksi tidak memiliki kunci yang seragam. Ketika divisi kepatuhan
+meminta jejak audit satu transfer, tim harus menyusun ulang data dari beberapa
+sistem. Persoalannya bukan ketiadaan data, melainkan ketiadaan \emph{model data}
+yang disepakati.
+
+\subsection*{Pertanyaan Pemandu}
+\begin{enumerate}
+  \item Objek data apa yang paling menentukan bagi kapabilitas transfer, dan dari
+        objek bisnis mana ia diturunkan?
+  \item Bagaimana objek data saling berhubungan (rujukan, komposisi, dependensi)?
+  \item Proses mana yang menulis dan membaca tiap objek data?
+  \item Aturan kualitas, kepemilikan, dan privasi apa yang harus melekat pada data?
+  \item Bagaimana kondisi data saat ini berbeda dari kondisi target, dan apa
+        kesenjangannya?
+\end{enumerate}
+
+\section{Mengapa Bab Ini Penting bagi Pembaca Non-TI}
+
+Pembaca non-TI kerap menyerahkan urusan data kepada tim teknis. Namun keputusan
+paling menentukan tentang data bersifat manajerial: siapa pemilik data, sampai
+level apa data dibagikan, dan bagaimana risiko privasi dikelola. Model data yang
+baik membuat keputusan tersebut terlihat dan dapat didiskusikan tanpa masuk ke
+detail basis data. Dengan tiga notasi sederhana---objek bisnis, objek data, dan
+representasi---seorang analis dapat menjelaskan bagaimana informasi mengalir dan
+di mana risikonya, lalu menautkannya ke argumen makalah.
+
+\section{Konsep Inti dan Glosarium Mini}
+
+\subsection{Objek Data dan Informasi dalam ArchiMate}
+
+ArchiMate memodelkan informasi pada beberapa tingkat abstraksi. \textbf{Objek
+bisnis} (\emph{business object}) menyatakan informasi pada tingkat konseptual:
+``apa'' yang dikelola organisasi, lepas dari teknologi (misalnya Instruksi
+Transfer). \textbf{Objek data} (\emph{data object}) menyatakan informasi pada
+tingkat logis/aplikasi: bagaimana data disusun dan diproses aplikasi (misalnya
+Data Instruksi Transfer). \textbf{Representasi} (\emph{representation}) adalah
+perwujudan yang dapat dipersepsi manusia, seperti struk atau laporan. Objek data
+\emph{diturunkan dari} objek bisnis: dalam notasi, objek data
+\textbf{merealisasikan} objek bisnis.
+
+\subsection{Notasi Elemen Data di Archi}
+
+Gambar~\ref{fig:data-legend} menampilkan tiga notasi informasi di Archi. Ketiganya
+memakai bentuk persegi panjang dengan penanda kepala yang berbeda; objek data
+berwarna kebiruan (lapisan aplikasi), sedangkan objek bisnis dan representasi
+berwarna kuning (lapisan bisnis).
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.85\textwidth]{data-legend.pdf}
+\caption{Notasi informasi ArchiMate: objek bisnis (konseptual), objek data
+(logis), dan representasi (perwujudan).}
+\label{fig:data-legend}
+\end{figure}
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Elemen informasi ArchiMate, kegunaan, dan contohnya.}
+\label{tab:data-elements}
+\begin{tabularx}{\textwidth}{@{}p{0.20\textwidth} p{0.20\textwidth} X@{}}
+\hline
+\textbf{Elemen} & \textbf{Tingkat \& kegunaan} & \textbf{Contoh} \\
+\hline
+Business Object & Konseptual---``apa'' informasi bisnis, dasar model data
+konseptual. & Instruksi Transfer, Rekening Nasabah, Catatan Transaksi, Hasil
+Penyaringan; (restoran) Pesanan. \\
+Data Object & Logis/aplikasi---bagaimana data disusun \& diproses; mewujudkan
+objek bisnis; ditautkan ke proses via objek bisnis. & Data Instruksi Transfer,
+Data Rekening, Data Transaksi (Ledger), Data Hasil AML; (restoran) Data Pesanan. \\
+Representation & Perwujudan yang dapat dipersepsi (dokumen, laporan, layar). &
+Struk/bukti transaksi, laporan rekonsiliasi; (restoran) Struk Pembayaran. \\
+\hline
+\end{tabularx}
+\end{table}
+
+\subsection{Tiga Tingkat Model Data}
+
+Model data biasa dibedakan menjadi tiga tingkat (Gambar~\ref{fig:data-levels}).
+\textbf{Konseptual} menjawab entitas informasi utama dan relasinya, dinyatakan
+sebagai objek bisnis. \textbf{Logis} merinci atribut dan struktur tanpa terikat
+teknologi, dinyatakan sebagai objek data. \textbf{Fisik} adalah wujud tersimpan
+pada teknologi (tabel, berkas), dinyatakan sebagai \emph{artifact} pada lapisan
+teknologi (Bab~\ref{ch:business-architecture} mempratinjaunya). Bab ini berfokus
+pada dua tingkat teratas.
+
+\begin{figure}[htbp]
+\centering
+\scalebox{0.9}{
+\begin{tikzpicture}[
+  font=\footnotesize,
+  lvl/.style={rectangle, rounded corners=1.5mm, thick, align=center,
+    minimum height=11mm, text width=44mm},
+  konsep/.style={lvl, draw=praditagreen, fill=praditagreen!14},
+  logis/.style={lvl, draw=blue!70!black, fill=blue!12},
+  fisik/.style={lvl, draw=gray!60, fill=gray!14},
+  link/.style={-Latex, thick, draw=gray!60}
+]
+  \node[konsep] (k) {\textbf{Konseptual}\\{\scriptsize Business Object}};
+  \node[logis, below=8mm of k] (l) {\textbf{Logis}\\{\scriptsize Data Object}};
+  \node[fisik, below=8mm of l] (f) {\textbf{Fisik}\\{\scriptsize Artifact (Bab~7)}};
+  \draw[link] (l) -- node[right]{\scriptsize merealisasikan} (k);
+  \draw[link] (f) -- node[right]{\scriptsize merealisasikan} (l);
+  \node[align=left, text width=52mm, right=8mm of k] {Entitas informasi \& relasi utama};
+  \node[align=left, text width=52mm, right=8mm of l] {Atribut, struktur, kunci---lepas teknologi};
+  \node[align=left, text width=52mm, right=8mm of f] {Tabel, berkas, skema pada teknologi};
+\end{tikzpicture}
+}
+\caption{Tiga tingkat model data dan padanannya di ArchiMate.}
+\label{fig:data-levels}
+\end{figure}
+
+\subsection{TOGAF ADM Fase C: Arsitektur Data}
+
+Dalam siklus TOGAF ADM, data dikerjakan pada \textbf{Fase C (Arsitektur Sistem
+Informasi)}, yang terbagi menjadi \emph{Arsitektur Data} dan \emph{Arsitektur
+Aplikasi}. Bab ini mengambil sisi data. Seperti Fase B, Fase C menghasilkan dua
+potret---\emph{baseline} dan \emph{target}---lalu menganalisis kesenjangannya
+\cite{togaf10}. Keluaran utamanya adalah katalog entitas data, diagram model
+data, dan matriks entitas-data terhadap fungsi/proses bisnis.
+Tabel~\ref{tab:adm-phase-c-data} memetakan langkahnya ke kasus Bank Wanua.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Pemetaan TOGAF ADM Fase C (Arsitektur Data) ke artefak Bank Wanua.}
+\label{tab:adm-phase-c-data}
+\begin{tabularx}{\textwidth}{@{}p{0.26\textwidth} X@{}}
+\hline
+\textbf{Langkah Fase C (Data)} & \textbf{Artefak / keluaran pada kasus Bank Wanua} \\
+\hline
+Ruang lingkup dan prinsip data & Lingkup data transfer; prinsip data sebagai
+aset, minimisasi data pribadi, dan jejak audit melekat. \\
+Arsitektur data baseline & Definisi rekening/limit/status berbeda antarkanal;
+catatan transaksi tanpa kunci seragam; jejak audit tersebar. \\
+Arsitektur data target & Objek data logis yang mewujudkan objek bisnis; kunci
+transaksi seragam; Data Log Audit dan Data Hasil AML terstruktur. \\
+Analisis kesenjangan & Selisih baseline--target: entitas yang perlu
+distandardisasi, disatukan, atau dibangun kualitasnya. \\
+Masukan ke fase berikutnya & Kebutuhan lapisan aplikasi: layanan data, komponen
+integrasi, dan mesin rekonsiliasi (Bab~\ref{ch:application-architecture}). \\
+\hline
+\end{tabularx}
+\end{table}
+
+Selisih baseline--target divisualkan pada Gambar~\ref{fig:data-asis} (as-is) dan
+Gambar~\ref{fig:data-tobe} (to-be): dari data yang terfragmentasi dan belum
+selaras, menuju objek data yang mewujudkan objek bisnis, berkunci transaksi
+seragam, dan berjejak audit melekat.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth,height=0.4\textheight,keepaspectratio]{data-asis.pdf}
+\caption{Arsitektur data \emph{as-is} (baseline): definisi berbeda antarkanal,
+catatan transaksi tanpa kunci seragam, jejak audit tersebar, hasil AML manual.}
+\label{fig:data-asis}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth,height=0.4\textheight,keepaspectratio]{data-tobe.pdf}
+\caption{Arsitektur data \emph{to-be} (target): objek data \emph{mewujudkan}
+objek bisnis (definisi selaras), kunci transaksi seragam, dan jejak audit serta
+hasil AML terstruktur.}
+\label{fig:data-tobe}
+\end{figure}
+
+\subsection{Contoh Interaksi Antar-Elemen Data}
+
+Sebelum masuk ke kasus Bank Wanua, Gambar~\ref{fig:data-contoh} memakai contoh
+sederhana restoran cepat saji untuk menunjukkan cara ketiga notasi berinteraksi:
+objek data \emph{Data Pesanan} merealisasikan objek bisnis \emph{Pesanan}---yang
+diakses proses \emph{Menyajikan Pesanan}---dan objek bisnis itu diwujudkan bagi
+pelanggan sebagai representasi \emph{Struk Pembayaran}, sementara data pendukung
+(menu, pelanggan, pembayaran) melengkapinya.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{data-contoh.pdf}
+\caption{Contoh interaksi antar-elemen data pada kasus restoran cepat saji.}
+\label{fig:data-contoh}
+\end{figure}
+
+\subsection*{Glosarium Mini}
+\begin{description}
+  \item[Objek bisnis (business object)] Informasi tingkat konseptual yang dikelola
+        organisasi, misalnya Instruksi Transfer.
+  \item[Objek data (data object)] Representasi logis data yang diproses aplikasi
+        dan merealisasikan objek bisnis, misalnya Data Instruksi Transfer.
+  \item[Representasi (representation)] Perwujudan informasi yang dapat dipersepsi,
+        misalnya Struk Pembayaran.
+  \item[Relasi akses] Relasi yang menyatakan proses membaca atau menulis objek
+        data.
+  \item[Model data konseptual/logis] Peta entitas informasi dan relasinya
+        (konseptual) atau struktur atribut dan kuncinya (logis).
+  \item[Tata kelola data] Aturan kepemilikan, kualitas, definisi, dan akses data.
+\end{description}
+
+\section{Kerangka Berpikir}
+
+Alur berpikir bab ini bergerak dari objek bisnis menuju arsitektur data
+(Gambar~\ref{fig:data-flow}). Objek bisnis dari lapisan bisnis menjadi titik awal;
+tiap objek bisnis diturunkan menjadi objek data logis; objek data dihubungkan
+menjadi model data; model data dipetakan ke proses melalui relasi akses; dan
+aturan tata kelola melekatkan kualitas serta privasi. Hasilnya menjadi bahan
+analisis dan draf metode makalah.
+
+\begin{figure}[htbp]
+\centering
+\scalebox{0.86}{
+\begin{tikzpicture}[
+  box/.style={rectangle, rounded corners=1.5mm, draw=blue!70!black,
+    fill=blue!8, thick, align=center, text width=30mm, minimum height=11mm},
+  outnode/.style={rectangle, rounded corners=1.5mm, draw=orange!80!black,
+    fill=orange!16, thick, align=center, text width=32mm, minimum height=11mm},
+  link/.style={-Latex, thick, draw=blue!70!black}
+]
+  \node[box] (bo) {Objek bisnis\\(dari Bab 5)};
+  \node[box, right=7mm of bo] (do) {Objek data\\logis};
+  \node[box, right=7mm of do] (model) {Model data\\\& relasi};
+  \node[box, below=8mm of model] (akses) {Pemetaan\\data-ke-proses};
+  \node[outnode, left=7mm of akses] (gov) {Tata kelola\\\& privasi};
+  \node[outnode, left=7mm of gov] (an) {Analisis \&\\draf metode};
+  \draw[link] (bo) -- (do); \draw[link] (do) -- (model); \draw[link] (model) -- (akses);
+  \draw[link] (akses) -- (gov); \draw[link] (gov) -- (an);
+  \draw[link, dashed] (an) -- (bo);
+\end{tikzpicture}
+}
+\caption{Alur berpikir lapisan data untuk makalah publikasi.}
+\label{fig:data-flow}
+\end{figure}
+
+\section{Konteks Indonesia}
+
+Arsitektur data di Indonesia bergerak di antara ambisi berbagi data dan kewajiban
+melindunginya. Undang-Undang Pelindungan Data Pribadi menuntut dasar pemrosesan,
+minimisasi, pembatasan akses, dan pencatatan penggunaan data pribadi
+\cite{uupdp2022}. Penyelenggara sistem elektronik wajib mengelola sistem dan data
+secara andal serta menyimpan jejak \cite{pp712019}. Untuk layanan transfer,
+standar Open API pembayaran nasional turut membakukan format data pertukaran
+\cite{snapbi}. Pada konteks lintas instansi pemerintah, prinsip Satu Data
+Indonesia---data yang akurat, mutakhir, terpadu, dan dapat dibagipakaikan dengan
+standar dan metadata yang jelas---menjadi acuan tata kelola \cite{satudata}.
+
+Implikasinya bagi model data cukup langsung: entitas yang memuat data pribadi
+(Data Nasabah/KYC) memerlukan pembatasan akses dan retensi; jejak audit (Data Log
+Audit) menjadi kebutuhan wajib, bukan tambahan; dan definisi data transaksi perlu
+seragam agar interoperabel lintas kanal dan mitra.
+
+\section{Studi Kasus Utama: Arsitektur Data Transfer Bank Wanua}
+
+Objek-objek bisnis pada Bab~\ref{ch:business-architecture}---Instruksi Transfer,
+Rekening Nasabah, Catatan Transaksi, Hasil Penyaringan, Notifikasi Status, dan
+Catatan Rekonsiliasi---diturunkan menjadi objek data logis dan disatukan menjadi
+model data pada Gambar~\ref{fig:data-transfer}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth,height=0.6\textheight,keepaspectratio]{data-transfer.pdf}
+\caption{Model arsitektur data (ArchiMate) API Transfer Dana Bank Wanua: objek
+data logis (kiri/tengah) yang merealisasikan objek bisnis konseptual (kanan),
+beserta relasi antar-data dan data pendukung/master.}
+\label{fig:data-transfer}
+\end{figure}
+
+\subsection{Cara Membaca Diagram Data}
+
+Gambar~\ref{fig:data-transfer} dibaca dari kanan ke kiri. Kolom kanan (kuning)
+memuat \textbf{objek bisnis} konseptual---``apa'' informasi yang dikelola. Kolom
+tengah (biru) memuat \textbf{objek data} logis yang \emph{merealisasikan} objek
+bisnis di sebelahnya: Data Instruksi Transfer mewujudkan Instruksi Transfer, Data
+Transaksi (Ledger) mewujudkan Catatan Transaksi, dan seterusnya. Inilah wujud
+prinsip ``data diturunkan dari objek bisnis''. Kolom kiri memuat \textbf{data
+pendukung dan master} yang tidak selalu punya padanan objek bisnis langsung: Data
+Nasabah (KYC), Referensi Bank (BI-FAST), Data Limit \& Kebijakan, dan Data Log
+Audit.
+
+Relasi antar-objek data membentuk model data logis. \emph{Data Transaksi} berisi
+(agregasi) \emph{Data Instruksi Transfer}; instruksi merujuk \emph{Data Rekening}
+dan dibuat atas nama \emph{Data Nasabah}; sebuah rekening adalah milik seorang
+nasabah; \emph{Data Hasil AML} menyaring instruksi dengan menerapkan \emph{Data
+Limit \& Kebijakan}; transaksi memicu \emph{Data Notifikasi}; \emph{Data
+Rekonsiliasi} mencocokkan transaksi; dan \emph{Data Log Audit} mencatat transaksi.
+Label pada tiap garis menyatakan makna relasi sehingga model dapat dibaca sebagai
+kalimat.
+
+\subsection{Keterlacakan Data ke Proses}
+
+Model data menjadi lebih berguna ketika ditautkan dengan proses yang memakainya.
+Dalam ArchiMate, proses bisnis \emph{mengakses objek bisnis}---bukan objek data
+secara langsung---sedangkan objek data \emph{merealisasikan} objek bisnis itu.
+Karena itu keterlacakan data-ke-proses ditelusuri berlapis
+(Gambar~\ref{fig:data-akses}): proses mengakses (baca/tulis) objek bisnis di kolom
+tengah, dan objek data di kolom kanan merealisasikan objek bisnis tersebut.
+Misalnya, Inisiasi menulis objek bisnis Instruksi Transfer yang direalisasikan
+oleh Data Instruksi Transfer; Validasi \& Otorisasi membaca Rekening Nasabah;
+Penyaringan AML \& Limit menulis Hasil Penyaringan; Eksekusi menulis Catatan
+Transaksi; dan Rekonsiliasi menulis Catatan Rekonsiliasi. Dengan menelusuri rantai
+\emph{akses}~+~\emph{realisasi}, kita mengetahui objek data mana yang dipakai
+proses mana tanpa menautkan proses langsung ke objek data.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth,height=0.6\textheight,keepaspectratio]{data-akses.pdf}
+\caption{Keterlacakan data-ke-proses berlapis: proses bisnis \emph{mengakses}
+(baca/tulis) objek bisnis, dan objek data \emph{merealisasikan} objek bisnis.
+Proses tidak mengakses objek data secara langsung.}
+\label{fig:data-akses}
+\end{figure}
+
+Keterlacakan ini adalah artefak Fase C yang penting. Ia memperlihatkan entitas
+paling ``sibuk'' (Catatan Transaksi dan Instruksi Transfer), menandai di mana
+kualitas data paling kritis, dan menjadi dasar keputusan kepemilikan data serta
+kebutuhan integrasi. Ketika lapisan aplikasi ditambahkan (bab berikutnya), fungsi
+aplikasilah yang mengakses objek data secara langsung, melengkapi rantai
+proses--layanan--fungsi--data.
+
+\section{Langkah Analisis dan Artefak Pendukung}
+
+\subsection{Langkah 1: Ambil Objek Bisnis dari Lapisan Bisnis}
+Mulai dari objek bisnis yang sudah dipetakan di Bab~\ref{ch:business-architecture}.
+Objek inilah kandidat entitas informasi utama.
+
+\subsection{Langkah 2: Turunkan Objek Data Logis}
+Untuk tiap objek bisnis, tentukan objek data yang merealisasikannya. Tambahkan
+data pendukung dan master (misalnya Data Nasabah, Referensi Bank) yang diperlukan.
+
+\subsection{Langkah 3: Susun Model Data}
+Hubungkan objek data dengan relasi bermakna (rujukan, komposisi/agregasi,
+dependensi). Beri label agar model dapat dibaca sebagai kalimat.
+
+\subsection{Langkah 4: Petakan Data ke Proses}
+Nyatakan relasi akses baca/tulis antara proses dan objek data. Tabel matriks
+data-ke-proses membantu menemukan entitas paling kritis.
+
+\subsection{Langkah 5: Tetapkan Aturan Tata Kelola}
+Untuk tiap entitas, tuliskan pemilik, definisi baku, aturan kualitas, klasifikasi
+sensitivitas, retensi, dan dasar pemrosesan bila memuat data pribadi.
+
+\subsection{Langkah 6: Nilai Baseline dan Target}
+Bandingkan definisi dan kualitas data saat ini dengan kondisi target, lalu catat
+kesenjangan sebagai bahan roadmap.
+
+\subsection{Langkah 7: Kaitkan dengan Regulasi}
+Tautkan entitas data pribadi dan jejak audit dengan kewajiban UU PDP dan PP 71,
+serta format pertukaran dengan SNAP BI.
+
+\subsection{Langkah 8: Tulis Narasi Analisis Data}
+Ubah model dan matriks menjadi paragraf yang menjelaskan keputusan data dan
+implikasinya bagi lapisan aplikasi.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Artefak pendukung Bab~6 dan fungsinya dalam makalah.}
+\label{tab:artefak-bab5-data}
+\begin{tabularx}{\textwidth}{@{}p{0.26\textwidth} p{0.30\textwidth} X@{}}
+\hline
+\textbf{Artefak} & \textbf{Isi minimum} & \textbf{Dipakai untuk bagian makalah} \\
+\hline
+Katalog entitas data & Daftar objek bisnis/data, pemilik, definisi & Metode dan
+analisis domain data. \\
+Diagram model data & Objek data \& relasinya (konseptual/logis) & Analisis dan
+lampiran. \\
+Matriks data-ke-proses & Akses baca/tulis per proses & Analisis kesenjangan dan
+prioritas. \\
+Tabel tata kelola \& privasi & Sensitivitas, retensi, dasar pemrosesan & Diskusi,
+implikasi, dan konteks Indonesia. \\
+\hline
+\end{tabularx}
+\end{table}
+
+\section{Integrasi ke Makalah Publikasi}
+
+Lapisan data memperkuat bagian \textbf{Metode} dan \textbf{Analisis}. Model data
+dan matriks data-ke-proses menjadi bukti bahwa rancangan transfer berpijak pada
+informasi yang terdefinisi, bukan asumsi. Contoh paragraf:
+
+\begin{quote}
+Analisis data menunjukkan bahwa kapabilitas transfer real-time bertumpu pada enam
+entitas inti yang saling terkait, dengan Data Transaksi sebagai simpul terpadat.
+Ketiadaan kunci transaksi yang seragam pada kondisi baseline menjelaskan
+kegagalan rekonsiliasi otomatis; arsitektur data target menstandardisasi kunci
+tersebut dan melekatkan jejak audit sesuai kewajiban perlindungan data.
+\end{quote}
+
+\section{Diskusi Kritis, Trade-off, dan Perangkap Umum}
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Trade-off dalam arsitektur data.}
+\label{tab:tradeoff-bab5-data}
+\begin{tabularx}{\textwidth}{@{}p{0.24\textwidth} X X@{}}
+\hline
+\textbf{Keputusan} & \textbf{Jika terlalu ringan} & \textbf{Jika terlalu berat} \\
+\hline
+Detail model data & Entitas kabur, relasi tak jelas & Model serumit skema basis
+data, sulit dibaca non-TI. \\
+Sentralisasi data & Silo data bertahan, definisi berbeda & Titik tunggal
+kegagalan dan beban integrasi besar. \\
+Data pribadi & Risiko pelanggaran privasi & Fitur macet karena kontrol
+berlebihan. \\
+Jejak audit & Kepatuhan lemah, sulit ditelusuri & Biaya penyimpanan dan
+kompleksitas naik. \\
+\hline
+\end{tabularx}
+\end{table}
+
+Perangkap umum: (1) menyamakan model data dengan skema basis data sehingga terlalu
+teknis; (2) melupakan kepemilikan dan definisi baku sehingga silo bertahan; (3)
+menambahkan data pribadi tanpa dasar pemrosesan; dan (4) menggambar entitas tanpa
+menautkannya ke proses yang memakainya.
+
+\section{Latihan Terapan Individual}
+
+\subsection*{Latihan~6.1: Katalog dan Model Data}
+Untuk organisasi studi kasus Anda, turunkan objek data dari objek bisnis, susun
+model data logis dengan relasi berlabel, dan tuliskan pemilik serta definisi tiap
+entitas.
+
+\subsection*{Latihan~6.2: Matriks Data-ke-Proses}
+Buat matriks akses baca/tulis antara proses dan objek data. Tandai entitas paling
+kritis dan jelaskan implikasinya bagi kualitas dan integrasi.
+
+\subsection*{Latihan~6.3: Tata Kelola dan Privasi}
+Klasifikasikan sensitivitas tiap entitas, tetapkan retensi dan dasar pemrosesan
+data pribadi, lalu kaitkan dengan UU PDP dan PP 71.
+
+\subsection*{Latihan~6.4: Baseline, Target, dan Paragraf Analisis}
+Bandingkan kondisi data saat ini dan target, catat kesenjangan, lalu tulis satu
+paragraf analisis data untuk makalah.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Rubrik latihan Bab~6.}
+\label{tab:rubrik-bab5-data}
+\begin{tabularx}{\textwidth}{@{}p{0.25\textwidth} X X@{}}
+\hline
+\textbf{Komponen} & \textbf{Indikator baik} & \textbf{Perlu diperbaiki bila} \\
+\hline
+Model data & Entitas \& relasi jelas dan berlabel & Sekadar daftar tabel tanpa
+relasi. \\
+Matriks data-ke-proses & Akses baca/tulis lengkap \& konsisten & Tidak menautkan
+data dengan proses. \\
+Tata kelola \& privasi & Sensitivitas, retensi, dasar pemrosesan jelas & Data
+pribadi tanpa kontrol. \\
+Narasi analisis & Menautkan data ke kesenjangan \& keputusan & Deskriptif tanpa
+argumen. \\
+\hline
+\end{tabularx}
+\end{table}
+
+\section{Ringkasan, Refleksi, dan Jembatan}
+
+\subsection*{Poin Kunci}
+\begin{itemize}
+  \item Informasi dimodelkan pada tiga tingkat: objek bisnis (konseptual), objek
+        data (logis), dan representasi (perwujudan).
+  \item Objek data \emph{diturunkan dari} objek bisnis melalui relasi realisasi.
+  \item Model data menjadi berguna ketika dipetakan ke proses lewat relasi akses.
+  \item Tata kelola dan privasi (UU PDP, PP 71, SNAP BI, Satu Data) melekat pada
+        entitas, bukan tempelan.
+  \item Fase C (Data) menghasilkan baseline, target, dan analisis kesenjangan.
+\end{itemize}
+
+\subsection*{Uji Mandiri}
+\begin{enumerate}
+  \item Jelaskan perbedaan objek bisnis, objek data, dan representasi beserta
+        contohnya.
+  \item Mengapa objek data dikatakan diturunkan dari objek bisnis?
+  \item Ambil satu proses pada kasus Anda dan sebutkan objek data yang ditulis dan
+        dibacanya.
+\end{enumerate}
+
+\subsection*{Jembatan ke Bab Berikutnya}
+Bab berikutnya melengkapi Fase C dengan \textbf{lapisan aplikasi}: komponen,
+layanan, antarmuka, dan fungsi aplikasi yang \emph{menjalankan} proses bisnis dan
+\emph{mengakses} objek data yang telah dimodelkan di sini. Katalog entitas dan
+matriks data-ke-proses menjadi masukan langsung untuk memilih komponen aplikasi
+dan pola integrasinya.
+
+\section{Bacaan Lanjutan dan Lampiran}
+
+\subsection*{Bacaan Inti}
+\begin{itemize}
+  \item The Open Group untuk Fase C ADM dan artefak arsitektur data \cite{togaf10}.
+  \item Ross, Weill, dan Robertson untuk hubungan integrasi data dengan operating
+        model \cite{ross2006enterprise}.
+\end{itemize}
+
+\subsection*{Bacaan untuk Memperdalam}
+\begin{itemize}
+  \item Untuk kepemilikan data pada arsitektur terdistribusi, baca pembahasan
+        modularisasi dan kepemilikan data \cite{newman2021building}.
+  \item Untuk konteks Indonesia: perlindungan data pribadi \cite{uupdp2022},
+        penyelenggaraan sistem elektronik \cite{pp712019}, standar API pembayaran
+        \cite{snapbi}, dan Satu Data Indonesia \cite{satudata}.
+\end{itemize}
+
+\subsection*{Lampiran Kerja Bab~6}
+\begin{description}
+  \item[Katalog entitas data] Daftar objek bisnis/data, pemilik, dan definisi.
+  \item[Diagram model data] Objek data dan relasinya.
+  \item[Matriks data-ke-proses] Akses baca/tulis per proses.
+  \item[Tabel tata kelola] Sensitivitas, retensi, dan dasar pemrosesan.
+\end{description}
+\setlength{\emergencystretch}{0pt}

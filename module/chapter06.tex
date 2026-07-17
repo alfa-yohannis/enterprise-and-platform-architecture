@@ -1,0 +1,546 @@
+\chapter[Lapisan Aplikasi: Komponen, Layanan, dan Integrasi]{Lapisan Aplikasi:
+Komponen, Layanan, dan Integrasi Sistem Transfer Dana}
+\label{ch:application-architecture}
+\setlength{\emergencystretch}{2em}
+
+\section*{Tujuan Pembelajaran}
+\begin{itemize}
+  \item Menjelaskan elemen lapisan aplikasi ArchiMate---komponen, layanan,
+        fungsi, dan antarmuka aplikasi---serta relasi yang menautkannya ke
+        proses bisnis dan objek data.
+  \item Menyusun \emph{application landscape} untuk kapabilitas sasaran dan
+        memetakan komponen ke layanan bisnis yang diwujudkannya.
+  \item Menempatkan analisis aplikasi dalam TOGAF ADM \textbf{Fase C (Arsitektur
+        Sistem Informasi)}, khususnya sub-fase \textbf{Arsitektur Aplikasi}:
+        menyusun \emph{baseline}, \emph{target}, dan analisis kesenjangan.
+  \item Menautkan lapisan aplikasi dengan lapisan data (akses objek data) dan
+        lapisan bisnis (realisasi layanan), serta mengaitkannya dengan pola
+        integrasi dan konteks Indonesia.
+\end{itemize}
+
+Tujuan pertama dan kedua mendukung CLO 3; tujuan ketiga mendukung CLO 2 dan
+CLO 3; tujuan keempat mendukung CLO 4 dan CLO 6 karena mahasiswa menautkan
+rancangan aplikasi dengan integrasi, API, dan konteks regulasi.
+
+\section{Ringkasan Awal Bab}
+
+Bab~\ref{ch:data-architecture} memodelkan \emph{data apa} yang mengalir. Bab ini
+melengkapi Fase C dengan sisi \textbf{aplikasi}: \emph{perangkat lunak apa} yang
+menjalankan proses bisnis dan mengolah data itu. Dalam ArchiMate, lapisan
+aplikasi memuat \textbf{komponen aplikasi} (perangkat lunak yang dapat digelar),
+\textbf{layanan aplikasi} (apa yang ditawarkan komponen), \textbf{fungsi
+aplikasi} (perilaku internal), dan \textbf{antarmuka aplikasi} (titik akses).
+
+Di sinilah lingkaran Fase C tertutup. Layanan aplikasi \emph{merealisasikan}
+layanan bisnis dan \emph{melayani} proses bisnis; sementara fungsi aplikasi
+\emph{mengakses} objek data. Jadi akses langsung ke data---yang sengaja tidak
+dibuat pada lapisan bisnis (Bab~\ref{ch:data-architecture})---berada tepat di
+lapisan aplikasi ini. Keluaran bab memperkuat bagian \textbf{Analisis} makalah:
+peta aplikasi, matriks komponen--layanan, dan analisis kesenjangan.
+
+\section{Pendahuluan}
+
+Ketika organisasi berbicara tentang ``sistem'', yang dimaksud biasanya lapisan
+aplikasi. Namun kesalahan umum adalah melompat ke daftar aplikasi tanpa
+menautkannya ke proses bisnis dan data. Akibatnya muncul lanskap yang rumit:
+banyak integrasi titik-ke-titik, duplikasi fungsi, dan ketergantungan yang sulit
+ditelusuri. Arsitektur aplikasi yang baik membuat lanskap itu terbaca---komponen
+apa menjalankan fungsi apa, menawarkan layanan apa, dan bergantung pada komponen
+mana.
+
+Bagi makalah, lapisan aplikasi memberi ketegasan pada rekomendasi teknologi.
+Alih-alih menyebut ``bangun API'', penulis dapat menunjukkan komponen API
+Gateway, layanan transfer, mesin AML, dan adaptor BI-FAST beserta relasinya.
+Konsep API sebagai produk \cite{jacobson2011apis} dan tata kelola siklus hidup
+API \cite{medjaoui2018continuous} memberi dasar akademik, sedangkan pembahasan
+modularisasi membantu menimbang komponen mana yang dipisah atau disatukan
+\cite{newman2021building}.
+
+\section{Skenario Pembuka dan Pertanyaan Pemandu}
+
+Setelah proses dan data transfer Bank Wanua dipetakan, tim arsitektur menghadapi
+pertanyaan aplikasi: apakah membangun satu aplikasi monolitik yang menangani
+semuanya, atau memisahkan gateway, layanan transfer, penyaringan AML, adaptor
+BI-FAST, dan mesin rekonsiliasi menjadi komponen tersendiri? Sistem inti lama
+tidak dapat diganti sekaligus, sehingga integrasi harus bertahap dan aman.
+
+\subsection*{Pertanyaan Pemandu}
+\begin{enumerate}
+  \item Layanan aplikasi apa yang diperlukan untuk mewujudkan layanan bisnis
+        transfer?
+  \item Komponen aplikasi apa yang menjalankan fungsi-fungsi itu, dan bagaimana
+        ketergantungannya?
+  \item Fungsi aplikasi mana yang mengakses objek data mana?
+  \item Pola integrasi apa yang sesuai dengan kondisi sistem inti dan mitra?
+  \item Bagaimana kondisi lanskap saat ini berbeda dari target, dan apa
+        kesenjangannya?
+\end{enumerate}
+
+\section{Mengapa Bab Ini Penting bagi Pembaca Non-TI}
+
+Pembaca non-TI tidak perlu menulis kode, tetapi perlu memahami keputusan
+aplikasi yang bersifat manajerial: membeli atau membangun, memusatkan atau
+memisahkan, mengganti atau membungkus sistem lama. Keputusan ini menentukan
+biaya, kecepatan perubahan, dan risiko. Dengan empat notasi sederhana---komponen,
+layanan, fungsi, dan antarmuka---seorang analis dapat menjelaskan lanskap
+aplikasi dan trade-off-nya tanpa tenggelam dalam detail teknis.
+
+\section{Konsep Inti dan Glosarium Mini}
+
+\subsection{Lapisan Aplikasi ArchiMate}
+
+\textbf{Komponen aplikasi} (\emph{application component}) adalah unit perangkat
+lunak yang dapat digelar dan diganti, misalnya API Gateway atau Mesin AML.
+\textbf{Layanan aplikasi} (\emph{application service}) adalah perilaku yang
+ditawarkan komponen kepada lingkungannya, misalnya Layanan API Transfer.
+\textbf{Fungsi aplikasi} (\emph{application function}) adalah perilaku internal
+komponen, misalnya Eksekusi Pembayaran. \textbf{Antarmuka aplikasi}
+(\emph{application interface}) adalah titik akses layanan, misalnya REST API yang
+patuh SNAP BI. Objek data (Bab~\ref{ch:data-architecture}) melengkapi lapisan ini
+sebagai struktur pasifnya.
+
+\subsection{Notasi Elemen Aplikasi di Archi}
+
+Gambar~\ref{fig:app-legend} menampilkan jenis elemen lapisan aplikasi di Archi.
+Semua elemen aplikasi berwarna kebiruan (biru muda); ikon di pojok kanan atas
+membedakan jenisnya, dan objek data ikut ditampilkan sebagai struktur pasif
+lapisan ini.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.92\textwidth]{app-legend.pdf}
+\caption{Jenis elemen lapisan aplikasi ArchiMate dan simbolnya di Archi.}
+\label{fig:app-legend}
+\end{figure}
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Elemen lapisan aplikasi ArchiMate, kegunaan, dan contohnya.}
+\label{tab:app-elements}
+\begin{tabularx}{\textwidth}{@{}p{0.24\textwidth} p{0.22\textwidth} X@{}}
+\hline
+\textbf{Elemen} & \textbf{Kegunaan} & \textbf{Contoh} \\
+\hline
+Application Component & Unit perangkat lunak yang dapat digelar/diganti. & API
+Gateway, Aplikasi Transfer Dana, Mesin AML \& Limit, Adaptor BI-FAST. \\
+Application Service & Perilaku yang ditawarkan komponen ke lingkungan;
+merealisasikan layanan bisnis. & Layanan API Transfer, Layanan Penyaringan AML. \\
+Application Function & Perilaku internal komponen; mengakses objek data. &
+Otorisasi \& Validasi, Eksekusi Pembayaran, Rekonsiliasi Otomatis. \\
+Application Interface & Titik akses layanan aplikasi. & REST API (SNAP BI),
+Antarmuka BI-FAST. \\
+Application Collaboration / Interaction & Kerja sama beberapa komponen dan
+perilaku kolektifnya. & (mis.) kolaborasi gateway--mesin AML. \\
+Application Process / Event & Alur perilaku aplikasi dan pemicunya. & (mis.)
+alur pemrosesan permintaan, peristiwa ``permintaan masuk''. \\
+Data Object & Struktur pasif---data yang diproses (Bab~6). & Data Instruksi
+Transfer, Data Transaksi (Ledger). \\
+\hline
+\end{tabularx}
+\end{table}
+
+\subsection{Komponen, Layanan, Fungsi, dan Antarmuka}
+
+Empat elemen ini mudah tertukar. \textbf{Layanan} menjawab ``apa yang
+ditawarkan''; \textbf{fungsi} menjawab ``perilaku apa di dalam''; \textbf{komponen}
+menjawab ``perangkat lunak apa yang menjalankannya''; dan \textbf{antarmuka}
+menjawab ``lewat mana diakses''. Satu komponen dapat menjalankan beberapa fungsi
+dan menawarkan beberapa layanan; satu layanan dapat dipakai banyak proses bisnis.
+
+\subsection{Pola Integrasi Aplikasi}
+
+Cara komponen saling terhubung menentukan kerumitan lanskap
+(Gambar~\ref{fig:integration-patterns}). \textbf{Titik-ke-titik} menghubungkan
+tiap pasang aplikasi secara langsung---sederhana di awal, tetapi cepat menjadi
+kusut. \textbf{Hub/ESB} memusatkan integrasi pada satu perantara. \textbf{API-led}
+menata integrasi berlapis melalui API yang dikelola sebagai produk, cocok untuk
+membuka layanan ke mitra secara aman dan terkendali \cite{medjaoui2018continuous}.
+Untuk rel transfer, pendekatan API-led melalui gateway sejalan dengan prinsip
+``API sebagai produk''.
+
+\begin{figure}[htbp]
+\centering
+\scalebox{1.0}{
+\begin{tikzpicture}[
+  font=\footnotesize,
+  lbl/.style={font=\footnotesize\bfseries, align=center},
+  app/.style={circle, draw=blue!70!black, fill=blue!10, minimum size=8mm, inner sep=0pt},
+  hub/.style={rectangle, rounded corners=1mm, draw=orange!80!black, fill=orange!16,
+    minimum width=13mm, minimum height=7.5mm},
+  gw/.style={rectangle, rounded corners=1mm, draw=praditagreen, fill=praditagreen!14,
+    minimum width=15mm, minimum height=7.5mm},
+  lnk/.style={draw=gray!55}
+]
+  % point-to-point
+  \node[lbl] at (1.4,3.6) {Titik-ke-titik};
+  \foreach \a/\x/\y in {a/0/2.6, b/2.8/2.6, c/0/0.8, d/2.8/0.8, e/1.4/1.7}
+    \node[app] (\a) at (\x,\y) {};
+  \foreach \p/\q in {a/b,a/c,a/d,a/e,b/c,b/d,b/e,c/d,c/e,d/e} \draw[lnk] (\p)--(\q);
+  % hub
+  \node[lbl] at (5.9,3.6) {Hub / ESB};
+  \node[hub] (h) at (5.9,1.7) {\textbf{ESB}};
+  \foreach \a/\x/\y in {h1/4.5/2.6, h2/7.3/2.6, h3/4.5/0.8, h4/7.3/0.8}
+    {\node[app] (\a) at (\x,\y) {}; \draw[lnk] (\a)--(h);}
+  % api-led
+  \node[lbl] at (10.4,3.6) {API-led};
+  \node[app] (ext) at (10.4,2.6) {};
+  \node[gw] (g) at (10.4,1.6) {\textbf{Gateway}};
+  \foreach \a/\x in {p1/9.2, p2/10.4, p3/11.6} {\node[app] (\a) at (\x,0.8) {}; \draw[lnk] (g)--(\a);}
+  \draw[lnk] (ext)--(g);
+\end{tikzpicture}
+}
+\caption{Tiga pola integrasi aplikasi: titik-ke-titik, hub/ESB, dan API-led.}
+\label{fig:integration-patterns}
+\end{figure}
+
+\subsection{TOGAF ADM Fase C: Arsitektur Aplikasi}
+
+Fase C mencakup dua sisi: data (Bab~\ref{ch:data-architecture}) dan aplikasi.
+Sisi aplikasi menyusun \emph{application landscape} baseline dan target, lalu
+menganalisis kesenjangan \cite{togaf10}. Keluaran utamanya adalah katalog
+komponen/layanan aplikasi, diagram kerja sama aplikasi, dan matriks komponen
+terhadap fungsi/layanan bisnis. Tabel~\ref{tab:adm-phase-c-app} memetakan
+langkahnya ke kasus Bank Wanua.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Pemetaan TOGAF ADM Fase C (Arsitektur Aplikasi) ke artefak Bank Wanua.}
+\label{tab:adm-phase-c-app}
+\begin{tabularx}{\textwidth}{@{}p{0.27\textwidth} X@{}}
+\hline
+\textbf{Langkah Fase C (Aplikasi)} & \textbf{Artefak / keluaran pada kasus Bank Wanua} \\
+\hline
+Ruang lingkup dan prinsip aplikasi & Lingkup aplikasi rel transfer; prinsip
+API-led, komponen modular, dan bungkus (bukan ganti) sistem inti. \\
+Arsitektur aplikasi baseline & Fungsi transfer tersebar pada sistem inti dan
+kanal; integrasi titik-ke-titik; AML dan rekonsiliasi manual. \\
+Arsitektur aplikasi target & API Gateway, Aplikasi Transfer Dana, Mesin AML,
+Adaptor BI-FAST, dan Mesin Rekonsiliasi sebagai komponen; layanan aplikasi yang
+mewujudkan layanan bisnis. \\
+Analisis kesenjangan & Selisih baseline--target: komponen yang dibangun,
+diintegrasikan, atau dibungkus dari sistem lama. \\
+Masukan ke fase berikutnya & Kebutuhan lapisan teknologi: node, platform,
+jaringan, dan sertifikasi untuk menggelar komponen (bab berikutnya). \\
+\hline
+\end{tabularx}
+\end{table}
+
+\subsection{Contoh Interaksi Antar-Elemen Aplikasi}
+
+Gambar~\ref{fig:app-contoh} memakai contoh restoran cepat saji untuk menunjukkan
+interaksi antar-elemen aplikasi: komponen \emph{Aplikasi Kasir (POS)}
+menjalankan fungsi \emph{Pemrosesan Pesanan}, yang mewujudkan \emph{Layanan
+Pemesanan} (merealisasikan layanan bisnis Layanan Makan di Tempat dan melayani
+proses Menyajikan Pesanan) serta mengakses objek data \emph{Data Pesanan}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth,height=0.42\textheight,keepaspectratio]{app-contoh.pdf}
+\caption{Contoh interaksi antar-elemen aplikasi pada kasus restoran cepat saji.}
+\label{fig:app-contoh}
+\end{figure}
+
+\subsection*{Glosarium Mini}
+\begin{description}
+  \item[Komponen aplikasi] Unit perangkat lunak yang dapat digelar, misalnya API
+        Gateway.
+  \item[Layanan aplikasi] Perilaku yang ditawarkan komponen; merealisasikan
+        layanan bisnis.
+  \item[Fungsi aplikasi] Perilaku internal komponen yang mengakses objek data.
+  \item[Antarmuka aplikasi] Titik akses layanan, misalnya REST API.
+  \item[Application landscape] Peta komponen aplikasi dan ketergantungannya.
+  \item[Pola integrasi] Cara komponen terhubung (titik-ke-titik, hub/ESB,
+        API-led).
+\end{description}
+
+\section{Kerangka Berpikir}
+
+Alur berpikir bab ini bergerak dari layanan bisnis menuju lanskap aplikasi
+(Gambar~\ref{fig:app-flow}). Layanan bisnis menentukan layanan aplikasi yang
+harus ada; layanan aplikasi diwujudkan oleh fungsi dan komponen; komponen
+saling bergantung membentuk lanskap; fungsi mengakses objek data; dan pola
+integrasi menata semuanya. Hasilnya menjadi bahan analisis dan pratinjau
+kebutuhan teknologi.
+
+\begin{figure}[htbp]
+\centering
+\scalebox{0.86}{
+\begin{tikzpicture}[
+  box/.style={rectangle, rounded corners=1.5mm, draw=blue!70!black,
+    fill=blue!8, thick, align=center, text width=30mm, minimum height=11mm},
+  outnode/.style={rectangle, rounded corners=1.5mm, draw=orange!80!black,
+    fill=orange!16, thick, align=center, text width=32mm, minimum height=11mm},
+  link/.style={-Latex, thick, draw=blue!70!black}
+]
+  \node[box] (bs) {Layanan bisnis\\(dari Bab 5)};
+  \node[box, right=7mm of bs] (as) {Layanan \&\\komponen aplikasi};
+  \node[box, right=7mm of as] (land) {Lanskap \&\\ketergantungan};
+  \node[box, below=8mm of land] (data) {Akses objek data\\(Bab 6)};
+  \node[outnode, left=7mm of data] (integ) {Pola integrasi\\\& kesenjangan};
+  \node[outnode, left=7mm of integ] (an) {Analisis \&\\pratinjau teknologi};
+  \draw[link] (bs) -- (as); \draw[link] (as) -- (land); \draw[link] (land) -- (data);
+  \draw[link] (data) -- (integ); \draw[link] (integ) -- (an);
+  \draw[link, dashed] (an) -- (bs);
+\end{tikzpicture}
+}
+\caption{Alur berpikir lapisan aplikasi untuk makalah publikasi.}
+\label{fig:app-flow}
+\end{figure}
+
+\section{Konteks Indonesia}
+
+Arsitektur aplikasi layanan keuangan Indonesia dibentuk oleh standar dan
+regulasi. Standar Open API pembayaran nasional membakukan antarmuka dan format
+data yang dibuka ke mitra \cite{snapbi}; karena itu antarmuka aplikasi pada rel
+transfer dirancang patuh SNAP BI sejak awal. Penyelenggara sistem elektronik
+wajib mengelola sistem, keandalan, dan jejaknya \cite{pp712019}, sedangkan
+pemrosesan data pribadi pada komponen aplikasi harus memenuhi perlindungan data
+pribadi \cite{uupdp2022}. Realitas sistem inti lama membuat pendekatan
+\emph{bungkus bertahap} (adaptor + gateway) lebih realistis daripada penggantian
+sekaligus.
+
+\section{Studi Kasus Utama: Arsitektur Aplikasi Transfer Bank Wanua}
+
+Layanan dan proses bisnis pada Bab~\ref{ch:business-architecture} diwujudkan oleh
+sekumpulan komponen aplikasi pada Gambar~\ref{fig:app-transfer}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth,height=0.62\textheight,keepaspectratio]{app-transfer.pdf}
+\caption{Lanskap aplikasi (ArchiMate) API Transfer Dana Bank Wanua: komponen
+menjalankan fungsi, fungsi merealisasikan layanan aplikasi, antarmuka mengekspos
+layanan, dan komponen saling melayani.}
+\label{fig:app-transfer}
+\end{figure}
+
+\subsection{Cara Membaca Diagram Aplikasi}
+
+Gambar~\ref{fig:app-transfer} dibaca dari kiri ke kanan. Kolom kiri memuat
+\textbf{komponen aplikasi}: API Gateway (pintu masuk yang aman dan patuh SNAP
+BI), Aplikasi Transfer Dana (orkestrator), Mesin AML \& Limit, Adaptor BI-FAST,
+Adaptor Core Banking, dan Mesin Rekonsiliasi \& Notifikasi. Tiap komponen
+\emph{menjalankan} (assignment) sebuah \textbf{fungsi aplikasi} di kolom tengah:
+Otorisasi \& Validasi, Penyaringan AML \& Limit, Eksekusi Pembayaran,
+Rekonsiliasi Otomatis, dan Notifikasi. Tiap fungsi lalu \emph{merealisasikan}
+sebuah \textbf{layanan aplikasi} di kolom kanan (Layanan API Transfer, Penyaringan
+AML, Rekonsiliasi, dan Notifikasi). Antarmuka REST API \emph{mengekspos} layanan
+transfer, dan komponen-komponen saling \emph{melayani} (serving) untuk membentuk
+alur: gateway melayani orkestrator, sedangkan mesin AML, adaptor BI-FAST, dan
+mesin rekonsiliasi melayani orkestrator; adaptor core banking melayani adaptor
+BI-FAST.
+
+\subsection{Penyelarasan Bisnis, Aplikasi, dan Data}
+
+Kekuatan lapisan aplikasi terlihat saat ketiga lapisan Fase B--C disandingkan
+(Gambar~\ref{fig:app-stack}). Diagram ini menutup rantai keterlacakan
+end-to-end: \textbf{layanan aplikasi merealisasikan layanan bisnis} dan
+\textbf{melayani proses bisnis}; \textbf{fungsi aplikasi merealisasikan layanan
+aplikasi}; \textbf{komponen menjalankan fungsi}; dan \textbf{fungsi aplikasi
+mengakses objek data}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth,height=0.62\textheight,keepaspectratio]{app-stack.pdf}
+\caption{Penyelarasan lintas-lapisan (ArchiMate) untuk rel transfer: bisnis,
+aplikasi (layanan dan komponen/fungsi), serta data. Fungsi aplikasi mengakses
+objek data---di sinilah akses data langsung berada, bukan pada proses bisnis.}
+\label{fig:app-stack}
+\end{figure}
+
+Inilah jawaban atas catatan pada Bab~\ref{ch:data-architecture}: proses bisnis
+mengakses objek bisnis, sedangkan \emph{objek data diakses langsung oleh fungsi
+aplikasi}. Dengan rantai lengkap---proses bisnis dilayani layanan aplikasi, yang
+diwujudkan fungsi, yang mengakses data---setiap kebutuhan dapat ditelusuri dari
+motivasi sampai ke data dan komponen yang mewujudkannya.
+
+\section{Langkah Analisis dan Artefak Pendukung}
+
+\subsection{Langkah 1: Ambil Layanan dan Proses Bisnis}
+Mulai dari layanan dan proses bisnis (Bab~\ref{ch:business-architecture}) yang
+perlu didukung aplikasi.
+
+\subsection{Langkah 2: Tentukan Layanan Aplikasi}
+Untuk tiap layanan bisnis, tentukan layanan aplikasi yang merealisasikannya dan
+proses bisnis yang dilayaninya.
+
+\subsection{Langkah 3: Rancang Komponen dan Fungsi}
+Tentukan komponen yang menjalankan fungsi dan mewujudkan layanan aplikasi.
+Pertimbangkan memisahkan atau menyatukan komponen sesuai kebutuhan perubahan.
+
+\subsection{Langkah 4: Tautkan Fungsi ke Objek Data}
+Nyatakan relasi akses baca/tulis antara fungsi aplikasi dan objek data
+(Bab~\ref{ch:data-architecture}).
+
+\subsection{Langkah 5: Pilih Pola Integrasi}
+Tetapkan pola integrasi (titik-ke-titik, hub/ESB, API-led) dan jelaskan
+alasannya terhadap kondisi sistem inti dan mitra.
+
+\subsection{Langkah 6: Susun Baseline dan Target}
+Bandingkan lanskap aplikasi saat ini dan target, lalu catat kesenjangan.
+
+\subsection{Langkah 7: Kaitkan dengan Standar dan Regulasi}
+Tautkan antarmuka dengan SNAP BI, dan pemrosesan data pribadi dengan UU PDP serta
+PP 71.
+
+\subsection{Langkah 8: Tulis Narasi Analisis Aplikasi}
+Ubah lanskap dan matriks menjadi paragraf yang menjelaskan keputusan aplikasi dan
+implikasinya bagi lapisan teknologi.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Artefak pendukung Bab~7 dan fungsinya dalam makalah.}
+\label{tab:artefak-bab6-app}
+\begin{tabularx}{\textwidth}{@{}p{0.26\textwidth} p{0.30\textwidth} X@{}}
+\hline
+\textbf{Artefak} & \textbf{Isi minimum} & \textbf{Dipakai untuk bagian makalah} \\
+\hline
+Katalog komponen/layanan & Daftar komponen, layanan, fungsi & Analisis domain
+aplikasi. \\
+Diagram lanskap aplikasi & Komponen \& ketergantungannya & Analisis dan lampiran. \\
+Diagram penyelarasan lintas-lapisan & Bisnis--aplikasi--data & Analisis
+keterlacakan end-to-end. \\
+Analisis pola integrasi & Pilihan pola + alasan & Diskusi \& implikasi
+manajerial. \\
+\hline
+\end{tabularx}
+\end{table}
+
+\section{Integrasi ke Makalah Publikasi}
+
+Lapisan aplikasi memperkuat bagian \textbf{Analisis} dan \textbf{Diskusi}.
+Diagram penyelarasan menjadi bukti keterlacakan dari kebutuhan bisnis sampai ke
+komponen dan data. Contoh paragraf:
+
+\begin{quote}
+Analisis aplikasi menunjukkan bahwa layanan transfer real-time paling baik
+diwujudkan oleh lanskap API-led: sebuah API Gateway yang patuh SNAP BI, aplikasi
+transfer sebagai orkestrator, serta komponen AML, adaptor BI-FAST, dan mesin
+rekonsiliasi yang terpisah. Pemisahan ini memungkinkan sistem inti dibungkus
+bertahap tanpa penggantian sekaligus, sekaligus menjaga keterlacakan akses data
+pada tiap fungsi.
+\end{quote}
+
+\section{Diskusi Kritis, Trade-off, dan Perangkap Umum}
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Trade-off dalam arsitektur aplikasi.}
+\label{tab:tradeoff-bab6-app}
+\begin{tabularx}{\textwidth}{@{}p{0.24\textwidth} X X@{}}
+\hline
+\textbf{Keputusan} & \textbf{Jika terlalu ringan} & \textbf{Jika terlalu berat} \\
+\hline
+Granularitas komponen & Monolit sulit diubah & Terlalu banyak komponen, integrasi
+rumit. \\
+Pola integrasi & Titik-ke-titik menjadi kusut & Platform integrasi mahal dan
+berat. \\
+Sistem inti lama & Diabaikan, integrasi rapuh & Diganti sekaligus, risiko tinggi. \\
+Keamanan API & Antarmuka terbuka tanpa kendali & Kontrol berlebihan menghambat
+adopsi mitra. \\
+\hline
+\end{tabularx}
+\end{table}
+
+Perangkap umum: (1) mendaftar aplikasi tanpa menautkannya ke proses dan data;
+(2) integrasi titik-ke-titik yang menumpuk; (3) mengganti sistem inti sekaligus;
+dan (4) membuka API tanpa tata kelola dan kepatuhan standar.
+
+\section{Latihan Terapan Individual}
+
+\subsection*{Latihan~7.1: Lanskap Aplikasi}
+Untuk organisasi studi kasus Anda, susun lanskap aplikasi: komponen, fungsi,
+layanan, dan antarmuka, beserta ketergantungannya.
+
+\subsection*{Latihan~7.2: Penyelarasan Lintas-Lapisan}
+Buat diagram yang menautkan layanan bisnis, layanan/komponen aplikasi, dan objek
+data untuk satu kapabilitas sasaran.
+
+\subsection*{Latihan~7.3: Pola Integrasi dan Baseline--Target}
+Pilih pola integrasi beserta alasannya, lalu bandingkan lanskap baseline dan
+target dan catat kesenjangan.
+
+\subsection*{Latihan~7.4: Paragraf Analisis Aplikasi}
+Tulis satu paragraf analisis aplikasi yang menautkan keputusan komponen dengan
+kebutuhan bisnis dan implikasi teknologi.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Rubrik latihan Bab~7.}
+\label{tab:rubrik-bab6-app}
+\begin{tabularx}{\textwidth}{@{}p{0.25\textwidth} X X@{}}
+\hline
+\textbf{Komponen} & \textbf{Indikator baik} & \textbf{Perlu diperbaiki bila} \\
+\hline
+Lanskap aplikasi & Komponen, layanan, fungsi jelas \& tertaut & Sekadar daftar
+aplikasi tanpa relasi. \\
+Penyelarasan lintas-lapisan & Menautkan bisnis--aplikasi--data & Aplikasi berdiri
+sendiri tanpa jejak. \\
+Pola integrasi & Pilihan beralasan terhadap konteks & Tanpa pertimbangan sistem
+lama/mitra. \\
+Narasi analisis & Menautkan komponen ke kebutuhan \& implikasi & Deskriptif
+tanpa argumen. \\
+\hline
+\end{tabularx}
+\end{table}
+
+\section{Ringkasan, Refleksi, dan Jembatan}
+
+\subsection*{Poin Kunci}
+\begin{itemize}
+  \item Lapisan aplikasi memuat komponen, layanan, fungsi, dan antarmuka.
+  \item Layanan aplikasi \emph{merealisasikan} layanan bisnis dan \emph{melayani}
+        proses bisnis; fungsi aplikasi \emph{mengakses} objek data.
+  \item Akses data langsung berada di lapisan aplikasi, bukan pada proses bisnis.
+  \item Pola integrasi (titik-ke-titik, hub/ESB, API-led) menentukan kerumitan
+        lanskap.
+  \item Fase C (Aplikasi) menghasilkan baseline, target, dan analisis kesenjangan.
+\end{itemize}
+
+\subsection*{Uji Mandiri}
+\begin{enumerate}
+  \item Jelaskan perbedaan komponen, layanan, fungsi, dan antarmuka aplikasi.
+  \item Mengapa akses objek data ditempatkan pada fungsi aplikasi, bukan pada
+        proses bisnis?
+  \item Ambil satu layanan bisnis pada kasus Anda dan sebutkan layanan serta
+        komponen aplikasi yang mewujudkannya.
+\end{enumerate}
+
+\subsection*{Jembatan ke Bab Berikutnya}
+Bab berikutnya turun ke \textbf{lapisan teknologi}: node, perangkat, jaringan,
+dan \emph{system software} yang menggelar komponen aplikasi ini, serta artifact
+yang mewujudkan objek data. Katalog komponen dan diagram penyelarasan menjadi
+masukan langsung untuk memilih platform, pola penggelaran, dan arsitektur
+teknologi acuan.
+
+\section{Bacaan Lanjutan dan Lampiran}
+
+\subsection*{Bacaan Inti}
+\begin{itemize}
+  \item The Open Group untuk Fase C ADM dan artefak arsitektur aplikasi
+        \cite{togaf10}.
+  \item Newman untuk modularisasi, komponen, dan pola integrasi
+        \cite{newman2021building}.
+\end{itemize}
+
+\subsection*{Bacaan untuk Memperdalam}
+\begin{itemize}
+  \item Untuk API sebagai produk dan tata kelola siklus hidupnya
+        \cite{jacobson2011apis,medjaoui2018continuous}.
+  \item Untuk konteks Indonesia: standar API pembayaran \cite{snapbi},
+        penyelenggaraan sistem elektronik \cite{pp712019}, dan perlindungan data
+        pribadi \cite{uupdp2022}.
+\end{itemize}
+
+\subsection*{Lampiran Kerja Bab~7}
+\begin{description}
+  \item[Katalog komponen/layanan] Daftar komponen, fungsi, layanan, antarmuka.
+  \item[Diagram lanskap aplikasi] Komponen dan ketergantungannya.
+  \item[Diagram penyelarasan] Bisnis--aplikasi--data.
+  \item[Analisis integrasi] Pola integrasi dan kesenjangan baseline--target.
+\end{description}
+\setlength{\emergencystretch}{0pt}

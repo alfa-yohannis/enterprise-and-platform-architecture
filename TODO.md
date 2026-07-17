@@ -16,18 +16,19 @@ fund transfer, wraps BI-FAST, complies with SNAP BI).
 | Motivation | ✅ | `motivation-legend/-transfer/-contoh` | `chapter02.tex` (Bab 3) | `session02` |
 | Strategy | ✅ | `strategy-legend/-transfer/-contoh` | `chapter03.tex` (Bab 4) | `session03` |
 | **Business** | ✅ | `business-legend/-transfer/-overview/-asis/-tobe/-contoh` | `chapter04.tex` (Bab 5) | `session04` |
-| **Application / Data** | ⬜ TODO (next) | — | `chapter05.tex` (create) | `session05` |
-| **Technology & Physical** | ⬜ TODO | — | `chapter06.tex` | `session06` |
-| **Implementation & Migration** | ⬜ TODO | — | `chapter07.tex` | `session07` |
+| **Data** | ✅ | `data-legend/-transfer/-akses/-asis/-tobe/-contoh` | `chapter05.tex` (Bab 6) | `session05` |
+| **Application** | ✅ | `app-legend/-transfer/-stack/-contoh` | `chapter06.tex` (Bab 7) | `session06` |
+| **Technology & Physical** | ⬜ TODO (next) | — | `chapter07.tex` | `session07` |
+| **Implementation & Migration** | ⬜ TODO | — | `chapter08.tex` | `session08` |
 
 > Chapter file numbering is offset by one from the book "Bab" number
-> (`chapter02.tex` = Bab 3). The next chapter after `chapter04.tex` is **Data /
-> Application Architecture** — the bridge text at the end of `chapter04.tex` says
-> *"Bab berikutnya … dimulai dari Data Architecture."* Confirm the intended split
-> (Data vs Application) with the user before writing chapter05.
+> (`chapter02.tex` = Bab 3, so `chapter06.tex` = Bab 7). Data (`chapter05`, Fase C
+> Data) and Application (`chapter06`, Fase C Application) are **done**. **The next
+> chapter is Technology (`chapter07.tex`, Bab 8, TOGAF Fase D)** — the bridge at
+> the end of `chapter06.tex` points to it (node/system software deploy components,
+> artifact realizes data object).
 
-Model now: ~129 elements, ~144 relationships, ~46 views (Motivation 41, Strategy
-27, Business 61). The Application/Technology/Implementation folders are empty.
+Model now (session-06): Motivation 41, Strategy 27, Business 61, Application 46 (16 DataObjects + 30 application elements). Technology/Implementation folders are empty.
 
 **Per-layer view set delivered for each completed layer** (replicate for the next
 layers): a notation **legend** view; a main case-study **transfer** view; for
@@ -46,7 +47,7 @@ restaurant example into new layers.
 ## 2. Hard rules
 
 1. **Edit the model ONLY through the `archi` MCP server.** Never edit
-   `models/session-03.archimate` directly (it is open in a live Archi instance at
+   `models/session-06.archimate` directly (it is open in a live Archi instance at
    `http://127.0.0.1:18090/mcp`). Native tools are `mcp__archi__*`; if they are
    not loaded in-session, drive the same server over MCP HTTP/SSE with a tiny
    Python client (see §7).
@@ -73,7 +74,7 @@ restaurant example into new layers.
   (primary case-study diagram), `<layer>-contoh.{pdf,svg}` (the `Contoh
   Komprehensif` per-element example), optional `<layer>-overview/-asis/-tobe.{pdf,svg}`.
   `<layer>` ∈ {motivation, strategy, business, application, technology, implementation}.
-- `models/session-03.archimate` — the single model (all layers live here).
+- `models/session-06.archimate` — the single model (all layers live here).
 
 ### View naming convention (match existing)
 - `"<Layer> - API Transfer Dana"` — main/overview case-study view.
@@ -102,8 +103,8 @@ Put new elements in their layer folder via `folderId`.
 ## 4. TOGAF ADM phase per layer (each chapter adds a phase subsection)
 - A — Vision → Strategy (`chapter03`, done)
 - **B — Business Architecture** → Business (`chapter04`, done)
-- **C — Information Systems (Data & Application)** → Application/Data chapter (next)
-- **D — Technology Architecture** → Technology chapter
+- **C — Information Systems** → **Data** (`chapter05`, done) + **Application** (`chapter06`, done)
+- **D — Technology Architecture** → Technology chapter (`chapter07`, next)
 - **E/F — Opportunities & Solutions / Migration Planning** → Implementation chapter
 
 Each chapter gets a `\subsection{TOGAF ADM Fase <X>: ...}` with a
