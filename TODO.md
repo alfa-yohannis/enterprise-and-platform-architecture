@@ -120,8 +120,16 @@ Each new layer realizes/derives from the one above. Reuse existing element ids
 - **Application → Business:** ApplicationService **realizes** BusinessService;
   ApplicationComponent **assigned to** ApplicationService / **serves**
   BusinessProcess; DataObject **realizes** BusinessObject.
-- **Technology → Application:** Node/SystemSoftware **assigned to** /
-  realizes ApplicationComponent; Artifact **realizes** DataObject; CommunicationNetwork.
+- **Technology → Application (canonical deployment — verified against the Open
+  Group ArchiMate spec):** Node **assigned to** (deploys) an **Artifact**; the
+  **Artifact realizes** the ApplicationComponent *and* **realizes** the DataObject
+  (a component is realized by an artifact and, indirectly, by the node that deploys
+  it). Node **realizes** its TechnologyService; **TechnologyService serves**
+  ApplicationComponent/Function — this is the *only* valid technology→application
+  serving. CommunicationNetwork **associated with** Node.
+  **Do NOT** use `Node -> Serving -> ApplicationComponent` or `Node -> Assignment ->
+  ApplicationComponent` (non-canonical; Archi rejects the assignment) — route
+  through an Artifact (deploy) or a TechnologyService (serve) instead.
 - **Implementation → all:** WorkPackage **realizes** Plateau/Deliverable;
   Gap; relate to Capabilities/Courses of Action (strategy) and the target architecture.
 
