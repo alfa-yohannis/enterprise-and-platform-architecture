@@ -63,8 +63,8 @@
     \item Menjelaskan elemen \textbf{lapisan teknologi} ArchiMate: node, perangkat
           (\emph{device}), \emph{system software}, layanan teknologi, artefak, dan
           jaringan.
-    \item Menyusun \textbf{arsitektur teknologi} acuan yang menggelar komponen
-          aplikasi dan mewujudkan objek data.
+    \item Menyusun \textbf{arsitektur teknologi} acuan tempat komponen aplikasi
+          digelar (lewat artefak) dan objek data diwujudkan.
     \item Menempatkan analisis dalam \textbf{TOGAF ADM Fase D (Teknologi)}:
           \emph{baseline}, \emph{target}, dan kesenjangan.
     \item Menutup rantai keterlacakan motivasi $\rightarrow$ \dots $\rightarrow$
@@ -77,8 +77,8 @@
 \begin{frame}{Ringkasan Awal Bab}
   \vspace{6pt}
   \begin{itemize}
-    \item Lapisan teknologi menutup \textbf{Fase D}: \textbf{node menggelar}
-          komponen aplikasi; \textbf{artefak mewujudkan} objek data.
+    \item Lapisan teknologi menutup \textbf{Fase D}: \textbf{node menggelar
+          artefak}; \textbf{artefak mewujudkan} komponen aplikasi \& objek data.
     \item Elemen inti: \emph{node}, \emph{device}, \emph{system software},
           \emph{technology service}, \emph{artifact}, \emph{communication network}.
     \item Studi kasus berjalan: kluster kontainer, server basis data, dan sistem
@@ -94,7 +94,7 @@
 \section{Mengapa Lapisan Teknologi}
 \sectionframe{Mengapa Lapisan Teknologi}
 
-\begin{frame}{Posisi Lapisan Teknologi dalam ArchiMate}
+\begin{frame}{Lapisan Teknologi dalam ArchiMate}
   \vspace{2pt}
   \centering
   \scalebox{0.74}{
@@ -126,11 +126,11 @@
     \end{tikzpicture}
   }
 
-  \takeaway{Node \emph{menggelar} komponen aplikasi; artefak \emph{mewujudkan}
-  objek data. Dipetakan ke fase \textbf{D (Teknologi)} TOGAF ADM.}
+  \takeaway{Node \emph{menggelar} artefak; artefak \emph{mewujudkan} komponen
+  aplikasi \& objek data. Dipetakan ke fase \textbf{D (Teknologi)} TOGAF ADM.}
 \end{frame}
 
-\begin{frame}{Pola Penggelaran: Node, Artefak, Komponen}
+\begin{frame}{Pola Penggelaran (Deployment)}
   \vspace{2pt}
   \centering
   \scalebox{1.0}{
@@ -142,20 +142,22 @@
         fill=praditagreen!18, thick, align=center, text width=32mm, minimum height=10mm},
       data/.style={rectangle, rounded corners=1.5mm, draw=cyan!60!black, fill=cyan!12,
         thick, align=center, text width=30mm, minimum height=10mm},
-      link/.style={-Latex, thick, draw=gray!60}
+      asg/.style={-Latex, thick, draw=gray!70},
+      real/.style={-{Triangle[open]}, thick, draw=gray!70, densely dashed}
     ]
       \node[app] (comp) {Komponen Aplikasi};
-      \node[tech, below=11mm of comp] (node) {Node};
-      \node[tech, right=22mm of node] (art) {Artifact};
-      \node[data, below=11mm of art] (do) {Objek Data};
-      \draw[link] (node) -- node[right,font=\scriptsize\bfseries]{menggelar} (comp);
-      \draw[link] (node) -- node[above,font=\scriptsize\bfseries]{menggelar} (art);
-      \draw[link, densely dashed] (art) -- node[right,font=\scriptsize\bfseries]{mewujudkan} (do);
+      \node[tech, below=12mm of comp] (art) {Artifact};
+      \node[data, below=12mm of art] (do) {Objek Data};
+      \node[tech, left=24mm of art] (node) {Node};
+      \draw[asg] (node) -- node[above,font=\scriptsize\bfseries]{menggelar} (art);
+      \draw[real] (art) -- node[right,font=\scriptsize\bfseries]{mewujudkan} (comp);
+      \draw[real] (art) -- node[right,font=\scriptsize\bfseries]{mewujudkan} (do);
     \end{tikzpicture}
   }
 
-  \takeaway{Node tak ``menjadi'' komponen---ia menyediakan tempat komponen
-  \emph{berjalan}; artefak adalah \emph{wujud fisik} yang dapat disimpan.}
+  \takeaway{Kanonik ArchiMate: node \emph{menggelar} (assignment) \textbf{artefak};
+  artefak \emph{mewujudkan} (realization) komponen \& data. Node menjalankan
+  komponen secara \emph{tidak langsung}---bukan node yang ``menjadi'' komponen.}
 \end{frame}
 
 % ============================================================
@@ -219,8 +221,8 @@
     \column{0.5\textwidth}
     \textbf{Apa \& Mengapa}
     \begin{itemize}\setlength{\itemsep}{2.5pt}
-      \item Fase D: infrastruktur yang \textbf{menggelar} komponen dan
-            \textbf{mewujudkan} data.
+      \item Fase D: infrastruktur tempat komponen \textbf{digelar} (lewat
+            artefak) dan data \textbf{diwujudkan}.
       \item Menghasilkan arsitektur teknologi \textbf{baseline} \&
             \textbf{target}.
       \item Selisihnya = \textbf{analisis kesenjangan}.
@@ -244,7 +246,7 @@
 \section{Elemen Lapisan Teknologi}
 \sectionframe{Elemen Lapisan Teknologi}
 
-\begin{frame}{Jenis Elemen dan Simbolnya di Archi}
+\begin{frame}{Jenis Elemen dan Simbolnya}
   \vspace{6pt}
   \begin{columns}[c]
     \column{0.56\textwidth}
@@ -278,7 +280,8 @@
           ``Skema Basis Data''.
   \end{itemize}
   \takeaway{Node \emph{tersusun atas} device \& system software, \emph{mewujudkan}
-  layanan teknologi, dan \emph{menggelar} artefak serta komponen.}
+  layanan teknologi, dan \emph{menggelar} artefak; layanan teknologi
+  \emph{melayani} komponen aplikasi.}
 \end{frame}
 
 \begin{frame}{}
@@ -286,8 +289,8 @@
   \vspace{1mm}
   \includegraphics[width=\textwidth,height=.8\textheight,keepaspectratio]{technology-contoh.pdf}\\
   {\scriptsize Contoh interaksi antar-elemen teknologi (kasus restoran): node
-  tersusun atas OS, mewujudkan layanan, menggelar aplikasi \& artefak; artefak
-  mewujudkan data.}
+  tersusun atas OS, mewujudkan layanan (yang melayani aplikasi), menggelar
+  artefak; artefak mewujudkan data.}
 \end{frame}
 
 % ============================================================
@@ -307,21 +310,22 @@
   \centering
   \vspace{1mm}
   \includegraphics[width=\textwidth,height=.84\textheight,keepaspectratio]{technology-stack.pdf}\\
-  {\scriptsize Penyelarasan \textbf{Aplikasi--Teknologi--Data}: node
-  \emph{menggelar} komponen aplikasi; artefak \emph{mewujudkan} objek data,
-  digelar di node basis data.}
+  {\scriptsize Penyelarasan \textbf{Aplikasi--Teknologi--Data}: artefak
+  (Container Image) \emph{mewujudkan} komponen aplikasi; node \emph{menggelar}
+  artefak; artefak basis data \emph{mewujudkan} objek data.}
 \end{frame}
 
-\begin{frame}{Cara Membaca: Rantai Lengkap Fase D}
+\begin{frame}{Cara Membaca Rantai Fase D}
   \vspace{4pt}
   \footnotesize
   \begin{itemize}\setlength{\itemsep}{2.5pt}
     \item \textbf{Komposisi:} node \emph{tersusun atas} device \& system
           software (ditunjukkan lewat pelingkupan).
-    \item \textbf{Realisasi (node):} node \emph{mewujudkan} layanan teknologi.
-    \item \textbf{Serving/Assignment:} node \emph{menggelar} komponen aplikasi.
-    \item \textbf{Realisasi (artefak):} artefak \emph{mewujudkan} objek
-          data---inilah jembatan teknologi ke data.
+    \item \textbf{Realisasi (node):} node \emph{mewujudkan} layanan teknologi;
+          layanan itu \emph{melayani} komponen aplikasi.
+    \item \textbf{Assignment:} node \emph{menggelar} artefak (\emph{deploy}).
+    \item \textbf{Realisasi (artefak):} artefak \emph{mewujudkan} komponen
+          aplikasi dan objek data---jembatan teknologi ke aplikasi \& data.
     \item \textbf{Asosiasi:} jaringan \emph{menghubungkan} node.
   \end{itemize}
   \takeaway{Rantai keterlacakan tertutup: komponen aplikasi $\rightarrow$ node;
