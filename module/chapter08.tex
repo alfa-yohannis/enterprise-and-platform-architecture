@@ -1,0 +1,554 @@
+\chapter[Lapisan Implementasi \& Migrasi: Peta Jalan Transformasi]{Lapisan
+Implementasi \& Migrasi: Work Package, Plateau, dan Peta Jalan}
+\label{ch:implementation-migration}
+\setlength{\emergencystretch}{2em}
+
+\section*{Tujuan Pembelajaran}
+\begin{itemize}
+  \item Menjelaskan elemen lapisan implementasi \& migrasi ArchiMate---\emph{work
+        package}, \emph{deliverable}, \emph{implementation event}, \emph{plateau},
+        dan \emph{gap}.
+  \item Menyusun \textbf{peta jalan} (\emph{roadmap}) transformasi: rangkaian
+        plateau dari \emph{baseline} ke \emph{target} beserta paket kerja yang
+        mewujudkannya.
+  \item Menempatkan analisis dalam TOGAF ADM \textbf{Fase E (Peluang \& Solusi)}
+        dan \textbf{Fase F (Perencanaan Migrasi)}.
+  \item Menutup rantai keterlacakan seluruh buku: dari motivasi sampai paket kerja
+        yang membangun arsitektur, dan mewujudkannya kembali menjadi kapabilitas.
+\end{itemize}
+
+Tujuan pertama dan kedua mendukung CLO 3; tujuan ketiga mendukung CLO 2 dan
+CLO 6; tujuan keempat mendukung CLO 7 karena mahasiswa merangkai seluruh lapisan
+menjadi satu argumen transformasi yang utuh.
+
+\section{Ringkasan Awal Bab}
+
+Enam bab sebelumnya menjawab \emph{apa} arsitektur target: motivasi, strategi,
+bisnis, data, aplikasi, dan teknologi. Bab ini menjawab \emph{bagaimana
+mencapainya}: bagaimana organisasi berpindah dari keadaan sekarang ke keadaan
+target, langkah demi langkah, tanpa harus mengganti semuanya sekaligus. Dalam
+ArchiMate, lapisan implementasi \& migrasi memuat \textbf{work package} (paket
+kerja/proyek), \textbf{deliverable} (hasil kerja), \textbf{implementation event}
+(peristiwa implementasi), \textbf{plateau} (keadaan arsitektur yang stabil pada
+suatu periode), dan \textbf{gap} (kesenjangan antar-plateau).
+
+Pola intinya: \textbf{work package mewujudkan deliverable}; \textbf{deliverable
+mewujudkan plateau}; \textbf{plateau mencakup} kapabilitas dan requirement yang
+aktif pada keadaan itu; dan \textbf{gap} menandai selisih antara \emph{baseline}
+dan \emph{target}. Karena ini lapisan terakhir, keluarannya---peta jalan dan
+analisis kesenjangan---menjadi bagian \textbf{Rekomendasi} dan \textbf{Rencana}
+pada naskah, sekaligus menutup keseluruhan model.
+
+\section{Pendahuluan}
+
+Arsitektur target yang indah tidak berguna jika tidak ada jalan untuk mencapainya.
+Kebanyakan kegagalan transformasi bukan karena visinya salah, melainkan karena
+lompatannya terlalu besar: anggaran habis, sistem lama tak sempat dibungkus, dan
+kepatuhan tertinggal. Lapisan implementasi \& migrasi memaksa kita berpikir
+\emph{bertahap}---memecah perjalanan menjadi beberapa \textbf{plateau} yang
+masing-masing stabil, bernilai, dan dapat dievaluasi.
+
+Bagi makalah, lapisan ini mengubah rekomendasi arsitektur menjadi \textbf{rencana
+yang dapat dinilai kelayakannya}. Pendekatan bertahap dan pengiriman inkremental
+sejalan dengan praktik rekayasa perangkat lunak modern \cite{newman2021building},
+sedangkan penahapan dan tata kelola arsitektur mengikuti TOGAF ADM Fase E dan F
+\cite{togaf10}. Fondasi eksekusi---urutan investasi yang membangun kapabilitas
+secara kumulatif---selaras dengan gagasan \emph{operating model} dan
+\emph{foundation for execution} \cite{ross2006enterprise}.
+
+\section{Skenario Pembuka dan Pertanyaan Pemandu}
+
+Arsitektur target rel transfer Bank Wanua sudah lengkap sampai lapisan teknologi.
+Kini komite investasi bertanya: mulai dari mana? Dengan anggaran terbatas dan
+sistem inti lama yang tak bisa diganti sekaligus, tim harus memecah program
+menjadi beberapa rilis. Tenggat kepatuhan SNAP BI menambah tekanan: sebagian
+kapabilitas harus hidup lebih dulu.
+
+\subsection*{Pertanyaan Pemandu}
+\begin{enumerate}
+  \item Apa keadaan \emph{baseline} saat ini dan apa \emph{target} akhirnya?
+  \item Kesenjangan (gap) apa yang memisahkan keduanya?
+  \item Paket kerja apa yang menutup tiap kesenjangan, dan apa deliverable-nya?
+  \item Plateau antara apa yang masuk akal sebagai tonggak bernilai?
+  \item Bagaimana urutan, ketergantungan, dan peristiwa penting (mis. go-live)
+        disusun menjadi peta jalan?
+\end{enumerate}
+
+\section{Mengapa Bab Ini Penting bagi Pembaca Non-TI}
+
+Justru pembaca non-TI---manajer, pemilik anggaran, regulator internal---yang
+paling sering membaca lapisan ini, karena di sinilah arsitektur bertemu waktu,
+biaya, dan risiko. Dengan lima notasi sederhana, seorang analis dapat menjelaskan
+\emph{apa} yang dikerjakan (work package), \emph{apa hasilnya} (deliverable),
+\emph{kapan keadaan stabil tercapai} (plateau), dan \emph{apa yang masih kurang}
+(gap)---tanpa jargon proyek. Peta jalan menjadi bahasa bersama antara arsitek dan
+pengambil keputusan.
+
+\section{Konsep Inti dan Glosarium Mini}
+
+\subsection{Lapisan Implementasi \& Migrasi ArchiMate}
+
+\textbf{Work package} adalah rangkaian tindakan dengan awal dan akhir yang jelas
+(sebuah proyek atau fase proyek) yang mewujudkan sekumpulan deliverable.
+\textbf{Deliverable} adalah hasil kerja yang terdefinisi jelas dari sebuah work
+package. \textbf{Implementation event} adalah peristiwa terkait implementasi,
+misalnya \emph{kickoff} atau \emph{go-live}. \textbf{Plateau} adalah keadaan
+arsitektur yang relatif stabil pada suatu periode. \textbf{Gap} adalah hasil
+analisis kesenjangan antara dua plateau---apa yang berbeda antara \emph{baseline}
+dan \emph{target}.
+
+\subsection{Notasi Elemen di Archi}
+
+Gambar~\ref{fig:implementation-legend} menampilkan jenis elemen lapisan ini di
+Archi. Semua elemen berwarna merah muda (\emph{peach}); ikon di pojok kanan atas
+membedakan jenisnya.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.86\textwidth]{implementation-legend.pdf}
+\caption{Jenis elemen lapisan implementasi \& migrasi ArchiMate dan simbolnya di
+Archi.}
+\label{fig:implementation-legend}
+\end{figure}
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Elemen lapisan implementasi \& migrasi, kegunaan, dan contohnya.}
+\label{tab:impl-elements}
+\begin{tabularx}{\textwidth}{@{}p{0.22\textwidth} p{0.30\textwidth} X@{}}
+\hline
+\textbf{Elemen} & \textbf{Kegunaan} & \textbf{Contoh} \\
+\hline
+Work Package & Proyek/fase dengan awal-akhir jelas yang mewujudkan deliverable. &
+WP1 Bangun Platform API \& Gateway; WP2 Bangun Mesin AML. \\
+Deliverable & Hasil kerja terdefinisi dari work package. & Platform API \& Gateway
+Terpasang; Mesin AML \& Limit Teruji. \\
+Implementation Event & Peristiwa implementasi/migrasi. & Kickoff Program; Go-Live
+SNAP BI. \\
+Plateau & Keadaan arsitektur yang stabil pada suatu periode. & Baseline; MVP Rel
+Transfer; Target (SNAP BI Penuh). \\
+Gap & Selisih (hasil analisis kesenjangan) antara dua plateau. & Belum ada
+gateway; AML masih manual. \\
+\hline
+\end{tabularx}
+\end{table}
+
+\subsection{Plateau, Gap, Work Package, dan Deliverable}
+
+Empat elemen ini bekerja bersama membentuk pola migrasi
+(Gambar~\ref{fig:migration-pattern}). Sebuah \textbf{plateau} menandai keadaan
+stabil; dua plateau dihubungkan oleh relasi \emph{triggering} (memicu) yang
+menyatakan urutan waktu. Selisih di antara keduanya adalah \textbf{gap}. Untuk
+menutup gap, sebuah \textbf{work package} dijalankan; ia \textbf{mewujudkan}
+(\emph{realization}) sebuah \textbf{deliverable}, dan deliverable itu pada
+gilirannya \textbf{mewujudkan} plateau target. Dengan kata lain: gap menyatakan
+\emph{apa} yang kurang, work package menyatakan \emph{siapa mengerjakan apa}, dan
+plateau menyatakan \emph{keadaan bernilai} yang dicapai.
+
+\begin{figure}[htbp]
+\centering
+\scalebox{0.95}{
+\begin{tikzpicture}[
+  font=\footnotesize,
+  impl/.style={rectangle, rounded corners=1.5mm, draw=red!55!black, fill=red!8,
+    thick, align=center, text width=30mm, minimum height=10mm},
+  plat/.style={rectangle, rounded corners=1.5mm, draw=red!55!black, fill=red!14,
+    thick, align=center, text width=26mm, minimum height=10mm},
+  real/.style={-{Triangle[open]}, thick, draw=gray!70, densely dashed},
+  trig/.style={-Latex, thick, draw=gray!70},
+  assoc/.style={thick, draw=gray!60}
+]
+  \node[plat] (p0) {Plateau\\\emph{Baseline}};
+  \node[plat, right=42mm of p0] (p2) {Plateau\\\emph{Target}};
+  \node[impl, below=16mm of p0] (wp) {Work Package};
+  \node[impl, right=14mm of wp] (del) {Deliverable};
+  \node[draw=red!55!black, fill=red!8, thick, circle, minimum size=7mm,
+    inner sep=0pt, font=\scriptsize] (gap) at ($(p0)!0.5!(p2)$) {};
+  \node[font=\scriptsize] at ($(gap)+(0,4mm)$) {Gap};
+  \draw[trig] (p0) -- node[above,font=\scriptsize]{memicu} (p2);
+  \draw[assoc] (gap) -- ($(gap)+(0,-10mm)$) node[below,font=\scriptsize]{pada};
+  \draw[real] (wp) -- node[below,font=\scriptsize]{mewujudkan} (del);
+  \draw[real] (del.north) to[out=90,in=-90] node[right,font=\scriptsize]{mewujudkan} (p2.south);
+\end{tikzpicture}
+}
+\caption{Pola migrasi (kanonik ArchiMate): plateau \emph{baseline} memicu plateau
+\emph{target}; gap menandai selisihnya; work package \emph{mewujudkan}
+deliverable, dan deliverable \emph{mewujudkan} plateau target.}
+\label{fig:migration-pattern}
+\end{figure}
+
+\subsection{TOGAF ADM Fase E \& F}
+
+Fase E (Peluang \& Solusi) mengubah kesenjangan menjadi \emph{solusi}: mengelompok\-kan
+gap ke dalam work package, menentukan plateau/increment, dan memilih blok bangunan
+solusi. Fase F (Perencanaan Migrasi) memberi \emph{urutan dan kelayakan}:
+prioritas, biaya--manfaat, risiko, dan jadwal migrasi \cite{togaf10}.
+Tabel~\ref{tab:adm-phase-ef} memetakan keduanya ke kasus Bank Wanua.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Pemetaan TOGAF ADM Fase E \& F ke artefak Bank Wanua.}
+\label{tab:adm-phase-ef}
+\begin{tabularx}{\textwidth}{@{}p{0.27\textwidth} X@{}}
+\hline
+\textbf{Langkah Fase E/F} & \textbf{Artefak / keluaran pada kasus Bank Wanua} \\
+\hline
+Analisis kesenjangan konsolidasi (E) & Gap: gateway belum ada; AML manual; BI-FAST
+\& core belum terintegrasi. \\
+Tentukan work package (E) & WP1 Platform API; WP2 Mesin AML; WP3 Integrasi
+BI-FAST/Core; WP4 Rekonsiliasi \& Go-Live. \\
+Tentukan plateau/increment (E) & Baseline $\rightarrow$ MVP Rel Transfer
+$\rightarrow$ Target (SNAP BI Penuh). \\
+Prioritas \& kelayakan (F) & Urutan WP, ketergantungan, biaya--manfaat, dan risiko
+terhadap anggaran serta tenggat kepatuhan. \\
+Rencana \& peta jalan migrasi (F) & Peta jalan berjejak: peristiwa Kickoff dan
+Go-Live, deliverable per plateau. \\
+\hline
+\end{tabularx}
+\end{table}
+
+\subsection{Contoh Interaksi Antar-Elemen}
+
+Gambar~\ref{fig:implementation-contoh} memakai contoh restoran: \emph{Proyek
+Pemesanan Online} (work package) \emph{mewujudkan} deliverable \emph{Aplikasi
+Pemesanan Online Live}, \emph{memicu} peristiwa \emph{Peluncuran}, dan
+\emph{menutup} gap \emph{Belum ada pemesanan online}; deliverable itu
+\emph{mewujudkan} \emph{Plateau Target Restoran} dan requirement, sedangkan
+plateau \emph{mencakup} kapabilitas penyajian cepat.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth,height=0.4\textheight,keepaspectratio]{implementation-contoh.pdf}
+\caption{Contoh interaksi antar-elemen implementasi \& migrasi pada kasus
+restoran cepat saji.}
+\label{fig:implementation-contoh}
+\end{figure}
+
+\subsection*{Glosarium Mini}
+\begin{description}
+  \item[Work package] Proyek/fase dengan awal-akhir jelas.
+  \item[Deliverable] Hasil kerja terdefinisi dari work package.
+  \item[Implementation event] Peristiwa implementasi (kickoff, go-live).
+  \item[Plateau] Keadaan arsitektur yang stabil pada suatu periode.
+  \item[Gap] Selisih antara dua plateau (hasil analisis kesenjangan).
+  \item[Roadmap] Peta jalan: rangkaian plateau dan work package sepanjang waktu.
+\end{description}
+
+\section{Kerangka Berpikir}
+
+Alur berpikir bab ini bergerak dari arsitektur target menuju rencana bertahap
+(Gambar~\ref{fig:impl-flow}). Baseline dan target dibandingkan untuk menemukan
+gap; gap dikelompokkan menjadi work package; work package menghasilkan deliverable;
+deliverable mewujudkan plateau; plateau disusun berurutan sebagai peta jalan; dan
+peta jalan menjadi bahan rekomendasi serta penutup naskah.
+
+\begin{figure}[htbp]
+\centering
+\scalebox{0.86}{
+\begin{tikzpicture}[
+  box/.style={rectangle, rounded corners=1.5mm, draw=red!55!black,
+    fill=red!8, thick, align=center, text width=30mm, minimum height=11mm},
+  outnode/.style={rectangle, rounded corners=1.5mm, draw=orange!80!black,
+    fill=orange!16, thick, align=center, text width=30mm, minimum height=11mm},
+  link/.style={-Latex, thick, draw=red!55!black}
+]
+  \node[box] (gap) {Baseline vs target\\= \emph{gap}};
+  \node[box, right=7mm of gap] (wp) {Work package\\per gap};
+  \node[box, right=7mm of wp] (del) {Deliverable\\per work package};
+  \node[box, below=8mm of del] (plat) {Plateau\\(keadaan stabil)};
+  \node[outnode, left=7mm of plat] (road) {Peta jalan\\(urutan plateau)};
+  \node[outnode, left=7mm of road] (rec) {Rekomendasi \&\\penutup naskah};
+  \draw[link] (gap) -- (wp); \draw[link] (wp) -- (del); \draw[link] (del) -- (plat);
+  \draw[link] (plat) -- (road); \draw[link] (road) -- (rec);
+  \draw[link, dashed] (rec) -- (gap);
+\end{tikzpicture}
+}
+\caption{Alur berpikir lapisan implementasi \& migrasi untuk makalah publikasi.}
+\label{fig:impl-flow}
+\end{figure}
+
+\section{Konteks Indonesia}
+
+Transformasi layanan keuangan di Indonesia jarang bisa \emph{big bang}. Sistem inti
+lama, anggaran bertahap, dan tenggat kepatuhan menuntut penahapan. Konektivitas
+BI-FAST dan kepatuhan format SNAP BI \cite{snapbi} kerap menjadi tonggak
+(\emph{plateau}) yang menentukan urutan: kapabilitas yang berkaitan dengan
+kepatuhan sering harus hidup lebih dahulu. Kewajiban penyelenggaraan sistem
+elektronik---keandalan, keamanan, dan pengelolaan pusat data---membentuk kriteria
+kesiapan tiap go-live \cite{pp712019}, sedangkan perlindungan data pribadi harus
+sudah terpenuhi sejak plateau yang pertama kali mengolah data nasabah
+\cite{uupdp2022}. Peta jalan yang realistis menempatkan tonggak kepatuhan ini
+secara eksplisit, bukan sebagai renungan di akhir.
+
+\section{Studi Kasus Utama: Peta Jalan Transformasi Bank Wanua}
+
+Arsitektur target dari Bab~\ref{ch:strategi-bisnis}--\ref{ch:technology-architecture}
+diwujudkan bertahap melalui peta jalan pada Gambar~\ref{fig:implementation-roadmap}.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{implementation-roadmap.pdf}
+\caption{Peta jalan migrasi (ArchiMate) Bank Wanua: plateau Baseline $\rightarrow$
+MVP $\rightarrow$ Target dipicu berurutan; tiap work package mewujudkan deliverable
+yang mewujudkan plateau; peristiwa Kickoff dan Go-Live menandai tonggak.}
+\label{fig:implementation-roadmap}
+\end{figure}
+
+\subsection{Cara Membaca Peta Jalan}
+
+Gambar~\ref{fig:implementation-roadmap} dibaca dari kiri ke kanan sebagai garis
+waktu. Tiga \textbf{plateau}---\emph{Baseline (Batch \& Manual)}, \emph{MVP Rel
+Transfer}, dan \emph{Target (SNAP BI Penuh)}---dihubungkan relasi
+\textbf{triggering} (memicu). Di bawahnya, empat \textbf{work package} berurutan
+(WP1$\rightarrow$WP2$\rightarrow$WP3$\rightarrow$WP4); tiap work package
+\textbf{mewujudkan} sebuah \textbf{deliverable}, dan deliverable itu
+\textbf{mewujudkan} plateau yang sesuai (Platform API mewujudkan MVP; Mesin AML,
+Adaptor, dan Rekonsiliasi mewujudkan Target). Peristiwa \emph{Kickoff Program}
+memicu WP1, dan WP4 memicu \emph{Go-Live SNAP BI} yang menandai tercapainya
+plateau target.
+
+\subsection{Analisis Kesenjangan}
+
+Peta jalan lahir dari analisis kesenjangan (Gambar~\ref{fig:implementation-gap}).
+Setiap \textbf{gap} antara \emph{Baseline} dan \emph{Target}---gateway belum ada,
+AML masih manual, BI-FAST \& core belum terintegrasi---\textbf{ditutup} oleh sebuah
+\textbf{work package}. Membaca dari kiri ke kanan: keadaan awal (baseline), selisih
+(gap), paket kerja penutup, lalu keadaan tujuan (target).
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth,height=0.45\textheight,keepaspectratio]{implementation-gap.pdf}
+\caption{Analisis kesenjangan (ArchiMate): tiap gap antara Baseline dan Target
+ditutup oleh sebuah work package.}
+\label{fig:implementation-gap}
+\end{figure}
+
+\subsection{Penyelarasan: Menutup Seluruh Rantai}
+
+Karena ini lapisan terakhir, penting menunjukkan bahwa paket kerja benar-benar
+menyentuh arsitektur dan mengembalikan nilai ke strategi
+(Gambar~\ref{fig:implementation-stack}). Tiap \textbf{work package
+\emph{membangun}} (asosiasi) komponen aplikasi yang dirancang pada
+Bab~\ref{ch:application-architecture}, \textbf{mewujudkan} deliverable, dan
+deliverable itu \textbf{mewujudkan} kapabilitas serta requirement dari lapisan
+strategi dan motivasi (Bab~\ref{ch:togaf-lite} dan
+Bab~\ref{ch:strategi-bisnis}). Dengan demikian lingkaran tertutup: motivasi menurunkan
+strategi, strategi diwujudkan bisnis--aplikasi--teknologi, dan paket kerja
+membangunnya kembali menjadi kapabilitas yang dijanjikan.
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{implementation-stack.pdf}
+\caption{Penyelarasan lintas-lapisan (ArchiMate): tiap work package membangun
+komponen aplikasi, mewujudkan deliverable, dan deliverable mewujudkan
+kapabilitas/requirement strategi--motivasi.}
+\label{fig:implementation-stack}
+\end{figure}
+
+\section{Langkah Analisis dan Artefak Pendukung}
+
+\subsection{Langkah 1: Tetapkan Baseline dan Target}
+Rumuskan plateau \emph{baseline} (keadaan sekarang) dan \emph{target} (arsitektur
+tujuan dari bab-bab sebelumnya).
+
+\subsection{Langkah 2: Lakukan Analisis Kesenjangan}
+Bandingkan baseline dan target, lalu nyatakan selisihnya sebagai sekumpulan gap.
+
+\subsection{Langkah 3: Bentuk Work Package}
+Kelompokkan gap menjadi work package yang koheren, masing-masing dengan deliverable
+yang jelas.
+
+\subsection{Langkah 4: Tentukan Plateau Antara}
+Tetapkan satu atau lebih plateau antara (mis. MVP) yang bernilai dan dapat
+dievaluasi, bukan hanya baseline dan target.
+
+\subsection{Langkah 5: Susun Urutan dan Peristiwa}
+Tentukan urutan work package (triggering), ketergantungan, dan peristiwa penting
+(kickoff, go-live).
+
+\subsection{Langkah 6: Uji Kelayakan (Fase F)}
+Nilai prioritas, biaya--manfaat, dan risiko terhadap anggaran serta tenggat
+kepatuhan.
+
+\subsection{Langkah 7: Tautkan Kembali ke Strategi dan Arsitektur}
+Pastikan tiap deliverable mewujudkan kapabilitas/requirement dan tiap work package
+menyentuh komponen arsitektur yang sesuai.
+
+\subsection{Langkah 8: Tulis Narasi Peta Jalan}
+Ubah peta jalan menjadi paragraf yang menjelaskan urutan, tonggak, dan alasan
+penahapan.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Artefak pendukung Bab~9 dan fungsinya dalam makalah.}
+\label{tab:artefak-bab8-impl}
+\begin{tabularx}{\textwidth}{@{}p{0.26\textwidth} p{0.30\textwidth} X@{}}
+\hline
+\textbf{Artefak} & \textbf{Isi minimum} & \textbf{Dipakai untuk bagian makalah} \\
+\hline
+Katalog work package \& deliverable & Paket kerja, hasil, urutan & Rekomendasi \&
+rencana. \\
+Diagram peta jalan (roadmap) & Plateau, work package, peristiwa & Rencana \&
+lampiran. \\
+Analisis kesenjangan & Gap baseline--target \& penutupnya & Analisis \& rencana. \\
+Diagram penyelarasan akhir & Work package--deliverable--kapabilitas & Sintesis \&
+keterlacakan end-to-end. \\
+\hline
+\end{tabularx}
+\end{table}
+
+\section{Integrasi ke Makalah Publikasi}
+
+Lapisan ini mengisi bagian \textbf{Rekomendasi/Rencana} dan menutup naskah. Peta
+jalan menjadi bukti bahwa rekomendasi arsitektur dapat dieksekusi secara realistis
+dan patuh. Contoh paragraf:
+
+\begin{quote}
+Transformasi diusulkan dalam tiga plateau. Plateau MVP memasang platform API dan
+gateway sehingga transfer real-time dasar berjalan; plateau target menambahkan AML
+otomatis, adaptor BI-FAST \& core, serta rekonsiliasi hingga patuh SNAP BI penuh.
+Penahapan ini menautkan tiap paket kerja dengan kapabilitas strategis yang
+diwujudkannya, sehingga anggaran terbatas dialokasikan pada tonggak yang paling
+bernilai dan paling terikat kepatuhan lebih dahulu.
+\end{quote}
+
+\section{Diskusi Kritis, Trade-off, dan Perangkap Umum}
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Trade-off dalam perencanaan implementasi \& migrasi.}
+\label{tab:tradeoff-bab8-impl}
+\begin{tabularx}{\textwidth}{@{}p{0.24\textwidth} X X@{}}
+\hline
+\textbf{Keputusan} & \textbf{Jika terlalu ringan} & \textbf{Jika terlalu berat} \\
+\hline
+Jumlah plateau & Satu lompatan besar, berisiko & Terlalu banyak tonggak,
+lambat \& mahal. \\
+Ukuran work package & Terlalu besar, sulit dikelola & Terlalu kecil, overhead
+koordinasi. \\
+Urutan \& kepatuhan & Kepatuhan tertinggal di akhir & Semua sekaligus, anggaran
+jebol. \\
+Sistem inti lama & Diabaikan, integrasi rapuh & Diganti sekaligus, risiko
+tinggi. \\
+\hline
+\end{tabularx}
+\end{table}
+
+Perangkap umum: (1) menggambar peta jalan tanpa analisis kesenjangan yang jujur;
+(2) plateau yang tidak bernilai (sekadar milestone teknis); (3) melupakan
+peristiwa kepatuhan (go-live SNAP BI) sebagai penentu urutan; dan (4) work package
+yang tidak tertaut ke kapabilitas mana pun.
+
+\section{Latihan Terapan Individual}
+
+\subsection*{Latihan~9.1: Baseline, Target, dan Gap}
+Untuk organisasi studi kasus Anda, rumuskan plateau baseline dan target, lalu
+daftarkan gap di antaranya.
+
+\subsection*{Latihan~9.2: Work Package dan Deliverable}
+Kelompokkan gap menjadi work package, tentukan deliverable tiap paket, dan tautkan
+ke kapabilitas/requirement yang diwujudkan.
+
+\subsection*{Latihan~9.3: Peta Jalan Berplateau}
+Susun peta jalan dengan minimal satu plateau antara, urutan work package, dan
+peristiwa penting (kickoff/go-live).
+
+\subsection*{Latihan~9.4: Paragraf Rencana Migrasi}
+Tulis satu paragraf yang menjelaskan urutan, tonggak, dan alasan penahapan peta
+jalan Anda.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Rubrik latihan Bab~9.}
+\label{tab:rubrik-bab8-impl}
+\begin{tabularx}{\textwidth}{@{}p{0.25\textwidth} X X@{}}
+\hline
+\textbf{Komponen} & \textbf{Indikator baik} & \textbf{Perlu diperbaiki bila} \\
+\hline
+Baseline--target--gap & Gap konkret \& berbasis selisih nyata & Gap kabur atau
+sekadar daftar keinginan. \\
+Work package \& deliverable & Paket koheren, deliverable jelas \& tertaut & Paket
+tanpa hasil atau tanpa tautan kapabilitas. \\
+Peta jalan & Plateau bernilai, urutan \& tonggak jelas & Satu lompatan atau
+milestone teknis tanpa nilai. \\
+Narasi rencana & Menjelaskan urutan \& alasan penahapan & Deskriptif tanpa
+argumen kelayakan. \\
+\hline
+\end{tabularx}
+\end{table}
+
+\section{Ringkasan, Refleksi, dan Penutup Buku}
+
+\subsection*{Poin Kunci}
+\begin{itemize}
+  \item Lapisan implementasi \& migrasi memuat work package, deliverable,
+        implementation event, plateau, dan gap.
+  \item \textbf{Work package mewujudkan deliverable}; \textbf{deliverable
+        mewujudkan plateau}; \textbf{plateau mencakup} kapabilitas/requirement;
+        \textbf{gap} menandai selisih baseline--target.
+  \item Peta jalan menyusun plateau secara berurutan (triggering) dengan peristiwa
+        penting sebagai tonggak.
+  \item Fase E mengubah gap menjadi work package \& plateau; Fase F memberi urutan,
+        biaya, dan risiko.
+  \item Penahapan yang realistis menautkan tiap paket kerja ke kapabilitas dan
+        menempatkan tonggak kepatuhan lebih dahulu.
+\end{itemize}
+
+\subsection*{Uji Mandiri}
+\begin{enumerate}
+  \item Jelaskan perbedaan plateau, gap, work package, dan deliverable.
+  \item Mengapa migrasi dinyatakan sebagai rangkaian plateau, bukan satu lompatan
+        dari baseline ke target?
+  \item Ambil satu gap pada kasus Anda dan sebutkan work package, deliverable, dan
+        plateau yang menutupnya.
+\end{enumerate}
+
+\subsection*{Penutup: Menutup Rantai Tujuh Lapisan}
+Buku ini menelusuri arsitektur enterprise dari \textbf{motivasi}
+(Bab~\ref{ch:strategi-bisnis})---mengapa---turun ke \textbf{strategi}
+(Bab~\ref{ch:togaf-lite}), \textbf{bisnis}
+(Bab~\ref{ch:business-architecture}), \textbf{data}
+(Bab~\ref{ch:data-architecture}), \textbf{aplikasi}
+(Bab~\ref{ch:application-architecture}), dan \textbf{teknologi}
+(Bab~\ref{ch:technology-architecture})---apa dan bagaimana secara struktural---lalu
+ditutup pada bab ini dengan \textbf{implementasi \& migrasi}---bagaimana
+mencapainya sepanjang waktu. Setiap lapisan menurun dan mewujudkan lapisan di
+atasnya, dan pada akhirnya paket kerja membangunnya kembali menjadi kapabilitas
+yang dijanjikan motivasi. Inilah kekuatan ArchiMate yang dipadu TOGAF ADM: satu
+model yang dapat ditelusuri dari ``mengapa'' sampai ``kapan dan dengan apa''.
+Mahasiswa yang menuntaskan ketujuh lapisan pada satu studi kasus telah menulis
+sebuah arsitektur enterprise yang utuh, koheren, dan siap dipertahankan secara
+akademik.
+
+\section{Bacaan Lanjutan dan Lampiran}
+
+\subsection*{Bacaan Inti}
+\begin{itemize}
+  \item The Open Group untuk Fase E \& F ADM dan artefak implementasi \& migrasi
+        \cite{togaf10}.
+  \item Ross, Weill, \& Robertson untuk fondasi eksekusi dan urutan investasi
+        kapabilitas \cite{ross2006enterprise}.
+\end{itemize}
+
+\subsection*{Bacaan untuk Memperdalam}
+\begin{itemize}
+  \item Newman untuk pengiriman inkremental dan penggelaran bertahap
+        \cite{newman2021building}.
+  \item Untuk konteks Indonesia: standar API pembayaran \cite{snapbi},
+        penyelenggaraan sistem elektronik \cite{pp712019}, dan perlindungan data
+        pribadi \cite{uupdp2022}.
+\end{itemize}
+
+\subsection*{Lampiran Kerja Bab~9}
+\begin{description}
+  \item[Katalog work package \& deliverable] Paket kerja, hasil, urutan.
+  \item[Diagram peta jalan] Plateau, work package, peristiwa.
+  \item[Analisis kesenjangan] Gap baseline--target dan penutupnya.
+  \item[Diagram penyelarasan akhir] Work package--deliverable--kapabilitas.
+\end{description}
+\setlength{\emergencystretch}{0pt}

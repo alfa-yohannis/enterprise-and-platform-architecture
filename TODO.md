@@ -19,17 +19,16 @@ fund transfer, wraps BI-FAST, complies with SNAP BI).
 | **Data** | ✅ | `data-legend/-transfer/-akses/-asis/-tobe/-contoh` | `chapter05.tex` (Bab 6) | `session05` |
 | **Application** | ✅ | `app-legend/-transfer/-stack/-contoh` | `chapter06.tex` (Bab 7) | `session06` |
 | **Technology & Physical** | ✅ | `technology-legend/-transfer/-stack/-contoh` | `chapter07.tex` (Bab 8) | `session07` |
-| **Implementation & Migration** | ⬜ TODO (next) | — | `chapter08.tex` | `session08` |
+| **Implementation & Migration** | ✅ | `implementation-legend/-roadmap/-gap/-stack/-contoh` | `chapter08.tex` (Bab 9) | `session08` |
 
-> Chapter file numbering is offset by one from the book "Bab" number
-> (`chapter02.tex` = Bab 3, so `chapter07.tex` = Bab 8). Data (`chapter05`, Fase C
-> Data), Application (`chapter06`, Fase C Application), and Technology
-> (`chapter07`, Fase D) are **done**. **The next chapter is Implementation &
-> Migration (`chapter08.tex`, Bab 9, TOGAF Fase E/F)** — the bridge at the end of
-> `chapter07.tex` points to it (work package / deliverable / plateau / gap turn the
-> target architecture into a phased roadmap).
+> **ALL SEVEN LAYERS COMPLETE.** Chapter file numbering is offset by one from the
+> book "Bab" number (`chapter02.tex` = Bab 3, so `chapter08.tex` = Bab 9). The book
+> now spans motivation → strategy → business → data → application → technology →
+> implementation & migration (TOGAF ADM Prelim/A through E/F). The bridge at the end
+> of `chapter08.tex` is the **book closing/synthesis** (no further layer). Future
+> work is refinement, not new layers.
 
-Model now (session-07): Motivation 41, Strategy 27, Business 61, Application 46 (16 DataObjects + 30 application elements), Technology 33 (3 Nodes + Device + 4 SystemSoftware + 3 TechnologyService + 3 Artifact + 2 CommunicationNetwork for Bank Wanua, plus restaurant example + 12 legend exemplars). Implementation folder is empty. Key cross-layer links: **Node → serving → ApplicationComponent** ("menggelar"; Node→Assignment→Component is rejected by Archi), **Artifact → realizes → DataObject** ("mewujudkan"), Node → composition → Device/SystemSoftware, Node → realizes → TechnologyService.
+Model now (session-08): Motivation 41, Strategy 27, Business 61, Application 46 (16 DataObjects + 30 application elements), Technology 33, Implementation & Migration 26 (3 Plateau + 3 Gap + 4 WorkPackage + 4 Deliverable + 2 ImplementationEvent for Bank Wanua, plus restaurant example + 5 legend exemplars). Key Technology cross-layer links (canonical, spec-verified): **Node → Assignment → Artifact → Realization → ApplicationComponent** ("menggelar"/"mewujudkan"; NEVER Node→Serving/Assignment→Component), **Artifact → Realization → DataObject**, Node → composition → Device/SystemSoftware, Node → realization → TechnologyService, TechnologyService → serving → ApplicationComponent. Key Implementation cross-layer links: **WorkPackage → realization → Deliverable → realization → Plateau**; Deliverable → realization → Capability/Requirement; Plateau → aggregation → Capability; Gap/WorkPackage → association → Plateau/Gap; Plateau/WorkPackage → triggering (sequence); WorkPackage → association → ApplicationComponent (affects architecture).
 
 **Per-layer view set delivered for each completed layer** (replicate for the next
 layers): a notation **legend** view; a main case-study **transfer** view; for
@@ -48,7 +47,7 @@ restaurant example into new layers.
 ## 2. Hard rules
 
 1. **Edit the model ONLY through the `archi` MCP server.** Never edit
-   `models/session-07.archimate` directly (it is open in a live Archi instance at
+   `models/session-08.archimate` directly (it is open in a live Archi instance at
    `http://127.0.0.1:18090/mcp`). Native tools are `mcp__archi__*`; if they are
    not loaded in-session, drive the same server over MCP HTTP/SSE with a tiny
    Python client (see §7).
@@ -75,7 +74,7 @@ restaurant example into new layers.
   (primary case-study diagram), `<layer>-contoh.{pdf,svg}` (the `Contoh
   Komprehensif` per-element example), optional `<layer>-overview/-asis/-tobe.{pdf,svg}`.
   `<layer>` ∈ {motivation, strategy, business, application, technology, implementation}.
-- `models/session-07.archimate` — the single model (all layers live here).
+- `models/session-08.archimate` — the single model (all layers live here).
 
 ### View naming convention (match existing)
 - `"<Layer> - API Transfer Dana"` — main/overview case-study view.
@@ -106,7 +105,7 @@ Put new elements in their layer folder via `folderId`.
 - **B — Business Architecture** → Business (`chapter04`, done)
 - **C — Information Systems** → **Data** (`chapter05`, done) + **Application** (`chapter06`, done)
 - **D — Technology Architecture** → Technology chapter (`chapter07`, done)
-- **E/F — Opportunities & Solutions / Migration Planning** → Implementation chapter (`chapter08`, next)
+- **E/F — Opportunities & Solutions / Migration Planning** → Implementation chapter (`chapter08`, Bab 9, **done**)
 
 Each chapter gets a `\subsection{TOGAF ADM Fase <X>: ...}` with a
 baseline→target→gap table mapped to Bank Wanua (see `chapter04.tex` Fase B as the
@@ -130,8 +129,14 @@ Each new layer realizes/derives from the one above. Reuse existing element ids
   **Do NOT** use `Node -> Serving -> ApplicationComponent` or `Node -> Assignment ->
   ApplicationComponent` (non-canonical; Archi rejects the assignment) — route
   through an Artifact (deploy) or a TechnologyService (serve) instead.
-- **Implementation → all:** WorkPackage **realizes** Plateau/Deliverable;
-  Gap; relate to Capabilities/Courses of Action (strategy) and the target architecture.
+- **Implementation → all (canonical — verified, 53 rels built with 0 fallbacks):**
+  WorkPackage **realizes** Deliverable; Deliverable **realizes** Plateau *and*
+  **realizes** Capability/Requirement (motivation/strategy); Plateau **aggregates**
+  Capability/Requirement valid at that state; Gap **associated with** the baseline
+  Plateau and the differing elements; WorkPackage **associated with** the Gap it
+  closes and the ApplicationComponent it builds; Plateau→Plateau and
+  WorkPackage→WorkPackage sequenced by **triggering**; ImplementationEvent
+  **triggers** WorkPackage (kickoff) / WorkPackage triggers Event (go-live).
 
 Anchor business element names you'll likely link to: services *Layanan Transfer
 Dana / Penyaringan Kepatuhan / Notifikasi & Status / Rekonsiliasi*; objects
