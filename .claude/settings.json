@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(~/venv/bin/python mcp_archi.py call get-model-info '{}')",
+      "Bash(~/venv/bin/python -c ' *)",
+      "WebFetch(domain:archimatetool.gitbook.io)",
+      "Bash(git status *)",
+      "Bash(grep -vE \"\\\\.\\(aux|log|fls|out|toc|xdv|fdb_latexmk|nav|snm|vrb\\)$\")",
+      "Bash(pdftoppm -png -r 110 -f 1 -l 1 session08.pdf /tmp/s8title)"
+    ]
+  }
+}

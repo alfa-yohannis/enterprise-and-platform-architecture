@@ -2697,9 +2697,8 @@
           <child xsi:type="archimate:DiagramObject" id="id-a5529ad7bddf496a86bec87d4074fb14" targetConnections="id-fbe00379e5544d998214661d21b0e23e" archimateElement="id-1ea594186e8746c2b23a0133e01f64f7">
             <bounds x="660" y="110" width="210" height="56"/>
             <sourceConnection xsi:type="archimate:Connection" id="id-1571b750b96d408f9019be3052007a41" source="id-a5529ad7bddf496a86bec87d4074fb14" target="id-a4e4870d49854ca79181dd811d907eef" archimateRelationship="id-30bb5fe9446f41c2823d181be5c9e7e4">
-              <bendpoint startX="106" endX="-159" endY="-1"/>
-              <bendpoint startX="164" endX="-101" endY="-1"/>
-              <bendpoint startX="164" startY="1" endX="-101"/>
+              <bendpoint startX="-33" startY="-42" endX="-244" endY="55"/>
+              <bendpoint startX="123" startY="-42" endX="-88" endY="55"/>
             </sourceConnection>
             <sourceConnection xsi:type="archimate:Connection" id="id-eacd7b654ac54357ad5483b91d44c9a5" source="id-a5529ad7bddf496a86bec87d4074fb14" target="id-3c82471586484372b6878f956d35eb16" archimateRelationship="id-b39499663716459ba6334f62736a4890">
               <bendpoint startX="33" startY="29" endX="33" endY="-102"/>
@@ -2716,10 +2715,10 @@
             </sourceConnection>
           </child>
           <child xsi:type="archimate:DiagramObject" id="id-a4e4870d49854ca79181dd811d907eef" targetConnections="id-1571b750b96d408f9019be3052007a41" archimateElement="id-bff30a06f8d54caa82801aba9351aa48">
-            <bounds x="930" y="110" width="200" height="58"/>
+            <bounds x="876" y="12" width="200" height="58"/>
           </child>
           <child xsi:type="archimate:DiagramObject" id="id-e26b84df8d2c4797824b60de99aeb7c2" targetConnections="id-80f53e0c6a25452693f9c42ae459b1b4" archimateElement="id-18177b16b945472c9c33ccd093f10d31">
-            <bounds x="930" y="240" width="200" height="58"/>
+            <bounds x="852" y="393" width="200" height="58"/>
           </child>
           <documentation>View contoh komprehensif lapisan implementasi &amp; migrasi pada kasus restoran: work package, deliverable, plateau, gap, event, beserta relasi ke kapabilitas, requirement, dan komponen aplikasi.</documentation>
         </element>
