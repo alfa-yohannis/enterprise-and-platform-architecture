@@ -64,20 +64,20 @@
           (\emph{device}), \emph{system software}, layanan teknologi, artefak, dan
           jaringan.
     \item Menyusun \textbf{arsitektur teknologi} acuan tempat komponen aplikasi
-          digelar (lewat artefak) dan objek data diwujudkan.
+          di-deploy (lewat artefak) dan objek data diwujudkan.
     \item Menempatkan analisis dalam \textbf{TOGAF ADM Fase D (Teknologi)}:
           \emph{baseline}, \emph{target}, dan kesenjangan.
     \item Menutup rantai keterlacakan motivasi $\rightarrow$ \dots $\rightarrow$
           aplikasi $\rightarrow$ data $\rightarrow$ \textbf{teknologi}.
   \end{itemize}
   \takeaway{Arah sesi: dari ``perangkat lunak apa'' menuju ``di atas node \&
-  artefak apa ia digelar''.}
+  artefak apa ia di-deploy''.}
 \end{frame}
 
 \begin{frame}{Ringkasan Awal Bab}
   \vspace{6pt}
   \begin{itemize}
-    \item Lapisan teknologi menutup \textbf{Fase D}: \textbf{node menggelar
+    \item Lapisan teknologi menutup \textbf{Fase D}: \textbf{node men-deploy
           artefak}; \textbf{artefak mewujudkan} komponen aplikasi \& objek data.
     \item Elemen inti: \emph{node}, \emph{device}, \emph{system software},
           \emph{technology service}, \emph{artifact}, \emph{communication network}.
@@ -87,7 +87,7 @@
           \textbf{kerangka akhir} makalah.
   \end{itemize}
   \takeaway{Di sinilah rantai keterlacakan tertutup: aplikasi \& data
-  \emph{digelar} pada infrastruktur nyata.}
+  \emph{di-deploy} pada infrastruktur nyata.}
 \end{frame}
 
 % ============================================================
@@ -126,11 +126,11 @@
     \end{tikzpicture}
   }
 
-  \takeaway{Node \emph{menggelar} artefak; artefak \emph{mewujudkan} komponen
+  \takeaway{Node \emph{men-deploy} artefak; artefak \emph{mewujudkan} komponen
   aplikasi \& objek data. Dipetakan ke fase \textbf{D (Teknologi)} TOGAF ADM.}
 \end{frame}
 
-\begin{frame}{Pola Penggelaran (Deployment)}
+\begin{frame}{Pola Deployment}
   \vspace{2pt}
   \centering
   \scalebox{1.0}{
@@ -149,13 +149,13 @@
       \node[tech, below=12mm of comp] (art) {Artifact};
       \node[data, below=12mm of art] (do) {Objek Data};
       \node[tech, left=24mm of art] (node) {Node};
-      \draw[asg] (node) -- node[above,font=\scriptsize\bfseries]{menggelar} (art);
+      \draw[asg] (node) -- node[above,font=\scriptsize\bfseries]{men-deploy} (art);
       \draw[real] (art) -- node[right,font=\scriptsize\bfseries]{mewujudkan} (comp);
       \draw[real] (art) -- node[right,font=\scriptsize\bfseries]{mewujudkan} (do);
     \end{tikzpicture}
   }
 
-  \takeaway{Kanonik ArchiMate: node \emph{menggelar} (assignment) \textbf{artefak};
+  \takeaway{Kanonik ArchiMate: node \emph{men-deploy} (assignment) \textbf{artefak};
   artefak \emph{mewujudkan} (realization) komponen \& data. Node menjalankan
   komponen secara \emph{tidak langsung}---bukan node yang ``menjadi'' komponen.}
 \end{frame}
@@ -221,7 +221,7 @@
     \column{0.5\textwidth}
     \textbf{Apa \& Mengapa}
     \begin{itemize}\setlength{\itemsep}{2.5pt}
-      \item Fase D: infrastruktur tempat komponen \textbf{digelar} (lewat
+      \item Fase D: infrastruktur tempat komponen \textbf{di-deploy} (lewat
             artefak) dan data \textbf{diwujudkan}.
       \item Menghasilkan arsitektur teknologi \textbf{baseline} \&
             \textbf{target}.
@@ -238,7 +238,7 @@
     \end{enumerate}
   \end{columns}
   \vspace{2pt}
-  \takeaway{Keluaran: katalog teknologi, diagram penggelaran, dan matriks
+  \takeaway{Keluaran: katalog teknologi, diagram deployment, dan matriks
   komponen--terhadap--teknologi.}
 \end{frame}
 
@@ -246,41 +246,83 @@
 \section{Elemen Lapisan Teknologi}
 \sectionframe{Elemen Lapisan Teknologi}
 
-\begin{frame}{Jenis Elemen dan Simbolnya}
-  \vspace{6pt}
+\begin{frame}{Elemen Teknologi (1/2): Struktur \& Jaringan}
+  \vspace{4pt}
   \begin{columns}[c]
-    \column{0.56\textwidth}
+    \column{0.5\textwidth}
     \centering
     \includegraphics[width=\linewidth]{technology-legend.pdf}
-    \column{0.44\textwidth}
-    \footnotesize
-    \begin{itemize}\setlength{\itemsep}{3pt}
-      \item \textbf{Node} -- sumber daya komputasi.
-      \item \textbf{Device} -- node fisik (perangkat keras).
-      \item \textbf{System software} -- OS, runtime, DBMS.
-      \item \textbf{Technology service} -- layanan node.
-      \item \textbf{Artifact} -- wujud fisik data/komponen.
-      \item \textbf{Communication network} -- penghubung node.
+    \column{0.5\textwidth}
+    \scriptsize
+    Lapisan teknologi memuat \textbf{12} jenis elemen. Enam pertama adalah
+    \emph{struktur aktif} (pelaku) \& \emph{struktur pasif} (yang dikelola)
+    ---\emph{instance} pada kasus Transfer Dana:
+    \begin{itemize}\setlength{\itemsep}{2pt}
+      \item \textbf{Node} -- komputasi yang men-deploy perangkat lunak.
+            \emph{Mis.} Kluster Kontainer, Server Basis Data.
+      \item \textbf{Device} -- node \emph{fisik}. \emph{Mis.} Server Fisik (Data
+            Center).
+      \item \textbf{System software} -- OS, runtime, DBMS. \emph{Mis.} Runtime
+            Kontainer \& OS, PostgreSQL.
+      \item \textbf{Artifact} -- \emph{struktur pasif} yang dapat di-deploy.
+            \emph{Mis.} Container Image, Skema Basis Data.
+      \item \textbf{Communication network} -- penghubung antar-node. \emph{Mis.}
+            Jaringan Internal Bank.
+      \item \textbf{Path} -- jalur \emph{logis} antar-node. \emph{Mis.} jalur
+            antar pusat data.
     \end{itemize}
   \end{columns}
-  \takeaway{Elemen teknologi berwarna kehijauan; ikon pojok membedakan jenisnya.}
+  \takeaway{Elemen teknologi berwarna kehijauan; ikon pojok membedakan jenisnya.
+  \emph{Node/device/system software} = pelaku; \emph{artifact} = objek pasif;
+  \emph{network/path} = koneksi.}
+\end{frame}
+
+\begin{frame}{Elemen Teknologi (2/2): Perilaku \& Layanan}
+  \vspace{4pt}
+  \begin{columns}[c]
+    \column{0.5\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{technology-legend.pdf}
+    \column{0.5\textwidth}
+    \scriptsize
+    Enam sisanya adalah \emph{perilaku}, \emph{layanan}, \& \emph{interaksi} node
+    ---\emph{instance} pada kasus Transfer Dana:
+    \begin{itemize}\setlength{\itemsep}{2pt}
+      \item \textbf{Technology function} -- perilaku \emph{internal} node.
+            \emph{Mis.} Fungsi Orkestrasi Kontainer.
+      \item \textbf{Technology process} -- perilaku \emph{berurutan}. \emph{Mis.}
+            Proses Pencadangan Basis Data.
+      \item \textbf{Technology service} -- yang \emph{ditawarkan} ke aplikasi.
+            \emph{Mis.} Layanan Komputasi Kontainer, Layanan Basis Data.
+      \item \textbf{Technology interface} -- \emph{titik akses} layanan.
+            \emph{Mis.} Endpoint API Kluster.
+      \item \textbf{Technology collaboration} -- \emph{kerja sama} $\geq$2 node.
+            \emph{Mis.} Klaster Ketersediaan Tinggi (HA).
+      \item \textbf{Technology event} -- \emph{peristiwa} teknologi. \emph{Mis.}
+            Pemicu Auto-scaling.
+    \end{itemize}
+  \end{columns}
+  \takeaway{Pola sama dengan lapisan bisnis \& aplikasi: \emph{fungsi/proses}
+  (perilaku) $\rightarrow$ \emph{service} (nilai yang ditawarkan) $\rightarrow$
+  \emph{interface} (titik akses). \emph{Service} inilah yang \emph{melayani}
+  komponen aplikasi.}
 \end{frame}
 
 \begin{frame}{Membedakan Elemen Teknologi}
   \vspace{6pt}
   \begin{itemize}
-    \item \textbf{Node:} sumber daya komputasi yang menggelar perangkat
+    \item \textbf{Node:} sumber daya komputasi yang men-deploy perangkat
           lunak---``Kluster Kontainer'', ``Server Basis Data''.
     \item \textbf{Device:} node fisik---``Server Fisik (Data Center)''.
     \item \textbf{System software:} perangkat lunak sistem---``Runtime Kontainer
           \& OS'', ``PostgreSQL''.
     \item \textbf{Technology service:} layanan node ke aplikasi---``Layanan
           Komputasi Kontainer''.
-    \item \textbf{Artifact:} wujud fisik yang dapat digelar---``Container Image'',
+    \item \textbf{Artifact:} wujud fisik yang dapat di-deploy---``Container Image'',
           ``Skema Basis Data''.
   \end{itemize}
   \takeaway{Node \emph{tersusun atas} device \& system software, \emph{mewujudkan}
-  layanan teknologi, dan \emph{menggelar} artefak; layanan teknologi
+  layanan teknologi, dan \emph{men-deploy} artefak; layanan teknologi
   \emph{melayani} komponen aplikasi.}
 \end{frame}
 
@@ -289,7 +331,7 @@
   \vspace{1mm}
   \includegraphics[width=\textwidth,height=.8\textheight,keepaspectratio]{technology-contoh.pdf}\\
   {\scriptsize Contoh interaksi antar-elemen teknologi (kasus restoran): node
-  tersusun atas OS, mewujudkan layanan (yang melayani aplikasi), menggelar
+  tersusun atas OS, mewujudkan layanan (yang melayani aplikasi), men-deploy
   artefak; artefak mewujudkan data.}
 \end{frame}
 
@@ -302,7 +344,7 @@
   \vspace{1mm}
   \includegraphics[width=\textwidth,height=.84\textheight,keepaspectratio]{technology-transfer.pdf}\\
   {\scriptsize Lanskap teknologi: node \emph{tersusun atas} perangkat \& system
-  software, \emph{mewujudkan} layanan teknologi, \emph{menggelar} artefak, dan
+  software, \emph{mewujudkan} layanan teknologi, \emph{men-deploy} artefak, dan
   terhubung lewat \emph{jaringan}.}
 \end{frame}
 
@@ -311,7 +353,7 @@
   \vspace{1mm}
   \includegraphics[width=\textwidth,height=.84\textheight,keepaspectratio]{technology-stack.pdf}\\
   {\scriptsize Penyelarasan \textbf{Aplikasi--Teknologi--Data}: artefak
-  (Container Image) \emph{mewujudkan} komponen aplikasi; node \emph{menggelar}
+  (Container Image) \emph{mewujudkan} komponen aplikasi; node \emph{men-deploy}
   artefak; artefak basis data \emph{mewujudkan} objek data.}
 \end{frame}
 
@@ -323,7 +365,7 @@
           software (ditunjukkan lewat pelingkupan).
     \item \textbf{Realisasi (node):} node \emph{mewujudkan} layanan teknologi;
           layanan itu \emph{melayani} komponen aplikasi.
-    \item \textbf{Assignment:} node \emph{menggelar} artefak (\emph{deploy}).
+    \item \textbf{Assignment:} node \emph{men-deploy} artefak (\emph{deploy}).
     \item \textbf{Realisasi (artefak):} artefak \emph{mewujudkan} komponen
           aplikasi dan objek data---jembatan teknologi ke aplikasi \& data.
     \item \textbf{Asosiasi:} jaringan \emph{menghubungkan} node.
@@ -343,7 +385,7 @@
           layanan, artefak, jaringan).
     \item \textbf{Latihan 8.2} -- Penyelarasan lintas-lapisan (aplikasi--teknologi
           --data) untuk satu kapabilitas.
-    \item \textbf{Latihan 8.3} -- Pola penggelaran \& baseline--target.
+    \item \textbf{Latihan 8.3} -- Pola deployment \& baseline--target.
     \item \textbf{Latihan 8.4} -- Paragraf analisis teknologi.
   \end{itemize}
   \takeaway{Semua latihan menjadi bahan langsung Analisis domain teknologi

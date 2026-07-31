@@ -1,0 +1,765 @@
+\chapter[Implementation Governance, Change Management, dan Requirements]{Implementation
+Governance, Architecture Change Management, dan Requirements Management}
+\label{ch:governance-change}
+\setlength{\emergencystretch}{2em}
+
+\section*{Tujuan Pembelajaran}
+\begin{itemize}
+  \item Menjelaskan \textbf{Implementation Governance} (\emph{tata kelola
+        implementasi}, TOGAF Fase G): \emph{Architecture Contract},
+        \emph{Compliance Review}, dan \emph{Dispensation}.
+  \item Menjelaskan \textbf{Architecture Change Management} (\emph{manajemen
+        perubahan arsitektur}, TOGAF Fase H): \emph{change driver} dan klasifikasi
+        perubahan (\emph{Simplification}, \emph{Incremental}, \emph{Re-architecting}).
+  \item Menjelaskan \textbf{Requirements Management} sebagai \emph{pusat} ADM:
+        \emph{Requirements Repository}, \emph{traceability}, dan aliran perubahan
+        antar-fase.
+  \item Menutup siklus ADM sehingga arsitektur menjadi praktik yang \emph{hidup
+        dan terus dikelola}---bukan dokumen sekali jadi---serta mengaitkannya
+        dengan tata kelola dan kepatuhan di Indonesia.
+\end{itemize}
+
+Tujuan pertama dan kedua mendukung CLO 6; tujuan ketiga mendukung CLO 2 dan
+CLO 3; tujuan keempat mendukung CLO 6 dan CLO 7 karena mahasiswa merumuskan tata
+kelola, risiko, dan implikasi manajerial yang dapat dipertahankan secara akademik.
+
+\section{Ringkasan Awal Bab}
+
+Bab~\ref{ch:implementation-migration} sudah menjawab \emph{apa} arsitektur
+targetnya dan \emph{bagaimana} membangunnya melalui peta jalan. Namun, rencana
+sebaik apa pun bisa melenceng ketika dieksekusi, dan keadaan terus berubah setelah
+sistem beroperasi. Bab ini menjawab dua pertanyaan penutup: \emph{bagaimana
+memastikan pembangunan tetap setia pada rancangan} (\emph{governance}) dan
+\emph{bagaimana arsitektur menyesuaikan diri ketika keadaan berubah}
+(\emph{change management}). Keduanya diikat oleh satu benang yang selalu berada di
+pusat ADM: \textbf{Requirements Management}.
+
+Tiga gagasan intinya: \textbf{Fase G (Implementation Governance)} memastikan proyek
+implementasi patuh pada arsitektur target melalui \emph{Architecture Contract} dan
+\emph{Compliance Review}; \textbf{Fase H (Architecture Change Management)} memantau
+\emph{change driver} lalu memutuskan apakah cukup ditangani lewat governance atau
+harus memicu \emph{siklus ADM baru}; dan \textbf{Requirements Management} menjaga
+\emph{traceability} setiap requirement dari motivasi sampai solusi yang berjalan.
+Karena bab ini menutup rangkaian metode, keluarannya---\emph{architecture charter},
+matriks traceability, dan protokol perubahan---mengisi bagian \textbf{Tata Kelola},
+\textbf{Risiko}, dan \textbf{Implikasi Manajerial} pada naskah.
+
+\section{Pendahuluan}
+
+Banyak organisasi memperlakukan arsitektur sebagai proyek: dokumen disusun,
+dipresentasikan, lalu dilupakan begitu pembangunan dimulai. Akibatnya bisa
+ditebak: tim implementasi mengambil jalan pintas, sistem yang terwujud berbeda
+dari yang dirancang, dan setahun kemudian tak seorang pun ingat mengapa suatu
+keputusan diambil. Di sinilah \emph{governance} dan \emph{change management}
+menutup celah itu. Fase G membuat kepatuhan arsitektur \emph{terukur} sepanjang
+pembangunan; Fase H membuat arsitektur \emph{tangguh menghadapi perubahan}; dan
+Requirements Management membuat seluruh rantai keputusan \emph{dapat ditelusuri}.
+
+Bagi makalah, ketiga hal ini mengubah rekomendasi dari sekadar rancangan menjadi
+\textbf{praktik yang dapat dipertanggungjawabkan}. Gagasan \emph{architecture
+governance}, \emph{architecture contract}, dan pemantauan perubahan mengikuti
+TOGAF ADM Fase G, H, dan Requirements Management \cite{togaf10}. Perspektif bahwa
+tata kelola dan fondasi eksekusi adalah kapabilitas organisasi yang dibangun
+sengaja---bukan formalitas administratif---selaras dengan gagasan \emph{operating
+model} dan \emph{IT governance} \cite{ross2006enterprise,ross2019designed}. Praktik
+pengiriman perangkat lunak yang berkelanjutan (\emph{continuous delivery}) pun
+menuntut agar perubahan dikelola melalui umpan balik, bukan dihindari
+\cite{newman2021building}.
+
+\section{Skenario Pembuka dan Pertanyaan Pemandu}
+
+Peta jalan rel transfer Bank Wanua sudah disetujui dan pembangunan dimulai. Kini
+muncul ketegangan yang khas: tim pengembang ingin bergerak cepat menuju
+\emph{go-live} SNAP BI, sementara arsitek khawatir gateway yang dibangun mulai
+menyimpang dari rancangan keamanan. Di tengah pembangunan, Bank Indonesia
+mengumumkan pembaruan spesifikasi SNAP BI, dan OJK meminta bukti \emph{traceability}
+kontrol AML dari kebijakan sampai kode. Pertanyaannya bukan lagi ``apa yang
+dibangun'', melainkan ``bagaimana memastikan yang dibangun tetap benar dan tetap
+relevan''.
+
+\subsection*{Pertanyaan Pemandu}
+\begin{enumerate}
+  \item Bagaimana memastikan proyek implementasi patuh pada arsitektur target?
+  \item Apa isi \emph{Architecture Contract}, dan kapan sebuah penyimpangan boleh
+        diberi \emph{Dispensation}?
+  \item Ketika muncul perubahan (regulasi, teknologi, kebutuhan baru), bagaimana
+        menilai apakah cukup ditangani lewat governance atau perlu siklus ADM
+        baru?
+  \item Bagaimana setiap requirement ditelusuri dari pemangku kepentingan sampai
+        solusi yang berjalan?
+  \item Tata kelola, metrik, dan risiko apa yang membuat arsitektur tetap hidup
+        dan patuh?
+\end{enumerate}
+
+\section{Mengapa Bab Ini Penting bagi Pembaca Non-TI}
+
+Justru pembaca non-TI---direksi, komite audit, regulator, pemilik risiko---lah yang
+paling berkepentingan pada bab ini, sebab di sinilah arsitektur berjumpa dengan
+\emph{akuntabilitas}. Tanpa istilah teknis, seorang analis dapat menjelaskan
+\emph{siapa bertanggung jawab atas kepatuhan} (\emph{governance}), \emph{bagaimana
+keputusan perubahan diambil} (\emph{change management}), dan \emph{bagaimana setiap
+kapabilitas dapat dilacak kembali ke alasannya} (\emph{Requirements Management}).
+\emph{Traceability} inilah yang diminta auditor dan regulator: bukti bahwa sistem
+yang berjalan benar-benar mewujudkan kebijakan dan kebutuhan yang dijanjikan.
+
+\section{Konsep Inti dan Glosarium Mini}
+
+\subsection{Fase G: Implementation Governance}
+
+\textbf{Fase G} memastikan proyek implementasi sesuai dengan arsitektur target.
+Instrumen utamanya adalah \emph{Architecture Contract} (kontrak arsitektur)---
+kesepakatan formal antara fungsi arsitektur dan tim implementasi yang menetapkan
+\emph{apa arti patuh}: standar, prinsip, dan batasan yang harus dipenuhi. Sepanjang
+pembangunan dijalankan \emph{Architecture Compliance Review} (tinjauan kepatuhan):
+apakah yang dibangun sesuai rancangan? Bila ada penyimpangan, ada dua jalan---
+\emph{rework} (perbaikan) agar kembali patuh, atau \emph{Dispensation} (dispensasi):
+pengecualian berbatas waktu yang disetujui \emph{Architecture Board} (dewan
+arsitektur) dengan alasan dan rencana penyelesaian. Fase G-lah yang menjaga agar
+peta jalan Fase E/F benar-benar dieksekusi seperti dirancang.
+
+\subsection{Fase H: Architecture Change Management}
+
+\textbf{Fase H} berlaku setelah solusi beroperasi. Ia memantau \emph{change driver}
+(pemicu perubahan)---teknologi baru, kebutuhan bisnis baru, regulasi baru, masalah
+kinerja---lalu menilai dampaknya dan \emph{mengklasifikasi} perubahan menjadi tiga
+jenis \cite{togaf10}: (1) \emph{Simplification} (penyederhanaan): mengurangi
+biaya/kompleksitas, ditangani lewat change management biasa; (2) \emph{Incremental}
+(inkremental): memperluas atau menambah nilai dalam arsitektur yang ada, mungkin
+menuntut sebagian ADM; dan (3) \emph{Re-architecting} (penataan ulang): perubahan
+mendasar yang \emph{memicu siklus ADM baru}, kembali ke Fase A. Keputusan inti
+Fase H: apakah perubahan cukup dikelola dalam governance, atau harus memulai
+iterasi arsitektur baru---sekaligus menilai \emph{value realization} (realisasi
+nilai), yakni apakah arsitektur yang berjalan benar-benar memberi kapabilitas yang
+dijanjikan.
+
+\subsection{Requirements Management: Pusat ADM}
+
+\textbf{Requirements Management} bukan sebuah fase, melainkan \emph{pusat} roda ADM
+yang terhubung ke \emph{semua} fase (Gambar~\ref{fig:adm-ghr}). Setiap fase
+\emph{menghasilkan} dan \emph{memakai} requirement; perubahan pada requirement
+mengalir ke fase-fase terkait. Prosesnya menyimpan requirement dalam
+\emph{Architecture Requirements Repository} (repositori requirement),
+memprioritaskannya, dan---
+yang terpenting---menjaga \emph{traceability} (keterlacakan): setiap requirement
+tertaut ke elemen arsitektur dan work package yang memenuhinya, dan kembali ke
+motivasi yang melatarinya (Bab~\ref{ch:strategi-bisnis}). \emph{Traceability}
+inilah yang membuat arsitektur \emph{dapat diaudit dan dipertahankan}.
+
+\begin{figure}[htbp]
+\centering
+\scalebox{0.92}{
+\begin{tikzpicture}[
+  font=\footnotesize\bfseries,
+  phase/.style={circle, draw=praditagreen, line width=0.3mm,
+    fill=praditagreen!12, minimum size=10mm, inner sep=0pt},
+  hi/.style={circle, draw=blue!70!black, line width=0.6mm, fill=blue!35,
+    minimum size=10mm, inner sep=0pt},
+  reqman/.style={circle, draw=orange!80!black, line width=0.5mm, fill=orange!22,
+    minimum size=20mm, inner sep=1pt, align=center, font=\scriptsize\bfseries},
+  prelim/.style={circle, draw=gray!70, line width=0.3mm, fill=gray!15,
+    minimum size=11mm, inner sep=0pt, align=center, font=\scriptsize\bfseries},
+  ring/.style={-Latex, draw=praditagreen!70, line width=0.3mm},
+  spoke/.style={draw=orange!60, line width=0.25mm},
+]
+  \node[reqman] (rm) at (0,0) {Requirements\\Management};
+  \foreach \ang/\lab in {90/A, 45/B, 0/C, -45/D, -90/E, -135/F}
+    \node[phase] (\lab) at (\ang:2.4cm) {\lab};
+  \node[hi] (G) at (180:2.4cm) {G};
+  \node[hi] (H) at (135:2.4cm) {H};
+  \node[prelim] (P) at (90:3.8cm) {Prelim.};
+  \foreach \lab in {A,B,C,D,E,F,G,H} \draw[spoke] (\lab) -- (rm);
+  \foreach \a/\b in {A/B, B/C, C/D, D/E, E/F, F/G, G/H, H/A}
+    \draw[ring] (\a) to[bend left=12] (\b);
+  \draw[ring, draw=gray!70] (P) -- (A);
+\end{tikzpicture}
+}
+\caption{Fokus bab ini pada roda TOGAF ADM: \textbf{Fase G} (Implementation
+Governance) dan \textbf{Fase H} (Architecture Change Management) disorot, dengan
+\textbf{Requirements Management} sebagai pusat yang terhubung (jari-jari) ke semua
+fase.}
+\label{fig:adm-ghr}
+\end{figure}
+
+\subsection*{Glosarium Mini}
+\begin{description}
+  \item[Architecture Contract] Kesepakatan formal yang menetapkan arti kepatuhan
+    bagi tim implementasi.
+  \item[Compliance Review] Pemeriksaan apakah yang dibangun sesuai arsitektur
+    target.
+  \item[Dispensation] Pengecualian berbatas waktu atas penyimpangan, dengan alasan
+    dan rencana penyelesaian.
+  \item[Change driver] Kejadian (teknologi, bisnis, regulasi) yang menuntut
+    penilaian ulang arsitektur.
+  \item[Klasifikasi perubahan] \emph{Simplification}, \emph{Incremental}, atau
+    \emph{Re-architecting}.
+  \item[Architecture Requirements Repository] Tempat requirement disimpan,
+    diprioritaskan, dan ditelusuri.
+  \item[Traceability] Tautan requirement $\rightarrow$ arsitektur $\rightarrow$
+    solusi $\rightarrow$ motivasi.
+\end{description}
+
+\section{Kerangka Berpikir}
+
+Alur berpikir bab ini melingkar, bukan lurus (Gambar~\ref{fig:gov-flow}).
+Arsitektur target dan peta jalan masuk sebagai \emph{Architecture Contract};
+governance menguji kepatuhan pembangunan; solusi yang patuh dirilis; setelah
+beroperasi, perubahan dipantau dan diklasifikasi; perubahan besar memicu siklus
+ADM baru, sedangkan perubahan kecil kembali ke governance. Requirements Management
+berada di tengah, menjaga \emph{traceability} di setiap langkah.
+
+\begin{figure}[htbp]
+\centering
+\scalebox{0.84}{
+\begin{tikzpicture}[
+  box/.style={rectangle, rounded corners=1.5mm, draw=blue!60!black,
+    fill=blue!8, thick, align=center, text width=27mm, minimum height=11mm},
+  hub/.style={rectangle, rounded corners=1.5mm, draw=orange!80!black,
+    fill=orange!16, thick, align=center, text width=27mm, minimum height=11mm},
+  link/.style={-Latex, thick, draw=blue!60!black}
+]
+  \node[box] (con) {Architecture Contract\\(dari peta jalan)};
+  \node[box, right=7mm of con] (gov) {Compliance Review\\(Fase G)};
+  \node[box, right=7mm of gov] (dep) {Solusi patuh\\dirilis};
+  \node[box, below=8mm of dep] (mon) {Pantau change driver\\(Fase H)};
+  \node[box, left=7mm of mon] (cls) {Klasifikasi\\perubahan};
+  \node[hub, left=7mm of cls] (req) {Requirements\\Management (pusat)};
+  \draw[link] (con) -- (gov); \draw[link] (gov) -- (dep); \draw[link] (dep) -- (mon);
+  \draw[link] (mon) -- (cls); \draw[link] (cls) -- (req);
+  \draw[link, dashed] (req) to[out=90,in=180] node[above,font=\scriptsize]{ADM baru / penyesuaian} (con);
+\end{tikzpicture}
+}
+\caption{Alur berpikir governance \& change management untuk makalah: siklus
+tertutup dari contract, compliance, rilis, pemantauan, klasifikasi, hingga kembali
+ke Requirements Management di pusat.}
+\label{fig:gov-flow}
+\end{figure}
+
+\section{Fase G: Contract, Compliance Review, dan Dispensation}
+
+Implementation Governance bekerja sebagai lingkar umpan balik
+(Gambar~\ref{fig:governance-loop}). Rancangan arsitektur menurunkan sebuah
+\emph{Architecture Contract} yang mengikat proyek implementasi. Selama proyek
+berjalan, dijalankan \emph{Compliance Review}. Bila hasilnya \emph{patuh}, solusi
+lanjut ke rilis; bila \emph{menyimpang}, penyimpangan dinilai: kalau dapat
+dibenarkan sementara, Architecture Board memberi \emph{Dispensation} berbatas
+waktu; kalau tidak, proyek melakukan \emph{rework} dan ditinjau ulang. Lingkar ini
+menjaga agar kualitas arsitektur tidak tergerus tekanan jadwal.
+
+\begin{figure}[htbp]
+\centering
+\scalebox{0.95}{
+\begin{tikzpicture}[
+  font=\footnotesize,
+  gov/.style={rectangle, rounded corners=1.5mm, draw=blue!60!black, fill=blue!10,
+    thick, align=center, text width=28mm, minimum height=10mm},
+  dec/.style={diamond, aspect=2, draw=blue!60!black, fill=blue!6, thick,
+    align=center, inner sep=1pt, text width=20mm},
+  rels/.style={rectangle, rounded corners=1.5mm, draw=praditagreen, fill=praditagreen!12,
+    thick, align=center, text width=24mm, minimum height=9mm},
+  flow/.style={-Latex, thick, draw=gray!70}
+]
+  \node[gov] (con) {Architecture Contract};
+  \node[gov, right=14mm of con] (rev) {Compliance Review};
+  \node[dec, right=14mm of rev] (d) {Patuh?};
+  \node[rels, above right=6mm and 8mm of d] (rel) {Rilis solusi};
+  \node[gov, below right=6mm and 8mm of d] (disp) {Dispensation / Rework};
+  \draw[flow] (con) -- (rev);
+  \draw[flow] (rev) -- (d);
+  \draw[flow] (d) -- node[above,font=\scriptsize]{ya} (rel);
+  \draw[flow] (d) -- node[below,font=\scriptsize]{tidak} (disp);
+  \draw[flow] (disp.west) to[out=180,in=-90] node[left,font=\scriptsize]{tinjau ulang} (rev.south);
+\end{tikzpicture}
+}
+\caption{Lingkar Implementation Governance (Fase G): Architecture Contract
+$\rightarrow$ Compliance Review $\rightarrow$ keputusan patuh; penyimpangan
+ditangani lewat Dispensation berbatas waktu atau rework lalu ditinjau ulang.}
+\label{fig:governance-loop}
+\end{figure}
+
+\section{Fase H: Memantau dan Mengklasifikasi Perubahan}
+
+Begitu solusi beroperasi, arsitektur langsung berhadapan dengan dunia yang terus
+berubah. Fase H mengubah perubahan dari ancaman menjadi proses yang terkelola
+(Gambar~\ref{fig:change-mgmt}). Sebuah \emph{change driver} dinilai dampaknya, lalu
+diklasifikasi. \emph{Simplification} dan sebagian besar \emph{Incremental} cukup
+ditangani lewat change management---memperbarui contract dan menjalankan Compliance
+Review ulang. \emph{Re-architecting} yang mendasar memicu \textbf{siklus ADM baru}:
+kembali ke Fase A untuk merumuskan visi arsitektur berikutnya. Aturan praktis The
+Open Group membantu memilah: bila sebuah perubahan menyentuh \emph{dua pemangku
+kepentingan atau lebih}, ia cenderung menuntut penataan ulang dan masuk kembali ke
+ADM; bila hanya satu, ia lebih cocok ditangani lewat change management
+\cite{togaf10}. Dengan begitu, arsitektur tidak pernah usang tanpa disadari; setiap
+perubahan tercatat, terklasifikasi, dan tertelusur.
+
+\begin{figure}[htbp]
+\centering
+\scalebox{0.9}{
+\begin{tikzpicture}[
+  font=\footnotesize,
+  ev/.style={rectangle, rounded corners=1.5mm, draw=purple!60!black, fill=purple!8,
+    thick, align=center, text width=26mm, minimum height=10mm},
+  cls/.style={rectangle, rounded corners=1.5mm, draw=blue!60!black, fill=blue!8,
+    thick, align=center, text width=26mm, minimum height=9mm},
+  act/.style={rectangle, rounded corners=1.5mm, draw=praditagreen, fill=praditagreen!12,
+    thick, align=center, text width=30mm, minimum height=9mm},
+  flow/.style={-Latex, thick, draw=gray!70}
+]
+  \node[ev] (drv) {Change driver\\(teknologi, bisnis, regulasi)};
+  \node[cls, right=12mm of drv] (imp) {Nilai dampak \&\\klasifikasikan};
+  \node[act, above right=8mm and 12mm of imp] (small) {Simplification / Incremental\\$\rightarrow$ change management};
+  \node[act, below right=8mm and 12mm of imp] (big) {Re-architecting\\$\rightarrow$ siklus ADM baru (Fase A)};
+  \draw[flow] (drv) -- (imp);
+  \draw[flow] (imp) -- (small);
+  \draw[flow] (imp) -- (big);
+\end{tikzpicture}
+}
+\caption{Architecture Change Management (Fase H): change driver dinilai dan
+diklasifikasi; perubahan kecil ditangani lewat change management, perubahan
+mendasar memicu siklus ADM baru.}
+\label{fig:change-mgmt}
+\end{figure}
+
+\section{Input, Langkah, dan Output Tiap Fase}
+
+Agar tiga fase penutup ini dapat \emph{diterapkan}, bukan sekadar dipahami, tiap
+fase perlu diperjelas \emph{input} (apa yang masuk), \emph{langkah} (apa yang
+dikerjakan), dan \emph{output} (apa yang dihasilkan). Tabel~\ref{tab:io-fase-g}--
+\ref{tab:io-rm} merangkum input, langkah, dan output kanonik tiap fase, lalu
+melengkapinya dengan dua contoh konkret---restoran pemesanan online dan rel
+transfer Bank Wanua---sehingga polanya terlihat sama meski domainnya berbeda.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Input, langkah, dan output Fase G (Implementation Governance).}
+\label{tab:io-fase-g}
+\begin{tabularx}{\textwidth}{@{}p{0.17\textwidth} X@{}}
+\hline
+\textbf{Aspek} & \textbf{Uraian} \\
+\hline
+Input & \emph{Architecture Contract}, \emph{Architecture Definition Document},
+\emph{Architecture Roadmap}, dan \emph{Implementation \& Migration Plan} (keluaran
+Fase E/F). \\
+Langkah & (1) Konfirmasi lingkup \& prioritas deployment; (2) siapkan sumber daya
+\& keterampilan; (3) bimbing pembangunan agar sesuai arsitektur; (4) jalankan
+\emph{Architecture Compliance Review}; (5) go-live, lalu \emph{post-implementation
+review}. \\
+Output & \emph{Architecture Contract} yang ditandatangani, \emph{Compliance
+Assessment}, \emph{Change Request}, solusi patuh yang ter-deploy, dan
+\emph{Architecture Repository} yang terisi. \\
+Contoh (Restoran Go-Online) & \emph{Input:} Architecture Contract aplikasi pemesanan
+(standar keamanan pembayaran, integrasi POS \& dapur). \emph{Langkah:} bimbing
+\emph{build} integrasi $\rightarrow$ Compliance Review pra-peluncuran $\rightarrow$
+luncurkan lalu review. \emph{Output:} Compliance Assessment ``lulus bersyarat'',
+Dispensation modul pembayaran 1 bulan, Change Request integrasi internal, aplikasi
+live. \\
+Contoh (Bank Wanua) & \emph{Input:} Architecture Contract rel transfer (standar
+keamanan gateway, batas integrasi core). \emph{Langkah:} konfirmasi lingkup
+$\rightarrow$ bimbing \emph{build} gateway/adaptor $\rightarrow$ Compliance Review
+WP3 pra go-live $\rightarrow$ go-live SNAP BI lalu review. \emph{Output:} Compliance
+Assessment WP3, Dispensation adaptor core 3 bulan, Change Request lapisan audit, rel
+transfer live. \\
+\hline
+\end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Input, langkah, dan output Fase H (Architecture Change Management).}
+\label{tab:io-fase-h}
+\begin{tabularx}{\textwidth}{@{}p{0.17\textwidth} X@{}}
+\hline
+\textbf{Aspek} & \textbf{Uraian} \\
+\hline
+Input & \emph{Change Request} (dari teknologi, bisnis, atau regulasi),
+\emph{Architecture Contract}, \emph{Compliance Assessment}, serta arsitektur \&
+requirement yang sedang berjalan. \\
+Langkah & (1) Pasang pemantauan \& proses \emph{value realization}; (2) tangkap
+\emph{change driver}; (3) nilai dampak \& kelola risiko; (4) klasifikasikan
+perubahan (\emph{Simplification}, \emph{Incremental}, atau \emph{Re-architecting});
+(5) tangani lewat governance atau picu siklus ADM baru. \\
+Output & Pembaruan arsitektur, perubahan prinsip/framework, \emph{Request for
+Architecture Work} baru (memulai siklus ADM berikutnya), dan \emph{Architecture
+Contract} yang diperbarui. \\
+Contoh (Restoran Go-Online) & \emph{Input:} Change Request (mitra GoFood minta
+integrasi API; usulan ekspansi cabang); metrik order \& keluhan. \emph{Langkah:}
+pantau $\rightarrow$ nilai dampak $\rightarrow$ klasifikasikan $\rightarrow$ tangani.
+\emph{Output:} GoFood = \emph{Incremental} (adaptor baru); ekspansi multi-cabang =
+\emph{Re-architecting} $\rightarrow$ \emph{Request for Architecture Work}. \\
+Contoh (Bank Wanua) & \emph{Input:} Change Request (SNAP BI versi baru; usulan kanal
+QRIS); metrik volume transaksi. \emph{Langkah:} pantau $\rightarrow$ nilai dampak
+$\rightarrow$ klasifikasikan $\rightarrow$ tangani. \emph{Output:} SNAP BI baru =
+\emph{Incremental} (adaptor diperbarui); QRIS = \emph{Re-architecting} $\rightarrow$
+\emph{Request for Architecture Work}. \\
+\hline
+\end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Input, langkah, dan output Requirements Management.}
+\label{tab:io-rm}
+\begin{tabularx}{\textwidth}{@{}p{0.17\textwidth} X@{}}
+\hline
+\textbf{Aspek} & \textbf{Uraian} \\
+\hline
+Input & Requirement dari \emph{semua} fase ADM \& \emph{Architecture Requirements
+Specification}, ditambah requirement yang berubah beserta \emph{Requirements Impact
+Assessment}. \\
+Langkah & (1) Baseline \& dokumentasikan requirement; (2) simpan di
+\emph{Architecture Requirements Repository}; (3) pantau \& tangkap requirement yang
+berubah; (4) nilai dampaknya (\emph{Requirements Impact Assessment}); (5) perbarui
+repository \& jaga \emph{traceability} lintas-fase. \\
+Output & \emph{Requirements Impact Assessment}, \emph{Architecture Requirements
+Specification} yang diperbarui, dan \emph{Architecture Requirements Repository} yang
+terisi \& tertelusur. \\
+Contoh (Restoran Go-Online) & \emph{Input:} requirement ``estimasi waktu antar
+akurat'' \& ``data alergi tercatat''; Architecture Requirements Repository.
+\emph{Langkah:} baseline $\rightarrow$ simpan $\rightarrow$ pantau perubahan
+$\rightarrow$ \emph{Requirements Impact Assessment} saat menambah kanal.
+\emph{Output:} matriks traceability (estimasi $\rightarrow$ mesin estimasi
+$\rightarrow$ log akurasi). \\
+Contoh (Bank Wanua) & \emph{Input:} requirement ``skrining AML wajib'' \& ``jejak
+audit lengkap''; Architecture Requirements Repository. \emph{Langkah:} baseline
+$\rightarrow$ simpan $\rightarrow$ pantau $\rightarrow$ \emph{Requirements Impact
+Assessment} saat SNAP BI berubah. \emph{Output:} matriks traceability AML (kebijakan
+$\rightarrow$ Mesin AML $\rightarrow$ WP2 $\rightarrow$ jejak audit). \\
+\hline
+\end{tabularx}
+\end{table}
+
+\section{Konteks Indonesia}
+
+Di sektor keuangan Indonesia, governance dan change management bukan pilihan,
+melainkan kewajiban. Penyelenggara sistem elektronik wajib menjaga keandalan,
+keamanan, dan jejak sistem, serta melaporkan perubahan signifikan
+\cite{pp712019}. Pembaruan standar pembayaran nasional seperti SNAP BI kerap
+datang sebagai \emph{change driver} eksternal yang harus diserap tanpa mengganggu
+layanan \cite{snapbi}. Perlindungan data pribadi menuntut bahwa setiap perubahan
+yang menyentuh data nasabah dinilai dampaknya sejak awal, bukan setelah insiden
+\cite{uupdp2022}. Tata kelola data lintas-instansi juga makin dituntut selaras
+dengan prinsip berbagi-pakai yang terkelola \cite{satudata}. Karena itu,
+\emph{Architecture Contract} dan matriks \emph{traceability} bukanlah formalitas;
+keduanya justru menjadi bukti kepatuhan yang diminta OJK dan Bank Indonesia ketika
+mengaudit rel transfer.
+
+\section{Studi Kasus: Menjaga Arsitektur Tetap Patuh}
+
+Governance, change management, dan traceability bekerja di domain apa pun. Bagian
+ini menyajikan dua contoh: restoran yang \emph{go-online}---dari offline ke
+online---sebagai contoh ringkas terlebih dahulu, lalu rel transfer Bank Wanua yang
+lebih mendalam.
+
+\subsection{Contoh Ringkas: Restoran Go-Online}
+
+Sebuah restoran cepat saji yang selama ini hanya melayani makan di tempat
+(\emph{offline}) kini ingin membuka kanal \emph{pemesanan online}. Transformasi
+yang tampak kecil ini pun melewati ketiga proses berikut. \textbf{Fase G:} sebelum aplikasi diluncurkan, Compliance Review
+menemukan modul pembayaran belum memenuhi standar keamanan kartu; Architecture
+Board memberi \emph{Dispensation} satu bulan (sementara memakai payment gateway
+pihak ketiga) disertai \emph{Change Request} integrasi pembayaran internal.
+\textbf{Fase H:} permintaan integrasi ke mitra pengantaran (mis. GoFood) dinilai
+\emph{Incremental}---cukup menambah adaptor dan memperbarui contract; sebaliknya,
+ekspansi ke banyak cabang dengan dapur dan inventori terpusat adalah
+\emph{Re-architecting} yang memicu siklus ADM baru. \textbf{Requirements
+Management:} requirement ``estimasi waktu antar akurat'' ditelusuri dari sasaran
+kepuasan pelanggan sampai mesin estimasi dan log akurasinya, sehingga ketika kanal
+baru ditambahkan, dampaknya pada requirement lama langsung terlihat.
+
+\subsection{Studi Kasus Utama: Rel Transfer Bank Wanua}
+
+Setelah peta jalan Bab~\ref{ch:implementation-migration} dijalankan, rel transfer
+Bank Wanua mulai beroperasi dan terus berubah. Tiga situasi berikut memperlihatkan
+governance, change management, dan traceability bekerja bersama.
+
+\textbf{Situasi 1 (Fase G).} Sebelum go-live SNAP BI, WP3 (Integrasi BI-FAST \&
+Core) menjalani Compliance Review terhadap Architecture Contract. Adaptor BI-FAST
+lulus, tetapi adaptor core banking masih menulis log tanpa jejak audit lengkap
+karena keterbatasan mainframe. Architecture Board memberi \emph{Dispensation} tiga
+bulan dengan syarat pemasangan lapisan pencatatan tambahan---bukan mengabaikan
+penyimpangan, melainkan mengelolanya secara eksplisit.
+
+\textbf{Situasi 2 (Fase H).} Enam bulan setelah go-live, Bank Indonesia merilis
+versi baru SNAP BI. Tim menilai dampaknya: format pesan berubah, tetapi pola
+integrasi tetap. Ini diklasifikasi sebagai perubahan \emph{Incremental}---contract
+diperbarui, komponen adaptor disesuaikan, dan Compliance Review diulang, tanpa
+merombak arsitektur. Sebaliknya, ketika manajemen mengusulkan menambah kanal
+pembayaran QRIS dan \emph{virtual account}, penilaian menunjukkan kebutuhan node,
+layanan, dan model data baru---sebuah \emph{Re-architecting} yang memicu siklus ADM
+baru, kembali ke Fase A.
+
+\textbf{Situasi 3 (Requirements Management).} Saat OJK meminta bukti bahwa kontrol
+AML benar-benar diterapkan, tim membuka matriks traceability
+(Gambar~\ref{fig:requirements-hub}): requirement ``skrining AML wajib'' tertaut ke
+sasaran motivasi (Bab~\ref{ch:strategi-bisnis}), diwujudkan komponen Mesin AML \&
+Limit (Bab~\ref{ch:application-architecture}), dibangun oleh WP2
+(Bab~\ref{ch:implementation-migration}), dan menghasilkan jejak audit pada artefak
+basis data (Bab~\ref{ch:technology-architecture}). Satu tarikan benang menautkan
+kebijakan sampai bukti.
+
+\begin{figure}[htbp]
+\centering
+\scalebox{0.9}{
+\begin{tikzpicture}[
+  font=\scriptsize,
+  req/.style={rectangle, rounded corners=1.5mm, draw=orange!80!black, fill=orange!16,
+    thick, align=center, text width=30mm, minimum height=9mm},
+  lay/.style={rectangle, rounded corners=1.5mm, draw=gray!60, fill=gray!8,
+    thick, align=center, text width=30mm, minimum height=9mm},
+  link/.style={-Latex, semithick, draw=orange!70!black}
+]
+  \node[req] (r) {Requirement:\\``Skrining AML wajib''};
+  \node[lay, above=6mm of r] (mot) {Sasaran motivasi\\(Bab~\ref{ch:strategi-bisnis})};
+  \node[lay, right=10mm of r] (app) {Komponen Mesin AML\\(Bab~\ref{ch:application-architecture})};
+  \node[lay, below=6mm of r] (wp) {WP2 Bangun Mesin AML\\(Bab~\ref{ch:implementation-migration})};
+  \node[lay, left=10mm of r] (evd) {Jejak audit basis data\\(Bab~\ref{ch:technology-architecture})};
+  \draw[link] (r) -- node[right,font=\tiny]{melatari} (mot);
+  \draw[link] (r) -- node[above,font=\tiny]{diwujudkan} (app);
+  \draw[link] (r) -- node[right,font=\tiny]{dibangun} (wp);
+  \draw[link] (r) -- node[above,font=\tiny]{dibuktikan} (evd);
+\end{tikzpicture}
+}
+\caption{\emph{Traceability} requirements sebagai pusat: satu requirement AML
+tertaut ke motivasi, komponen aplikasi, work package, dan bukti audit di teknologi.}
+\label{fig:requirements-hub}
+\end{figure}
+
+Diagram di atas menelusuri \emph{satu} requirement. Dalam praktik, keterlacakan
+direkam sebagai \textbf{matriks traceability} yang memuat banyak requirement
+sekaligus (Tabel~\ref{tab:traceability-matrix}): tiap baris menautkan sebuah
+requirement ke sasaran, komponen/layanan, work package, dan bukti verifikasinya---
+baik untuk rel transfer bank maupun restoran go-online.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Contoh matriks traceability: tiap requirement ditelusuri lintas-lapisan.}
+\label{tab:traceability-matrix}
+\begin{tabularx}{\textwidth}{@{}p{0.19\textwidth} p{0.15\textwidth} p{0.16\textwidth} p{0.075\textwidth} X@{}}
+\hline
+\textbf{Requirement} & \textbf{Sasaran (motivasi)} & \textbf{Komponen/Layanan} &
+\textbf{WP} & \textbf{Bukti/Verifikasi} \\
+\hline
+Skrining AML wajib \emph{(bank)} & Kepatuhan AML \& regulator & Mesin AML \& Limit &
+WP2 & Jejak audit basis data \\
+Transfer real-time \emph{(bank)} & Layanan cepat UMKM & Adaptor BI-FAST & WP3 & Log
+latensi saat go-live \\
+Estimasi antar akurat \emph{(restoran)} & Kepuasan pelanggan & Mesin Estimasi Antar &
+Online & Log akurasi estimasi \\
+Pembayaran online aman \emph{(restoran)} & Kepercayaan pelanggan & Modul Pembayaran &
+Online & Sertifikasi keamanan kartu \\
+\hline
+\end{tabularx}
+\end{table}
+
+\section{Langkah Analisis dan Artefak Pendukung}
+
+\subsection{Langkah 1: Susun Architecture Contract}
+Rumuskan standar, prinsip, dan batasan yang mengikat tim implementasi---turunkan
+dari prinsip arsitektur dan requirement kunci.
+
+\subsection{Langkah 2: Tetapkan Gerbang Compliance Review}
+Tentukan titik Compliance Review (mis. sebelum go-live) dan kriteria lulus/tidak,
+termasuk mekanisme Dispensation.
+
+\subsection{Langkah 3: Definisikan Protokol Perubahan}
+Tetapkan bagaimana change driver ditangkap, dinilai dampaknya, dan diklasifikasi
+menjadi \emph{Simplification}, \emph{Incremental}, atau \emph{Re-architecting}.
+
+\subsection{Langkah 4: Bangun Matriks Traceability}
+Tautkan tiap requirement kunci ke motivasi, komponen/layanan, work package, dan
+bukti/verifikasinya.
+
+\subsection{Langkah 5: Tentukan Metrik dan Value Realization}
+Pilih indikator yang menunjukkan arsitektur memberi kapabilitas yang dijanjikan
+(mis. waktu transfer, tingkat kepatuhan, insiden).
+
+\subsection{Langkah 6: Petakan Governance dan Peran}
+Tetapkan siapa yang memutuskan apa---Architecture Board, pemilik risiko, pemilik
+produk---beserta irama peninjauannya.
+
+\subsection{Langkah 7: Kaitkan dengan Regulasi}
+Tautkan kontrol dan pelaporan perubahan dengan PP 71, UU PDP, dan standar SNAP BI.
+
+\subsection{Langkah 8: Tulis Narasi Governance}
+Ubah contract, protokol, dan matriks menjadi paragraf yang menjelaskan bagaimana
+arsitektur dijaga tetap patuh dan relevan.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Artefak pendukung Bab~10 dan fungsinya dalam makalah.}
+\label{tab:artefak-bab9-gov}
+\begin{tabularx}{\textwidth}{@{}p{0.26\textwidth} p{0.30\textwidth} X@{}}
+\hline
+\textbf{Artefak} & \textbf{Isi minimum} & \textbf{Dipakai untuk bagian makalah} \\
+\hline
+Architecture charter \& contract & Prinsip, standar, batasan, peran & Tata kelola
+\& implikasi manajerial. \\
+Protokol change management & Change driver, penilaian dampak, klasifikasi & Tata
+kelola \& risiko. \\
+Matriks traceability requirements & Requirement--arsitektur--WP--bukti & Analisis,
+sintesis, keterlacakan end-to-end. \\
+Kerangka metrik \& value realization & Indikator kapabilitas \& kepatuhan & Diskusi
+\& implikasi. \\
+\hline
+\end{tabularx}
+\end{table}
+
+\section{Integrasi ke Makalah Publikasi}
+
+Bab ini mengisi bagian \textbf{Tata Kelola}, \textbf{Risiko}, dan \textbf{Implikasi
+Manajerial}, sekaligus menyediakan \emph{traceability} yang memperkuat seluruh
+\textbf{Analisis}. Contoh paragraf:
+
+\begin{quote}
+Agar rel transfer tetap patuh dan relevan, arsitektur dikelola sebagai praktik
+yang terus hidup. Sebuah Architecture Contract mengikat tiap work package pada
+standar keamanan dan integrasi, dan Compliance Review menjadi gerbang sebelum
+go-live SNAP BI. Perubahan eksternal---pembaruan SNAP BI, kanal pembayaran baru---
+dinilai dan diklasifikasi: yang \emph{Incremental} diserap lewat governance, yang
+mendasar memicu iterasi arsitektur baru. Matriks traceability memastikan setiap
+kontrol, dari AML sampai perlindungan data, dapat ditelusuri dari kebijakan hingga
+bukti audit, sehingga rekomendasi ini dapat dipertanggungjawabkan kepada OJK dan
+Bank Indonesia.
+\end{quote}
+
+\section{Diskusi Kritis, Trade-off, dan Perangkap Umum}
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Trade-off dalam governance dan change management.}
+\label{tab:tradeoff-bab9-gov}
+\begin{tabularx}{\textwidth}{@{}p{0.24\textwidth} X X@{}}
+\hline
+\textbf{Keputusan} & \textbf{Jika terlalu ringan} & \textbf{Jika terlalu berat} \\
+\hline
+Ketatnya compliance & Arsitektur tergerus, utang teknis & Birokrasi lambat,
+pengembang frustrasi. \\
+Kebijakan Dispensation & Penyimpangan jadi permanen & Tak ada ruang gerak, proyek
+mandek. \\
+Ambang siklus ADM baru & Perubahan besar dipaksa \emph{Incremental} & Tiap
+perubahan kecil memicu ADM, boros. \\
+Kedalaman traceability & Tak teraudit, sulit dipertahankan & Overhead dokumentasi
+berlebih. \\
+\hline
+\end{tabularx}
+\end{table}
+
+Perangkap umum: (1) governance yang hanya di atas kertas tanpa gerbang Compliance
+Review nyata; (2) Dispensation tanpa batas waktu sehingga menjadi utang permanen;
+(3) mencampur perubahan \emph{Incremental} dengan \emph{Re-architecting} sehingga
+arsitektur berubah tanpa iterasi yang sah; dan (4) matriks traceability yang tidak
+dirawat sehingga usang saat audit tiba.
+
+\section{Latihan Terapan Individual}
+
+\subsection*{Latihan~10.1: Architecture Contract dan Gerbang Compliance}
+Untuk organisasi studi kasus Anda, susun Architecture Contract ringkas (prinsip,
+standar, batasan) dan tetapkan minimal satu gerbang Compliance Review beserta
+kriterianya.
+
+\subsection*{Latihan~10.2: Protokol Change Management}
+Rumuskan cara menangkap change driver dan klasifikasikan tiga contoh perubahan
+(\emph{Simplification}, \emph{Incremental}, \emph{Re-architecting}) beserta
+keputusannya.
+
+\subsection*{Latihan~10.3: Matriks Traceability}
+Ambil dua requirement kunci dan telusuri masing-masing ke motivasi, komponen,
+work package, dan bukti verifikasinya.
+
+\subsection*{Latihan~10.4: Paragraf Governance}
+Tulis satu paragraf yang menjelaskan bagaimana arsitektur Anda dijaga tetap patuh
+dan relevan, termasuk peran, metrik, dan kaitan regulasi.
+
+\begin{table}[htbp]
+\centering
+\scriptsize
+\caption{Rubrik latihan Bab~10.}
+\label{tab:rubrik-bab9-gov}
+\begin{tabularx}{\textwidth}{@{}p{0.25\textwidth} X X@{}}
+\hline
+\textbf{Komponen} & \textbf{Indikator baik} & \textbf{Perlu diperbaiki bila} \\
+\hline
+Contract \& compliance & Kriteria konkret \& gerbang jelas & Prinsip normatif tanpa
+gerbang atau kriteria. \\
+Protokol perubahan & Klasifikasi \& keputusan beralasan & Perubahan tanpa penilaian
+dampak atau kelas. \\
+Traceability & Requirement tertaut penuh \& berbukti & Tautan terputus atau tanpa
+verifikasi. \\
+Narasi governance & Menjelaskan peran, metrik, \& regulasi & Deskriptif tanpa
+akuntabilitas. \\
+\hline
+\end{tabularx}
+\end{table}
+
+\section{Ringkasan, Refleksi, dan Penutup Metode}
+
+\subsection*{Poin Kunci}
+\begin{itemize}
+  \item \textbf{Fase G (Implementation Governance)} menjaga kepatuhan implementasi
+        lewat Architecture Contract, Compliance Review, dan Dispensation berbatas
+        waktu.
+  \item \textbf{Fase H (Architecture Change Management)} memantau change driver dan
+        mengklasifikasinya: \emph{Simplification}, \emph{Incremental}, atau
+        \emph{Re-architecting} (memicu ADM baru).
+  \item \textbf{Requirements Management} adalah pusat ADM yang menjaga
+        \emph{traceability} dari motivasi sampai bukti solusi.
+  \item Bersama-sama ketiganya menjadikan arsitektur \emph{hidup, terkelola, dan
+        dapat diaudit}, bukan dokumen sekali jadi.
+  \item Dalam konteks Indonesia, contract dan traceability adalah bukti kepatuhan
+        yang diminta OJK, Bank Indonesia, dan regulasi PDP.
+\end{itemize}
+
+\subsection*{Uji Mandiri}
+\begin{enumerate}
+  \item Jelaskan perbedaan Compliance Review (Fase G) dan Architecture Change
+        Management (Fase H).
+  \item Kapan sebuah perubahan cukup ditangani lewat governance, dan kapan ia
+        harus memicu siklus ADM baru?
+  \item Ambil satu requirement pada kasus Anda dan telusuri tautannya dari
+        motivasi sampai bukti solusi.
+\end{enumerate}
+
+\subsection*{Penutup: Dari Rancangan ke Praktik yang Hidup}
+Ketujuh lapisan sebelumnya membangun arsitektur enterprise yang utuh: dari motivasi
+turun ke strategi, bisnis, data, aplikasi, teknologi, lalu peta jalan implementasi.
+Bab ini menutup \emph{metode}-nya---menunjukkan bahwa arsitektur yang baik bukan
+sekadar rancangan yang indah, melainkan praktik yang \emph{dijaga} dan
+\emph{ditelusuri}. Governance memastikan yang dibangun setia pada rancangan;
+change management memastikan arsitektur menyesuaikan diri dengan dunia yang
+bergerak; dan Requirements Management menjaga agar setiap keputusan selalu dapat
+ditarik kembali ke alasannya. Dengan menutup roda ADM, mahasiswa tidak hanya
+merancang satu arsitektur target, tetapi juga merancang \emph{cara merawatnya}---
+kompetensi yang membedakan arsitek enterprise dari sekadar pembuat diagram.
+
+\section{Bacaan Lanjutan dan Lampiran}
+
+\subsection*{Bacaan Inti}
+\begin{itemize}
+  \item The Open Group untuk Fase G, H, dan Requirements Management ADM
+        \cite{togaf10}.
+  \item Ross, Weill, \& Robertson untuk \emph{IT governance} dan fondasi eksekusi
+        \cite{ross2006enterprise,ross2019designed}.
+\end{itemize}
+
+\subsection*{Bacaan untuk Memperdalam}
+\begin{itemize}
+  \item Newman untuk umpan balik, \emph{continuous delivery}, dan perubahan yang
+        dikelola \cite{newman2021building}.
+  \item Untuk konteks Indonesia: penyelenggaraan sistem elektronik \cite{pp712019},
+        perlindungan data pribadi \cite{uupdp2022}, standar API pembayaran
+        \cite{snapbi}, dan tata kelola data \cite{satudata}.
+\end{itemize}
+
+\subsection*{Lampiran Kerja Bab~10}
+\begin{description}
+  \item[Architecture charter \& contract] Prinsip, standar, batasan, peran.
+  \item[Protokol change management] Change driver, penilaian dampak, klasifikasi.
+  \item[Matriks traceability] Requirement--arsitektur--WP--bukti.
+  \item[Kerangka metrik] Indikator kapabilitas, kepatuhan, dan value realization.
+\end{description}
+\setlength{\emergencystretch}{0pt}

@@ -102,31 +102,41 @@ sampai rancangan bisnis tanpa kehilangan benang merah.
 \label{sec:peta-lapisan}
 
 Buku ini menata pembahasan arsitektur mengikuti urutan lapisan dalam bahasa
-pemodelan ArchiMate, dari ``mengapa'' menuju ``apa'' dan ``bagaimana''. Tiga
-bab inti pertama menelusuri tiga lapisan teratas untuk kasus API Transfer Bank
-Wanua, sedangkan lapisan berikutnya diperkenalkan secara bertahap pada
-sesi-sesi lanjutan.
+pemodelan ArchiMate, dari ``mengapa'' menuju ``apa'' dan ``bagaimana'', lalu
+ditutup dengan cara \emph{merawat} arsitektur. Setiap lapisan ditelusuri lapis
+demi lapis untuk kasus API Transfer Bank Wanua: dari motivasi, strategi, dan
+bisnis di lapisan teratas, turun ke data, aplikasi, dan teknologi, dilanjutkan
+peta jalan implementasi \& migrasi, dan akhirnya tata kelola, manajemen
+perubahan, serta manajemen requirements yang menutup siklus TOGAF ADM
+(Tabel~\ref{tab:peta-lapisan}).
 
 \begin{table}[htbp]
 \centering
 \scriptsize
-\caption{Pemetaan lapisan arsitektur ke bab inti untuk studi kasus API
-Transfer Dana.}
+\caption{Pemetaan lapisan arsitektur dan fase TOGAF ADM ke bab untuk studi kasus
+API Transfer Dana.}
 \label{tab:peta-lapisan}
-\begin{tabularx}{\textwidth}{@{}p{0.20\textwidth} p{0.16\textwidth} X@{}}
+\begin{tabularx}{\textwidth}{@{}p{0.22\textwidth} p{0.13\textwidth} X@{}}
 \hline
-\textbf{Lapisan} & \textbf{Bab} & \textbf{Pertanyaan inti untuk kasus Transfer} \\
+\textbf{Lapisan / Fase} & \textbf{Bab} & \textbf{Pertanyaan inti untuk kasus Transfer} \\
 \hline
 Motivasi & Bab~\ref{ch:strategi-bisnis} & Siapa pemangku kepentingan, apa
 pendorong, sasaran, kebutuhan, dan kendala di balik API Transfer? \\
 Strategi & Bab~\ref{ch:togaf-lite} & Pilihan strategis (\emph{course of
-action}), kapabilitas, sumber daya, dan peta jalan apa yang menjadikan rel
+action}), kapabilitas, sumber daya, dan visi arsitektur apa yang menjadikan rel
 transfer prioritas? \\
 Bisnis & Bab~\ref{ch:business-architecture} & Layanan, proses, peran, dan alur
 nilai bisnis apa yang mewujudkan transfer dana bagi UMKM? \\
-Aplikasi, Teknologi, Fisik, Implementasi & Sesi lanjutan & Aplikasi, data,
-infrastruktur, dan peta migrasi apa yang merealisasikan layanan transfer?
-(Dipratinjau pada akhir Bab~\ref{ch:business-architecture}.) \\
+Data & Bab~\ref{ch:data-architecture} & Objek dan model data apa yang mengalir,
+dan bagaimana tata kelola informasinya? \\
+Aplikasi & Bab~\ref{ch:application-architecture} & Komponen, layanan, dan
+integrasi aplikasi apa yang menjalankan transfer? \\
+Teknologi & Bab~\ref{ch:technology-architecture} & Node, artefak, jaringan, dan
+pola deployment apa yang menopang aplikasi? \\
+Implementasi \& Migrasi & Bab~\ref{ch:implementation-migration} & Work package,
+plateau, dan peta jalan apa yang membangun arsitektur target secara bertahap? \\
+Tata Kelola \& Perubahan & Bab~\ref{ch:governance-change} & Bagaimana pembangunan
+dijaga tetap patuh, perubahan dikelola, dan tiap requirement ditelusuri? \\
 \hline
 \end{tabularx}
 \end{table}
@@ -134,7 +144,9 @@ infrastruktur, dan peta migrasi apa yang merealisasikan layanan transfer?
 Urutan ini bukan sekadar tata letak. Ia menanamkan kebiasaan berpikir yang
 sehat: motivasi lebih dahulu, lalu strategi, baru rancangan bisnis dan teknis.
 Dengan begitu, rekomendasi teknologi yang muncul belakangan selalu dapat
-ditelusuri kembali ke sasaran dan pemangku kepentingan yang melatarinya.
+ditelusuri kembali ke sasaran dan pemangku kepentingan yang melatarinya. Bab
+penutup tentang tata kelola dan manajemen perubahan memastikan rantai
+keterlacakan itu tetap terjaga bahkan setelah arsitektur dibangun dan berjalan.
 
 \section{Luaran Utama dan Pelengkap}
 
@@ -205,18 +217,18 @@ yang akan membentuk naskah final secara bertahap.
 \hline
 1  & Orientasi EA, Platform \& Penulisan Akademik & Pernyataan topik, kandidat target publikasi, motivasi awal \\
 2  & Lapisan Motivasi: Stakeholder, Driver \& Sasaran & Model motivasi, rumusan masalah, pertanyaan penelitian (RQ), kontribusi awal \\
-3  & Lapisan Strategi: Course of Action, Visi Arsitektur \& Literature Review & Pilihan strategis, peta jalan, visi arsitektur, bibliografi awal ($\geq$10) \\
+3  & Lapisan Strategi: Course of Action, Visi Arsitektur \& Literature Review & Pilihan strategis, peta jalan awal, visi arsitektur, bibliografi awal ($\geq$10) \\
 4  & Lapisan Bisnis: Layanan, Proses \& Kapabilitas & Peta kapabilitas, value stream, tinjauan pustaka v1 \\
-5  & Data Architecture & Peta data konseptual, draf metode/pendekatan \\
-6  & Application Architecture & Portofolio aplikasi, draf analisis \\
-7  & Technology Architecture \& Kerangka Final & Arsitektur teknologi acuan, kerangka final \\
-8  & Klinik Proposal Makalah (tengah semester) & \textbf{Proposal makalah v1} (penanda kemajuan formatif) \\
-9  & API Strategy: API sebagai Produk & Draf analisis bagian strategi API \\
-10 & API Design, Lifecycle \& Governance & Spesifikasi API, daftar periksa tata kelola \\
-11 & Platform Economy \& Model Bisnis & Draf diskusi bagian platform \\
-12 & Platform Governance, Etika \& Regulasi & Piagam tata kelola, draf diskusi dan kesimpulan \\
-13 & Lokakarya Pra-Pengajuan & Draf final makalah, bahan presentasi, daftar periksa pengajuan \\
-14 & Presentasi Konferensi \& Finalisasi & \textbf{Naskah final makalah ($100\%$)} \\
+5  & Lapisan Data: Objek Data \& Tata Kelola Informasi & Peta data konseptual, draf metode/pendekatan \\
+6  & Lapisan Aplikasi: Komponen, Layanan \& Integrasi & Portofolio aplikasi, draf analisis \\
+7  & Lapisan Teknologi: Node, Artefak \& Deployment & Arsitektur teknologi acuan, kerangka final \\
+8  & Implementasi \& Migrasi: Work Package, Plateau \& Peta Jalan & Analisis kesenjangan, peta jalan; \textbf{Proposal makalah v1} (penanda kemajuan formatif, tengah semester) \\
+9  & Tata Kelola, Perubahan \& Manajemen Requirements & Piagam \& kontrak arsitektur, protokol perubahan, matriks keterlacakan \\
+10 & API Strategy: API sebagai Produk & Draf analisis bagian strategi API \\
+11 & API Design, Lifecycle \& Governance & Spesifikasi API, daftar periksa tata kelola API \\
+12 & Platform Economy \& Model Bisnis & Draf diskusi bagian platform \\
+13 & Platform Governance, Etika \& Regulasi & Piagam tata kelola platform, draf diskusi \& kesimpulan; \textbf{draf final makalah} \\
+14 & Lokakarya Pra-Pengajuan, Presentasi \& Finalisasi & Bahan presentasi, daftar periksa pengajuan; \textbf{naskah final makalah ($100\%$)} \\
 \hline
 \end{tabularx}
 \end{table}
